@@ -1,29 +1,44 @@
 #include "GameObject.h"
+#include <SDL3/SDL.h>  // Necesita SDL_FRect
 
 int GameObject::idCounter = 0;
 
 #pragma region Constructores
 GameObject::GameObject() {
-    transform = &addComponent<Transform>();
-	spriteRenderer = &addComponent<SpriteRenderer>();
+
+	components.reserve(2);
+
+    transform = addComponent<Transform>();
+	spriteRenderer = addComponent<SpriteRenderer>();
 
     name = "GameObject_" + std::to_string(idCounter);
     id = idCounter++;
     isActive = true;
 }
 
-GameObject::GameObject(std::string name, Transform* transform, SpriteRenderer* sprite){
-    GameObject::transform = transform;
+GameObject::GameObject(std::string name, Transform* transform, SpriteRenderer* sprite, size_t nComponents){
+	components.reserve(nComponents);
 
+	// ASIGNACION DE TRANSFORM
+    GameObject::transform = transform;
 	if (transform == nullptr) {
-		GameObject::transform = &addComponent<Transform>();
+		GameObject::transform = addComponent<Transform>();
 		SDL_LogWarn(SDL_LOG_CATEGORY_APPLICATION, "Transform nulo en GameObject %s. Se ha creado uno por defecto.", name.c_str());
 	}
+	else {
+		transform->gameObject = this; // Asegura que el Transform conoce su GameObject
+		components.push_back(std::unique_ptr<Transform>(transform));
+	}
 
+	// ASIGNACION DE SPRITERENDERER
 	spriteRenderer = sprite;
 	if (spriteRenderer == nullptr) {
-		spriteRenderer = &addComponent<SpriteRenderer>();
+		spriteRenderer = addComponent<SpriteRenderer>();
 		SDL_LogWarn(SDL_LOG_CATEGORY_APPLICATION, "SpriteRenderer nulo en GameObject %s. Se ha creado uno por defecto.", name.c_str());
+	}
+	else {
+		spriteRenderer->gameObject = this; // Asegura que el SpriteRenderer conoce su GameObject
+		components.push_back(std::unique_ptr<SpriteRenderer>(spriteRenderer));
 	}
 
 	GameObject::name = name;
@@ -47,25 +62,6 @@ void GameObject::render() {
     if (spriteRenderer) {
         spriteRenderer->render();
     }
-}
-
-// Las funciones addComponent y getComponent se quedan como estaban
-template<typename T, typename... TArgs>
-T& GameObject::addComponent(TArgs&&... args) {
-    auto comp = std::make_unique<T>(std::forward<TArgs>(args)...);
-    comp->gameObject = this;
-    components.push_back(std::move(comp));
-    return *dynamic_cast<T*>(components.back().get());
-}
-
-template<typename T>
-T* GameObject::getComponent() const {
-    for (const auto& comp : components) {
-        if (auto castedComp = dynamic_cast<T*>(comp.get())) {
-            return castedComp;
-        }
-    }
-    return nullptr;
 }
 
 #pragma region Getters y Setters

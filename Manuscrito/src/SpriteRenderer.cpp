@@ -1,9 +1,8 @@
 #include "SpriteRenderer.h"
+#include "texture.h"
+#include "GameObject.h"
 
 SpriteRenderer::SpriteRenderer() {
-
-	transform = gameObject->getComponent<Transform>();
-
 	row = 0;
 	col = 0;
 
@@ -15,18 +14,15 @@ SpriteRenderer::SpriteRenderer(Texture* texture, int row, int col) {
 	this->row = row;
 	this->col = col;
 
-	transform = gameObject->getComponent<Transform>();
-
 	isEnabled = true;
 }
 
 SpriteRenderer::~SpriteRenderer() {
 	texture = nullptr;
-	transform = nullptr;
 }
 
 void SpriteRenderer::render() {
-	if (texture && transform && isEnabled) {
-		texture->renderFrame(transform->dstRect, row, col);
+	if (texture && isEnabled) {
+		texture->renderFrame(gameObject->transform->dstRect, row, col);
 	}
 }

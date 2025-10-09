@@ -1,6 +1,8 @@
 #include "game.h"
 
 #include <SDL3_image/SDL_image.h>
+#include "texture.h"
+#include "GameObject.h"
 
 using namespace std;
 
@@ -178,7 +180,7 @@ void Game::createGameObjects() {
 	);
 	SpriteRenderer* chinoSprite = new SpriteRenderer(getTexture(CHINO), 0, 0);
 
-	GameObject* chino = new GameObject("Chino", chinoTransform, chinoSprite);
+	GameObject* chino = new GameObject("Chino", chinoTransform, chinoSprite, 2);
 
 	Game::gameObjects.push_back(chino);
 }

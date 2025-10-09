@@ -1,12 +1,12 @@
 #pragma once
-#include "texture.h"
-#include "Transform.h"
+#include "Component.h"
+
+class Texture;
 
 class SpriteRenderer : public Component
 {
-private: 
+private:
 	Texture* texture = nullptr;
-	Transform* transform = nullptr;
 
 	int row;
 	int col;
@@ -18,4 +18,3 @@ public:
 
 	void render();
 };
-

@@ -5,10 +5,10 @@
 #include <array>
 #include <istream>
 #include <vector>
-#include "GameObject.h"
 
 // Declaraciones anticipadas
 class Texture;
+class GameObject;
 
 /**
  * Clase principal del juego.

@@ -1,5 +1,12 @@
 #include "Transform.h"
 
+Transform::Transform() {
+	position = Vector2D<float>(0.0f, 0.0f);
+	scale = Vector2D<float>(1.0f, 1.0f);
+
+	dstRect = { position.x, position.y, scale.x, scale.y };
+}
+
 Transform::Transform(Vector2D<float> position, Vector2D<float> size) {
 	this->position = position;
 	scale = size;

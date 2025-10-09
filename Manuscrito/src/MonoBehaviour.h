@@ -1,6 +1,6 @@
 #pragma once
-#include <SDL3/SDL.h>
-#include "GameObject.h"
+
+class GameObject; // Declaración adelantada
 
 class MonoBehaviour {
 public:
