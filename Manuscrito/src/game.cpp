@@ -3,6 +3,7 @@
 #include <SDL3_image/SDL_image.h>
 #include "texture.h"
 #include "GameObject.h"
+#include "Button.h"
 
 using namespace std;
 
@@ -155,6 +156,25 @@ Game::handleEvents()
 			}
 		}
 
+		else if (event.type == SDL_EVENT_MOUSE_BUTTON_DOWN) {
+			float mouseX = event.button.x;
+			float mouseY = event.button.y;
+
+			for (GameObject* go : gameObjects) {
+				if (go->getIsActive()) {
+					Button* bt = go->getComponent<Button>();
+
+					if (bt != nullptr) {
+						Transform* t = go->getComponent<Transform>();
+
+						if (t != nullptr && t->overlapingPoint(Vector2D<float>(mouseX, mouseY))) {
+							bt->onClick();
+						}
+					}
+				}
+			}
+		}
+
 		else if (event.type == SDL_EVENT_KEY_DOWN) {
 
 			if (event.key.key == SDLK_E) {
@@ -182,6 +202,12 @@ void Game::createGameObjects() {
 	SpriteRenderer* chinoSprite = new SpriteRenderer(getTexture(CHINO), 0, 0);
 
 	GameObject* chino = new GameObject("Chino", chinoTransform, chinoSprite, 2);
+	Button* chinoButton = chino->addComponent<Button>();
+
+	chinoButton->onClick = [chino]() {
+		chino->setIsActive(!chino->getIsActive());
+		SDL_Log("Has hecho click en el Chino");
+		};
 
 	Game::gameObjects.push_back(chino);
 }

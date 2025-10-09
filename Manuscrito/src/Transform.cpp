@@ -14,6 +14,11 @@ Transform::Transform(Vector2D<float> position, Vector2D<float> size) {
 	dstRect = { position.x, position.y, size.x, size.y };
 }
 
+bool Transform::overlapingPoint(Vector2D<float> point) const {
+	return (point.x >= position.x && point.x <= position.x + scale.x &&
+		point.y >= position.y && point.y <= position.y + scale.y);
+}
+
 Vector2D<float> Transform::getSize() const {
 	return scale;
 }

@@ -14,8 +14,12 @@ public:
 
 	Transform();
 	Transform(Vector2D<float> position, Vector2D<float> size);
+
+	bool overlapingPoint(Vector2D<float> point) const;
+
 	Vector2D<float> getSize() const;
 	Vector2D<float> getPosition() const;
 	void setPosition(Vector2D<float> newPosition);
+
 };
 
