@@ -1,0 +1,29 @@
+#include "Transform.h"
+
+Transform::Transform() {
+	position = Vector2D<float>(0.0f, 0.0f);
+	scale = Vector2D<float>(1.0f, 1.0f);
+
+	dstRect = { position.x, position.y, scale.x, scale.y };
+}
+
+Transform::Transform(Vector2D<float> position, Vector2D<float> size) {
+	this->position = position;
+	scale = size;
+
+	dstRect = { position.x, position.y, size.x, size.y };
+}
+
+Vector2D<float> Transform::getSize() const {
+	return scale;
+}
+
+Vector2D<float> Transform::getPosition() const {
+	return position;
+}
+
+void Transform::setPosition(Vector2D<float> newPosition) {
+	position = newPosition;
+	dstRect.x = position.x;
+	dstRect.y = position.y;
+}

@@ -9,15 +9,11 @@
 template<typename T = float>
 class Vector2D
 {
+public:
 	T x, y;
 
-public:
 	Vector2D(T x, T y) : x(x), y(y) { }
 	Vector2D() : Vector2D(0, 0) { }
-
-	// Coordenadas del vector
-	const T& getX() const { return x; }
-	const T& getY() const { return y; }
 
 	// Operadores
 	Vector2D operator+(const Vector2D& otro) const {

@@ -1,6 +1,8 @@
 #include "game.h"
 
 #include <SDL3_image/SDL_image.h>
+#include "texture.h"
+#include "GameObject.h"
 
 using namespace std;
 
@@ -25,10 +27,9 @@ constexpr array<TextureSpec, Game::NUM_TEXTURES> textureList{
 
 vector<GameObject*> Game::gameObjects;
 
-Game::Game()
-  : exit(false)
+Game::Game() : exit(false)
 {
-	#pragma region SDL INIT
+#pragma region SDL INIT
 	// Carga SDL y sus bibliotecas auxiliares
 	SDL_Init(SDL_INIT_VIDEO);
 	//SDL_WINDOW_FULLSCREEN
@@ -41,7 +42,11 @@ Game::Game()
 
 	if (renderer == nullptr)
 		throw "renderer: "s + SDL_GetError();
-	#pragma endregion
+#pragma endregion
+
+	// Inicializamos las variables de tiempo
+	perfFrequency = SDL_GetPerformanceFrequency();
+	lastTime = SDL_GetPerformanceCounter();
 
 	// Carga las texturas al inicio
 	for (size_t i = 0; i < textures.size(); i++) {
@@ -55,17 +60,8 @@ Game::Game()
 	}
 
 	//Carga los GameObjects
-	
-	GameObject* chino = new GameObject(
-		"Chino",
-		Vector2D<float>(WINDOW_WIDTH / 2 - 150, WINDOW_HEIGHT / 2 - 150),
-		Vector2D<float>(300, 300),
-		getTexture(CHINO),
-		0,
-		0
-	);
 
-	Game::gameObjects.push_back(chino);
+	createGameObjects();
 
 	// Configura que se pueden utilizar capas translúcidas
 	// SDL_SetRenderDrawBlendMode(renderer, SDL_BLENDMODE_BLEND);
@@ -106,7 +102,21 @@ Game::render() const
 void
 Game::update()
 {
-	// TODO
+	// 1. Obtenemos el tiempo actual
+	Uint64 currentTime = SDL_GetPerformanceCounter();
+
+	// 2. Calculamos el deltaTime en segundos
+	//    (tiempo transcurrido) / (ticks por segundo)
+	float deltaTime = (float)(currentTime - lastTime) / (float)perfFrequency;
+
+	// 3. Actualizamos lastTime para el siguiente fotograma
+	lastTime = currentTime;
+
+	// 4. Ahora llamamos al update de todos los GameObjects, pasando el deltaTime
+	for (size_t i = 0; i < gameObjects.size(); i++) {
+		if (gameObjects[i]->getIsActive())
+			gameObjects[i]->update(deltaTime); // Pasamos el valor calculado
+	}
 }
 
 void
@@ -135,8 +145,12 @@ Game::handleEvents()
 			int h = event.window.data2;
 
 			for (GameObject* go : gameObjects) {
-				go->setPosition(Vector2D<float>(w / 2 - go->getSize().getX() / 2,
-					h / 2 - go->getSize().getY() / 2));
+				Transform* t = go->getComponent<Transform>();
+
+				if (t != nullptr) {
+					t->setPosition(Vector2D<float>(w / 2 - t->scale.x / 2,
+						h / 2 - t->scale.y / 2));
+				}
 			}
 		}
 
@@ -156,4 +170,17 @@ Game::checkCollision(const SDL_FRect& rect) const
 {
 	// TODO: cambiar el tipo de retorno a Collision e implementar
 	return false;
+}
+
+void Game::createGameObjects() {
+	// TODO
+	Transform* chinoTransform = new Transform(
+		Vector2D<float>(WINDOW_WIDTH / 2 - 150, WINDOW_HEIGHT / 2 - 150),
+		Vector2D<float>(300, 300)
+	);
+	SpriteRenderer* chinoSprite = new SpriteRenderer(getTexture(CHINO), 0, 0);
+
+	GameObject* chino = new GameObject("Chino", chinoTransform, chinoSprite, 2);
+
+	Game::gameObjects.push_back(chino);
 }
