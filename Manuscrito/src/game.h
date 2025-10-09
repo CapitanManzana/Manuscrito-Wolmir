@@ -39,10 +39,15 @@ private:
 	void render() const;
 	void update();
 	void handleEvents();
+	void createGameObjects();
 
 	bool exit;
 
 	static std::vector<GameObject*> gameObjects;
+
+	Uint64 perfFrequency; // Frecuencia del contador de alto rendimiento (ticks por segundo)
+	Uint64 lastTime;
+
 	// Elemento del juego
 	// TODO: añadir atributos para los objetos del juego
 

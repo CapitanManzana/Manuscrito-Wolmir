@@ -1,49 +1,45 @@
 #pragma once
 #include "texture.h"
 #include "vector2D.h"
-#include "MonoBehaviour.h"
+#include "Component.h"
 #include <string>
+#include <vector>
+#include "SpriteRenderer.h"
 
-class GameObject : public MonoBehaviour
+class GameObject
 {
 private:
-	// Posición y tamaño del objeto en la pantalla
-	Vector2D<float> position;
-	Vector2D<float> size;
-
-	// Fila y columna actuales para animaciones
-	int row;
-	int col;
-
-	// Rectángulo destino para renderizar con SDL
-	SDL_FRect dstRect;
-
-	// Textura del objeto
-	Texture* texture;
 	std::string name;
 	int id;
+
+	std::vector<std::unique_ptr<Component>> components;
 	bool isActive;
 
 	static int idCounter;
-
 public:
-	GameObject();
-	~GameObject();
-	GameObject(Vector2D<float> position, Vector2D<float> size, Texture* texture);
-	GameObject(Vector2D<float> position, Vector2D<float> size, Texture* texture, int row, int col);
-	GameObject(std::string name, Vector2D<float> position, Vector2D<float> size, Texture* texture);
-	GameObject(std::string name, Vector2D<float> position, Vector2D<float> size, Texture* texture, int row, int col);
+	Transform* transform = nullptr;
+	// Añadimos un puntero al SpriteRenderer para delegar el render
+	SpriteRenderer* spriteRenderer = nullptr;
 
-	Vector2D<float> getSize() const;
-	Vector2D<float> getPosition() const;
-	void setPosition(Vector2D<float> newPosition);
+	GameObject();
+	GameObject(std::string name, Transform* transform, SpriteRenderer* sprite);
+	~GameObject() = default;
+
+	void update(float deltaTime);
+	void render(); // El render ahora lo delegaremos al SpriteComponent
+
+	bool getIsActive() const;
+	void setIsActive(bool active);
+
+	template<typename T, typename... TArgs>
+	T& addComponent(TArgs&&... args);
+
+	template<typename T>
+	T* getComponent() const;
+
 	std::string getName() const;
 	int getId() const;
 
 	bool getIsActive() const;
 	void setIsActive(bool active);
-
-	void render();
-
-	static GameObject* findById(int id);
 };

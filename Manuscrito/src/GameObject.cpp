@@ -4,99 +4,71 @@ int GameObject::idCounter = 0;
 
 #pragma region Constructores
 GameObject::GameObject() {
-	position = Vector2D<float>(0.0f, 0.0f);
-	size = Vector2D<float>(1.0f, 1.0f);
-	name = "Default";
-	texture = nullptr;
-	id = idCounter++;
-	isActive = true;
+    transform = &addComponent<Transform>();
+	spriteRenderer = &addComponent<SpriteRenderer>();
 
-	row = 0;
-	col = 0;
-
-	dstRect = { position.getX(), position.getY(), size.getX(), size.getY()};
+    name = "GameObject_" + std::to_string(idCounter);
+    id = idCounter++;
+    isActive = true;
 }
 
-GameObject::GameObject(Vector2D<float> position, Vector2D<float> size, Texture* texture) {
-	this->position = position;
-	this->size = size;
-	this->texture = texture;
-	name = "Default";
+GameObject::GameObject(std::string name, Transform* transform, SpriteRenderer* sprite){
+    GameObject::transform = transform;
+
+	if (transform == nullptr) {
+		GameObject::transform = &addComponent<Transform>();
+		SDL_LogWarn(SDL_LOG_CATEGORY_APPLICATION, "Transform nulo en GameObject %s. Se ha creado uno por defecto.", name.c_str());
+	}
+
+	spriteRenderer = sprite;
+	if (spriteRenderer == nullptr) {
+		spriteRenderer = &addComponent<SpriteRenderer>();
+		SDL_LogWarn(SDL_LOG_CATEGORY_APPLICATION, "SpriteRenderer nulo en GameObject %s. Se ha creado uno por defecto.", name.c_str());
+	}
+
+	GameObject::name = name;
 	id = idCounter++;
 	isActive = true;
-
-	row = 0;
-	col = 0;
-
-	dstRect = { position.getX(), position.getY(), size.getX(), size.getY() };
 }
 
-GameObject::GameObject(std::string name, Vector2D<float> position, Vector2D<float> size, Texture* texture) {
-	this->position = position;
-	this->size = size;
-	this->texture = texture;
-	this->name = name;
-	id = idCounter++;
-	isActive = true;
-
-	row = 0;
-	col = 0;
-
-	dstRect = { position.getX(), position.getY(), size.getX(), size.getY() };
-}
-
-GameObject::GameObject(Vector2D<float> position, Vector2D<float> size, Texture* texture, int row, int col) {
-	this->position = position;
-	this->size = size;
-	this->texture = texture;
-	name = "Default";
-	id = idCounter++;
-	isActive = true;
-
-	GameObject::row = row;
-	GameObject::col = col;
-
-	dstRect = { position.getX(), position.getY(), size.getX(), size.getY() };
-}
-
-GameObject::GameObject(std::string name, Vector2D<float> position, Vector2D<float> size, Texture* texture, int row, int col) {
-	this->position = position;
-	this->size = size;
-	this->texture = texture;
-	this->name = name;
-	id = idCounter++;
-	isActive = true;
-
-	GameObject::row = row;
-	GameObject::col = col;
-
-	dstRect = { position.getX(), position.getY(), size.getX(), size.getY() };
-}
 #pragma endregion
 
-GameObject::~GameObject() {
-	texture = nullptr; // No se elimina la textura, ya que puede ser compartida
+
+void GameObject::update(float deltaTime) {
+    if (!isActive) return;
+    for (auto& comp : components) {
+        comp->DoUpdate(deltaTime); // Llama a Start/Update de cada componente
+    }
 }
 
 void GameObject::render() {
-	if (isActive && texture != nullptr) {
-		texture->renderFrame(dstRect, row, col);
-	}
+    if (!isActive) return;
+    // La responsabilidad de renderizar ahora es del SpriteComponent
+    if (spriteRenderer) {
+        spriteRenderer->render();
+    }
 }
 
-Vector2D<float> GameObject::getSize() const{
-	return size;
+// Las funciones addComponent y getComponent se quedan como estaban
+template<typename T, typename... TArgs>
+T& GameObject::addComponent(TArgs&&... args) {
+    auto comp = std::make_unique<T>(std::forward<TArgs>(args)...);
+    comp->gameObject = this;
+    components.push_back(std::move(comp));
+    return *dynamic_cast<T*>(components.back().get());
 }
 
-Vector2D<float> GameObject::getPosition() const {
-	return position;
+template<typename T>
+T* GameObject::getComponent() const {
+    for (const auto& comp : components) {
+        if (auto castedComp = dynamic_cast<T*>(comp.get())) {
+            return castedComp;
+        }
+    }
+    return nullptr;
 }
 
-void GameObject::setPosition(Vector2D<float> newPosition) {
-	position = newPosition;
-	dstRect.x = position.getX();
-	dstRect.y = position.getY();
-}
+#pragma region Getters y Setters
 
 std::string GameObject::getName() const {
 	return name;
@@ -112,3 +84,4 @@ bool GameObject::getIsActive() const {
 void GameObject::setIsActive(bool active) { 
 	isActive = active; 
 }
+#pragma endregion
