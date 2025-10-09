@@ -1,0 +1,33 @@
+#pragma once
+
+class MonoBehaviour {
+public:
+    MonoBehaviour() : started(false), active(true) {}
+    virtual ~MonoBehaviour() = default;
+
+    // Llamada una sola vez al principio
+    virtual void Start() {}
+
+    // Llamada cada frame
+    virtual void Update(float deltaTime) {}
+
+    // Llamada cuando el objeto se destruye
+    virtual void OnDestroy() {}
+
+    // Método de control general
+    void InternalUpdate(float deltaTime) {
+        if (!started) {
+            Start();
+            started = true;
+        }
+        if (active)
+            Update(deltaTime);
+    }
+
+    bool IsActive() const { return active; }
+    void SetActive(bool value) { active = value; }
+
+protected:
+    bool started;
+    bool active;
+};
