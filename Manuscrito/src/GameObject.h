@@ -20,8 +20,9 @@ public:
 	SpriteRenderer* spriteRenderer = nullptr;
 
 	GameObject();
+	GameObject(std::string name, size_t nComponents);
 	GameObject(std::string name, Transform* transform, SpriteRenderer* sprite, size_t nComponents);
-	~GameObject() = default;
+	~GameObject();
 
 	void update(float deltaTime);
 	void render(); // El render ahora lo delegaremos al SpriteComponent

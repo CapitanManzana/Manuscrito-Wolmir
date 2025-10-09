@@ -122,6 +122,7 @@ Game::update()
 void
 Game::run()
 {
+	// Bucle principal del juego
 	while (!exit) {
 		handleEvents();
 		update();

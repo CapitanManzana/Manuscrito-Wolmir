@@ -16,6 +16,17 @@ GameObject::GameObject() {
     isActive = true;
 }
 
+GameObject::GameObject(std::string name, size_t nComponents) {
+	components.reserve(nComponents);
+
+	transform = addComponent<Transform>();
+	spriteRenderer = addComponent<SpriteRenderer>();
+
+	GameObject::name = name;
+	id = idCounter++;
+	isActive = true;
+}
+
 GameObject::GameObject(std::string name, Transform* transform, SpriteRenderer* sprite, size_t nComponents){
 	components.reserve(nComponents);
 
@@ -46,8 +57,17 @@ GameObject::GameObject(std::string name, Transform* transform, SpriteRenderer* s
 	isActive = true;
 }
 
-#pragma endregion
+GameObject::~GameObject() {
+	for (auto& comp : components) {
+		comp->OnDestroy(); // Llama a OnDestroy de cada componente
+	}
 
+	transform = nullptr;
+	spriteRenderer = nullptr;
+	components.clear();
+}
+
+#pragma endregion
 
 void GameObject::update(float deltaTime) {
     if (!isActive) return;

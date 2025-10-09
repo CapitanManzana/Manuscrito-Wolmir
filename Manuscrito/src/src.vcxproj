@@ -94,10 +94,10 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="Component.cpp" />
     <ClCompile Include="game.cpp" />
     <ClCompile Include="GameObject.cpp" />
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="MonoBehaviour.cpp" />
     <ClCompile Include="SpriteRenderer.cpp" />
     <ClCompile Include="texture.cpp" />
     <ClCompile Include="Transform.cpp" />

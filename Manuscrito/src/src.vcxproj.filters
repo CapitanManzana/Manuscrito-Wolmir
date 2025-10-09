@@ -33,14 +33,14 @@
     <ClCompile Include="GameObject.cpp">
       <Filter>Archivos de código fuente</Filter>
     </ClCompile>
-    <ClCompile Include="Component.cpp">
-      <Filter>Archivos de código fuente\Componentes</Filter>
-    </ClCompile>
     <ClCompile Include="Transform.cpp">
       <Filter>Archivos de código fuente\Componentes</Filter>
     </ClCompile>
     <ClCompile Include="SpriteRenderer.cpp">
       <Filter>Archivos de código fuente\Componentes</Filter>
+    </ClCompile>
+    <ClCompile Include="MonoBehaviour.cpp">
+      <Filter>Archivos de código fuente</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

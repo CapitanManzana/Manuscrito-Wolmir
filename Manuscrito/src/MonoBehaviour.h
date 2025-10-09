@@ -1,4 +1,5 @@
 #pragma once
+#include <SDL3/SDL_Log.h>
 
 class GameObject; // Declaración adelantada
 
@@ -10,7 +11,7 @@ public:
     virtual ~MonoBehaviour() = default;
 
     /// Llamada una sola vez al principio
-    virtual void Start() {}
+    virtual void Start();
 
     /// Llamada cada frame
     virtual void Update(float deltaTime) {}
