@@ -38,6 +38,9 @@ public:
 	/// Number of frames in each column
 	int getNumColumns() const;
 
+	int getWidth() const;
+	int getHeight() const;
+
 	/// Render the whole picture filling the entire screen
 	void render() const;
 	/// Render the whole picture to the given rectangle
@@ -88,6 +91,18 @@ inline int
 Texture::getNumColumns() const
 {
 	return ncolumns;
+}
+
+inline int
+Texture::getWidth() const
+{
+	return width;
+}
+
+inline int
+Texture::getHeight() const
+{
+	return height;
 }
 
 #endif // TEXTURE_H

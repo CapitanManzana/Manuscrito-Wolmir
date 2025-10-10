@@ -1,6 +1,7 @@
 #include "SpriteRenderer.h"
 #include "texture.h"
 #include "GameObject.h"
+#include "Transform.h"
 
 SpriteRenderer::SpriteRenderer() {
 	row = 0;
@@ -22,7 +23,17 @@ SpriteRenderer::~SpriteRenderer() {
 }
 
 void SpriteRenderer::render() {
+	if (transform == nullptr) throw ("[%s] Renderer no tiene transform asignado", gameObject->getName());
+
 	if (texture && isEnabled) {
-		texture->renderFrame(gameObject->transform->dstRect, row, col);
+		texture->renderFrame(transform->dstRect, row, col);
+	}
+}
+
+void SpriteRenderer::onComponentAdd() {
+	transform = gameObject->getComponent<Transform>();
+
+	if (transform != nullptr) {
+		transform->updateTextureSize(Vector2D<float>(texture->getWidth(), texture->getHeight()));
 	}
 }

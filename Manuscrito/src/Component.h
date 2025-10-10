@@ -6,5 +6,5 @@ class Component : public MonoBehaviour
 public:
 	bool isEnabled = true;
 	virtual ~Component() = default;
+	virtual void onComponentAdd() {};
 };
-

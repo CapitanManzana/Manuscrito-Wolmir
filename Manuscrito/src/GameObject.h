@@ -15,13 +15,8 @@ private:
 
 	static int idCounter;
 public:
-	Transform* transform = nullptr;
-	// Añadimos un puntero al SpriteRenderer para delegar el render
-	SpriteRenderer* spriteRenderer = nullptr;
-
 	GameObject();
 	GameObject(std::string name, size_t nComponents);
-	GameObject(std::string name, Transform* transform, SpriteRenderer* sprite, size_t nComponents);
 	~GameObject();
 
 	void update(float deltaTime);
@@ -42,7 +37,7 @@ public:
 		T* rawPtr = comp.get(); // Obtenemos el puntero antes de moverlo
 
 		components.push_back(std::move(comp));
-
+		rawPtr->onComponentAdd();
 		return rawPtr; // <-- CAMBIO: Devuelve el puntero
 	}
 

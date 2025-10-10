@@ -5,10 +5,11 @@
 
 class Transform : public Component
 {
-public:
+private:
+	Vector2D<float> textureSize;
 	Vector2D<float> position;
 	Vector2D<float> scale;
-
+public:
 	// Rectángulo destino para renderizar con SDL
 	SDL_FRect dstRect;
 
@@ -17,9 +18,11 @@ public:
 
 	bool overlapingPoint(Vector2D<float> point) const;
 
-	Vector2D<float> getSize() const;
+	Vector2D<float> getScale() const;
 	Vector2D<float> getPosition() const;
 	void setPosition(Vector2D<float> newPosition);
+	void setScale(Vector2D<float> neScale);
 
+	void updateTextureSize(Vector2D<float> size);
 };
 

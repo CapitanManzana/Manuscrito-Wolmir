@@ -23,7 +23,8 @@ constexpr const char* const imgBase = "../assets/images/";
 
 constexpr array<TextureSpec, Game::NUM_TEXTURES> textureList{
 	TextureSpec{"background.jpg"},
-	{"chino.jpeg"}
+	{"chino.jpeg"},
+	{"hoja1.png"}
 };
 
 vector<GameObject*> Game::gameObjects;
@@ -123,11 +124,23 @@ Game::update()
 void
 Game::run()
 {
+	const Uint32 frameDelay = 1000 / FRAME_RATE;
+	Uint32 frameStart;
+	Uint32 frameTime;
+
 	// Bucle principal del juego
 	while (!exit) {
+		frameStart = SDL_GetTicks();
+
 		handleEvents();
 		update();
 		render();
+
+		frameTime = SDL_GetTicks() - frameStart;
+
+		if (frameDelay > frameTime) {
+			SDL_Delay(frameDelay - frameTime);
+		}
 	}
 }
 
@@ -150,8 +163,8 @@ Game::handleEvents()
 				Transform* t = go->getComponent<Transform>();
 
 				if (t != nullptr) {
-					t->setPosition(Vector2D<float>(w / 2 - t->scale.x / 2,
-						h / 2 - t->scale.y / 2));
+					t->setPosition(Vector2D<float>(w / 2 - t->getScale().x / 2,
+						h / 2 - t->getScale().y / 2));
 				}
 			}
 		}
@@ -195,13 +208,12 @@ Game::checkCollision(const SDL_FRect& rect) const
 
 void Game::createGameObjects() {
 	// TODO
-	Transform* chinoTransform = new Transform(
-		Vector2D<float>(WINDOW_WIDTH / 2 - 150, WINDOW_HEIGHT / 2 - 150),
-		Vector2D<float>(300, 300)
-	);
-	SpriteRenderer* chinoSprite = new SpriteRenderer(getTexture(CHINO), 0, 0);
+	#pragma region CHINO
 
-	GameObject* chino = new GameObject("Chino", chinoTransform, chinoSprite, 2);
+	GameObject* chino = new GameObject("Chino", 2);
+	chino->addComponent<Transform>(Vector2D<float>(WINDOW_WIDTH / 2 - 150, WINDOW_HEIGHT / 2 - 150), Vector2D<float>(1, 1));
+	chino->addComponent<SpriteRenderer>(getTexture(CHINO), 0, 0);
+
 	Button* chinoButton = chino->addComponent<Button>();
 
 	chinoButton->onClick = [chino]() {
@@ -210,4 +222,14 @@ void Game::createGameObjects() {
 		};
 
 	Game::gameObjects.push_back(chino);
+
+	#pragma endregion
+
+	/*Transform* hoja1T = new Transform(
+		Vector2D<float>(WINDOW_WIDTH / 2 - 150, WINDOW_HEIGHT / 2 - 150),
+		Vector2D<float>(1, 1)
+	);
+
+	SpriteRenderer* hoja1SR = new SpriteRenderer(getTexture(HOJA1), 0, 0);*/
+
 }

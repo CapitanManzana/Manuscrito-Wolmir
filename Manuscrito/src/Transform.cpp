@@ -15,11 +15,11 @@ Transform::Transform(Vector2D<float> position, Vector2D<float> size) {
 }
 
 bool Transform::overlapingPoint(Vector2D<float> point) const {
-	return (point.x >= position.x && point.x <= position.x + scale.x &&
-		point.y >= position.y && point.y <= position.y + scale.y);
+	return (point.x >= position.x && point.x <= position.x + scale.x * textureSize.x &&
+		point.y >= position.y && point.y <= position.y + scale.y * textureSize.y);
 }
 
-Vector2D<float> Transform::getSize() const {
+Vector2D<float> Transform::getScale() const {
 	return scale;
 }
 
@@ -31,4 +31,16 @@ void Transform::setPosition(Vector2D<float> newPosition) {
 	position = newPosition;
 	dstRect.x = position.x;
 	dstRect.y = position.y;
+}
+
+void Transform::setScale(Vector2D<float> newScale) {
+	scale = newScale;
+	dstRect.w = newScale.x;
+	dstRect.h = newScale.y;
+}
+
+void Transform::updateTextureSize(Vector2D<float> size) {
+	textureSize = size;
+	dstRect.w = textureSize.x * scale.x;
+	dstRect.h = textureSize.y * scale.y;
 }

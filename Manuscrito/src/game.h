@@ -19,8 +19,8 @@ public:
 	// Se actualiza el juego cada tantos milisegundos
 	static constexpr int FRAME_RATE = 60;
 	// Tamaño real de la ventana
-	static constexpr int WINDOW_WIDTH = 1920;
-	static constexpr int WINDOW_HEIGHT = 1080;
+	static constexpr int WINDOW_WIDTH = 1920/2;
+	static constexpr int WINDOW_HEIGHT = 1080/2;
 	// Extremo inferior del río
 	static constexpr int RIVER_LOW = 210;
 
@@ -28,6 +28,7 @@ public:
 	{
 		BACKGROUND,
 		CHINO,
+		HOJA1,
 		NUM_TEXTURES
 	};
 
