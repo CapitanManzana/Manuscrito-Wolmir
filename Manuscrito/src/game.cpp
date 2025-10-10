@@ -35,7 +35,8 @@ Game::Game() : exit(false)
 	// Carga SDL y sus bibliotecas auxiliares
 	SDL_Init(SDL_INIT_VIDEO);
 	//SDL_WINDOW_FULLSCREEN
-	window = SDL_CreateWindow(WINDOW_TITLE, WINDOW_WIDTH, WINDOW_HEIGHT, SDL_WINDOW_RESIZABLE);
+	//SDL_WINDOW_RESIZABLE
+	window = SDL_CreateWindow(WINDOW_TITLE, WINDOW_WIDTH, WINDOW_HEIGHT, SDL_WINDOW_FULLSCREEN);
 
 	if (window == nullptr)
 		throw "window: "s + SDL_GetError();
@@ -207,10 +208,14 @@ Game::checkCollision(const SDL_FRect& rect) const
 }
 
 void Game::createGameObjects() {
+	int w;
+	int h;
+
+	SDL_GetWindowSize(window, &w, &h);
 	// TODO
 	#pragma region CHINO
 
-	GameObject* chino = new GameObject("Chino", 2);
+	GameObject* chino = new GameObject("Chino", 3);
 	chino->addComponent<Transform>(Vector2D<float>(WINDOW_WIDTH / 2 - 150, WINDOW_HEIGHT / 2 - 150), Vector2D<float>(1, 1));
 	chino->addComponent<SpriteRenderer>(getTexture(CHINO), 0, 0);
 
@@ -225,11 +230,9 @@ void Game::createGameObjects() {
 
 	#pragma endregion
 
-	/*Transform* hoja1T = new Transform(
-		Vector2D<float>(WINDOW_WIDTH / 2 - 150, WINDOW_HEIGHT / 2 - 150),
-		Vector2D<float>(1, 1)
-	);
+	GameObject* hoja1 = new GameObject("Hoja1", 2);
+	hoja1->addComponent<Transform>(Vector2D<float>(w/2, h/2), Vector2D<float>(1, 1));
+	hoja1->addComponent<SpriteRenderer>(getTexture(HOJA1), 0, 0);
 
-	SpriteRenderer* hoja1SR = new SpriteRenderer(getTexture(HOJA1), 0, 0);*/
-
+	Game::gameObjects.push_back(hoja1);
 }

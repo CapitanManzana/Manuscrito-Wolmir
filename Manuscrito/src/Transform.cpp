@@ -43,4 +43,6 @@ void Transform::updateTextureSize(Vector2D<float> size) {
 	textureSize = size;
 	dstRect.w = textureSize.x * scale.x;
 	dstRect.h = textureSize.y * scale.y;
+	dstRect.x = position.x - dstRect.w / 2;
+	dstRect.y = position.y - dstRect.h / 2;
 }
