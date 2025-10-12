@@ -24,5 +24,7 @@ public:
 	void setScale(Vector2D<float> neScale);
 
 	void updateTextureSize(Vector2D<float> size);
+
+	void onComponentAdd() override;
 };
 

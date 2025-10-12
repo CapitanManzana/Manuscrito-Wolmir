@@ -1,4 +1,5 @@
 #include "Transform.h"
+#include "GameObject.h"
 
 Transform::Transform() {
 	position = Vector2D<float>(0.0f, 0.0f);
@@ -29,8 +30,8 @@ Vector2D<float> Transform::getPosition() const {
 
 void Transform::setPosition(Vector2D<float> newPosition) {
 	position = newPosition;
-	dstRect.x = position.x;
-	dstRect.y = position.y;
+	dstRect.x = position.x - dstRect.w / 2;
+	dstRect.y = position.y - dstRect.h / 2;
 }
 
 void Transform::setScale(Vector2D<float> newScale) {
@@ -45,4 +46,8 @@ void Transform::updateTextureSize(Vector2D<float> size) {
 	dstRect.h = textureSize.y * scale.y;
 	dstRect.x = position.x - dstRect.w / 2;
 	dstRect.y = position.y - dstRect.h / 2;
+}
+
+void Transform::onComponentAdd() {
+	gameObject->transform = this;
 }

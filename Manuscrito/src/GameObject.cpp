@@ -41,11 +41,10 @@ void GameObject::update(float deltaTime) {
 void GameObject::render() {
 	if (!isActive) return;
 
-	SpriteRenderer* sr = getComponent<SpriteRenderer>();
 	// La responsabilidad de renderizar ahora es del SpriteComponent
-	if (sr != nullptr) {
+	if (spriteRenderer != nullptr) {
 		try {
-			sr->render();
+			spriteRenderer->render();
 		}
 		catch (const std::runtime_error& e) {
 			SDL_Log("Se produjo un error: %s", e.what());

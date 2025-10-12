@@ -15,6 +15,9 @@ private:
 
 	static int idCounter;
 public:
+	SpriteRenderer* spriteRenderer; // Componente de renderizado
+	Transform* transform; // Componente de transformación
+
 	GameObject();
 	GameObject(std::string name, size_t nComponents);
 	~GameObject();
