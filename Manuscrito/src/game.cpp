@@ -23,7 +23,7 @@ struct TextureSpec
 constexpr const char* const imgBase = "../assets/images/";
 
 constexpr array<TextureSpec, Game::NUM_TEXTURES> textureList{
-	TextureSpec{"background.jpg"},
+	TextureSpec{"fondo.jpg"},
 	{"chino.jpeg"},
 	{"hoja1.png"},
 	{"hoja2.png"},
@@ -130,7 +130,7 @@ Game::update()
 			gameObjects[i]->update(deltaTime); // Pasamos el valor calculado
 	}
 
-	
+
 }
 
 void
@@ -244,39 +244,41 @@ void Game::createGameObjects() {
 	// TODO
 #pragma region CHINO
 
-/*ameObject* chino = new GameObject("Chino", 3);
-chino->addComponent<Transform>(Vector2D<float>(WINDOW_WIDTH / 2 - 150, WINDOW_HEIGHT / 2 - 150), Vector2D<float>(1, 1));
-chino->addComponent<SpriteRenderer>(getTexture(CHINO), 0, 0);
+	/*GameObject* chino = new GameObject("Chino", 3);
+	chino->addComponent<Transform>(Vector2D<float>(w / 2 + 150, h / 2 - 600), Vector2D<float>(1, 1));
+	chino->addComponent<SpriteRenderer>(getTexture(CHINO), 0, 0);
 
-Button* chinoButton = chino->addComponent<Button>();
+	Button* chinoButton = chino->addComponent<Button>();
 
-chinoButton->onClick = [chino]() {
-	chino->setIsActive(!chino->getIsActive());
-	SDL_Log("Has hecho click en el Chino");
+	chinoButton->onClick = [chino]() {
+		currentPage++;
+		if (currentPage >= pagesCount - 1) currentPage = 0;
+
+		manuscrito->changePage(currentPage);
 	};
 
-Game::gameObjects.push_back(chino);*/
+	gameObjects.push_back(chino);*/
 
 #pragma endregion
 
 	GameObject* hoja1 = new GameObject("Hoja1", 2);
-	hoja1->addComponent<Transform>(Vector2D<float>(w / 2 - 400, h / 2), Vector2D<float>(1.3, 1.3));
+	hoja1->addComponent<Transform>(Vector2D<float>(w / 2 - 400, h / 2), Vector2D<float>(1, 1));
 	hoja1->addComponent<SpriteRenderer>(getTexture(HOJA1), 0, 0);
 
 	GameObject* hoja2 = new GameObject("Hoja2", 2);
-	hoja2->addComponent<Transform>(Vector2D<float>(w / 2 + 400, h / 2), Vector2D<float>(1.3, 1.3));
+	hoja2->addComponent<Transform>(Vector2D<float>(w / 2 + 400, h / 2), Vector2D<float>(1, 1));
 	hoja2->addComponent<SpriteRenderer>(getTexture(HOJA2), 0, 0);
 
 	GameObject* hoja3 = new GameObject("Hoja3", 2);
-	hoja3->addComponent<Transform>(Vector2D<float>(w / 2 + 400, h / 2), Vector2D<float>(1.3, 1.3));
+	hoja3->addComponent<Transform>(Vector2D<float>(w / 2 + 400, h / 2), Vector2D<float>(1, 1));
 	hoja3->addComponent<SpriteRenderer>(getTexture(HOJA3), 0, 0);
 
 	GameObject* hoja4 = new GameObject("Hoja4", 2);
-	hoja4->addComponent<Transform>(Vector2D<float>(w / 2 + 400, h / 2), Vector2D<float>(1.3, 1.3));
+	hoja4->addComponent<Transform>(Vector2D<float>(w / 2 + 400, h / 2), Vector2D<float>(1, 1));
 	hoja4->addComponent<SpriteRenderer>(getTexture(HOJA4), 0, 0);
 
 	GameObject* hoja5 = new GameObject("Hoja5", 2);
-	hoja5->addComponent<Transform>(Vector2D<float>(w / 2 + 400, h / 2), Vector2D<float>(1.3, 1.3));
+	hoja5->addComponent<Transform>(Vector2D<float>(w / 2 + 400, h / 2), Vector2D<float>(1, 1));
 	hoja5->addComponent<SpriteRenderer>(getTexture(HOJA5), 0, 0);
 
 	gameObjects.push_back(hoja1);
@@ -284,12 +286,13 @@ Game::gameObjects.push_back(chino);*/
 	gameObjects.push_back(hoja3);
 	gameObjects.push_back(hoja4);
 	gameObjects.push_back(hoja5);
+
 	bookPages.push_back(hoja1);
 	bookPages.push_back(hoja2);
 	bookPages.push_back(hoja3);
 	bookPages.push_back(hoja4);
 	bookPages.push_back(hoja5);
 
-	manuscrito = new Book(bookPages, w/2, h/2, 400);
+	manuscrito = new Book(bookPages, w / 2 - 8, h / 2 - 25, 300);
 	pagesCount = manuscrito->getPageCount();
 }
