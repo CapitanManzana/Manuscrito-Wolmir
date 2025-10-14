@@ -38,6 +38,7 @@ int currentPage = 0;
 int pagesCount = 0;
 
 bool blackLight = false;
+bool glasses = false;
 
 Game::Game() : exit(false)
 {
@@ -116,6 +117,10 @@ Game::render() const
 		SDL_SetRenderDrawColor(renderer, 24, 0, 115, 160);
 		SDL_RenderFillRect(renderer, nullptr);
 	}
+	else if (glasses) {
+		SDL_SetRenderDrawColor(renderer, 120, 100, 35, 160);
+		SDL_RenderFillRect(renderer, nullptr);
+	}
 
 	SDL_RenderPresent(renderer);
 }
@@ -153,7 +158,6 @@ Game::run()
 	while (!exit) {
 		frameStart = SDL_GetTicks();
 
-		handleEvents();
 		update();
 		render();
 
@@ -215,6 +219,10 @@ Game::handleEvents()
 				blackLight = !blackLight;
 			}
 
+			if (event.key.key == SDLK_Q) {
+				glasses = !glasses;
+			}
+
 			if (event.key.key == SDLK_D) {
 				currentPage+=2;
 				if (currentPage >= pagesCount - 1) currentPage = pagesCount - 2;
@@ -235,13 +243,6 @@ Game::handleEvents()
 
 		// TODO
 	}
-}
-
-bool
-Game::checkCollision(const SDL_FRect& rect) const
-{
-	// TODO: cambiar el tipo de retorno a Collision e implementar
-	return false;
 }
 
 void Game::createGameObjects() {

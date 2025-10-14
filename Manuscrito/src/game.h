@@ -9,6 +9,7 @@
 // Declaraciones anticipadas
 class Texture;
 class GameObject;
+class Book;
 
 /**
  * Clase principal del juego.
@@ -52,9 +53,6 @@ private:
 
 	Uint64 perfFrequency; // Frecuencia del contador de alto rendimiento (ticks por segundo)
 	Uint64 lastTime;
-
-	// Elemento del juego
-	// TODO: añadir atributos para los objetos del juego
 
 public:
 	Game();

@@ -7,6 +7,8 @@ int GameObject::idCounter = 0;
 GameObject::GameObject() {
 
 	components.reserve(2);
+	spriteRenderer = nullptr;
+	transform = nullptr;
 
 	name = "GameObject_" + std::to_string(idCounter);
 	id = idCounter++;
@@ -15,6 +17,21 @@ GameObject::GameObject() {
 
 GameObject::GameObject(std::string name, size_t nComponents) {
 	components.reserve(nComponents);
+	spriteRenderer = nullptr;
+	transform = nullptr;
+
+	GameObject::name = name;
+	id = idCounter++;
+	isActive = true;
+}
+
+GameObject::GameObject(std::string name, size_t nComponents, GameObject* parent) {
+	components.reserve(nComponents);
+	spriteRenderer = nullptr;
+	transform = nullptr;
+
+	this->parent = parent;
+	parent->childs.push_back(this);
 
 	GameObject::name = name;
 	id = idCounter++;
@@ -68,4 +85,12 @@ bool GameObject::getIsActive() const {
 void GameObject::setIsActive(bool active) {
 	isActive = active;
 }
+
+GameObject* GameObject::getChildren(int index) {
+	if (index < 0 || index >= childs.size()) {
+		return nullptr; // O lanza una excepción si prefieres
+	}
+	return childs[index];
+}
+
 #pragma endregion

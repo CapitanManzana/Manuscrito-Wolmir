@@ -11,15 +11,18 @@ private:
 	int id;
 
 	std::vector<std::unique_ptr<Component>> components;
+	std::vector<GameObject*> childs;
 	bool isActive;
 
 	static int idCounter;
 public:
 	SpriteRenderer* spriteRenderer; // Componente de renderizado
 	Transform* transform; // Componente de transformación
+	GameObject* parent = nullptr; 
 
 	GameObject();
 	GameObject(std::string name, size_t nComponents);
+	GameObject(std::string name, size_t nComponents, GameObject* parent);
 	~GameObject();
 
 	void update(float deltaTime);
@@ -30,6 +33,8 @@ public:
 
 	std::string getName() const;
 	int getId() const;
+
+	GameObject* getChildren(int index);
 
 public:
 	template<typename T, typename... TArgs>
