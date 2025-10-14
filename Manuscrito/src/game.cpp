@@ -37,6 +37,8 @@ Book* manuscrito;
 int currentPage = 0;
 int pagesCount = 0;
 
+bool blackLight = false;
+
 Game::Game() : exit(false)
 {
 #pragma region SDL INIT
@@ -69,6 +71,8 @@ Game::Game() : exit(false)
 			SDL_Log("Se produjo un error: %s", e.what());
 		}
 	}
+
+	SDL_SetRenderDrawBlendMode(renderer, SDL_BLENDMODE_MUL);
 
 	//Carga los GameObjects
 	createGameObjects();
@@ -106,6 +110,11 @@ Game::render() const
 	for (size_t i = 0; i < gameObjects.size(); i++) {
 		if (gameObjects[i]->getIsActive())
 			gameObjects[i]->render();
+	}
+
+	if (blackLight) {
+		SDL_SetRenderDrawColor(renderer, 24, 0, 115, 160);
+		SDL_RenderFillRect(renderer, nullptr);
 	}
 
 	SDL_RenderPresent(renderer);
@@ -203,7 +212,7 @@ Game::handleEvents()
 		else if (event.type == SDL_EVENT_KEY_DOWN) {
 
 			if (event.key.key == SDLK_E) {
-				gameObjects[0]->setIsActive(!gameObjects[0]->getIsActive());
+				blackLight = !blackLight;
 			}
 
 			if (event.key.key == SDLK_D) {
