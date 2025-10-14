@@ -12,7 +12,17 @@ Transform::Transform(Vector2D<float> position, Vector2D<float> size) {
 	this->position = position;
 	scale = size;
 
-	dstRect = { position.x, position.y, size.x, size.y };
+	dstRect = { position.x, position.y, scale.x, scale.y };
+}
+
+Transform::Transform(Vector2D<float> position, float size) {
+	this->position = position;
+	scale = {
+		size, 
+		size
+	};
+
+	dstRect = { position.x, position.y, scale.x, scale.y };
 }
 
 bool Transform::overlapingPoint(Vector2D<float> point) const {

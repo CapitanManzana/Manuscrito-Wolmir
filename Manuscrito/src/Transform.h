@@ -15,6 +15,7 @@ public:
 
 	Transform();
 	Transform(Vector2D<float> position, Vector2D<float> size);
+	Transform(Vector2D<float> position, float size);
 
 	bool overlapingPoint(Vector2D<float> point) const;
 

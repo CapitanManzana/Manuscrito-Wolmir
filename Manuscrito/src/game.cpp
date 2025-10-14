@@ -73,7 +73,7 @@ Game::Game() : exit(false)
 	}
 
 	SDL_SetRenderDrawBlendMode(renderer, SDL_BLENDMODE_MUL);
-	SDL_SetRenderLogicalPresentation(renderer, WINDOW_WIDTH, WINDOW_HEIGHT, SDL_LOGICAL_PRESENTATION_INTEGER_SCALE);
+	SDL_SetRenderLogicalPresentation(renderer, WINDOW_WIDTH, WINDOW_HEIGHT, SDL_LOGICAL_PRESENTATION_STRETCH);
 	//Carga los GameObjects
 	createGameObjects();
 
@@ -271,11 +271,11 @@ void Game::createGameObjects() {
 #pragma endregion
 
 	GameObject* hoja1 = new GameObject("Hoja1", 2);
-	hoja1->addComponent<Transform>(Vector2D<float>(w / 2 - 400, h / 2), Vector2D<float>(1, 1));
+	hoja1->addComponent<Transform>(Vector2D<float>(w / 2 - 400, h / 2), 0.375);
 	hoja1->addComponent<SpriteRenderer>(getTexture(HOJA1), 0, 0);
 
 	GameObject* hoja2 = new GameObject("Hoja2", 2);
-	hoja2->addComponent<Transform>(Vector2D<float>(w / 2 + 400, h / 2), Vector2D<float>(1, 1));
+	hoja2->addComponent<Transform>(Vector2D<float>(w / 2 + 400, h / 2), 0.375);
 	hoja2->addComponent<SpriteRenderer>(getTexture(HOJA1), 0, 0);
 
 	GameObject* hoja3 = new GameObject("Hoja3", 2);
@@ -302,6 +302,6 @@ void Game::createGameObjects() {
 	bookPages.push_back(hoja4);
 	bookPages.push_back(hoja5);
 
-	manuscrito = new Book(bookPages, w / 2 - 8, h / 2 - 25, 320);
+	manuscrito = new Book(bookPages, WINDOW_WIDTH / 2 - 5, WINDOW_HEIGHT / 2 - 9, 125);
 	pagesCount = manuscrito->getPageCount();
 }
