@@ -73,7 +73,7 @@ Game::Game() : exit(false)
 	}
 
 	SDL_SetRenderDrawBlendMode(renderer, SDL_BLENDMODE_MUL);
-
+	SDL_SetRenderLogicalPresentation(renderer, WINDOW_WIDTH, WINDOW_HEIGHT, SDL_LOGICAL_PRESENTATION_INTEGER_SCALE);
 	//Carga los GameObjects
 	createGameObjects();
 
@@ -216,15 +216,15 @@ Game::handleEvents()
 			}
 
 			if (event.key.key == SDLK_D) {
-				currentPage++;
-				if (currentPage >= pagesCount - 1) currentPage = 0;
+				currentPage+=2;
+				if (currentPage >= pagesCount - 1) currentPage = pagesCount - 2;
 
 				manuscrito->changePage(currentPage);
 			}
 
 			if (event.key.key == SDLK_A) {
-				currentPage--;
-				if (currentPage < 0) currentPage = pagesCount - 2;
+				currentPage = currentPage - 2;
+				if (currentPage < 0) currentPage = 0;
 				manuscrito->changePage(currentPage);
 			}
 
