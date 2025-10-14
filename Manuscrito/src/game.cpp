@@ -25,11 +25,11 @@ constexpr const char* const imgBase = "../assets/images/";
 constexpr array<TextureSpec, Game::NUM_TEXTURES> textureList{
 	TextureSpec{"fondo.jpg"},
 	{"chino.jpeg"},
-	{"hoja1.png"},
-	{"hoja2.png"},
+	{"Hoja1.png"},
 	{"hoja3.png"},
 	{"hoja4.png"},
-	{"hoja5.png"}
+	{"hoja5.png"},
+	{"HojaVacia.png"}
 };
 
 vector<GameObject*> Game::gameObjects;
@@ -276,7 +276,7 @@ void Game::createGameObjects() {
 
 	GameObject* hoja2 = new GameObject("Hoja2", 2);
 	hoja2->addComponent<Transform>(Vector2D<float>(w / 2 + 400, h / 2), Vector2D<float>(1, 1));
-	hoja2->addComponent<SpriteRenderer>(getTexture(HOJA2), 0, 0);
+	hoja2->addComponent<SpriteRenderer>(getTexture(HOJA1), 0, 0);
 
 	GameObject* hoja3 = new GameObject("Hoja3", 2);
 	hoja3->addComponent<Transform>(Vector2D<float>(w / 2 + 400, h / 2), Vector2D<float>(1, 1));
@@ -302,6 +302,6 @@ void Game::createGameObjects() {
 	bookPages.push_back(hoja4);
 	bookPages.push_back(hoja5);
 
-	manuscrito = new Book(bookPages, w / 2 - 8, h / 2 - 25, 300);
+	manuscrito = new Book(bookPages, w / 2 - 8, h / 2 - 25, 320);
 	pagesCount = manuscrito->getPageCount();
 }

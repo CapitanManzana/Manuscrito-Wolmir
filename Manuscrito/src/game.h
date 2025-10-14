@@ -29,10 +29,10 @@ public:
 		BACKGROUND,
 		CHINO,
 		HOJA1,
-		HOJA2,
 		HOJA3,
 		HOJA4,
 		HOJA5,
+		HOJA_VACIA,
 		NUM_TEXTURES
 	};
 
