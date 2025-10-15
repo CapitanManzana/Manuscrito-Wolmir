@@ -41,6 +41,8 @@ Book* manuscrito;
 int currentPage = 0;
 int pagesCount = 0;
 
+vector<GameObject*> texts;
+
 bool blackLight = false;
 bool glasses = false;
 
@@ -88,6 +90,7 @@ Game::Game() : exit(false)
 	//Carga los GameObjects
 	createGameObjects();
 
+
 	// Configura que se pueden utilizar capas translúcidas
 	// SDL_SetRenderDrawBlendMode(renderer, SDL_BLENDMODE_BLEND);
 }
@@ -96,6 +99,8 @@ Game::~Game()
 {
 	TTF_CloseFont(font);
 	font = nullptr;
+
+	texts.clear();
 
 	// Elimina los objetos del juego
 	for (size_t i = 0; i < gameObjects.size(); i++) {
@@ -135,6 +140,8 @@ Game::render() const
 		SDL_SetRenderDrawColor(renderer, 0, 115, 0, 160);
 		SDL_RenderFillRect(renderer, nullptr);
 	}
+
+
 
 	SDL_RenderPresent(renderer);
 }
@@ -197,14 +204,19 @@ Game::handleEvents()
 			float mouseX = event.button.x;
 			float mouseY = event.button.y;
 
+			float logicalX, logicalY;
+
+			SDL_RenderCoordinatesFromWindow(renderer, mouseX, mouseY, &logicalX, &logicalY);
+			SDL_FPoint mousePoint = { logicalX, logicalY };
+
 			for (GameObject* go : gameObjects) {
 				if (go->getIsActive()) {
 					Button* bt = go->getComponent<Button>();
 
-					if (bt != nullptr) {
+					if (bt != nullptr && bt->isEnabled) {
 						Transform* t = go->getComponent<Transform>();
 
-						if (t != nullptr && t->overlapingPoint(Vector2D<float>(mouseX, mouseY))) {
+						if (SDL_PointInRectFloat(&mousePoint, &t->dstRect)) {
 							bt->onClick();
 						}
 					}
@@ -239,56 +251,68 @@ Game::handleEvents()
 				exit = true;
 			}
 		}
-
-		// TODO
 	}
 }
 
 void Game::createGameObjects() {
-	int w;
-	int h;
 
-	SDL_GetWindowSize(window, &w, &h);
+	#pragma region HOJAS DEL MANUSCRITO
+
 	vector<GameObject*> bookPages;
-	// TODO
-#pragma region CHINO
-
-	/*GameObject* chino = new GameObject("Chino", 3);
-	chino->addComponent<Transform>(Vector2D<float>(w / 2 + 150, h / 2 - 600), Vector2D<float>(1, 1));
-	chino->addComponent<SpriteRenderer>(getTexture(CHINO), 0, 0);
-
-	Button* chinoButton = chino->addComponent<Button>();
-
-	chinoButton->onClick = [chino]() {
-		currentPage++;
-		if (currentPage >= pagesCount - 1) currentPage = 0;
-
-		manuscrito->changePage(currentPage);
-	};
-
-	gameObjects.push_back(chino);*/
-
-#pragma endregion
 
 	GameObject* hoja1 = new GameObject("Hoja1", 2);
-	hoja1->addComponent<Transform>(Vector2D<float>(w / 2 - 400, h / 2), 0.1875);
+	hoja1->addComponent<Transform>(Vector2D<float>(1, 1), 0.1875);
 	hoja1->addComponent<SpriteRenderer>(getTexture(HOJA1), 0, 0);
 
 	GameObject* hoja2 = new GameObject("Hoja2", 2);
-	hoja2->addComponent<Transform>(Vector2D<float>(w / 2 + 400, h / 2), 0.1875);
+	hoja2->addComponent<Transform>(Vector2D<float>(1, 1), 0.1875);
 	hoja2->addComponent<SpriteRenderer>(getTexture(HOJA1), 0, 0);
 
-	GameObject* texto1 = new GameObject("Texto1", 3, hoja1);
-	texto1->addComponent<Transform>(Vector2D<float>(-400, -400), 0.1875);
-	texto1->addComponent<SpriteRenderer>(getTexture(TEXTO1_1),0,0);
+	GameObject* hoja3 = new GameObject("Hoja3", 2);
+	hoja3->addComponent<Transform>(Vector2D<float>(1, 1), 0.1875);
+	hoja3->addComponent<SpriteRenderer>(getTexture(HOJA_VACIA), 0, 0);
 
 	gameObjects.push_back(hoja1);
 	gameObjects.push_back(hoja2);
-	gameObjects.push_back(texto1);
+	gameObjects.push_back(hoja3);
 
 	bookPages.push_back(hoja1);
 	bookPages.push_back(hoja2);
+	bookPages.push_back(hoja3);
 
 	manuscrito = new Book(bookPages, WINDOW_WIDTH / 2 - 5, WINDOW_HEIGHT / 2 - 9, 125);
 	pagesCount = manuscrito->getPageCount();
+#pragma endregion
+
+
+	GameObject* texto1 = new GameObject("Texto1", 3, hoja1);
+
+	texto1->addComponent<Transform>(Vector2D<float>(-5, -120), 0.1875);
+	texto1->addComponent<SpriteRenderer>(getTexture(TEXTO1_1), 0, 0);
+
+	Button* btT1 = texto1->addComponent<Button>();
+	btT1->onClick = [this, texto1]() { 
+		showText(texto1); 
+	};
+	texto1->spriteRenderer->isEnabled = false;
+
+	gameObjects.push_back(texto1);
+
+	texts.push_back(texto1);
 }
+
+#pragma region ButtonEvents
+
+void Game::showText(GameObject* text) {
+	if (glasses) {
+
+		if (text->spriteRenderer->isEnabled) {
+			for (GameObject* t : texts) {
+				if (t != text) t->spriteRenderer->isEnabled = false;
+			}
+		}
+
+		text->spriteRenderer->isEnabled = !text->spriteRenderer->isEnabled;
+	}
+}
+#pragma endregion

@@ -83,6 +83,12 @@ bool GameObject::getIsActive() const {
 	return isActive;
 }
 void GameObject::setIsActive(bool active) {
+	if (childs.size() > 0) {
+		for (GameObject* child : childs) {
+			child->setIsActive(active);
+		}
+	}
+
 	isActive = active;
 }
 

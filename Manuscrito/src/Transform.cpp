@@ -34,9 +34,9 @@ Transform::Transform(Vector2D<float> position, float size) {
 bool Transform::overlapingPoint(Vector2D<float> point) const {
 	Vector2D position;
 
-	if (gameObject->parent != nullptr && gameObject->parent->transform != nullptr) {
-		float parentX = gameObject->parent->transform->position.x;
-		float parentY = gameObject->parent->transform->position.y;
+	if (parentTransform!= nullptr) {
+		float parentX = parentTransform->position.x;
+		float parentY = parentTransform->position.y;
 
 		position.x = parentX + Transform::position.x;
 		position.y = parentY + Transform::position.y;
@@ -63,9 +63,9 @@ void Transform::setPosition(Vector2D<float> newPosition) {
 	position = newPosition;
 
 	// Si el objeto es hijo, pues se toman las coordenadas del padre
-	if (gameObject->parent != nullptr && gameObject->parent->transform != nullptr) {
-		float parentX = gameObject->parent->transform->position.x;
-		float parentY = gameObject->parent->transform->position.y;
+	if (parentTransform != nullptr) {
+		float parentX = parentTransform->position.x;
+		float parentY = parentTransform->position.y;
 
 		dstRect.x = parentX + position.x - dstRect.w / 2;
 		dstRect.y = parentY + position.y - dstRect.h / 2;
@@ -105,4 +105,8 @@ void Transform::updateTextureSize(Vector2D<float> size) {
 
 void Transform::onComponentAdd() {
 	gameObject->transform = this;
+
+	if (gameObject->parent != nullptr && gameObject->parent->transform != nullptr) {
+		parentTransform = gameObject->parent->transform;
+	}
 }

@@ -52,6 +52,8 @@ private:
 	void handleEvents();
 	void createGameObjects();
 
+	void showText(GameObject* text);
+
 	bool exit;
 
 	static std::vector<GameObject*> gameObjects;

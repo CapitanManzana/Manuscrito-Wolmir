@@ -9,6 +9,9 @@ private:
 	Vector2D<float> textureSize;
 	Vector2D<float> position;
 	Vector2D<float> scale;
+
+	Transform* parentTransform = nullptr;
+
 public:
 	// Rectángulo destino para renderizar con SDL
 	SDL_FRect dstRect;
@@ -18,6 +21,7 @@ public:
 	Transform(Vector2D<float> position, float size);
 
 	bool overlapingPoint(Vector2D<float> point) const;
+	bool overlapingRect(SDL_FRect& rect) const;
 
 	Vector2D<float> getScale() const;
 	Vector2D<float> getPosition() const;
