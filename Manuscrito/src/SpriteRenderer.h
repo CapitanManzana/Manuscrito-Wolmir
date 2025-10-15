@@ -18,6 +18,9 @@ public:
 	SpriteRenderer(Texture* texture, int row, int col);
 	~SpriteRenderer();
 
+	Texture* getTexture() const;
+	void setTexture(Texture* texture);
+
 	void onComponentAdd() override;
 
 	void render();

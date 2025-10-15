@@ -50,6 +50,7 @@
   </ImportGroup>
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+    <Import Project="..\ProyectoSDL.props" />
   </ImportGroup>
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Sanitize|x64'">
     <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
@@ -101,6 +102,7 @@
     <ClCompile Include="main.cpp" />
     <ClCompile Include="MonoBehaviour.cpp" />
     <ClCompile Include="SpriteRenderer.cpp" />
+    <ClCompile Include="Text.cpp" />
     <ClCompile Include="texture.cpp" />
     <ClCompile Include="Transform.cpp" />
   </ItemGroup>
@@ -112,6 +114,7 @@
     <ClInclude Include="GameObject.h" />
     <ClInclude Include="MonoBehaviour.h" />
     <ClInclude Include="SpriteRenderer.h" />
+    <ClInclude Include="Text.h" />
     <ClInclude Include="texture.h" />
     <ClInclude Include="Transform.h" />
     <ClInclude Include="vector2D.h" />

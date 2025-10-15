@@ -29,6 +29,8 @@ public:
 	Texture(Texture&&) noexcept;
 	Texture& operator=(Texture&&) noexcept;
 
+	void setTexture(SDL_Surface* surface, int rows = 1, int columns = 1);
+
 	/// Width of a frame in pixels
 	int getFrameWidth() const;
 	/// Height of a frame in pixels

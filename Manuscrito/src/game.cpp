@@ -1,15 +1,17 @@
 #include "game.h"
 
 #include <SDL3_image/SDL_image.h>
+
 #include "texture.h"
 #include "GameObject.h"
 #include "Button.h"
+#include "Text.h"
 #include "Book.h"
 
 using namespace std;
 
 // Constantes
-constexpr const char* const WINDOW_TITLE = "Manuscrito";
+constexpr const char* const WINDOW_TITLE = "Manuscrito Wolmir";
 
 // Estructura para especificar las texturas que hay que
 // cargar y el tamaño de su matriz de frames
@@ -21,6 +23,7 @@ struct TextureSpec
 };
 
 constexpr const char* const imgBase = "../assets/images/";
+constexpr const char* const fontBase = "../assets/font/";
 
 constexpr array<TextureSpec, Game::NUM_TEXTURES> textureList{
 	TextureSpec{"fondo.jpg"},
@@ -45,6 +48,10 @@ Game::Game() : exit(false)
 #pragma region SDL INIT
 	// Carga SDL y sus bibliotecas auxiliares
 	SDL_Init(SDL_INIT_VIDEO);
+	if (!TTF_Init()) {
+		SDL_LogError(SDL_LOG_CATEGORY_APPLICATION, "Couldn't initialize TTF");
+	}
+
 	//SDL_WINDOW_FULLSCREEN
 	//SDL_WINDOW_RESIZABLE
 	window = SDL_CreateWindow(WINDOW_TITLE, WINDOW_WIDTH, WINDOW_HEIGHT, SDL_WINDOW_FULLSCREEN);
@@ -62,19 +69,21 @@ Game::Game() : exit(false)
 	perfFrequency = SDL_GetPerformanceFrequency();
 	lastTime = SDL_GetPerformanceCounter();
 
+	//Carga la fuente
+	font = TTF_OpenFont(((string)fontBase + "XTypewriter-Regular.ttf").c_str(), FONT_SIZE);
+	if (!font) {
+		SDL_LogError(SDL_LOG_CATEGORY_APPLICATION, "Couldn't load font");
+	}
+
 	// Carga las texturas al inicio
 	for (size_t i = 0; i < textures.size(); i++) {
-		try {
-			auto [name, nrows, ncols] = textureList[i];
-			textures[i] = new Texture(renderer, (string(imgBase) + name).c_str(), nrows, ncols);
-		}
-		catch (const std::runtime_error& e) {
-			SDL_Log("Se produjo un error: %s", e.what());
-		}
+		auto [name, nrows, ncols] = textureList[i];
+		textures[i] = new Texture(renderer, (string(imgBase) + name).c_str(), nrows, ncols);
 	}
 
 	SDL_SetRenderDrawBlendMode(renderer, SDL_BLENDMODE_MUL);
 	SDL_SetRenderLogicalPresentation(renderer, WINDOW_WIDTH, WINDOW_HEIGHT, SDL_LOGICAL_PRESENTATION_STRETCH);
+
 	//Carga los GameObjects
 	createGameObjects();
 
@@ -84,6 +93,9 @@ Game::Game() : exit(false)
 
 Game::~Game()
 {
+	TTF_CloseFont(font);
+	font = nullptr;
+
 	// Elimina los objetos del juego
 	for (size_t i = 0; i < gameObjects.size(); i++) {
 		delete gameObjects[i];
@@ -98,6 +110,7 @@ Game::~Game()
 
 	SDL_DestroyRenderer(renderer);
 	SDL_DestroyWindow(window);
+	TTF_Quit();
 	SDL_Quit();
 }
 
@@ -109,7 +122,7 @@ Game::render() const
 	getTexture(BACKGROUND)->render();
 
 	for (size_t i = 0; i < gameObjects.size(); i++) {
-		if (gameObjects[i]->getIsActive())
+		if (gameObjects[i]->getIsActive() && gameObjects[i]->spriteRenderer != nullptr && gameObjects[i]->spriteRenderer->isEnabled)
 			gameObjects[i]->render();
 	}
 
@@ -118,7 +131,7 @@ Game::render() const
 		SDL_RenderFillRect(renderer, nullptr);
 	}
 	else if (glasses) {
-		SDL_SetRenderDrawColor(renderer, 120, 100, 35, 160);
+		SDL_SetRenderDrawColor(renderer, 0, 115, 0, 160);
 		SDL_RenderFillRect(renderer, nullptr);
 	}
 
@@ -143,8 +156,6 @@ Game::update()
 		if (gameObjects[i]->getIsActive())
 			gameObjects[i]->update(deltaTime); // Pasamos el valor calculado
 	}
-
-
 }
 
 void
@@ -158,6 +169,7 @@ Game::run()
 	while (!exit) {
 		frameStart = SDL_GetTicks();
 
+		handleEvents();
 		update();
 		render();
 
@@ -179,20 +191,6 @@ Game::handleEvents()
 
 		if (event.type == SDL_EVENT_QUIT)
 			exit = true;
-
-		/*else if (event.type == SDL_EVENT_WINDOW_RESIZED) {
-			int w = event.window.data1;
-			int h = event.window.data2;
-
-			for (GameObject* go : gameObjects) {
-				Transform* t = go->getComponent<Transform>();
-
-				if (t != nullptr) {
-					t->setPosition(Vector2D<float>(w / 2 - t->getScale().x / 2,
-						h / 2 - t->getScale().y / 2));
-				}
-			}
-		}*/
 
 		else if (event.type == SDL_EVENT_MOUSE_BUTTON_DOWN) {
 			float mouseX = event.button.x;
@@ -224,7 +222,7 @@ Game::handleEvents()
 			}
 
 			if (event.key.key == SDLK_D) {
-				currentPage+=2;
+				currentPage += 2;
 				if (currentPage >= pagesCount - 1) currentPage = pagesCount - 2;
 
 				manuscrito->changePage(currentPage);
@@ -279,29 +277,19 @@ void Game::createGameObjects() {
 	hoja2->addComponent<Transform>(Vector2D<float>(w / 2 + 400, h / 2), 0.375);
 	hoja2->addComponent<SpriteRenderer>(getTexture(HOJA1), 0, 0);
 
-	GameObject* hoja3 = new GameObject("Hoja3", 2);
-	hoja3->addComponent<Transform>(Vector2D<float>(w / 2 + 400, h / 2), Vector2D<float>(1, 1));
-	hoja3->addComponent<SpriteRenderer>(getTexture(HOJA3), 0, 0);
-
-	GameObject* hoja4 = new GameObject("Hoja4", 2);
-	hoja4->addComponent<Transform>(Vector2D<float>(w / 2 + 400, h / 2), Vector2D<float>(1, 1));
-	hoja4->addComponent<SpriteRenderer>(getTexture(HOJA4), 0, 0);
-
-	GameObject* hoja5 = new GameObject("Hoja5", 2);
-	hoja5->addComponent<Transform>(Vector2D<float>(w / 2 + 400, h / 2), Vector2D<float>(1, 1));
-	hoja5->addComponent<SpriteRenderer>(getTexture(HOJA5), 0, 0);
+	GameObject* texto1 = new GameObject("Texto1", 3, hoja1);
+	texto1->addComponent<Transform>(Vector2D<float>(100, 100), 1);
+	texto1->addComponent<SpriteRenderer>();
+	string str = "HOLAAAA";
+	SDL_Color color = { 0, 0, 0, 255 };
+	texto1->addComponent<Text>(str, color, font, 100, renderer);
 
 	gameObjects.push_back(hoja1);
 	gameObjects.push_back(hoja2);
-	gameObjects.push_back(hoja3);
-	gameObjects.push_back(hoja4);
-	gameObjects.push_back(hoja5);
+	gameObjects.push_back(texto1);
 
 	bookPages.push_back(hoja1);
 	bookPages.push_back(hoja2);
-	bookPages.push_back(hoja3);
-	bookPages.push_back(hoja4);
-	bookPages.push_back(hoja5);
 
 	manuscrito = new Book(bookPages, WINDOW_WIDTH / 2 - 5, WINDOW_HEIGHT / 2 - 9, 125);
 	pagesCount = manuscrito->getPageCount();

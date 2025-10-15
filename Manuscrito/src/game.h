@@ -2,6 +2,8 @@
 #define GAME_H
 
 #include <SDL3/SDL.h>
+#include <SDL3_ttf/SDL_ttf.h>
+
 #include <array>
 #include <istream>
 #include <vector>
@@ -22,8 +24,8 @@ public:
 	// Tamaño real de la ventana
 	static constexpr int WINDOW_WIDTH = 1920/2;
 	static constexpr int WINDOW_HEIGHT = 1080/2;
-	// Extremo inferior del río
-	static constexpr int RIVER_LOW = 210;
+
+	static constexpr int FONT_SIZE = 40;
 
 	enum TextureName
 	{
@@ -36,6 +38,8 @@ public:
 		HOJA_VACIA,
 		NUM_TEXTURES
 	};
+
+	TTF_Font* font;
 
 private:
 	SDL_Window* window;
@@ -60,18 +64,20 @@ public:
 
 	// Obtiene una textura por su nombre
 	Texture* getTexture(TextureName name) const;
-
+	SDL_Renderer* getRenderer() const;
 	// Ejecuta el bucle principal del juego
 	void run();
-
-	// Comprueba si hay algún objeto colocado en ese rectángulo
-	bool checkCollision(const SDL_FRect& rect) const;
 };
 
 inline Texture*
 Game::getTexture(TextureName name) const
 {
 	return textures[name];
+}
+
+inline SDL_Renderer* Game::getRenderer() const
+{
+	return renderer;
 }
 
 #endif // GAME_H

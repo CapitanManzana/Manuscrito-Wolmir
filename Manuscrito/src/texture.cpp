@@ -70,6 +70,23 @@ Texture::operator=(Texture&& other) noexcept
 	return *this;
 }
 
+void Texture::setTexture(SDL_Surface* surface, int rows, int columns)
+{
+	if (texture != nullptr) {
+		SDL_DestroyTexture(texture);
+	}
+
+	texture = SDL_CreateTextureFromSurface(renderer, surface);
+	nrows = rows;
+	ncolumns = columns;
+
+	width = texture->w;
+	height = texture->h;
+
+	frameWidth = width / ncolumns;
+	frameHeight = height / nrows;
+}
+
 SDL_FRect
 Texture::getFrameRect(int row, int col) const
 {
