@@ -36,6 +36,7 @@ public:
 		HOJA4,
 		HOJA5,
 		HOJA_VACIA,
+		TEXTO1_1,
 		NUM_TEXTURES
 	};
 

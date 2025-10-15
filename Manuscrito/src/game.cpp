@@ -32,7 +32,8 @@ constexpr array<TextureSpec, Game::NUM_TEXTURES> textureList{
 	{"hoja3.png"},
 	{"hoja4.png"},
 	{"hoja5.png"},
-	{"HojaVacia.png"}
+	{"HojaVacia.png"},
+	{"Texto1.1.png"}
 };
 
 vector<GameObject*> Game::gameObjects;
@@ -270,19 +271,16 @@ void Game::createGameObjects() {
 #pragma endregion
 
 	GameObject* hoja1 = new GameObject("Hoja1", 2);
-	hoja1->addComponent<Transform>(Vector2D<float>(w / 2 - 400, h / 2), 0.375);
+	hoja1->addComponent<Transform>(Vector2D<float>(w / 2 - 400, h / 2), 0.1875);
 	hoja1->addComponent<SpriteRenderer>(getTexture(HOJA1), 0, 0);
 
 	GameObject* hoja2 = new GameObject("Hoja2", 2);
-	hoja2->addComponent<Transform>(Vector2D<float>(w / 2 + 400, h / 2), 0.375);
+	hoja2->addComponent<Transform>(Vector2D<float>(w / 2 + 400, h / 2), 0.1875);
 	hoja2->addComponent<SpriteRenderer>(getTexture(HOJA1), 0, 0);
 
 	GameObject* texto1 = new GameObject("Texto1", 3, hoja1);
-	texto1->addComponent<Transform>(Vector2D<float>(100, 100), 1);
-	texto1->addComponent<SpriteRenderer>();
-	string str = "HOLAAAA";
-	SDL_Color color = { 0, 0, 0, 255 };
-	texto1->addComponent<Text>(str, color, font, 100, renderer);
+	texto1->addComponent<Transform>(Vector2D<float>(-400, -400), 0.1875);
+	texto1->addComponent<SpriteRenderer>(getTexture(TEXTO1_1),0,0);
 
 	gameObjects.push_back(hoja1);
 	gameObjects.push_back(hoja2);

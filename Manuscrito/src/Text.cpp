@@ -67,8 +67,11 @@ void Text::onComponentAdd() {
 		return;
 	}
 
+	//1. Actualizar la superficie con el texto, color y fuente actuales
 	updateSurface();
 
+	//2. Crear la textura a partir de la superficie
+	//3. Asignar la textura al SpriteRenderer del GameObject
 	if (surface) {
 		textureSDL = SDL_CreateTextureFromSurface(renderer, surface);
 		if (!textureSDL) {
