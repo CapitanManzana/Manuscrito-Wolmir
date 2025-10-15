@@ -8,6 +8,8 @@
 #include "Text.h"
 #include "Book.h"
 
+//#include <json.hpp>
+
 using namespace std;
 
 // Constantes
@@ -285,10 +287,12 @@ void Game::createGameObjects() {
 #pragma endregion
 
 
-	GameObject* texto1 = new GameObject("Texto1", 3, hoja1);
+	GameObject* texto1 = new GameObject("Texto1", 4, hoja1);
 
 	texto1->addComponent<Transform>(Vector2D<float>(-5, -120), 0.1875);
-	texto1->addComponent<SpriteRenderer>(getTexture(TEXTO1_1), 0, 0);
+	texto1->addComponent<SpriteRenderer>();
+	string texto = "En un lugar de la Mancha, de cuyo nombre no quiero acordarme...";
+	texto1->addComponent<Text>(texto, SDL_Color{ 0, 0, 0, 255 }, font, FONT_SIZE, renderer);
 
 	Button* btT1 = texto1->addComponent<Button>();
 	btT1->onClick = [this, texto1]() { 

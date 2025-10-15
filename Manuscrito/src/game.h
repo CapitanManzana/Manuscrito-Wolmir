@@ -25,7 +25,7 @@ public:
 	static constexpr int WINDOW_WIDTH = 1920/2;
 	static constexpr int WINDOW_HEIGHT = 1080/2;
 
-	static constexpr int FONT_SIZE = 40;
+	static constexpr int FONT_SIZE = 50;
 
 	enum TextureName
 	{
