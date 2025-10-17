@@ -13,6 +13,7 @@ private:
 	std::string text;
 	SDL_Color color;
 	int fontSize;
+	int textureWidth;
 
 	SDL_Surface* surface;
 	Texture* texture;
@@ -24,7 +25,7 @@ private:
 
 public:
 	Text();
-	Text(std::string text, SDL_Color newColor, TTF_Font* font, int newFontSize, SDL_Renderer* renderer);
+	Text(std::string text, SDL_Color newColor, TTF_Font* font, int newFontSize, int width, SDL_Renderer* renderer);
 	~Text();
 
 	void onComponentAdd() override;

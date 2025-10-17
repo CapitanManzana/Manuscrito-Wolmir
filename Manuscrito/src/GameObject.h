@@ -34,7 +34,8 @@ public:
 	std::string getName() const;
 	int getId() const;
 
-	GameObject* getChildren(int index);
+	GameObject* getChild(int index);
+	std::vector<GameObject*> getChildren();
 
 public:
 	template<typename T, typename... TArgs>

@@ -92,11 +92,15 @@ void GameObject::setIsActive(bool active) {
 	isActive = active;
 }
 
-GameObject* GameObject::getChildren(int index) {
+GameObject* GameObject::getChild(int index) {
 	if (index < 0 || index >= childs.size()) {
 		return nullptr; // O lanza una excepción si prefieres
 	}
 	return childs[index];
+}
+
+std::vector<GameObject*> GameObject::getChildren() {
+	return childs;
 }
 
 #pragma endregion

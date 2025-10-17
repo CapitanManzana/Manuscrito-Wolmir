@@ -3,6 +3,12 @@
 #include "vector2D.h"
 #include <SDL3/SDL.h>
 
+// Sirve para saber si la escala es por defecto o si se multiplica el w y h de la textura por un escalar
+enum ScaleMode {
+	DEFAULT,
+	SCALAR
+};
+
 class Transform : public Component
 {
 private:
@@ -12,6 +18,10 @@ private:
 
 	Transform* parentTransform = nullptr;
 
+	ScaleMode scaleMode = ScaleMode::DEFAULT;
+
+	Vector2D<float> getParentPosition() const;
+
 public:
 	// Rectángulo destino para renderizar con SDL
 	SDL_FRect dstRect;
@@ -20,8 +30,7 @@ public:
 	Transform(Vector2D<float> position, Vector2D<float> size);
 	Transform(Vector2D<float> position, float size);
 
-	bool overlapingPoint(Vector2D<float> point) const;
-	bool overlapingRect(SDL_FRect& rect) const;
+	void setScaleMode(ScaleMode mode);
 
 	Vector2D<float> getScale() const;
 	Vector2D<float> getPosition() const;

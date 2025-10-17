@@ -8,6 +8,7 @@ Text::Text() {
 	this->text = "";
 	this->color = { 255, 255, 255, 255 };
 	this->fontSize = 40;
+	this->textureWidth = 200;
 
 	texture = nullptr;
 	surface = nullptr;
@@ -16,12 +17,17 @@ Text::Text() {
 	textureSDL = nullptr;
 }
 
-Text::Text(std::string text, SDL_Color newColor, TTF_Font* font, int newFontSize, SDL_Renderer* renderer) {
+Text::Text(std::string text, SDL_Color newColor, TTF_Font* font, int newFontSize, int width, SDL_Renderer* renderer) {
 	this->text = text;
 	this->color = newColor;
 	this->fontSize = newFontSize;
 	this->font = font;
 	this->renderer = renderer;
+	this->textureWidth = width;
+
+	surface = nullptr;
+	texture = nullptr;
+	textureSDL = nullptr;
 }
 
 Text::~Text() {
@@ -50,7 +56,7 @@ void Text::updateSurface() {
 		surface = nullptr;
 	}
 
-	surface = TTF_RenderText_Blended(font, text.c_str(), 0, color);
+	surface = TTF_RenderText_Blended_Wrapped(font, text.c_str(), 0, color, textureWidth);
 	if (!surface) {
 		SDL_LogError(SDL_LOG_CATEGORY_APPLICATION, "Couldn't create text surface: %s", SDL_GetError());
 	}

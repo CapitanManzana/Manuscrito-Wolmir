@@ -16,6 +16,7 @@ Transform::Transform(Vector2D<float> position, Vector2D<float> size) {
 
 	dstRect = { position.x, position.y, scale.x, scale.y };
 
+	scaleMode = ScaleMode::DEFAULT;
 }
 
 Transform::Transform(Vector2D<float> position, float size) {
@@ -26,28 +27,19 @@ Transform::Transform(Vector2D<float> position, float size) {
 	};
 
 	dstRect = { position.x, position.y, scale.x, scale.y };
+
+	scaleMode = ScaleMode::SCALAR;
 }
 
 #pragma endregion
 
-// Revisa si un punto está dentro del área del Transform
-bool Transform::overlapingPoint(Vector2D<float> point) const {
-	Vector2D position;
-
-	if (parentTransform!= nullptr) {
-		float parentX = parentTransform->position.x;
-		float parentY = parentTransform->position.y;
-
-		position.x = parentX + Transform::position.x;
-		position.y = parentY + Transform::position.y;
+Vector2D<float> Transform::getParentPosition() const {
+	if (parentTransform == nullptr) {
+		return position;
 	}
 	else {
-		position.x = Transform::position.x;
-		position.y = Transform::position.y;
+		return parentTransform->getParentPosition() + position;
 	}
-
-	return (point.x >= position.x && point.x <= position.x + scale.x * textureSize.x &&
-		point.y >= position.y && point.y <= position.y + scale.y * textureSize.y);
 }
 
 Vector2D<float> Transform::getScale() const {
@@ -64,11 +56,10 @@ void Transform::setPosition(Vector2D<float> newPosition) {
 
 	// Si el objeto es hijo, pues se toman las coordenadas del padre
 	if (parentTransform != nullptr) {
-		float parentX = parentTransform->position.x;
-		float parentY = parentTransform->position.y;
+		Vector2D<float> parentPos = parentTransform->getParentPosition();
 
-		dstRect.x = parentX + position.x - dstRect.w / 2;
-		dstRect.y = parentY + position.y - dstRect.h / 2;
+		dstRect.x = parentPos.x + position.x - dstRect.w / 2;
+		dstRect.y = parentPos.y + position.y - dstRect.h / 2;
 	}
 	else {
 		dstRect.x = position.x - dstRect.w / 2;
@@ -83,19 +74,25 @@ void Transform::setScale(Vector2D<float> newScale) {
 	dstRect.h = newScale.y;
 }
 
+void Transform::setScaleMode(ScaleMode mode) {
+	scaleMode = mode;
+}
+
 // Actualiza el tamaño del rectángulo destino basado en el tamaño de la textura y la escala
 void Transform::updateTextureSize(Vector2D<float> size) {
 	textureSize = size;
-	dstRect.w = textureSize.x * scale.x;
-	dstRect.h = textureSize.y * scale.y;
+
+	if (scaleMode == ScaleMode::SCALAR) {
+		dstRect.w = textureSize.x * scale.x;
+		dstRect.h = textureSize.y * scale.y;
+	}
 
 	// Si el objeto es hijo, pues se toman las coordenadas del padre
 	if (gameObject->parent != nullptr && gameObject->parent->transform != nullptr) {
-		float parentX = gameObject->parent->transform->position.x;
-		float parentY = gameObject->parent->transform->position.y;
+		Vector2D<float> parentPos = parentTransform->getParentPosition();
 
-		dstRect.x = parentX + position.x - dstRect.w / 2;
-		dstRect.y = parentY + position.y - dstRect.h / 2;
+		dstRect.x = parentPos.x + position.x - dstRect.w / 2;
+		dstRect.y = parentPos.y + position.y - dstRect.h / 2;
 	}
 	else {
 		dstRect.x = position.x - dstRect.w / 2;
@@ -108,5 +105,10 @@ void Transform::onComponentAdd() {
 
 	if (gameObject->parent != nullptr && gameObject->parent->transform != nullptr) {
 		parentTransform = gameObject->parent->transform;
+
+		Vector2D<float> parentPos = getParentPosition();
+
+		dstRect.x = parentPos.x + position.x - dstRect.w / 2;
+		dstRect.y = parentPos.y + position.y - dstRect.h / 2;
 	}
 }

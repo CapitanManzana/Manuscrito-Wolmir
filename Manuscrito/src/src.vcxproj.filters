@@ -19,6 +19,9 @@
     <Filter Include="Archivos de encabezado\Componentes">
       <UniqueIdentifier>{7669426f-7db8-46bf-ab2c-826d9b0e361b}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Archivos de encabezado\Aux">
+      <UniqueIdentifier>{8a5f6b7a-15ca-41bc-9404-8cea02b458e9}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="game.cpp">
@@ -51,15 +54,15 @@
     <ClCompile Include="Text.cpp">
       <Filter>Archivos de código fuente\Componentes</Filter>
     </ClCompile>
+    <ClCompile Include="LoadTexts.cpp">
+      <Filter>Archivos de código fuente</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="game.h">
       <Filter>Archivos de encabezado</Filter>
     </ClInclude>
     <ClInclude Include="texture.h">
-      <Filter>Archivos de encabezado</Filter>
-    </ClInclude>
-    <ClInclude Include="vector2D.h">
       <Filter>Archivos de encabezado</Filter>
     </ClInclude>
     <ClInclude Include="GameObject.h">
@@ -86,5 +89,16 @@
     <ClInclude Include="Text.h">
       <Filter>Archivos de encabezado\Componentes</Filter>
     </ClInclude>
+    <ClInclude Include="LoadTexts.h">
+      <Filter>Archivos de encabezado</Filter>
+    </ClInclude>
+    <ClInclude Include="vector2D.h">
+      <Filter>Archivos de encabezado\Aux</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="..\assets\data\texts.txt">
+      <Filter>Archivos de recursos</Filter>
+    </None>
   </ItemGroup>
 </Project>

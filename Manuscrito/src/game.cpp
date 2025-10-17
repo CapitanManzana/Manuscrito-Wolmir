@@ -7,8 +7,7 @@
 #include "Button.h"
 #include "Text.h"
 #include "Book.h"
-
-//#include <json.hpp>
+#include "LoadTexts.h"
 
 using namespace std;
 
@@ -39,11 +38,14 @@ constexpr array<TextureSpec, Game::NUM_TEXTURES> textureList{
 };
 
 vector<GameObject*> Game::gameObjects;
+
+vector<GameObject*> bookPages;
 Book* manuscrito;
 int currentPage = 0;
 int pagesCount = 0;
 
 vector<GameObject*> texts;
+GameObject* currentText = nullptr;
 
 bool blackLight = false;
 bool glasses = false;
@@ -91,10 +93,6 @@ Game::Game() : exit(false)
 
 	//Carga los GameObjects
 	createGameObjects();
-
-
-	// Configura que se pueden utilizar capas translúcidas
-	// SDL_SetRenderDrawBlendMode(renderer, SDL_BLENDMODE_BLEND);
 }
 
 Game::~Game()
@@ -129,9 +127,14 @@ Game::render() const
 
 	getTexture(BACKGROUND)->render();
 
-	for (size_t i = 0; i < gameObjects.size(); i++) {
-		if (gameObjects[i]->getIsActive() && gameObjects[i]->spriteRenderer != nullptr && gameObjects[i]->spriteRenderer->isEnabled)
-			gameObjects[i]->render();
+	for (size_t i = 0; i < pagesCount; i++) {
+		if (bookPages[i]->getIsActive() && bookPages[i]->spriteRenderer != nullptr && bookPages[i]->spriteRenderer->isEnabled)
+			bookPages[i]->render();
+	}
+
+	for (size_t i = 0; i < texts.size(); i++) {
+		if (texts[i]->getIsActive() && texts[i]->spriteRenderer != nullptr && texts[i]->spriteRenderer->isEnabled)
+			texts[i]->render();
 	}
 
 	if (blackLight) {
@@ -139,11 +142,9 @@ Game::render() const
 		SDL_RenderFillRect(renderer, nullptr);
 	}
 	else if (glasses) {
-		SDL_SetRenderDrawColor(renderer, 0, 115, 0, 160);
+		SDL_SetRenderDrawColor(renderer, 0, 115, 0, 100);
 		SDL_RenderFillRect(renderer, nullptr);
 	}
-
-
 
 	SDL_RenderPresent(renderer);
 }
@@ -228,14 +229,23 @@ Game::handleEvents()
 
 		else if (event.type == SDL_EVENT_KEY_DOWN) {
 
+			// LUZ UV
 			if (event.key.key == SDLK_E) {
 				blackLight = !blackLight;
 			}
 
+			// GAFAS DESCIFRADORAS
 			if (event.key.key == SDLK_Q) {
 				glasses = !glasses;
+				if (currentText) {
+					currentText->spriteRenderer->isEnabled = false;
+					for (GameObject* g : currentText->getChildren()) {
+						g->setIsActive(false);
+					}
+				}
 			}
 
+			// CAMBIO DE PÁGINA DERECHA
 			if (event.key.key == SDLK_D) {
 				currentPage += 2;
 				if (currentPage >= pagesCount - 1) currentPage = pagesCount - 2;
@@ -243,12 +253,14 @@ Game::handleEvents()
 				manuscrito->changePage(currentPage);
 			}
 
+			// CAMBIO DE PÁGINA IZQUIERDA
 			if (event.key.key == SDLK_A) {
 				currentPage = currentPage - 2;
 				if (currentPage < 0) currentPage = 0;
 				manuscrito->changePage(currentPage);
 			}
 
+			// SALIR DEL JUEGO
 			if (event.key.key == SDLK_ESCAPE) {
 				exit = true;
 			}
@@ -256,11 +268,10 @@ Game::handleEvents()
 	}
 }
 
+// Se crean los objetos del juego
 void Game::createGameObjects() {
 
 	#pragma region HOJAS DEL MANUSCRITO
-
-	vector<GameObject*> bookPages;
 
 	GameObject* hoja1 = new GameObject("Hoja1", 2);
 	hoja1->addComponent<Transform>(Vector2D<float>(1, 1), 0.1875);
@@ -268,7 +279,7 @@ void Game::createGameObjects() {
 
 	GameObject* hoja2 = new GameObject("Hoja2", 2);
 	hoja2->addComponent<Transform>(Vector2D<float>(1, 1), 0.1875);
-	hoja2->addComponent<SpriteRenderer>(getTexture(HOJA1), 0, 0);
+	hoja2->addComponent<SpriteRenderer>(getTexture(HOJA_VACIA), 0, 0);
 
 	GameObject* hoja3 = new GameObject("Hoja3", 2);
 	hoja3->addComponent<Transform>(Vector2D<float>(1, 1), 0.1875);
@@ -286,37 +297,67 @@ void Game::createGameObjects() {
 	pagesCount = manuscrito->getPageCount();
 #pragma endregion
 
+	#pragma region TEXTOS DEL MANUSCRITO
+	// Cargamos el archivo de textos
+	LoadTexts* textsLoader = new LoadTexts("../assets/data/texts.txt");
+	// Recorremos las páginas y los textos para crearlos
+	for (int i = 0; i < pagesCount; i++) {
+		for (int j = 0; j < textsLoader->getTextsCount(i); j++) {
 
-	GameObject* texto1 = new GameObject("Texto1", 4, hoja1);
+			// La data del texto (pos, tamaño, contenido)
+			TextData textData = textsLoader->getTextData(i, j);
 
-	texto1->addComponent<Transform>(Vector2D<float>(-5, -120), 0.1875);
-	texto1->addComponent<SpriteRenderer>();
-	string texto = "En un lugar de la Mancha, de cuyo nombre no quiero acordarme...";
-	texto1->addComponent<Text>(texto, SDL_Color{ 0, 0, 0, 255 }, font, FONT_SIZE, renderer);
+			// CREAMOS EL FONDO DEL TEXTO
+			GameObject* fondoTexto = new GameObject("Fondo Texto " + to_string(i) + "_" + to_string(j), 3, bookPages[i]);
 
-	Button* btT1 = texto1->addComponent<Button>();
-	btT1->onClick = [this, texto1]() { 
-		showText(texto1); 
-	};
-	texto1->spriteRenderer->isEnabled = false;
+			fondoTexto->addComponent<Transform>(Vector2D<float>(textData.rect.x, textData.rect.y), Vector2D<float>(textData.rect.w, textData.rect.h));
+			fondoTexto->addComponent<SpriteRenderer>(getTexture(HOJA_VACIA), 0, 0);
 
-	gameObjects.push_back(texto1);
+			Button* btT = fondoTexto->addComponent<Button>();
+			btT->onClick = [this, fondoTexto]() {
+				showText(fondoTexto);
+				};
 
-	texts.push_back(texto1);
+			fondoTexto->spriteRenderer->isEnabled = false;
+
+			//CREAMOS EL TEXTO
+			GameObject* texto = new GameObject("Texto " + to_string(i) + "_" + to_string(j), 3, fondoTexto);
+
+			// Añadimos los componentes
+			texto->addComponent<Transform>(Vector2D<float>(textData.position.x, textData.position.y), 0.1875);
+			texto->addComponent<SpriteRenderer>();
+			texto->addComponent<Text>(textData.text, SDL_Color{ 0, 0, 0, 255 }, font, FONT_SIZE, textData.textEnd, renderer);
+
+			gameObjects.push_back(fondoTexto);
+			gameObjects.push_back(texto);
+			texts.push_back(fondoTexto);
+			texts.push_back(texto);
+		}
+	}
+
+	delete textsLoader;
+#pragma endregion
 }
 
 #pragma region ButtonEvents
 
+// Muestra el texto asociado al botón
 void Game::showText(GameObject* text) {
 	if (glasses) {
-
-		if (text->spriteRenderer->isEnabled) {
-			for (GameObject* t : texts) {
-				if (t != text) t->spriteRenderer->isEnabled = false;
+		// Si ya hay un texto mostrado, lo ocultamos
+		if (currentText != nullptr && currentText != text) {
+			currentText->spriteRenderer->isEnabled = false;
+			for (GameObject* g : currentText->getChildren()) {
+				g->setIsActive(false);
 			}
 		}
 
+		// Mostramos/ocultamos el texto seleccionado
 		text->spriteRenderer->isEnabled = !text->spriteRenderer->isEnabled;
+		for (GameObject* g : text->getChildren()) {
+			g->setIsActive(text->spriteRenderer->isEnabled);
+		}
+		currentText = text;
 	}
 }
 #pragma endregion
