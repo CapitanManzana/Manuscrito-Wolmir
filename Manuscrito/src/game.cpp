@@ -328,6 +328,8 @@ void Game::createGameObjects() {
 			texto->addComponent<SpriteRenderer>();
 			texto->addComponent<Text>(textData.text, SDL_Color{ 0, 0, 0, 255 }, font, FONT_SIZE, textData.textEnd, renderer);
 
+			texto->setIsActive(false);
+
 			gameObjects.push_back(fondoTexto);
 			gameObjects.push_back(texto);
 			texts.push_back(fondoTexto);

@@ -2,7 +2,7 @@ PagesCount: 1
 Page_1
     TextsCount: 5
     T_1
-        text: Mucho tiempo ha pasado ya desde aquel fatidico dia, hecho mucho de menos a mi hermana helena, pero era un suceso inevitable.
+        text: Mucho tiempo ha pasado ya desde aquel fatidico dia, echo mucho de menos a mi hermana Helena, pero era un suceso inevitable.
         x: 10
         y: 2
         textEnd: 1100
@@ -20,7 +20,7 @@ Page_1
         w: 220
         h: 85
     T_3
-        text: Nuestra madre nos fue enseñando a como controlar nuestros poderes, y entre lecciones mi hermana y yo jugabamos a un juego que nos habiamos inventado, lo llamabamos el busca la bola, consistia en esconder un orbe en algun lugar del pueblo, y la otra lo tenia que encontrar.
+        text: Nuestra madre nos fue mostrando como controlar nuestros poderes, y entre lecciones mi hermana y yo jugabamos a un juego que nos habiamos inventado, lo llamabamos el busca la bola, consistia en esconder un orbe en algun lugar del pueblo, y la otra lo tenia que encontrar.
         x: 5        
         y: 2
         textEnd: 1100
