@@ -7,7 +7,6 @@
 Text::Text() {
 	this->text = "";
 	this->color = { 255, 255, 255, 255 };
-	this->fontSize = 40;
 	this->textureWidth = 200;
 
 	texture = nullptr;
@@ -17,10 +16,9 @@ Text::Text() {
 	textureSDL = nullptr;
 }
 
-Text::Text(std::string text, SDL_Color newColor, TTF_Font* font, int newFontSize, int width, SDL_Renderer* renderer) {
+Text::Text(std::string text, SDL_Color newColor, TTF_Font* font, int width, SDL_Renderer* renderer) {
 	this->text = text;
 	this->color = newColor;
-	this->fontSize = newFontSize;
 	this->font = font;
 	this->renderer = renderer;
 	this->textureWidth = width;
@@ -56,25 +54,14 @@ void Text::updateSurface() {
 		surface = nullptr;
 	}
 
+	if (texture) {
+		delete texture;
+	}
+
 	surface = TTF_RenderText_Blended_Wrapped(font, text.c_str(), 0, color, textureWidth);
 	if (!surface) {
 		SDL_LogError(SDL_LOG_CATEGORY_APPLICATION, "Couldn't create text surface: %s", SDL_GetError());
 	}
-}
-
-void Text::onComponentAdd() {
-	if (!font) {
-		SDL_LogError(SDL_LOG_CATEGORY_APPLICATION, "No font assigned to Text component in GameObject %s", gameObject->getName());
-		return;
-	}
-
-	if (!renderer) {
-		SDL_LogError(SDL_LOG_CATEGORY_APPLICATION, "No renderer assigned to Text component in GameObject %s", gameObject->getName());
-		return;
-	}
-
-	//1. Actualizar la superficie con el texto, color y fuente actuales
-	updateSurface();
 
 	//2. Crear la textura a partir de la superficie
 	//3. Asignar la textura al SpriteRenderer del GameObject
@@ -103,6 +90,36 @@ void Text::onComponentAdd() {
 	}
 }
 
+void Text::onComponentAdd() {
+	if (!font) {
+		SDL_LogError(SDL_LOG_CATEGORY_APPLICATION, "No font assigned to Text component in GameObject %s", gameObject->getName());
+		return;
+	}
+
+	if (!renderer) {
+		SDL_LogError(SDL_LOG_CATEGORY_APPLICATION, "No renderer assigned to Text component in GameObject %s", gameObject->getName());
+		return;
+	}
+
+	//1. Actualizar la superficie con el texto, color y fuente actuales
+	updateSurface();
+}
+
+void Text::changeFont(TTF_Font* newFont) {
+	if (font != newFont) {
+		font = newFont;
+		updateSurface();
+	}
+}
+
+void Text::changeFont(TTF_Font* newFont, size_t size) {
+	if (font != newFont) {
+		font = newFont;
+
+		updateSurface();
+	}
+}
+
 #pragma region Setters
 void Text::setText(const std::string& newText) {
 	if (text != newText) {
@@ -110,16 +127,15 @@ void Text::setText(const std::string& newText) {
 		updateSurface();
 	}
 }
-void Text::setFontSize(int newFontSize) {
-	if (fontSize != newFontSize) {
-		fontSize = newFontSize;
-		updateSurface();
-	}
-}
+
 void Text::setColor(SDL_Color newColor) {
 	if (color.r != newColor.r || color.g != newColor.g || color.b != newColor.b || color.a != newColor.a) {
 		color = newColor;
 		updateSurface();
 	}
+}
+
+SDL_Color Text::getColor() const{
+	return color;
 }
 #pragma endregion

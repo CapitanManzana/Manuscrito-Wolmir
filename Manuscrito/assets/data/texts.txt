@@ -4,45 +4,30 @@ Page_1
     T_1
         text: Mucho tiempo ha pasado ya desde aquel fatidico dia, echo mucho de menos a mi hermana Helena, pero era un suceso inevitable.
         x: 10
-        y: 2
-        textEnd: 1100
-        rx: -5
-        ry: -125
-        w: 210
-        h: 50
+        y: -125
+        textEnd: 1500
+        color: #6B2604
     T_2
         text: Todo comenzo cuando yo era joven, podia hacer cosas que otras personas no podian. Mi madre nos conto a mi hermana y a mi que durante decadas, la inquisicion ha perseguido a gente especial como nosotras, brujas lo llaman ellos, y que por eso no podemos mostrar nuestras habilidades al mundo.
-        x: 5        
-        y: 2
-        textEnd: 1100
-        rx: 0
-        ry: -55
-        w: 220
-        h: 85
+        x: 10        
+        y: -60
+        textEnd: 1500
+        color: #6B2604
     T_3
         text: Nuestra madre nos fue mostrando como controlar nuestros poderes, y entre lecciones mi hermana y yo jugabamos a un juego que nos habiamos inventado, lo llamabamos el busca la bola, consistia en esconder un orbe en algun lugar del pueblo, y la otra lo tenia que encontrar.
-        x: 5        
-        y: 2
-        textEnd: 1100
-        rx: 0
-        ry: 30
-        w: 220
-        h: 80
+        x: 10       
+        y: 23
+        textEnd: 1500
+        color: #6B2604
     T_4
         text: Nota: al mezclar sangre de cabra y un poco de zumo de uva se crea una tinta inperceptible a la vista. 
-        x: 5
-        y: 2
-        textEnd: 1100
-        rx: 0
-        ry: 90
-        w: 220
-        h: 35
+        x: 10
+        y: 90
+        textEnd: 1500
+        color: #6B2604
     T_5
-        text: Si deseas continuar calor necesitaras
+        text: Si deseas continuar calor necesitaras.
         x: 0
-        y: 0
-        textEnd: 1100
-        rx: 3
-        ry: 130
-        w: 200
-        h: 15
+        y: 130
+        textEnd: 1500
+        color: #C41A00

@@ -70,8 +70,14 @@ void Transform::setPosition(Vector2D<float> newPosition) {
 // Actualiza la escala y el tamaño del rectángulo destino
 void Transform::setScale(Vector2D<float> newScale) {
 	scale = newScale;
-	dstRect.w = newScale.x;
-	dstRect.h = newScale.y;
+	if (scaleMode == ScaleMode::SCALAR) {
+		dstRect.w = textureSize.x * scale.x;
+		dstRect.h = textureSize.y * scale.y;
+	}
+	else {
+		dstRect.w = newScale.x;
+		dstRect.h = newScale.y;
+	}
 }
 
 void Transform::setScaleMode(ScaleMode mode) {

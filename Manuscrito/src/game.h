@@ -25,7 +25,8 @@ public:
 	static constexpr int WINDOW_WIDTH = 1920/2;
 	static constexpr int WINDOW_HEIGHT = 1080/2;
 
-	static constexpr int FONT_SIZE = 45;
+	static constexpr int FONT_SIZE = 60;
+	static constexpr int MANUS_FONT_SIZE = 76.5;
 
 	enum TextureName
 	{
@@ -40,7 +41,8 @@ public:
 		NUM_TEXTURES
 	};
 
-	TTF_Font* font;
+	TTF_Font* baseFont;
+	TTF_Font* manuscritoFont;
 
 private:
 	SDL_Window* window;

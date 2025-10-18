@@ -77,8 +77,13 @@ Game::Game() : exit(false)
 	lastTime = SDL_GetPerformanceCounter();
 
 	//Carga la fuente
-	font = TTF_OpenFont(((string)fontBase + "XTypewriter-Regular.ttf").c_str(), FONT_SIZE);
-	if (!font) {
+	baseFont = TTF_OpenFont(((string)fontBase + "XTypewriter-Regular.ttf").c_str(), FONT_SIZE);
+	if (!baseFont) {
+		SDL_LogError(SDL_LOG_CATEGORY_APPLICATION, "Couldn't load font");
+	}
+
+	manuscritoFont = TTF_OpenFont(((string)fontBase + "ManuscritoWolmir.ttf").c_str(), MANUS_FONT_SIZE) ;
+	if (!manuscritoFont) {
 		SDL_LogError(SDL_LOG_CATEGORY_APPLICATION, "Couldn't load font");
 	}
 
@@ -97,8 +102,8 @@ Game::Game() : exit(false)
 
 Game::~Game()
 {
-	TTF_CloseFont(font);
-	font = nullptr;
+	TTF_CloseFont(baseFont);
+	baseFont = nullptr;
 
 	texts.clear();
 
@@ -238,9 +243,11 @@ Game::handleEvents()
 			if (event.key.key == SDLK_Q) {
 				glasses = !glasses;
 				if (currentText) {
-					currentText->spriteRenderer->isEnabled = false;
-					for (GameObject* g : currentText->getChildren()) {
-						g->setIsActive(false);
+					if (glasses) {
+						currentText->getComponent<Text>()->changeFont(baseFont);
+					}
+					else {
+						currentText->getComponent<Text>()->changeFont(manuscritoFont);
 					}
 				}
 			}
@@ -271,11 +278,11 @@ Game::handleEvents()
 // Se crean los objetos del juego
 void Game::createGameObjects() {
 
-	#pragma region HOJAS DEL MANUSCRITO
+#pragma region HOJAS DEL MANUSCRITO
 
 	GameObject* hoja1 = new GameObject("Hoja1", 2);
 	hoja1->addComponent<Transform>(Vector2D<float>(1, 1), 0.1875);
-	hoja1->addComponent<SpriteRenderer>(getTexture(HOJA1), 0, 0);
+	hoja1->addComponent<SpriteRenderer>(getTexture(HOJA_VACIA), 0, 0);
 
 	GameObject* hoja2 = new GameObject("Hoja2", 2);
 	hoja2->addComponent<Transform>(Vector2D<float>(1, 1), 0.1875);
@@ -297,42 +304,30 @@ void Game::createGameObjects() {
 	pagesCount = manuscrito->getPageCount();
 #pragma endregion
 
-	#pragma region TEXTOS DEL MANUSCRITO
+#pragma region TEXTOS DEL MANUSCRITO
 	// Cargamos el archivo de textos
 	LoadTexts* textsLoader = new LoadTexts("../assets/data/texts.txt");
 	// Recorremos las páginas y los textos para crearlos
-	for (int i = 0; i < pagesCount; i++) {
+ 	for (int i = 0; i < pagesCount; i++) {
 		for (int j = 0; j < textsLoader->getTextsCount(i); j++) {
 
 			// La data del texto (pos, tamaño, contenido)
 			TextData textData = textsLoader->getTextData(i, j);
 
-			// CREAMOS EL FONDO DEL TEXTO
-			GameObject* fondoTexto = new GameObject("Fondo Texto " + to_string(i) + "_" + to_string(j), 3, bookPages[i]);
-
-			fondoTexto->addComponent<Transform>(Vector2D<float>(textData.rect.x, textData.rect.y), Vector2D<float>(textData.rect.w, textData.rect.h));
-			fondoTexto->addComponent<SpriteRenderer>(getTexture(HOJA_VACIA), 0, 0);
-
-			Button* btT = fondoTexto->addComponent<Button>();
-			btT->onClick = [this, fondoTexto]() {
-				showText(fondoTexto);
-				};
-
-			fondoTexto->spriteRenderer->isEnabled = false;
-
 			//CREAMOS EL TEXTO
-			GameObject* texto = new GameObject("Texto " + to_string(i) + "_" + to_string(j), 3, fondoTexto);
+			GameObject* texto = new GameObject("Texto " + to_string(i) + "_" + to_string(j), 4, bookPages[i]);
 
 			// Añadimos los componentes
-			texto->addComponent<Transform>(Vector2D<float>(textData.position.x, textData.position.y), 0.1875);
+			texto->addComponent<Transform>(Vector2D<float>(textData.position.x, textData.position.y), 0.15);
 			texto->addComponent<SpriteRenderer>();
-			texto->addComponent<Text>(textData.text, SDL_Color{ 0, 0, 0, 255 }, font, FONT_SIZE, textData.textEnd, renderer);
+			texto->addComponent<Text>(textData.text, textData.color, manuscritoFont, textData.textEnd, renderer);
 
-			texto->setIsActive(false);
+			Button* btT = texto->addComponent<Button>();
+			btT->onClick = [this, texto]() {
+				showText(texto);
+				};
 
-			gameObjects.push_back(fondoTexto);
 			gameObjects.push_back(texto);
-			texts.push_back(fondoTexto);
 			texts.push_back(texto);
 		}
 	}
@@ -348,17 +343,12 @@ void Game::showText(GameObject* text) {
 	if (glasses) {
 		// Si ya hay un texto mostrado, lo ocultamos
 		if (currentText != nullptr && currentText != text) {
-			currentText->spriteRenderer->isEnabled = false;
-			for (GameObject* g : currentText->getChildren()) {
-				g->setIsActive(false);
-			}
+			Text* textComp = currentText->getComponent<Text>();
+			textComp->changeFont(manuscritoFont);
 		}
 
-		// Mostramos/ocultamos el texto seleccionado
-		text->spriteRenderer->isEnabled = !text->spriteRenderer->isEnabled;
-		for (GameObject* g : text->getChildren()) {
-			g->setIsActive(text->spriteRenderer->isEnabled);
-		}
+		// Mostramos el texto seleccionado
+		text->getComponent<Text>()->changeFont(baseFont);
 		currentText = text;
 	}
 }
