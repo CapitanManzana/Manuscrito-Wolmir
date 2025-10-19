@@ -105,6 +105,8 @@
     <ClCompile Include="LoadTexts.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="MonoBehaviour.cpp" />
+    <ClCompile Include="RunicTest.cpp" />
+    <ClCompile Include="Selector.cpp" />
     <ClCompile Include="SpriteRenderer.cpp" />
     <ClCompile Include="Text.cpp" />
     <ClCompile Include="texture.cpp" />
@@ -118,6 +120,8 @@
     <ClInclude Include="GameObject.h" />
     <ClInclude Include="LoadTexts.h" />
     <ClInclude Include="MonoBehaviour.h" />
+    <ClInclude Include="RunicTest.h" />
+    <ClInclude Include="Selector.h" />
     <ClInclude Include="SpriteRenderer.h" />
     <ClInclude Include="Text.h" />
     <ClInclude Include="texture.h" />

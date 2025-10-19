@@ -8,6 +8,8 @@
 #include "Text.h"
 #include "Book.h"
 #include "LoadTexts.h"
+#include "Selector.h"
+#include "RunicTest.h"
 
 using namespace std;
 
@@ -28,27 +30,39 @@ constexpr const char* const fontBase = "../assets/font/";
 
 constexpr array<TextureSpec, Game::NUM_TEXTURES> textureList{
 	TextureSpec{"fondo.jpg"},
-	{"chino.jpeg"},
-	{"Hoja1.png"},
-	{"hoja3.png"},
-	{"hoja4.png"},
-	{"hoja5.png"},
-	{"HojaVacia.png"},
-	{"Texto1.1.png"}
+	{"Runas.JPEG"},
+	{"TablaRunas.JPEG"},
+	{"Selector.png"},
+	{"HojaVacia.png"}
 };
 
+#pragma region VARIABLES
+
+// OBJETOS DEL JUEGO
 vector<GameObject*> Game::gameObjects;
 
+// MANUSCRITO
 vector<GameObject*> bookPages;
 Book* manuscrito;
 int currentPage = 0;
 int pagesCount = 0;
 
+// TEXTOS
 vector<GameObject*> texts;
 GameObject* currentText = nullptr;
 
+// OVERLAY
+vector<GameObject*> overlays;
+
+// TESTS
+RunicTest* runicTest;
+
+// HERAMIENTAS
 bool blackLight = false;
 bool glasses = false;
+
+#pragma endregion
+
 
 Game::Game() : exit(false)
 {
@@ -107,6 +121,8 @@ Game::~Game()
 
 	texts.clear();
 
+	delete runicTest;
+
 	// Elimina los objetos del juego
 	for (size_t i = 0; i < gameObjects.size(); i++) {
 		delete gameObjects[i];
@@ -132,14 +148,22 @@ Game::render() const
 
 	getTexture(BACKGROUND)->render();
 
+	// El fondo del cuaderno
 	for (size_t i = 0; i < pagesCount; i++) {
 		if (bookPages[i]->getIsActive() && bookPages[i]->spriteRenderer != nullptr && bookPages[i]->spriteRenderer->isEnabled)
 			bookPages[i]->render();
 	}
 
+	// EL texto
 	for (size_t i = 0; i < texts.size(); i++) {
 		if (texts[i]->getIsActive() && texts[i]->spriteRenderer != nullptr && texts[i]->spriteRenderer->isEnabled)
 			texts[i]->render();
+	}
+
+	// Elementos extra
+	for (size_t i = 0; i < overlays.size(); i++) {
+		if (overlays[i]->getIsActive() && overlays[i]->spriteRenderer != nullptr && overlays[i]->spriteRenderer->isEnabled)
+			overlays[i]->render();
 	}
 
 	if (blackLight) {
@@ -147,7 +171,11 @@ Game::render() const
 		SDL_RenderFillRect(renderer, nullptr);
 	}
 	else if (glasses) {
-		SDL_SetRenderDrawColor(renderer, 0, 115, 0, 100);
+		SDL_SetRenderDrawColor(renderer, 0, 115, 0, 20);
+		SDL_RenderFillRect(renderer, nullptr);
+	}
+	else {
+		SDL_SetRenderDrawColor(renderer, 0, 16, 48, 160); 
 		SDL_RenderFillRect(renderer, nullptr);
 	}
 
@@ -172,6 +200,8 @@ Game::update()
 		if (gameObjects[i]->getIsActive())
 			gameObjects[i]->update(deltaTime); // Pasamos el valor calculado
 	}
+
+	runicTest->DoUpdate(deltaTime);
 }
 
 void
@@ -180,6 +210,10 @@ Game::run()
 	const Uint32 frameDelay = 1000 / FRAME_RATE;
 	Uint32 frameStart;
 	Uint32 frameTime;
+
+	for (size_t i = 0; i < gameObjects.size(); i++) {
+		gameObjects[i]->start();
+	}
 
 	// Bucle principal del juego
 	while (!exit) {
@@ -255,15 +289,16 @@ Game::handleEvents()
 			// CAMBIO DE PÁGINA DERECHA
 			if (event.key.key == SDLK_D) {
 				currentPage += 2;
-				if (currentPage >= pagesCount - 1) currentPage = pagesCount - 2;
+				if (currentPage >= pagesCount) currentPage = pagesCount - 2;
 
 				manuscrito->changePage(currentPage);
 			}
 
 			// CAMBIO DE PÁGINA IZQUIERDA
 			if (event.key.key == SDLK_A) {
-				currentPage = currentPage - 2;
+				currentPage -= 2;
 				if (currentPage < 0) currentPage = 0;
+
 				manuscrito->changePage(currentPage);
 			}
 
@@ -289,19 +324,37 @@ void Game::createGameObjects() {
 	hoja2->addComponent<SpriteRenderer>(getTexture(HOJA_VACIA), 0, 0);
 
 	GameObject* hoja3 = new GameObject("Hoja3", 2);
-	hoja3->addComponent<Transform>(Vector2D<float>(1, 1), 0.1875);
-	hoja3->addComponent<SpriteRenderer>(getTexture(HOJA_VACIA), 0, 0);
+	hoja3->addComponent<Transform>(Vector2D<float>(1, 1), 0.16);
+	hoja3->addComponent<SpriteRenderer>(getTexture(TABLA_RUNAS), 0, 0);
 
-	gameObjects.push_back(hoja1);
-	gameObjects.push_back(hoja2);
-	gameObjects.push_back(hoja3);
+	GameObject* hoja4 = new GameObject("Hoja4", 2);
+	hoja4->addComponent<Transform>(Vector2D<float>(1, 1), 0.16);
+	hoja4->addComponent<SpriteRenderer>(getTexture(RUNAS), 0, 0);
 
 	bookPages.push_back(hoja1);
 	bookPages.push_back(hoja2);
 	bookPages.push_back(hoja3);
+	bookPages.push_back(hoja4);
 
 	manuscrito = new Book(bookPages, WINDOW_WIDTH / 2 - 5, WINDOW_HEIGHT / 2 - 9, 125);
 	pagesCount = manuscrito->getPageCount();
+
+	GameObject* hoja4_2 = new GameObject("Hoja4_2", 2);
+	hoja4_2->addComponent<Transform>(Vector2D<float>(1, 1), 0.16);
+	hoja4_2->addComponent<SpriteRenderer>(getTexture(TABLA_RUNAS), 0, 0);
+	hoja4_2->setIsActive(false);
+
+	gameObjects.push_back(hoja1);
+	gameObjects.push_back(hoja2);
+	gameObjects.push_back(hoja3);
+	gameObjects.push_back(hoja4);
+	gameObjects.push_back(hoja4_2);
+
+	
+	overlays.push_back(hoja4_2);
+
+	
+	
 #pragma endregion
 
 #pragma region TEXTOS DEL MANUSCRITO
@@ -309,6 +362,11 @@ void Game::createGameObjects() {
 	LoadTexts* textsLoader = new LoadTexts("../assets/data/texts.txt");
 	// Recorremos las páginas y los textos para crearlos
  	for (int i = 0; i < pagesCount; i++) {
+
+		if (i % 2 == 0) {
+			manuscrito->changePage(i);
+		}
+
 		for (int j = 0; j < textsLoader->getTextsCount(i); j++) {
 
 			// La data del texto (pos, tamaño, contenido)
@@ -334,6 +392,143 @@ void Game::createGameObjects() {
 
 	delete textsLoader;
 #pragma endregion
+
+#pragma region RunicTest
+	/*
+	*  1. Creamos el GameObject
+	*  2. Añadimos transform y renderer
+	*  3. Añadimos el selector
+	*  4. Añadimos el boton y le agregamos el metodo onClick de selector
+	*  5. Ocultamos el render
+	*  6. Se añade a los vectores y a runicTest
+	*/
+	
+	GameObject* selector1 = new GameObject("Selector1", 4, hoja4);
+	selector1->addComponent<Transform>(Vector2D<float>(9, -60), 0.06);
+	selector1->addComponent<SpriteRenderer>(getTexture(SELECTOR), 0, 0);
+	Selector* sl1 = selector1->addComponent<Selector>();
+	Button* btS1 = selector1->addComponent<Button>();
+	btS1->onClick = [sl1]() { sl1->onClick(); };
+
+	GameObject* selector2 = new GameObject("Selector2", 4, hoja4);
+	selector2->addComponent<Transform>(Vector2D<float>(37, -50), 0.06);
+	selector2->addComponent<SpriteRenderer>(getTexture(SELECTOR), 0, 0);
+	Selector* sl2 = selector2->addComponent<Selector>();
+	Button* btS2 = selector2->addComponent<Button>();
+	btS2->onClick = [sl2]() { sl2->onClick(); };
+
+	GameObject* selector3 = new GameObject("Selector3", 4, hoja4);
+	selector3->addComponent<Transform>(Vector2D<float>(57, -30), 0.06);
+	selector3->addComponent<SpriteRenderer>(getTexture(SELECTOR), 0, 0);
+	Selector* sl3 = selector3->addComponent<Selector>();
+	Button* btS3 = selector3->addComponent<Button>();
+	btS3->onClick = [sl3]() { sl3->onClick(); };
+
+	GameObject* selector4 = new GameObject("Selector4", 4, hoja4);
+	selector4->addComponent<Transform>(Vector2D<float>(60, -3), 0.06);
+	selector4->addComponent<SpriteRenderer>(getTexture(SELECTOR), 0, 0);
+	Selector* sl4 = selector4->addComponent<Selector>();
+	Button* btS4 = selector4->addComponent<Button>();
+	btS4->onClick = [sl4]() { sl4->onClick(); };
+
+	GameObject* selector5 = new GameObject("Selector5", 4, hoja4);
+	selector5->addComponent<Transform>(Vector2D<float>(53, 30), 0.06);
+	selector5->addComponent<SpriteRenderer>(getTexture(SELECTOR), 0, 0);
+	Selector* sl5 = selector5->addComponent<Selector>();
+	Button* btS5 = selector5->addComponent<Button>();
+	btS5->onClick = [sl5]() { sl5->onClick(); };
+
+	GameObject* selector6 = new GameObject("Selector6", 4, hoja4);
+	selector6->addComponent<Transform>(Vector2D<float>(37, 57), 0.06); 
+	selector6->addComponent<SpriteRenderer>(getTexture(SELECTOR), 0, 0);
+	Selector* sl6 = selector6->addComponent<Selector>();
+	Button* btS6 = selector6->addComponent<Button>();
+	btS6->onClick = [sl6]() { sl6->onClick(); };
+
+	GameObject* selector7 = new GameObject("Selector7", 4, hoja4); 
+	selector7->addComponent<Transform>(Vector2D<float>(2, 67), 0.06); 
+	selector7->addComponent<SpriteRenderer>(getTexture(SELECTOR), 0, 0);
+	Selector* sl7 = selector7->addComponent<Selector>();
+	Button* btS7 = selector7->addComponent<Button>();
+	btS7->onClick = [sl7]() { sl7->onClick(); };
+
+	GameObject* selector8 = new GameObject("Selector8", 4, hoja4); 
+	selector8->addComponent<Transform>(Vector2D<float>(-30, 60), 0.06);
+	selector8->addComponent<SpriteRenderer>(getTexture(SELECTOR), 0, 0);
+	Selector* sl8 = selector8->addComponent<Selector>();
+	Button* btS8 = selector8->addComponent<Button>();
+	btS8->onClick = [sl8]() { sl8->onClick(); };
+
+	GameObject* selector9 = new GameObject("Selector9", 4, hoja4);
+	selector9->addComponent<Transform>(Vector2D<float>(-50, 35), 0.06); 
+	selector9->addComponent<SpriteRenderer>(getTexture(SELECTOR), 0, 0);
+	Selector* sl9 = selector9->addComponent<Selector>();
+	Button* btS9 = selector9->addComponent<Button>();
+	btS9->onClick = [sl9]() { sl9->onClick(); };
+
+	GameObject* selector10 = new GameObject("Selector10", 4, hoja4); 
+	selector10->addComponent<Transform>(Vector2D<float>(-56, 0), 0.06); 
+	selector10->addComponent<SpriteRenderer>(getTexture(SELECTOR), 0, 0);
+	Selector* sl10 = selector10->addComponent<Selector>();
+	Button* btS10 = selector10->addComponent<Button>();
+	btS10->onClick = [sl10]() { sl10->onClick(); };
+
+	GameObject* selector11 = new GameObject("Selector11", 4, hoja4); 
+	selector11->addComponent<Transform>(Vector2D<float>(-50, -33), 0.06); 
+	selector11->addComponent<SpriteRenderer>(getTexture(SELECTOR), 0, 0);
+	Selector* sl11 = selector11->addComponent<Selector>();
+	Button* btS11 = selector11->addComponent<Button>();
+	btS11->onClick = [sl11]() { sl11->onClick(); };
+
+	GameObject* selector12 = new GameObject("Selector12", 4, hoja4);
+	selector12->addComponent<Transform>(Vector2D<float>(-25, -55), 0.06);
+	selector12->addComponent<SpriteRenderer>(getTexture(SELECTOR), 0, 0);
+	Selector* sl12 = selector12->addComponent<Selector>();
+	Button* btS12 = selector12->addComponent<Button>();
+	btS12->onClick = [sl12]() { sl12->onClick(); };
+
+	overlays.push_back(selector1);
+	overlays.push_back(selector2);
+	overlays.push_back(selector3);
+	overlays.push_back(selector4);
+	overlays.push_back(selector5);
+	overlays.push_back(selector6);
+	overlays.push_back(selector7);
+	overlays.push_back(selector8);
+	overlays.push_back(selector9);
+	overlays.push_back(selector10);
+	overlays.push_back(selector11);
+	overlays.push_back(selector12);
+	gameObjects.push_back(selector1);
+	gameObjects.push_back(selector2);
+	gameObjects.push_back(selector3);
+	gameObjects.push_back(selector4);
+	gameObjects.push_back(selector5);
+	gameObjects.push_back(selector6);
+	gameObjects.push_back(selector7);
+	gameObjects.push_back(selector8);
+	gameObjects.push_back(selector9);
+	gameObjects.push_back(selector10);
+	gameObjects.push_back(selector11);
+	gameObjects.push_back(selector12);
+
+	runicTest = new RunicTest(RUNIC_TEST_SOLUTION, RUNIC_TEST_LENGHT, manuscrito, hoja4_2);
+	runicTest->addSelector(sl1);
+	runicTest->addSelector(sl2);
+	runicTest->addSelector(sl3);
+	runicTest->addSelector(sl4);
+	runicTest->addSelector(sl5);
+	runicTest->addSelector(sl6);
+	runicTest->addSelector(sl7);
+	runicTest->addSelector(sl8);
+	runicTest->addSelector(sl9);
+	runicTest->addSelector(sl10);
+	runicTest->addSelector(sl11);
+	runicTest->addSelector(sl12);
+
+#pragma endregion
+
+	manuscrito->changePage(0);
 }
 
 #pragma region ButtonEvents

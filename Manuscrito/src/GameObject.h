@@ -26,6 +26,7 @@ public:
 	~GameObject();
 
 	void update(float deltaTime);
+	void start();
 	void render(); // El render ahora lo delegaremos al SpriteComponent
 
 	bool getIsActive() const;

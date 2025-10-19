@@ -26,18 +26,18 @@ public:
 	static constexpr int WINDOW_HEIGHT = 1080/2;
 
 	static constexpr int FONT_SIZE = 60;
-	static constexpr int MANUS_FONT_SIZE = 76.5;
+	static constexpr float MANUS_FONT_SIZE = 76.5;
+
+	static constexpr unsigned short RUNIC_TEST_SOLUTION = 0b010010000100;
+	static constexpr unsigned short RUNIC_TEST_LENGHT = 3;
 
 	enum TextureName
 	{
 		BACKGROUND,
-		CHINO,
-		HOJA1,
-		HOJA3,
-		HOJA4,
-		HOJA5,
+		RUNAS,
+		TABLA_RUNAS,
+		SELECTOR,
 		HOJA_VACIA,
-		TEXTO1_1,
 		NUM_TEXTURES
 	};
 

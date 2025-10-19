@@ -23,7 +23,6 @@ public:
     void DoUpdate(float deltaTime) {
         if (!started) {
             Start();
-            started = true;
         }
         if (active)
             Update(deltaTime);

@@ -22,6 +22,12 @@
     <Filter Include="Archivos de encabezado\Aux">
       <UniqueIdentifier>{8a5f6b7a-15ca-41bc-9404-8cea02b458e9}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Archivos de código fuente\Scripts">
+      <UniqueIdentifier>{a5f7dbc7-cd7a-460a-a474-b53a6ccca792}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Archivos de encabezado\Scripts">
+      <UniqueIdentifier>{effa39c0-66ea-4578-8393-26ea6392773f}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="game.cpp">
@@ -48,14 +54,20 @@
     <ClCompile Include="Button.cpp">
       <Filter>Archivos de código fuente\Componentes</Filter>
     </ClCompile>
-    <ClCompile Include="Book.cpp">
-      <Filter>Archivos de código fuente</Filter>
-    </ClCompile>
     <ClCompile Include="Text.cpp">
       <Filter>Archivos de código fuente\Componentes</Filter>
     </ClCompile>
+    <ClCompile Include="Book.cpp">
+      <Filter>Archivos de código fuente\Scripts</Filter>
+    </ClCompile>
     <ClCompile Include="LoadTexts.cpp">
-      <Filter>Archivos de código fuente</Filter>
+      <Filter>Archivos de código fuente\Scripts</Filter>
+    </ClCompile>
+    <ClCompile Include="Selector.cpp">
+      <Filter>Archivos de código fuente\Scripts</Filter>
+    </ClCompile>
+    <ClCompile Include="RunicTest.cpp">
+      <Filter>Archivos de código fuente\Scripts</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -83,17 +95,23 @@
     <ClInclude Include="Button.h">
       <Filter>Archivos de encabezado\Componentes</Filter>
     </ClInclude>
-    <ClInclude Include="Book.h">
-      <Filter>Archivos de encabezado</Filter>
-    </ClInclude>
     <ClInclude Include="Text.h">
       <Filter>Archivos de encabezado\Componentes</Filter>
     </ClInclude>
-    <ClInclude Include="LoadTexts.h">
-      <Filter>Archivos de encabezado</Filter>
-    </ClInclude>
     <ClInclude Include="vector2D.h">
       <Filter>Archivos de encabezado\Aux</Filter>
+    </ClInclude>
+    <ClInclude Include="LoadTexts.h">
+      <Filter>Archivos de encabezado\Scripts</Filter>
+    </ClInclude>
+    <ClInclude Include="Book.h">
+      <Filter>Archivos de encabezado\Scripts</Filter>
+    </ClInclude>
+    <ClInclude Include="Selector.h">
+      <Filter>Archivos de encabezado\Scripts</Filter>
+    </ClInclude>
+    <ClInclude Include="RunicTest.h">
+      <Filter>Archivos de encabezado\Scripts</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

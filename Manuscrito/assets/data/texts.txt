@@ -1,4 +1,4 @@
-PagesCount: 1
+PagesCount: 3
 Page_1
     TextsCount: 5
     T_1
@@ -14,7 +14,7 @@ Page_1
         textEnd: 1500
         color: #6B2604
     T_3
-        text: Nuestra madre nos fue mostrando como controlar nuestros poderes, y entre lecciones mi hermana y yo jugabamos a un juego que nos habiamos inventado, lo llamabamos el busca la bola, consistia en esconder un orbe en algun lugar del pueblo, y la otra lo tenia que encontrar.
+        text: Madre nos fue mostrando como controlar nuestros poderes, y entre lecciones mi hermana y yo jugabamos a un juego que nos habiamos inventado, lo llamabamos "busca la bola", consistia en esconder un orbe en algun lugar del pueblo, y la otra lo tenia que encontrar.
         x: 10       
         y: 23
         textEnd: 1500
@@ -26,8 +26,120 @@ Page_1
         textEnd: 1500
         color: #6B2604
     T_5
-        text: Si deseas continuar calor necesitaras.
+        text: Hechizo: FOGUS
         x: 0
         y: 130
+        textEnd: 1500
+        color: #C41A00
+Page_2
+    TextsCount: 3
+     T_1
+        text: Lo malo de ocultar texto es que una vez revelado, tarda 1 dia en volverse a ocultar.
+        x: 5
+        y: -125
+        textEnd: 1500
+        color: #6B2604
+    T_2
+        text: Hay que tener cuidado con esta planta, si la tocas causa un enrojecimiento de la piel y un picor intenso en la zona afectada. Tambien tiene propiedades curativas si se junta con un poco de raiz de onujo.
+        x: -32        
+        y: -40
+        textEnd: 1000
+        color: #6B2604
+    T_3
+        text: A mi hermana Helena y a mi nos esta buscando la inquisicion, nuestra unica esperanza es llegar hasta la Orden Wincanster. Me han dicho que esta yendo por la carretera del norte.
+        x: 50       
+        y: 80
+        textEnd: 900
+        color: #6B2604
+Page_3
+    TextsCount: 15 
+     T_1
+        text: Tenemos que llegar, hay que llegar, me temo lo peor.
+        x: 5
+        y: -140
+        textEnd: 1500
+        color: #C41A00
+    T_2
+        text: En pocos dias sera la nueva luna, polaris es la clave para evitar que a Helena la detenga la inquisicion.
+        x: 5
+        y: -110
+        textEnd: 1500
+        color: #6B2604
+    T_3
+        text: RUNAS
+        x: 0
+        y: -85
+        textEnd: 1500
+        color: #6B2604
+    T_4
+        text: GUERRA
+        x: -27
+        y: -47
+        textEnd: 1500
+        color: #C41A00
+    T_4
+        text: IGUAL
+        x: -27
+        y: -10
+        textEnd: 1500
+        color: #C41A00
+    T_5
+        text: UNION
+        x: -27
+        y: 25
+        textEnd: 1500
+        color: #C41A00
+    T_6
+        text: MAZO
+        x: -27
+        y: 55 
+        textEnd: 1500
+        color: #C41A00
+    T_7
+        text: VACIO
+        x: -27
+        y: 90
+        textEnd: 1500
+        color: #C41A00
+    T_8
+        text: ROTURA
+        x: -27
+        y: 120 
+        textEnd: 1500
+        color: #C41A00
+    T_9
+        text: RAYO
+        x: 67
+        y: -47
+        textEnd: 1500
+        color: #C41A00
+    T_10
+        text: FERTIL
+        x: 67
+        y: -10
+        textEnd: 1500
+        color: #C41A00
+    T_11
+        text: HOMBRE
+        x: 67
+        y: 25
+        textEnd: 1500
+        color: #C41A00
+    T_12
+        text: MAR
+        x: 67
+        y: 55 
+        textEnd: 1500
+        color: #C41A00
+    T_13
+        text: SOL
+        x: 67
+        y: 90
+        textEnd: 1500
+        color: #C41A00
+    T_14
+        text: PAZ
+        x: 67
+        y: 120 
         textEnd: 1500
         color: #C41A00

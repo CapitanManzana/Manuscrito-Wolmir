@@ -28,6 +28,8 @@ public:
 
 	void changePage(size_t index);
 
+	void remplacePage(GameObject* page, int index);
+
 	GameObject* getPage(size_t index) const;
 	size_t getPageCount() const;
 	int getCurrentPage() const;

@@ -16,7 +16,7 @@ Book::Book() {
 	position = Vector2D<float>(0.0f, 0.0f);
 }
 
-Book::Book(const std::vector<GameObject*> &pages, float x, float y, float separation) {
+Book::Book(const std::vector<GameObject*>& pages, float x, float y, float separation) {
 	this->pages = pages;
 	this->pagesNumber = this->pages.size();
 	this->position = Vector2D<float>(x, y);
@@ -70,5 +70,34 @@ void Book::changePage(size_t index) {
 	}
 	else {
 		rightPage = nullptr;
+	}
+}
+
+void Book::remplacePage(GameObject* page, int index) {
+	GameObject* p = pages[index];
+
+	if (p == leftPage) {
+		p->setIsActive(false);
+		pages[index] = page;
+		leftPage = page;
+
+		leftPage->setIsActive(true);
+		if (auto t = leftPage->getComponent<Transform>()) {
+			t->setPosition(Vector2D<float>(position.x - pageSeparation, position.y));
+		}
+	}
+	else if (p == rightPage) {
+		p->setIsActive(false);
+		pages[index] = page;
+		rightPage = page;
+
+		rightPage->setIsActive(true);
+		if (auto t = rightPage->getComponent<Transform>()) {
+			t->setPosition(Vector2D<float>(position.x + pageSeparation, position.y));
+		}
+	}
+	else {
+		p->setIsActive(false);
+		pages[index] = page;
 	}
 }

@@ -48,6 +48,12 @@ GameObject::~GameObject() {
 
 #pragma endregion
 
+void GameObject::start() {
+	for (auto& c : components) {
+		c->Start();
+	}
+}
+
 void GameObject::update(float deltaTime) {
 	if (!isActive) return;
 	for (auto& comp : components) {
