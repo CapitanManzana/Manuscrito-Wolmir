@@ -385,10 +385,6 @@ void Game::createGameObjects() {
 	gameObjects.push_back(hoja4);
 	gameObjects.push_back(hoja4_2);
 
-	overlays.push_back(hoja4_2);
-
-
-
 #pragma endregion
 
 #pragma region TEXTOS DEL MANUSCRITO

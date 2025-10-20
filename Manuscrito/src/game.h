@@ -28,8 +28,8 @@ public:
 	static constexpr int FONT_SIZE = 60;
 	static constexpr float MANUS_FONT_SIZE = 76.5;
 
-	static constexpr unsigned short RUNIC_TEST_SOLUTION = 0b010010000100;
-	static constexpr unsigned short RUNIC_TEST_LENGHT = 3;
+	static constexpr unsigned short RUNIC_TEST_SOLUTION = 0b000000000000;
+	static constexpr unsigned short RUNIC_TEST_LENGHT = 1;
 
 	enum TextureName
 	{

@@ -42,43 +42,51 @@ Page_1
         color: #6B2604
         uv: 0
 Page_2
-    TextsCount: 3
+    TextsCount: 4
      T_1
-        text: Lo malo de ocultar texto es que, una vez revelado, tarda un día en volverse a ocultar.
-        x: 5
-        y: -125
-        size: 76
+        text: ORITUS COMÚN
+        x: 0
+        y: -130
+        size: 130
         textEnd: 1500
         color: #0DFF00
         uv: 1
     T_2
         text: Hay que tener cuidado con esta planta: si la tocas, causa un enrojecimiento de la piel y un picor intenso en la zona afectada. También tiene propiedades curativas si se mezcla con un poco de raíz de onujo.
-        x: -32        
-        y: -40
+        x: 0      
+        y: -85
         size: 76
-        textEnd: 1000
+        textEnd: 1500
         color: #0DFF00
         uv: 1
     T_3
-        text: A mi hermana Helena y a mí nos está buscando la Inquisición. Nuestra única esperanza es llegar hasta la Orden Wincanster. Me han dicho que está yendo por la carretera del norte.
-        x: 50       
-        y: 80
+        text: Tampoco nos podemos fiar de la Orden Wincanster, el Sr. Wolmir necesita a Helena para algo, para un proyecto. Casi nos atrapa en su mansión.
+        x: 45       
+        y: 60
         size: 76
         textEnd: 900
         color: #0DFF00
         uv: 1
+    T_4
+        text: NO TE FIES DE NADIE
+        x: 0       
+        y: 135
+        size: 130
+        textEnd: 1500
+        color: #0DFF00
+        uv: 1
 Page_3
-    TextsCount: 15 
+    TextsCount: 16 
      T_1
         text: Tenemos que llegar, hay que llegar, me temo lo peor.
-        x: 5
+        x: 0
         y: -140
-        size: 76
+        size: 60
         textEnd: 1500
         color: #C41A00
         uv: 0
     T_2
-        text: En pocos días será la nueva luna. Polaris es la clave para evitar que a Helena la detenga la Inquisición.
+        text: En pocos días será la nueva luna. Polaris es la clave para evitar que a Helena la detenga la Inquisición y legar hasta la Orden Wincanster.
         x: 5
         y: -110
         size: 76
@@ -88,8 +96,8 @@ Page_3
     T_3
         text: RUNAS
         x: 0
-        y: -85
-        size: 76
+        y: -80
+        size: 100
         textEnd: 1500
         color: #6B2604
         uv: 0
@@ -189,8 +197,16 @@ Page_3
         textEnd: 1500
         color: #C41A00
         uv: 0
+    T_15
+        text: NO TE FIES DE LA ORDEN
+        x: 0
+        y: 150 
+        size: 76
+        textEnd: 1500
+        color: #0DFF00
+        uv: 1
 Page_4
-    TextsCount: 2
+    TextsCount: 3
      T_1
         text: El otro día descubrí un hechizo muy curioso, capaz de lanzar una luz que revela elementos que no se ven a simple vista.
         x: 5
@@ -202,8 +218,24 @@ Page_4
     T_2
         text: Hechizo: Phobos
         x: 0
-        y: -90
+        y: -80
         size: 110
+        textEnd: 1500
+        color: #C41A00
+        uv: 0
+    T_3
+        text: 2 de octubre de 1534
+        x: -60
+        y: -50
+        size: 80
+        textEnd: 1500
+        color: #C41A00
+        uv: 0
+    T_3
+        text: Es demasiado tarde, la inquisición nos ha encontrado
+        x: -60
+        y: -50
+        size: 80
         textEnd: 1500
         color: #C41A00
         uv: 0
