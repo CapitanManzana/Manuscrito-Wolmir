@@ -8,6 +8,7 @@ Page_1
         size: 76
         textEnd: 1500
         color: #6B2604
+        uv: 0
     T_2
         text: Aún recuerdo cuando Helena y yo jugábamos a "busca la bola", el juego de buscar el orbe por el pueblo. Madre se enfadaba mucho porque le daba miedo que alguien nos descubriera, cosa que acabó pasando.
         x: -45        
@@ -15,6 +16,7 @@ Page_1
         size: 76
         textEnd: 750
         color: #6B2604
+        uv: 0
     T_3
         text: Orbe
         x: 50       
@@ -22,6 +24,7 @@ Page_1
         size: 100
         textEnd: 1500
         color: #C41A00
+        uv: 0
     T_4
         text: TINTA NOVIDE
         x: 0       
@@ -29,6 +32,7 @@ Page_1
         size: 130
         textEnd: 1500
         color: #C41A00
+        uv: 0
     T_5
         text: Nota: al mezclar sangre de cabra y un poco de zumo de uva se crea una tinta imperceptible a la vista. 
         x: 65
@@ -36,6 +40,7 @@ Page_1
         size: 76
         textEnd: 750
         color: #6B2604
+        uv: 0
 Page_2
     TextsCount: 3
      T_1
@@ -44,21 +49,24 @@ Page_2
         y: -125
         size: 76
         textEnd: 1500
-        color: #6B2604
+        color: #0DFF00
+        uv: 1
     T_2
         text: Hay que tener cuidado con esta planta: si la tocas, causa un enrojecimiento de la piel y un picor intenso en la zona afectada. También tiene propiedades curativas si se mezcla con un poco de raíz de onujo.
         x: -32        
         y: -40
         size: 76
         textEnd: 1000
-        color: #6B2604
+        color: #0DFF00
+        uv: 1
     T_3
         text: A mi hermana Helena y a mí nos está buscando la Inquisición. Nuestra única esperanza es llegar hasta la Orden Wincanster. Me han dicho que está yendo por la carretera del norte.
         x: 50       
         y: 80
         size: 76
         textEnd: 900
-        color: #6B2604
+        color: #0DFF00
+        uv: 1
 Page_3
     TextsCount: 15 
      T_1
@@ -68,6 +76,7 @@ Page_3
         size: 76
         textEnd: 1500
         color: #C41A00
+        uv: 0
     T_2
         text: En pocos días será la nueva luna. Polaris es la clave para evitar que a Helena la detenga la Inquisición.
         x: 5
@@ -75,6 +84,7 @@ Page_3
         size: 76
         textEnd: 1500
         color: #6B2604
+        uv: 0
     T_3
         text: RUNAS
         x: 0
@@ -82,6 +92,7 @@ Page_3
         size: 76
         textEnd: 1500
         color: #6B2604
+        uv: 0
     T_4
         text: GUERRA
         x: -27
@@ -89,6 +100,7 @@ Page_3
         size: 76
         textEnd: 1500
         color: #C41A00
+        uv: 0
     T_4
         text: IGUAL
         x: -27
@@ -96,6 +108,7 @@ Page_3
         size: 76
         textEnd: 1500
         color: #C41A00
+        uv: 0
     T_5
         text: UNION
         x: -27
@@ -103,6 +116,7 @@ Page_3
         size: 76
         textEnd: 1500
         color: #C41A00
+        uv: 0
     T_6
         text: MAZO
         x: -27
@@ -110,6 +124,7 @@ Page_3
         size: 76
         textEnd: 1500
         color: #C41A00
+        uv: 0
     T_7
         text: VACIO
         x: -27
@@ -117,6 +132,7 @@ Page_3
         size: 76
         textEnd: 1500
         color: #C41A00
+        uv: 0
     T_8
         text: ROTURA
         x: -27
@@ -124,6 +140,7 @@ Page_3
         size: 76
         textEnd: 1500
         color: #C41A00
+        uv: 0
     T_9
         text: RAYO
         x: 67
@@ -131,6 +148,7 @@ Page_3
         size: 76
         textEnd: 1500
         color: #C41A00
+        uv: 0
     T_10
         text: FERTIL
         x: 67
@@ -138,6 +156,7 @@ Page_3
         size: 76
         textEnd: 1500
         color: #C41A00
+        uv: 0
     T_11
         text: HOMBRE
         x: 67
@@ -145,6 +164,7 @@ Page_3
         size: 76
         textEnd: 1500
         color: #C41A00
+        uv: 0
     T_12
         text: MAR
         x: 67
@@ -152,6 +172,7 @@ Page_3
         size: 76
         textEnd: 1500
         color: #C41A00
+        uv: 0
     T_13
         text: SOL
         x: 67
@@ -159,6 +180,7 @@ Page_3
         size: 76
         textEnd: 1500
         color: #C41A00
+        uv: 0
     T_14
         text: PAZ
         x: 67
@@ -166,6 +188,7 @@ Page_3
         size: 76
         textEnd: 1500
         color: #C41A00
+        uv: 0
 Page_4
     TextsCount: 2
      T_1
@@ -175,6 +198,7 @@ Page_4
         size: 76
         textEnd: 1500
         color: #6B2604
+        uv: 0
     T_2
         text: Hechizo: Phobos
         x: 0
@@ -182,3 +206,4 @@ Page_4
         size: 110
         textEnd: 1500
         color: #C41A00
+        uv: 0

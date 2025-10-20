@@ -46,6 +46,8 @@ LoadTexts::LoadTexts(std::string filePath)
                 textData.color = { 0, 0, 0, 255 };
             }
 
+			file >> tag >> textData.uv;
+
 			// Eliminamos el primer espacio en blanco
 			textData.text.erase(0, 1);
 

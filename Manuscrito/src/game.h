@@ -57,6 +57,7 @@ private:
 
 	void showText(GameObject* text);
 	void renderObjects() const;
+	void createLight();
 
 	bool exit;
 

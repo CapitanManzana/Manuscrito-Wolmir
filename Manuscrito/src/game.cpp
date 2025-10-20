@@ -68,6 +68,8 @@ SDL_Texture* rendertex_light;
 SDL_Texture* rendertex;
 SDL_FRect rectLight;
 
+vector<GameObject*> uvObjects;
+
 float cur_posX;
 float cur_posY;
 
@@ -106,7 +108,7 @@ Game::Game() : exit(false)
 		SDL_LogError(SDL_LOG_CATEGORY_APPLICATION, "Couldn't load font");
 	}
 
-	manuscritoFont = TTF_OpenFont(((string)fontBase + "ManuscritoWolmir2.ttf").c_str(), MANUS_FONT_SIZE) ;
+	manuscritoFont = TTF_OpenFont(((string)fontBase + "ManuscritoWolmir2.ttf").c_str(), MANUS_FONT_SIZE);
 	if (!manuscritoFont) {
 		SDL_LogError(SDL_LOG_CATEGORY_APPLICATION, "Couldn't load font");
 	}
@@ -123,18 +125,8 @@ Game::Game() : exit(false)
 	//Carga los GameObjects
 	createGameObjects();
 
-	SDL_Surface* lightSurf = IMG_Load("../assets/images/light.png");
-	rectLight = { 0, 0, static_cast<float>(lightSurf->w), static_cast<float>(lightSurf->h) };
-	light_tex = SDL_CreateTextureFromSurface(renderer, lightSurf);
-	SDL_SetTextureBlendMode(light_tex, SDL_BLENDMODE_ADD);
-
-	rendertex_light = SDL_CreateTexture(renderer, SDL_PIXELFORMAT_RGBA8888, SDL_TEXTUREACCESS_TARGET, WINDOW_WIDTH, WINDOW_HEIGHT);
-	SDL_SetTextureBlendMode(rendertex_light, SDL_BLENDMODE_MOD);
-
-	rendertex = SDL_CreateTexture(renderer, SDL_PIXELFORMAT_RGBA8888, SDL_TEXTUREACCESS_TARGET, WINDOW_WIDTH, WINDOW_HEIGHT);
-	SDL_SetTextureBlendMode(rendertex, SDL_BLENDMODE_MOD);
-
-	SDL_DestroySurface(lightSurf);
+	//Crea la luz uv
+	createLight();
 }
 
 Game::~Game()
@@ -173,7 +165,7 @@ Game::render() const
 		renderObjects();
 
 		if (glasses) {
-			SDL_SetRenderDrawColor(renderer, 0, 115, 0, 20);
+			SDL_SetRenderDrawColor(renderer, 0, 115, 0, 1);
 			SDL_RenderFillRect(renderer, nullptr);
 		}
 		else {
@@ -207,6 +199,11 @@ Game::render() const
 		SDL_SetRenderDrawColor(renderer, 24, 0, 115, 160);
 		SDL_RenderFillRect(renderer, nullptr);
 
+		// Renderiza los elementos que se ven con la uv light
+		for (size_t i = 0; i < uvObjects.size(); i++) {
+			if (uvObjects[i]->getIsActive() && uvObjects[i]->spriteRenderer != nullptr && uvObjects[i]->spriteRenderer->isEnabled)
+				uvObjects[i]->render();
+		}
 		// Multiplica el mapa por tu máscara de luz (rendertex_light)
 		SDL_RenderTexture(renderer, rendertex_light, NULL, NULL);
 	}
@@ -387,18 +384,18 @@ void Game::createGameObjects() {
 	gameObjects.push_back(hoja3);
 	gameObjects.push_back(hoja4);
 	gameObjects.push_back(hoja4_2);
-	
+
 	overlays.push_back(hoja4_2);
 
-	
-	
+
+
 #pragma endregion
 
 #pragma region TEXTOS DEL MANUSCRITO
 	// Cargamos el archivo de textos
 	LoadTexts* textsLoader = new LoadTexts("../assets/data/texts.txt");
 	// Recorremos las páginas y los textos para crearlos
- 	for (int i = 0; i < pagesCount; i++) {
+	for (int i = 0; i < pagesCount; i++) {
 
 		if (i % 2 == 0) {
 			manuscrito->changePage(i);
@@ -422,8 +419,13 @@ void Game::createGameObjects() {
 				showText(texto);
 				};
 
+			if (textData.uv) {
+				uvObjects.push_back(texto);
+			}
+			else {
+				texts.push_back(texto);
+			}
 			gameObjects.push_back(texto);
-			texts.push_back(texto);
 		}
 	}
 
@@ -443,7 +445,7 @@ void Game::createGameObjects() {
 	*  5. Ocultamos el render
 	*  6. Se añade a los vectores y a runicTest
 	*/
-	
+
 	GameObject* selector1 = new GameObject("Selector1", 4, hoja4);
 	selector1->addComponent<Transform>(Vector2D<float>(9, -60), 0.06);
 	selector1->addComponent<SpriteRenderer>(getTexture(SELECTOR), 0, 0);
@@ -480,20 +482,20 @@ void Game::createGameObjects() {
 	btS5->onClick = [sl5]() { sl5->onClick(); };
 
 	GameObject* selector6 = new GameObject("Selector6", 4, hoja4);
-	selector6->addComponent<Transform>(Vector2D<float>(37, 57), 0.06); 
+	selector6->addComponent<Transform>(Vector2D<float>(37, 57), 0.06);
 	selector6->addComponent<SpriteRenderer>(getTexture(SELECTOR), 0, 0);
 	Selector* sl6 = selector6->addComponent<Selector>();
 	Button* btS6 = selector6->addComponent<Button>();
 	btS6->onClick = [sl6]() { sl6->onClick(); };
 
-	GameObject* selector7 = new GameObject("Selector7", 4, hoja4); 
-	selector7->addComponent<Transform>(Vector2D<float>(2, 67), 0.06); 
+	GameObject* selector7 = new GameObject("Selector7", 4, hoja4);
+	selector7->addComponent<Transform>(Vector2D<float>(2, 67), 0.06);
 	selector7->addComponent<SpriteRenderer>(getTexture(SELECTOR), 0, 0);
 	Selector* sl7 = selector7->addComponent<Selector>();
 	Button* btS7 = selector7->addComponent<Button>();
 	btS7->onClick = [sl7]() { sl7->onClick(); };
 
-	GameObject* selector8 = new GameObject("Selector8", 4, hoja4); 
+	GameObject* selector8 = new GameObject("Selector8", 4, hoja4);
 	selector8->addComponent<Transform>(Vector2D<float>(-30, 60), 0.06);
 	selector8->addComponent<SpriteRenderer>(getTexture(SELECTOR), 0, 0);
 	Selector* sl8 = selector8->addComponent<Selector>();
@@ -501,21 +503,21 @@ void Game::createGameObjects() {
 	btS8->onClick = [sl8]() { sl8->onClick(); };
 
 	GameObject* selector9 = new GameObject("Selector9", 4, hoja4);
-	selector9->addComponent<Transform>(Vector2D<float>(-50, 35), 0.06); 
+	selector9->addComponent<Transform>(Vector2D<float>(-50, 35), 0.06);
 	selector9->addComponent<SpriteRenderer>(getTexture(SELECTOR), 0, 0);
 	Selector* sl9 = selector9->addComponent<Selector>();
 	Button* btS9 = selector9->addComponent<Button>();
 	btS9->onClick = [sl9]() { sl9->onClick(); };
 
-	GameObject* selector10 = new GameObject("Selector10", 4, hoja4); 
-	selector10->addComponent<Transform>(Vector2D<float>(-56, 0), 0.06); 
+	GameObject* selector10 = new GameObject("Selector10", 4, hoja4);
+	selector10->addComponent<Transform>(Vector2D<float>(-56, 0), 0.06);
 	selector10->addComponent<SpriteRenderer>(getTexture(SELECTOR), 0, 0);
 	Selector* sl10 = selector10->addComponent<Selector>();
 	Button* btS10 = selector10->addComponent<Button>();
 	btS10->onClick = [sl10]() { sl10->onClick(); };
 
-	GameObject* selector11 = new GameObject("Selector11", 4, hoja4); 
-	selector11->addComponent<Transform>(Vector2D<float>(-50, -33), 0.06); 
+	GameObject* selector11 = new GameObject("Selector11", 4, hoja4);
+	selector11->addComponent<Transform>(Vector2D<float>(-50, -33), 0.06);
 	selector11->addComponent<SpriteRenderer>(getTexture(SELECTOR), 0, 0);
 	Selector* sl11 = selector11->addComponent<Selector>();
 	Button* btS11 = selector11->addComponent<Button>();
@@ -593,7 +595,7 @@ void Game::showText(GameObject* text) {
 
 #pragma region Auxiliar
 
-void Game::renderObjects() const{
+void Game::renderObjects() const {
 	getTexture(BACKGROUND)->render();
 
 	// El fondo del cuaderno
@@ -613,6 +615,21 @@ void Game::renderObjects() const{
 		if (overlays[i]->getIsActive() && overlays[i]->spriteRenderer != nullptr && overlays[i]->spriteRenderer->isEnabled)
 			overlays[i]->render();
 	}
+}
+
+void Game::createLight() {
+	SDL_Surface* lightSurf = IMG_Load("../assets/images/light.png");
+	rectLight = { 0, 0, static_cast<float>(lightSurf->w), static_cast<float>(lightSurf->h) };
+	light_tex = SDL_CreateTextureFromSurface(renderer, lightSurf);
+	SDL_SetTextureBlendMode(light_tex, SDL_BLENDMODE_ADD);
+
+	rendertex_light = SDL_CreateTexture(renderer, SDL_PIXELFORMAT_RGBA8888, SDL_TEXTUREACCESS_TARGET, WINDOW_WIDTH, WINDOW_HEIGHT);
+	SDL_SetTextureBlendMode(rendertex_light, SDL_BLENDMODE_MOD);
+
+	rendertex = SDL_CreateTexture(renderer, SDL_PIXELFORMAT_RGBA8888, SDL_TEXTUREACCESS_TARGET, WINDOW_WIDTH, WINDOW_HEIGHT);
+	SDL_SetTextureBlendMode(rendertex, SDL_BLENDMODE_MOD);
+
+	SDL_DestroySurface(lightSurf);
 }
 
 #pragma endregion
