@@ -62,6 +62,15 @@ RunicTest* runicTest;
 bool blackLight = false;
 bool glasses = false;
 
+// Mascara de luz uv
+SDL_Texture* light_tex;
+SDL_Texture* rendertex_light;
+SDL_Texture* rendertex;
+SDL_FRect rectLight;
+
+float cur_posX;
+float cur_posY;
+
 #pragma endregion
 
 
@@ -113,6 +122,19 @@ Game::Game() : exit(false)
 
 	//Carga los GameObjects
 	createGameObjects();
+
+	SDL_Surface* lightSurf = IMG_Load("../assets/images/light.png");
+	rectLight = { 0, 0, static_cast<float>(lightSurf->w), static_cast<float>(lightSurf->h) };
+	light_tex = SDL_CreateTextureFromSurface(renderer, lightSurf);
+	SDL_SetTextureBlendMode(light_tex, SDL_BLENDMODE_ADD);
+
+	rendertex_light = SDL_CreateTexture(renderer, SDL_PIXELFORMAT_RGBA8888, SDL_TEXTUREACCESS_TARGET, WINDOW_WIDTH, WINDOW_HEIGHT);
+	SDL_SetTextureBlendMode(rendertex_light, SDL_BLENDMODE_MOD);
+
+	rendertex = SDL_CreateTexture(renderer, SDL_PIXELFORMAT_RGBA8888, SDL_TEXTUREACCESS_TARGET, WINDOW_WIDTH, WINDOW_HEIGHT);
+	SDL_SetTextureBlendMode(rendertex, SDL_BLENDMODE_MOD);
+
+	SDL_DestroySurface(lightSurf);
 }
 
 Game::~Game()
@@ -147,39 +169,49 @@ Game::render() const
 {
 	SDL_RenderClear(renderer);
 
-	getTexture(BACKGROUND)->render();
+	if (!blackLight) {
+		renderObjects();
 
-	// El fondo del cuaderno
-	for (size_t i = 0; i < pagesCount; i++) {
-		if (bookPages[i]->getIsActive() && bookPages[i]->spriteRenderer != nullptr && bookPages[i]->spriteRenderer->isEnabled)
-			bookPages[i]->render();
-	}
-
-	// EL texto
-	for (size_t i = 0; i < texts.size(); i++) {
-		if (texts[i]->getIsActive() && texts[i]->spriteRenderer != nullptr && texts[i]->spriteRenderer->isEnabled)
-			texts[i]->render();
-	}
-
-	// Elementos extra
-	for (size_t i = 0; i < overlays.size(); i++) {
-		if (overlays[i]->getIsActive() && overlays[i]->spriteRenderer != nullptr && overlays[i]->spriteRenderer->isEnabled)
-			overlays[i]->render();
-	}
-
-	if (blackLight) {
-		SDL_SetRenderDrawColor(renderer, 24, 0, 115, 160);
-		SDL_RenderFillRect(renderer, nullptr);
-	}
-	else if (glasses) {
-		SDL_SetRenderDrawColor(renderer, 0, 115, 0, 20);
-		SDL_RenderFillRect(renderer, nullptr);
+		if (glasses) {
+			SDL_SetRenderDrawColor(renderer, 0, 115, 0, 20);
+			SDL_RenderFillRect(renderer, nullptr);
+		}
+		else {
+			SDL_SetRenderDrawColor(renderer, 0, 16, 48, 160);
+			SDL_RenderFillRect(renderer, nullptr);
+		}
 	}
 	else {
-		SDL_SetRenderDrawColor(renderer, 0, 16, 48, 160); 
+		rectLight.x = cur_posX - (rectLight.w / 2.f);
+		rectLight.y = cur_posY - (rectLight.h / 2.f);
+
+		// 1. PREPARAR LA MÁSCARA DE LUZ
+		SDL_SetRenderDrawColor(renderer, 0, 0, 0, 255);
+		// Apunta a tu textura de luz (que tiene BLENDMODE_MOD)
+		SDL_SetRenderTarget(renderer, rendertex_light);
+		// Limpia la textura de luz a negro (oscuridad total)
+		SDL_RenderClear(renderer);
+		// Renderiza el gradiente (light_tex, que tiene BLENDMODE_ADD) 
+		// sobre la textura negra.
+		SDL_RenderTexture(renderer, light_tex, NULL, &rectLight);
+
+		// 2. RENDERIZAR LA ESCENA FINAL A LA PANTALLA
+
+		// Apunta de nuevo a la pantalla
+		SDL_SetRenderTarget(renderer, NULL);
+		SDL_RenderClear(renderer); // Limpia la pantalla
+
+		// Dibuja el mapa base
+		renderObjects();
+
+		SDL_SetRenderDrawColor(renderer, 24, 0, 115, 160);
 		SDL_RenderFillRect(renderer, nullptr);
+
+		// Multiplica el mapa por tu máscara de luz (rendertex_light)
+		SDL_RenderTexture(renderer, rendertex_light, NULL, NULL);
 	}
 
+	// Muestra el resultado
 	SDL_RenderPresent(renderer);
 }
 
@@ -243,7 +275,7 @@ Game::handleEvents()
 		if (event.type == SDL_EVENT_QUIT)
 			exit = true;
 
-		else if (event.type == SDL_EVENT_MOUSE_BUTTON_DOWN) {
+		if (event.type == SDL_EVENT_MOUSE_BUTTON_DOWN) {
 			float mouseX = event.button.x;
 			float mouseY = event.button.y;
 
@@ -267,7 +299,11 @@ Game::handleEvents()
 			}
 		}
 
-		else if (event.type == SDL_EVENT_KEY_DOWN) {
+		if (event.type == SDL_EVENT_MOUSE_MOTION) {
+			SDL_RenderCoordinatesFromWindow(renderer, event.motion.x, event.motion.y, &cur_posX, &cur_posY);
+		}
+
+		if (event.type == SDL_EVENT_KEY_DOWN) {
 
 			// LUZ UV
 			if (event.key.key == SDLK_E) {
@@ -553,4 +589,30 @@ void Game::showText(GameObject* text) {
 		currentText = text;
 	}
 }
+#pragma endregion
+
+#pragma region Auxiliar
+
+void Game::renderObjects() const{
+	getTexture(BACKGROUND)->render();
+
+	// El fondo del cuaderno
+	for (size_t i = 0; i < pagesCount; i++) {
+		if (bookPages[i]->getIsActive() && bookPages[i]->spriteRenderer != nullptr && bookPages[i]->spriteRenderer->isEnabled)
+			bookPages[i]->render();
+	}
+
+	// EL texto
+	for (size_t i = 0; i < texts.size(); i++) {
+		if (texts[i]->getIsActive() && texts[i]->spriteRenderer != nullptr && texts[i]->spriteRenderer->isEnabled)
+			texts[i]->render();
+	}
+
+	// Elementos extra
+	for (size_t i = 0; i < overlays.size(); i++) {
+		if (overlays[i]->getIsActive() && overlays[i]->spriteRenderer != nullptr && overlays[i]->spriteRenderer->isEnabled)
+			overlays[i]->render();
+	}
+}
+
 #pragma endregion

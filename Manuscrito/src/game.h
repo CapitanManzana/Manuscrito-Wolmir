@@ -56,6 +56,7 @@ private:
 	void createGameObjects();
 
 	void showText(GameObject* text);
+	void renderObjects() const;
 
 	bool exit;
 
