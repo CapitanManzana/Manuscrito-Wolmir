@@ -16,7 +16,7 @@ Text::Text() {
 	textureSDL = nullptr;
 }
 
-Text::Text(std::string text, SDL_Color newColor, TTF_Font* font, int width, SDL_Renderer* renderer) {
+Text::Text(std::string text, SDL_Color newColor, TTF_Font* font, int width, int size, SDL_Renderer* renderer) {
 	this->text = text;
 	this->color = newColor;
 	this->font = font;
@@ -26,6 +26,9 @@ Text::Text(std::string text, SDL_Color newColor, TTF_Font* font, int width, SDL_
 	surface = nullptr;
 	texture = nullptr;
 	textureSDL = nullptr;
+
+	TTF_SetFontSize(font, size);
+	fontSize = size;
 }
 
 Text::~Text() {
@@ -105,9 +108,10 @@ void Text::onComponentAdd() {
 	updateSurface();
 }
 
-void Text::changeFont(TTF_Font* newFont) {
+void Text::changeFont(TTF_Font* newFont, int size) {
 	if (font != newFont) {
 		font = newFont;
+		TTF_SetFontSize(font, size);
 		updateSurface();
 	}
 }
@@ -137,5 +141,9 @@ void Text::setColor(SDL_Color newColor) {
 
 SDL_Color Text::getColor() const{
 	return color;
+}
+
+int Text::getFontSize() const {
+	return fontSize;
 }
 #pragma endregion

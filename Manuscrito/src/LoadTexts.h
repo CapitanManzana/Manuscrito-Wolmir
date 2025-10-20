@@ -13,6 +13,7 @@ struct TextData
 	std::string text;
 	Vector2D<int> position;
 	int textEnd;
+	int size;
 	SDL_Color color;
 
 	TextData(std::string text, Vector2D<int> position, int textEnd) {
@@ -26,6 +27,7 @@ struct TextData
 		position = { 0,0 };
 		textEnd = 0;
 		color = { 0, 0, 0, 255 };
+		size = 12;
 	}
 };
 

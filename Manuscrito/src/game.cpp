@@ -33,6 +33,7 @@ constexpr array<TextureSpec, Game::NUM_TEXTURES> textureList{
 	{"Runas.JPEG"},
 	{"TablaRunas.JPEG"},
 	{"Selector.png"},
+	{"Hoja1.JPEG"},
 	{"HojaVacia.png"}
 };
 
@@ -91,12 +92,12 @@ Game::Game() : exit(false)
 	lastTime = SDL_GetPerformanceCounter();
 
 	//Carga la fuente
-	baseFont = TTF_OpenFont(((string)fontBase + "XTypewriter-Regular.ttf").c_str(), FONT_SIZE);
+	baseFont = TTF_OpenFont(((string)fontBase + "OldNewspaperTypes.ttf").c_str(), FONT_SIZE);
 	if (!baseFont) {
 		SDL_LogError(SDL_LOG_CATEGORY_APPLICATION, "Couldn't load font");
 	}
 
-	manuscritoFont = TTF_OpenFont(((string)fontBase + "ManuscritoWolmir.ttf").c_str(), MANUS_FONT_SIZE) ;
+	manuscritoFont = TTF_OpenFont(((string)fontBase + "ManuscritoWolmir2.ttf").c_str(), MANUS_FONT_SIZE) ;
 	if (!manuscritoFont) {
 		SDL_LogError(SDL_LOG_CATEGORY_APPLICATION, "Couldn't load font");
 	}
@@ -277,11 +278,12 @@ Game::handleEvents()
 			if (event.key.key == SDLK_Q) {
 				glasses = !glasses;
 				if (currentText) {
+					Text* t = currentText->getComponent<Text>();
 					if (glasses) {
-						currentText->getComponent<Text>()->changeFont(baseFont);
+						t->changeFont(baseFont, t->getFontSize() - 16);
 					}
 					else {
-						currentText->getComponent<Text>()->changeFont(manuscritoFont);
+						t->changeFont(manuscritoFont, t->getFontSize());
 					}
 				}
 			}
@@ -317,7 +319,7 @@ void Game::createGameObjects() {
 
 	GameObject* hoja1 = new GameObject("Hoja1", 2);
 	hoja1->addComponent<Transform>(Vector2D<float>(1, 1), 0.1875);
-	hoja1->addComponent<SpriteRenderer>(getTexture(HOJA_VACIA), 0, 0);
+	hoja1->addComponent<SpriteRenderer>(getTexture(HOJA1), 0, 0);
 
 	GameObject* hoja2 = new GameObject("Hoja2", 2);
 	hoja2->addComponent<Transform>(Vector2D<float>(1, 1), 0.1875);
@@ -341,7 +343,7 @@ void Game::createGameObjects() {
 
 	GameObject* hoja4_2 = new GameObject("Hoja4_2", 2);
 	hoja4_2->addComponent<Transform>(Vector2D<float>(1, 1), 0.16);
-	hoja4_2->addComponent<SpriteRenderer>(getTexture(TABLA_RUNAS), 0, 0);
+	hoja4_2->addComponent<SpriteRenderer>(getTexture(HOJA_VACIA), 0, 0);
 	hoja4_2->setIsActive(false);
 
 	gameObjects.push_back(hoja1);
@@ -349,7 +351,6 @@ void Game::createGameObjects() {
 	gameObjects.push_back(hoja3);
 	gameObjects.push_back(hoja4);
 	gameObjects.push_back(hoja4_2);
-
 	
 	overlays.push_back(hoja4_2);
 
@@ -378,7 +379,7 @@ void Game::createGameObjects() {
 			// Añadimos los componentes
 			texto->addComponent<Transform>(Vector2D<float>(textData.position.x, textData.position.y), 0.15);
 			texto->addComponent<SpriteRenderer>();
-			texto->addComponent<Text>(textData.text, textData.color, manuscritoFont, textData.textEnd, renderer);
+			texto->addComponent<Text>(textData.text, textData.color, manuscritoFont, textData.textEnd, textData.size, renderer);
 
 			Button* btT = texto->addComponent<Button>();
 			btT->onClick = [this, texto]() {
@@ -389,6 +390,10 @@ void Game::createGameObjects() {
 			texts.push_back(texto);
 		}
 	}
+
+	hoja4_2->setChildren(hoja4->getChildren());
+	hoja4->removeChildren();
+	hoja4_2->setIsActive(false);
 
 	delete textsLoader;
 #pragma endregion
@@ -539,11 +544,12 @@ void Game::showText(GameObject* text) {
 		// Si ya hay un texto mostrado, lo ocultamos
 		if (currentText != nullptr && currentText != text) {
 			Text* textComp = currentText->getComponent<Text>();
-			textComp->changeFont(manuscritoFont);
+			textComp->changeFont(manuscritoFont, textComp->getFontSize());
 		}
 
 		// Mostramos el texto seleccionado
-		text->getComponent<Text>()->changeFont(baseFont);
+		Text* t = text->getComponent<Text>();
+		t->changeFont(baseFont, t->getFontSize() - 16);
 		currentText = text;
 	}
 }

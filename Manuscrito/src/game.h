@@ -37,6 +37,7 @@ public:
 		RUNAS,
 		TABLA_RUNAS,
 		SELECTOR,
+		HOJA1,
 		HOJA_VACIA,
 		NUM_TEXTURES
 	};

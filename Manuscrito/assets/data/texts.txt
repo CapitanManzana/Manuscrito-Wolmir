@@ -1,54 +1,62 @@
-PagesCount: 3
+PagesCount: 4
 Page_1
     TextsCount: 5
     T_1
-        text: Mucho tiempo ha pasado ya desde aquel fatidico dia, echo mucho de menos a mi hermana Helena, pero era un suceso inevitable.
+        text: Mucho tiempo ha pasado ya desde aquel fatídico día. Echo mucho de menos a mi hermana Helena, pero fue un suceso inevitable.
         x: 10
-        y: -125
+        y: -130
+        size: 76
         textEnd: 1500
         color: #6B2604
     T_2
-        text: Todo comenzo cuando yo era joven, podia hacer cosas que otras personas no podian. Mi madre nos conto a mi hermana y a mi que durante decadas, la inquisicion ha perseguido a gente especial como nosotras, brujas lo llaman ellos, y que por eso no podemos mostrar nuestras habilidades al mundo.
-        x: 10        
-        y: -60
-        textEnd: 1500
+        text: Aún recuerdo cuando Helena y yo jugábamos a "busca la bola", el juego de buscar el orbe por el pueblo. Madre se enfadaba mucho porque le daba miedo que alguien nos descubriera, cosa que acabó pasando.
+        x: -45        
+        y: -50
+        size: 76
+        textEnd: 750
         color: #6B2604
     T_3
-        text: Madre nos fue mostrando como controlar nuestros poderes, y entre lecciones mi hermana y yo jugabamos a un juego que nos habiamos inventado, lo llamabamos "busca la bola", consistia en esconder un orbe en algun lugar del pueblo, y la otra lo tenia que encontrar.
-        x: 10       
-        y: 23
-        textEnd: 1500
-        color: #6B2604
-    T_4
-        text: Nota: al mezclar sangre de cabra y un poco de zumo de uva se crea una tinta inperceptible a la vista. 
-        x: 10
-        y: 90
-        textEnd: 1500
-        color: #6B2604
-    T_5
-        text: Hechizo: FOGUS
-        x: 0
-        y: 130
+        text: Orbe
+        x: 50       
+        y: -10
+        size: 100
         textEnd: 1500
         color: #C41A00
+    T_4
+        text: TINTA NOVIDE
+        x: 0       
+        y: 25
+        size: 130
+        textEnd: 1500
+        color: #C41A00
+    T_5
+        text: Nota: al mezclar sangre de cabra y un poco de zumo de uva se crea una tinta imperceptible a la vista. 
+        x: 65
+        y: 80
+        size: 76
+        textEnd: 750
+        color: #6B2604
 Page_2
     TextsCount: 3
      T_1
-        text: Lo malo de ocultar texto es que una vez revelado, tarda 1 dia en volverse a ocultar.
+        text: Lo malo de ocultar texto es que, una vez revelado, tarda un día en volverse a ocultar.
         x: 5
         y: -125
+        size: 76
         textEnd: 1500
         color: #6B2604
     T_2
-        text: Hay que tener cuidado con esta planta, si la tocas causa un enrojecimiento de la piel y un picor intenso en la zona afectada. Tambien tiene propiedades curativas si se junta con un poco de raiz de onujo.
+        text: Hay que tener cuidado con esta planta: si la tocas, causa un enrojecimiento de la piel y un picor intenso en la zona afectada. También tiene propiedades curativas si se mezcla con un poco de raíz de onujo.
         x: -32        
         y: -40
+        size: 76
         textEnd: 1000
         color: #6B2604
     T_3
-        text: A mi hermana Helena y a mi nos esta buscando la inquisicion, nuestra unica esperanza es llegar hasta la Orden Wincanster. Me han dicho que esta yendo por la carretera del norte.
+        text: A mi hermana Helena y a mí nos está buscando la Inquisición. Nuestra única esperanza es llegar hasta la Orden Wincanster. Me han dicho que está yendo por la carretera del norte.
         x: 50       
         y: 80
+        size: 76
         textEnd: 900
         color: #6B2604
 Page_3
@@ -57,89 +65,120 @@ Page_3
         text: Tenemos que llegar, hay que llegar, me temo lo peor.
         x: 5
         y: -140
+        size: 76
         textEnd: 1500
         color: #C41A00
     T_2
-        text: En pocos dias sera la nueva luna, polaris es la clave para evitar que a Helena la detenga la inquisicion.
+        text: En pocos días será la nueva luna. Polaris es la clave para evitar que a Helena la detenga la Inquisición.
         x: 5
         y: -110
+        size: 76
         textEnd: 1500
         color: #6B2604
     T_3
         text: RUNAS
         x: 0
         y: -85
+        size: 76
         textEnd: 1500
         color: #6B2604
     T_4
         text: GUERRA
         x: -27
         y: -47
+        size: 76
         textEnd: 1500
         color: #C41A00
     T_4
         text: IGUAL
         x: -27
         y: -10
+        size: 76
         textEnd: 1500
         color: #C41A00
     T_5
         text: UNION
         x: -27
         y: 25
+        size: 76
         textEnd: 1500
         color: #C41A00
     T_6
         text: MAZO
         x: -27
         y: 55 
+        size: 76
         textEnd: 1500
         color: #C41A00
     T_7
         text: VACIO
         x: -27
         y: 90
+        size: 76
         textEnd: 1500
         color: #C41A00
     T_8
         text: ROTURA
         x: -27
         y: 120 
+        size: 76
         textEnd: 1500
         color: #C41A00
     T_9
         text: RAYO
         x: 67
         y: -47
+        size: 76
         textEnd: 1500
         color: #C41A00
     T_10
         text: FERTIL
         x: 67
         y: -10
+        size: 76
         textEnd: 1500
         color: #C41A00
     T_11
         text: HOMBRE
         x: 67
         y: 25
+        size: 76
         textEnd: 1500
         color: #C41A00
     T_12
         text: MAR
         x: 67
         y: 55 
+        size: 76
         textEnd: 1500
         color: #C41A00
     T_13
         text: SOL
         x: 67
         y: 90
+        size: 76
         textEnd: 1500
         color: #C41A00
     T_14
         text: PAZ
         x: 67
         y: 120 
+        size: 76
+        textEnd: 1500
+        color: #C41A00
+Page_4
+    TextsCount: 2
+     T_1
+        text: El otro día descubrí un hechizo muy curioso, capaz de lanzar una luz que revela elementos que no se ven a simple vista.
+        x: 5
+        y: -120
+        size: 76
+        textEnd: 1500
+        color: #6B2604
+    T_2
+        text: Hechizo: Phobos
+        x: 0
+        y: -90
+        size: 110
         textEnd: 1500
         color: #C41A00

@@ -32,6 +32,7 @@ LoadTexts::LoadTexts(std::string filePath)
 			std::getline(file, textData.text);
 			file >> tag >> textData.position.x;
 			file >> tag >> textData.position.y;
+			file >> tag >> textData.size;
 			file >> tag >> textData.textEnd;
 
             std::string color;

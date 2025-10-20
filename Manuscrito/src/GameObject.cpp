@@ -109,4 +109,18 @@ std::vector<GameObject*> GameObject::getChildren() {
 	return childs;
 }
 
+void GameObject::setChildren(std::vector<GameObject*> children) {
+	this->childs = children;
+	for (GameObject* go : childs) {
+		go->parent = this;
+	}
+}
+
+void GameObject::removeChildren() {
+	for (GameObject* go : childs) {
+		if (go->parent == this) go->parent = nullptr;
+	}
+	childs.clear();
+}
+
 #pragma endregion
