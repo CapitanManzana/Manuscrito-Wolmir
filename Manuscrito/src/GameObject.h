@@ -39,6 +39,7 @@ public:
 	std::vector<GameObject*> getChildren();
 	void setChildren(std::vector<GameObject*> children);
 	void removeChildren();
+	void removeChildren(int index);
 
 public:
 	template<typename T, typename... TArgs>

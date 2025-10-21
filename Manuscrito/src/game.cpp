@@ -46,7 +46,6 @@ constexpr array<TextureSpec, Game::NUM_TEXTURES> textureList{
 vector<GameObject*> Game::gameObjects;
 
 // MANUSCRITO
-vector<GameObject*> bookPages;
 Book* manuscrito;
 int currentPage = 0;
 int pagesCount = 0;
@@ -78,15 +77,15 @@ float cur_posX;
 float cur_posY;
 
 // Luz ambiente
-SDL_Color ambientLightDarkZone = { 24, 0, 115, 190 };
-SDL_Color ambientLightIlumZone = { 161, 88, 0, 100 };
+SDL_Color ambientLightDarkZone = { 24, 0, 115, 225 };
+SDL_Color ambientLightIlumZone = { 212, 135, 51, 100 };
 SDL_Texture* ambientLight_tex;
 SDL_Texture* rendertex_ambientLight;
 SDL_Texture* rendertexLight;
 SDL_FRect rect_ambientLight;
 
-float lightRadius = 2.5f;
-Vector2D<float> lightPosition = Vector2D<float>(-450, -650);
+float lightRadius = 2.3f;
+Vector2D<float> lightPosition = Vector2D<float>(-375, -580);
 
 #pragma endregion
 
@@ -394,6 +393,7 @@ Game::handleEvents()
 void Game::createGameObjects() {
 
 #pragma region HOJAS DEL MANUSCRITO
+	vector<GameObject*> bookPages;
 
 	GameObject* hoja1 = new GameObject("Hoja1", 2);
 	hoja1->addComponent<Transform>(Vector2D<float>(1, 1), 0.1875);
@@ -478,14 +478,7 @@ void Game::createGameObjects() {
 			TextData textData = textsLoader->getTextData(i, j);
 
 			//CREAMOS EL TEXTO
-			// Este if es para mostrar los textos de la pagina de astrología
-			GameObject* texto;
-			if (i == 5 && j >= 5) {
-				texto = new GameObject("Texto " + to_string(i) + "_" + to_string(j), 4, hoja6_2);
-			}
-			else {
-				texto = new GameObject("Texto " + to_string(i) + "_" + to_string(j), 4, bookPages[i]);
-			}
+			 GameObject* texto = new GameObject("Texto " + to_string(i) + "_" + to_string(j), 4, bookPages[i]);
 
 			// Añadimos los componentes
 			texto->addComponent<Transform>(Vector2D<float>(textData.position.x, textData.position.y), 0.15);
@@ -506,9 +499,24 @@ void Game::createGameObjects() {
 			gameObjects.push_back(texto);
 		}
 	}
-
+	//LOS HIJOS DE LA HOJA 4 PASAN A LA 4_2 PORQUE ESTAN OCULTOS
+	//LOS HIJOS DE LA HOJA 6 SOLO NECESITAMOS LOS DEL FINAL DESPUES DEL 5 PORQUE SON LOS OCULTOS
 	hoja4_2->setChildren(hoja4->getChildren());
 	hoja4->removeChildren();
+
+	//Recorremos los hijos y los metemos en un vector los necesarios
+	vector<GameObject*> hoja6Children;
+	for (int k = 5; k < hoja6->getChildren().size(); k++) {
+		hoja6Children.push_back(hoja6->getChild(k));
+	}
+	hoja6_2->setChildren(hoja6Children);
+
+	//Borramos los hijos
+	int childsCount = hoja6->getChildren().size();
+	for (int k = 5; k < childsCount; k++) {
+		hoja6->removeChildren(5);
+	}
+
 	hoja4_2->setIsActive(false);
 	hoja6_2->setIsActive(false);
 
@@ -746,11 +754,11 @@ void Game::showText(GameObject* text) {
 
 void Game::renderObjects() const {
 	getTexture(BACKGROUND)->render();
-
 	// El fondo del cuaderno
 	for (size_t i = 0; i < pagesCount; i++) {
-		if (bookPages[i]->getIsActive() && bookPages[i]->spriteRenderer != nullptr && bookPages[i]->spriteRenderer->isEnabled)
-			bookPages[i]->render();
+ 		GameObject* page = manuscrito->getPage(i);
+		if (page->getIsActive() && page->spriteRenderer != nullptr && page->spriteRenderer->isEnabled && page->getName()!= "Hoja6_2")
+			page->render();
 	}
 
 	// EL texto

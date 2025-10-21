@@ -123,4 +123,10 @@ void GameObject::removeChildren() {
 	childs.clear();
 }
 
+void GameObject::removeChildren(int index) {
+	GameObject* go = childs[index];
+	if(go->parent == this) go->parent = nullptr;
+	childs.erase(childs.begin() + index);
+}
+
 #pragma endregion

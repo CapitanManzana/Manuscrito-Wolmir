@@ -28,10 +28,10 @@ public:
 	static constexpr int FONT_SIZE = 60;
 	static constexpr float MANUS_FONT_SIZE = 76.5;
 
-	static constexpr unsigned short RUNIC_TEST_SOLUTION = 0b000000010000;
-	static constexpr unsigned short RUNIC_TEST_LENGHT = 1;
-	static constexpr unsigned short ASTROLOGY_TEST_SOLUTION = 0b1000001;
-	static constexpr unsigned short ASTROLOGY_TEST_LENGHT = 2;
+	static constexpr unsigned short RUNIC_TEST_SOLUTION = 0b000100100010; // 12
+	static constexpr unsigned short RUNIC_TEST_LENGHT = 3;
+	static constexpr unsigned short ASTROLOGY_TEST_SOLUTION = 0b0100000; // 7
+	static constexpr unsigned short ASTROLOGY_TEST_LENGHT = 1;
 
 	enum TextureName
 	{

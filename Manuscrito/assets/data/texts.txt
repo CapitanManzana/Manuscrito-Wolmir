@@ -18,18 +18,18 @@ Page_1
         color: #C41A00
         uv: 0
     T_3
-        text: Madre nos ha enseñado trucos nuevos, y Helena y yo hemos jugado a nuestro juego favorito, Busca la bola, consiste en buscar un orbe mágico por el pueblo, quien lo encuentre primero gana.
+        text: Madre nos ha enseñado trucos nuevos, y Helena y yo hemos jugado a nuestro juego favorito, Busca a Vega, consiste en buscar un orbe mágico llamado Vega por el pueblo.
         x: -45        
-        y: -75
-        size: 60
+        y: -65
+        size: 70
         textEnd: 850
         color: #6B2604
         uv: 0
     T_4
-        text: Pero hoy a Helena no le apetecía jugar, pero la he insistido. A madre le da miedo que nos encuentre la inquisición. ESO ES UNA CHORRADA, es imposible que nos encuentren por esconder un orbe mágico en un pueblucho.
+        text: A madre le da miedo que nos encuentre la inquisición. Es imposible que nos encuentren por esconder un orbe en un pueblucho.
         x: -45        
-        y: -15
-        size: 60
+        y: -5
+        size: 70
         textEnd: 850
         color: #6B2604
         uv: 0
@@ -224,7 +224,7 @@ Page_3
     T_15
         text: NO TE FIES DE LA ORDEN
         x: 0
-        y: 150 
+        y: -160 
         size: 76
         textEnd: 1500
         color: #0DFF00
@@ -338,7 +338,7 @@ Page_5
         color: #C41A00
         uv: 0
 Page_6
-    TextsCount: 7
+    TextsCount: 15
      T_1
         text: ESCORPIO
         x: -50
@@ -381,8 +381,8 @@ Page_6
         uv: 0
      T_6     
         text: 30 de septiembre de 1534
-        x: -50       
-        y: -135
+        x: -35       
+        y: -125
         size: 90
         textEnd: 1500
         color: #C41A00
@@ -390,41 +390,121 @@ Page_6
     T_7
         text: Nos han encontrado, han llegado hasta nuestro pueblo, hemos tenido que huir. Helena quería luchar, siempre ha sido la fuerte de las dos. Ahora nos dirigimos hacia la Orden Wincanster, nos han prometido comida y cobijo. Al parecer hay mas gente como nosotras allí.
         x: 5        
-        y: -100
+        y: -75
         size: 76
+        textEnd: 1400
+        color: #6B2604
+        uv: 0
+    T_8     
+        text: 2 de octubre de 1534
+        x: -45       
+        y: -15
+        size: 90
         textEnd: 1500
+        color: #C41A00
+        uv: 0
+    T_9
+        text: Estamos a solo 1 día de nuestra salvación, creo que la inquisición no nos sigue la pista. El camino ha sido duro, pero seguro que el esfuerzo merece la pena.
+        x: 5        
+        y: 20
+        size: 76
+        textEnd: 1400
+        color: #6B2604
+        uv: 0
+    T_10     
+        text: Polaris
+        x: -65       
+        y: 65
+        size: 90
+        textEnd: 1500
+        color: #C41A00
+        uv: 0
+    T_11     
+        text: Vega
+        x: -65       
+        y: 85
+        size: 90
+        textEnd: 1500
+        color: #C41A00
+        uv: 0
+    T_12     
+        text: Segin
+        x: -65       
+        y: 105
+        size: 90
+        textEnd: 1500
+        color: #C41A00
+        uv: 0
+    T_13
+        text: 1h 25' 40''
+        x: -5        
+        y: 64
+        size: 76
+        textEnd: 1400
+        color: #6B2604
+        uv: 0
+    T_14
+        text: 5h 10' 12''
+        x: -5        
+        y: 84
+        size: 76
+        textEnd: 1400
+        color: #6B2604
+        uv: 0
+    T_15
+        text: 8h 04' 55''
+        x: -5        
+        y: 104
+        size: 76
+        textEnd: 1400
         color: #6B2604
         uv: 0
 Page_7
-    TextsCount: 4
-     T_1     
-        text: 2 de octubre de 1534
-        x: -50       
+    TextsCount: 6
+    T_1     
+        text: 23 de septiembre de 1534
+        x: -40       
         y: -135
         size: 90
         textEnd: 1500
         color: #C41A00
         uv: 0
     T_2
-        text: Estamos a solo 1 día de nuestra salvación, creo que la inquisición no nos sigue la pista. El camino ha sido duro, pero seguro que el esfuerzo merece la pena.
+        text: Madre hoy estaba muy alterada, al parecer nos han encontrado,  estamos planeando la huida hacia el norte, allí creo que nos acogerán, se hacen llamar la Orden Wincanster.
         x: 5        
         y: -100
         size: 76
         textEnd: 1500
         color: #6B2604
         uv: 0
-    T_3     
+    T_3
+        text: Espero que todo esto no haya sido por mi culpa, y por el estúpido juego de la bola.
+        x: 5        
+        y: -50
+        size: 76
+        textEnd: 1500
+        color: #6B2604
+        uv: 0
+    T_4     
         text: 31 de octubre de 1535
         x: -50       
-        y: -60
+        y: -10
         size: 90
         textEnd: 1500
         color: #C41A00
         uv: 0
-    T_4
-        text: No puedo mas, no puedo seguir con esta carga, sola no desde luego. Desde el 13 de octubre de 1534, nada ha vuelto a ser lo mismo, he ido de pueblo en pueblo, buscando cobijo, comida y un lugar donde descansar. Perdóname Helena, no pude protegerte.
+    T_5
+        text: No puedo mas, no puedo seguir con esta carga, sola no desde luego. Desde el 13 de octubre de 1534, nada ha vuelto a ser lo mismo, he ido de pueblo en pueblo, buscando cobijo, comida y un lugar donde descansar. Por las noches siempre miro al cielo, en busca de Casiopea, la constelación favorita de Helena, para así no olvidarla. Perdóname Helena, no pude protegerte.
         x: 5        
-        y: -13
+        y: 50
+        size: 76
+        textEnd: 1500
+        color: #6B2604
+        uv: 0
+    T_6
+        text: Como decia siempre Helena, unión, paz y sol. Le encantaba la playa
+        x: 5        
+        y: 130
         size: 76
         textEnd: 1500
         color: #6B2604

@@ -80,6 +80,7 @@ void Book::remplacePage(GameObject* page, int index) {
 		p->setIsActive(false);
 		pages[index] = page;
 		leftPage = page;
+		page->setIsActive(true);
 
 		leftPage->setIsActive(true);
 		if (auto t = leftPage->getComponent<Transform>()) {
@@ -90,6 +91,7 @@ void Book::remplacePage(GameObject* page, int index) {
 		p->setIsActive(false);
 		pages[index] = page;
 		rightPage = page;
+		page->setIsActive(true);
 
 		rightPage->setIsActive(true);
 		if (auto t = rightPage->getComponent<Transform>()) {
