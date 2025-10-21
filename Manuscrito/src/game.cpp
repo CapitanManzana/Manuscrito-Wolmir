@@ -36,6 +36,7 @@ constexpr array<TextureSpec, Game::NUM_TEXTURES> textureList{
 	{"Hoja1.JPEG"},
 	{"Hoja5.JPEG"},
 	{"Hoja6.JPEG"},
+	{"Hoja8.JPEG"},
 	{"HojaVacia.png"}
 };
 
@@ -376,12 +377,22 @@ void Game::createGameObjects() {
 	hoja6->addComponent<Transform>(Vector2D<float>(1, 1), 0.1875);
 	hoja6->addComponent<SpriteRenderer>(getTexture(HOJA6), 0, 0);
 
+	GameObject* hoja7 = new GameObject("Hoja7", 2);
+	hoja7->addComponent<Transform>(Vector2D<float>(1, 1), 0.1875);
+	hoja7->addComponent<SpriteRenderer>(getTexture(HOJA_VACIA), 0, 0);
+
+	GameObject* hoja8 = new GameObject("Hoja8", 2);
+	hoja8->addComponent<Transform>(Vector2D<float>(1, 1), 0.1875);
+	hoja8->addComponent<SpriteRenderer>(getTexture(HOJA8), 0, 0);
+
 	bookPages.push_back(hoja1);
 	bookPages.push_back(hoja2);
 	bookPages.push_back(hoja3);
 	bookPages.push_back(hoja4);
 	bookPages.push_back(hoja5);
 	bookPages.push_back(hoja6);
+	bookPages.push_back(hoja7);
+	bookPages.push_back(hoja8);
 
 	manuscrito = new Book(bookPages, WINDOW_WIDTH / 2 - 5, WINDOW_HEIGHT / 2 - 9, 125);
 	pagesCount = manuscrito->getPageCount();
@@ -398,6 +409,8 @@ void Game::createGameObjects() {
 	gameObjects.push_back(hoja4_2);
 	gameObjects.push_back(hoja5);
 	gameObjects.push_back(hoja6);
+	gameObjects.push_back(hoja7);
+	gameObjects.push_back(hoja8);
 
 #pragma endregion
 
@@ -593,7 +606,7 @@ void Game::createGameObjects() {
 	gameObjects.push_back(selector1E);
 #pragma endregion
 
-	manuscrito->changePage(4);
+	manuscrito->changePage(0);
 }
 
 #pragma region ButtonEvents

@@ -40,6 +40,7 @@ public:
 		HOJA1,
 		HOJA5,
 		HOJA6,
+		HOJA8,
 		HOJA_VACIA,
 		NUM_TEXTURES
 	};

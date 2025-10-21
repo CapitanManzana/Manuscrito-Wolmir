@@ -1,6 +1,6 @@
-PagesCount: 6
+PagesCount: 7
 Page_1
-    TextsCount: 6
+    TextsCount: 7
     T_1
         text: Echo mucho de menos a mi hermana Helena, pero fue un suceso inevitable.
         x: 10
@@ -11,7 +11,7 @@ Page_1
         uv: 0
     T_2     
         text: 19 de agosto de 1534
-        x: -45       
+        x: -50       
         y: -110
         size: 90
         textEnd: 1500
@@ -20,12 +20,20 @@ Page_1
     T_3
         text: Madre nos ha enseñado trucos nuevos, y Helena y yo hemos jugado a nuestro juego favorito, Busca la bola, consiste en buscar un orbe mágico por el pueblo, quien lo encuentre primero gana.
         x: -45        
-        y: -45
-        size: 76
-        textEnd: 750
+        y: -75
+        size: 60
+        textEnd: 850
         color: #6B2604
         uv: 0
     T_4
+        text: Pero hoy a Helena no le apetecía jugar, pero la he insistido. A madre le da miedo que nos encuentre la inquisición. ESO ES UNA CHORRADA, es imposible que nos encuentren por esconder un orbe mágico en un pueblucho.
+        x: -45        
+        y: -15
+        size: 60
+        textEnd: 850
+        color: #6B2604
+        uv: 0
+    T_5
         text: Orbe
         x: 50       
         y: -10
@@ -33,7 +41,7 @@ Page_1
         textEnd: 1500
         color: #C41A00
         uv: 0
-    T_5
+    T_6
         text: TINTA NOVIDE
         x: 0       
         y: 32
@@ -41,7 +49,7 @@ Page_1
         textEnd: 1500
         color: #C41A00
         uv: 0
-    T_6
+    T_7
         text: Nota: al mezclar sangre de cabra y un poco de zumo de uva se crea una tinta imperceptible a la vista. 
         x: 70
         y: 100
@@ -222,7 +230,7 @@ Page_3
         color: #0DFF00
         uv: 1
 Page_4
-    TextsCount: 3
+    TextsCount: 4
      T_1
         text: El otro día descubrí un hechizo muy curioso, capaz de lanzar una luz que revela elementos que no se ven a simple vista.
         x: 5
@@ -240,12 +248,20 @@ Page_4
         color: #C41A00
         uv: 0
     T_3
-        text: 2 de octubre de 1534
+        text: 5 de octubre de 1534
         x: -60
         y: -50
         size: 80
         textEnd: 1500
         color: #C41A00
+        uv: 0
+    T_4
+        text: Era todo mentira, todo una farsa, menos mal que hemos conseguido escapar. La Orden no nos quería ayudar, nos quería atrapar. Han intentado llevarse a mi hermana y casi nos matan a madre y a mi. Hemos huido por la noche, a través de las cloacas.
+        x: 5        
+        y: -5
+        size: 76
+        textEnd: 1500
+        color: #6B2604
         uv: 0
 Page_5
     TextsCount: 9
@@ -362,4 +378,38 @@ Page_6
         size: 70
         textEnd: 1500
         color: #C41A00
+        uv: 0
+Page_7
+    TextsCount: 4
+     T_1     
+        text: 2 de octubre de 1534
+        x: -50       
+        y: -135
+        size: 90
+        textEnd: 1500
+        color: #C41A00
+        uv: 0
+    T_2
+        text: Estamos a solo 1 día de nuestra salvación, creo que la inquisición no nos sigue la pista. El camino ha sido duro, pero seguro que el esfuerzo merece la pena.
+        x: 5        
+        y: -100
+        size: 76
+        textEnd: 1500
+        color: #6B2604
+        uv: 0
+    T_3     
+        text: 31 de octubre de 1535
+        x: -50       
+        y: -60
+        size: 90
+        textEnd: 1500
+        color: #C41A00
+        uv: 0
+    T_4
+        text: No puedo mas, no puedo seguir con esta carga, sola no desde luego. Desde el 13 de octubre de 1534, nada ha vuelto a ser lo mismo, he ido de pueblo en pueblo, buscando cobijo, comida y un lugar donde descansar. Perdóname Helena, no pude protegerte.
+        x: 5        
+        y: -13
+        size: 76
+        textEnd: 1500
+        color: #6B2604
         uv: 0
