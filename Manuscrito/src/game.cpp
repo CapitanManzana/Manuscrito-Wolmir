@@ -60,6 +60,7 @@ vector<GameObject*> overlays;
 
 // TESTS
 RunicTest* runicTest;
+RunicTest* astrologyTest;
 
 // HERAMIENTAS
 bool blackLight = false;
@@ -77,15 +78,15 @@ float cur_posX;
 float cur_posY;
 
 // Luz ambiente
-SDL_Color ambientLightDarkZone = { 24, 0, 115, 100 };
-SDL_Color ambientLightIlumZone = { 255, 139, 0, 160 };
+SDL_Color ambientLightDarkZone = { 24, 0, 115, 190 };
+SDL_Color ambientLightIlumZone = { 161, 88, 0, 100 };
 SDL_Texture* ambientLight_tex;
 SDL_Texture* rendertex_ambientLight;
 SDL_Texture* rendertexLight;
 SDL_FRect rect_ambientLight;
 
-float lightIntensity = 1.0f;
-Vector2D<float> lightScale = Vector2D<float>(lightIntensity, lightIntensity);
+float lightRadius = 2.5f;
+Vector2D<float> lightPosition = Vector2D<float>(-450, -650);
 
 #pragma endregion
 
@@ -151,6 +152,7 @@ Game::~Game()
 	texts.clear();
 
 	delete runicTest;
+	delete astrologyTest;
 
 	// Elimina los objetos del juego
 	for (size_t i = 0; i < gameObjects.size(); i++) {
@@ -163,6 +165,15 @@ Game::~Game()
 	}
 
 	delete manuscrito;
+
+	SDL_DestroyTexture(light_tex);
+	SDL_DestroyTexture(rendertex_light);
+	SDL_DestroyTexture(rendertex);
+
+	SDL_DestroyTexture(ambientLight_tex);
+	SDL_DestroyTexture(rendertex_ambientLight);
+	SDL_DestroyTexture(rendertexLight);
+
 
 	SDL_DestroyRenderer(renderer);
 	SDL_DestroyWindow(window);
@@ -199,12 +210,9 @@ Game::render() const
 			SDL_RenderFillRect(renderer, nullptr);
 		}
 		else {
-			SDL_SetRenderDrawColor(renderer, 0, 16, 48, 160);
+			SDL_SetRenderDrawColor(renderer, ambientLightIlumZone.r, ambientLightIlumZone.g, ambientLightIlumZone.b, ambientLightIlumZone.a);
 			SDL_RenderFillRect(renderer, nullptr);
 		}
-
-		SDL_SetRenderDrawColor(renderer, ambientLightIlumZone.r, ambientLightIlumZone.g, ambientLightIlumZone.b, ambientLightIlumZone.a);
-		SDL_RenderFillRect(renderer, nullptr);
 	}
 	else {
 		rectLight.x = cur_posX - (rectLight.w / 2.f);
@@ -268,6 +276,7 @@ Game::update()
 	}
 
 	runicTest->DoUpdate(deltaTime);
+	astrologyTest->DoUpdate(deltaTime);
 }
 
 void
@@ -435,6 +444,11 @@ void Game::createGameObjects() {
 	hoja4_2->addComponent<SpriteRenderer>(getTexture(HOJA_VACIA), 0, 0);
 	hoja4_2->setIsActive(false);
 
+	GameObject* hoja6_2 = new GameObject("Hoja6_2", 2);
+	hoja6_2->addComponent<Transform>(Vector2D<float>(1, 1), 0.16);
+	hoja6_2->addComponent<SpriteRenderer>(getTexture(HOJA_VACIA), 0, 0);
+	hoja6_2->setIsActive(true);
+
 	gameObjects.push_back(hoja1);
 	gameObjects.push_back(hoja2);
 	gameObjects.push_back(hoja3);
@@ -442,6 +456,7 @@ void Game::createGameObjects() {
 	gameObjects.push_back(hoja4_2);
 	gameObjects.push_back(hoja5);
 	gameObjects.push_back(hoja6);
+	gameObjects.push_back(hoja6_2);
 	gameObjects.push_back(hoja7);
 	gameObjects.push_back(hoja8);
 
@@ -463,7 +478,14 @@ void Game::createGameObjects() {
 			TextData textData = textsLoader->getTextData(i, j);
 
 			//CREAMOS EL TEXTO
-			GameObject* texto = new GameObject("Texto " + to_string(i) + "_" + to_string(j), 4, bookPages[i]);
+			// Este if es para mostrar los textos de la pagina de astrología
+			GameObject* texto;
+			if (i == 5 && j >= 5) {
+				texto = new GameObject("Texto " + to_string(i) + "_" + to_string(j), 4, hoja6_2);
+			}
+			else {
+				texto = new GameObject("Texto " + to_string(i) + "_" + to_string(j), 4, bookPages[i]);
+			}
 
 			// Añadimos los componentes
 			texto->addComponent<Transform>(Vector2D<float>(textData.position.x, textData.position.y), 0.15);
@@ -488,6 +510,7 @@ void Game::createGameObjects() {
 	hoja4_2->setChildren(hoja4->getChildren());
 	hoja4->removeChildren();
 	hoja4_2->setIsActive(false);
+	hoja6_2->setIsActive(false);
 
 	delete textsLoader;
 #pragma endregion
@@ -611,7 +634,7 @@ void Game::createGameObjects() {
 	gameObjects.push_back(selector11);
 	gameObjects.push_back(selector12);
 
-	runicTest = new RunicTest(RUNIC_TEST_SOLUTION, RUNIC_TEST_LENGHT, manuscrito, hoja4_2);
+	runicTest = new RunicTest(RUNIC_TEST_SOLUTION, RUNIC_TEST_LENGHT, manuscrito, hoja4_2, 3);
 	runicTest->addSelector(sl1);
 	runicTest->addSelector(sl2);
 	runicTest->addSelector(sl3);
@@ -635,11 +658,75 @@ void Game::createGameObjects() {
 	Button* btS1E = selector1E->addComponent<Button>();
 	btS1E->onClick = [sl1E]() { sl1E->onClick(); };
 
+	GameObject* selector2E = new GameObject("Selector2E", 4, hoja5);
+	selector2E->addComponent<Transform>(Vector2D<float>(-30, -55), 0.03);
+	selector2E->addComponent<SpriteRenderer>(getTexture(SELECTOR), 0, 0);
+	Selector* sl2E = selector2E->addComponent<Selector>();
+	Button* btS2E = selector2E->addComponent<Button>();
+	btS2E->onClick = [sl2E]() { sl2E->onClick(); };
+
+	GameObject* selector3E = new GameObject("Selector3E", 4, hoja5);
+	selector3E->addComponent<Transform>(Vector2D<float>(-107, 10), 0.03);
+	selector3E->addComponent<SpriteRenderer>(getTexture(SELECTOR), 0, 0);
+	Selector* sl3E = selector3E->addComponent<Selector>();
+	Button* btS3E = selector3E->addComponent<Button>();
+	btS3E->onClick = [sl3E]() { sl3E->onClick(); };
+
+	GameObject* selector4E = new GameObject("Selector4E", 4, hoja5);
+	selector4E->addComponent<Transform>(Vector2D<float>(-45, 77), 0.03);
+	selector4E->addComponent<SpriteRenderer>(getTexture(SELECTOR), 0, 0);
+	Selector* sl4E = selector4E->addComponent<Selector>();
+	Button* btS4E = selector4E->addComponent<Button>();
+	btS4E->onClick = [sl4E]() { sl4E->onClick(); };
+
+	GameObject* selector5E = new GameObject("Selector5E", 4, hoja6);
+	selector5E->addComponent<Transform>(Vector2D<float>(43, -53), 0.035);
+	selector5E->addComponent<SpriteRenderer>(getTexture(SELECTOR), 0, 0);
+	Selector* sl5E = selector5E->addComponent<Selector>();
+	Button* btS5E = selector5E->addComponent<Button>();
+	btS5E->onClick = [sl5E]() { sl5E->onClick(); };
+
+	GameObject* selector6E = new GameObject("Selector6E", 4, hoja6);
+	selector6E->addComponent<Transform>(Vector2D<float>(-73, 44), 0.03);
+	selector6E->addComponent<SpriteRenderer>(getTexture(SELECTOR), 0, 0);
+	Selector* sl6E = selector6E->addComponent<Selector>();
+	Button* btS6E = selector6E->addComponent<Button>();
+	btS6E->onClick = [sl6E]() { sl6E->onClick(); };
+
+	GameObject* selector7E = new GameObject("Selector7E", 4, hoja6);
+	selector7E->addComponent<Transform>(Vector2D<float>(23, 152), 0.03);
+	selector7E->addComponent<SpriteRenderer>(getTexture(SELECTOR), 0, 0);
+	Selector* sl7E = selector7E->addComponent<Selector>();
+	Button* btS7E = selector7E->addComponent<Button>();
+	btS7E->onClick = [sl7E]() { sl7E->onClick(); };
+
 	overlays.push_back(selector1E);
+	overlays.push_back(selector2E);
+	overlays.push_back(selector3E);
+	overlays.push_back(selector4E);
+	overlays.push_back(selector5E);
+	overlays.push_back(selector6E);
+	overlays.push_back(selector7E);
 	gameObjects.push_back(selector1E);
+	gameObjects.push_back(selector2E);
+	gameObjects.push_back(selector3E);
+	gameObjects.push_back(selector4E);
+	gameObjects.push_back(selector5E);
+	gameObjects.push_back(selector6E);
+	gameObjects.push_back(selector7E);
+
+	astrologyTest = new RunicTest(ASTROLOGY_TEST_SOLUTION, ASTROLOGY_TEST_LENGHT, manuscrito, hoja6_2, 5);
+	astrologyTest->addSelector(sl1E);
+	astrologyTest->addSelector(sl2E);
+	astrologyTest->addSelector(sl3E);
+	astrologyTest->addSelector(sl4E);
+	astrologyTest->addSelector(sl5E);
+	astrologyTest->addSelector(sl6E);
+	astrologyTest->addSelector(sl7E);
+
 #pragma endregion
 
-	manuscrito->changePage(0);
+	manuscrito->changePage(4);
 }
 
 #pragma region ButtonEvents
@@ -683,6 +770,7 @@ void Game::createLight() {
 
 	// LUZ UV
 	SDL_Surface* lightSurf = IMG_Load("../assets/images/light.png");
+	SDL_Surface* ambientLightSurf = IMG_Load("../assets/images/AmbientLight.png");
 	rectLight = { 0, 0, static_cast<float>(lightSurf->w), static_cast<float>(lightSurf->h) };
 	light_tex = SDL_CreateTextureFromSurface(renderer, lightSurf);
 	SDL_SetTextureBlendMode(light_tex, SDL_BLENDMODE_ADD);
@@ -694,8 +782,8 @@ void Game::createLight() {
 	SDL_SetTextureBlendMode(rendertex, SDL_BLENDMODE_MOD);
 
 	// LUZ AMBIENTE
-	rect_ambientLight = { 0, 0, static_cast<float>(lightSurf->w) * lightIntensity, static_cast<float>(lightSurf->h) * lightIntensity };
-	ambientLight_tex = SDL_CreateTextureFromSurface(renderer, lightSurf);
+	rect_ambientLight = { lightPosition.x, lightPosition.y, static_cast<float>(lightSurf->w) * lightRadius, static_cast<float>(lightSurf->h) * lightRadius };
+	ambientLight_tex = SDL_CreateTextureFromSurface(renderer, ambientLightSurf);
 	SDL_SetTextureBlendMode(ambientLight_tex, SDL_BLENDMODE_ADD);
 
 	rendertex_ambientLight = SDL_CreateTexture(renderer, SDL_PIXELFORMAT_RGBA8888, SDL_TEXTUREACCESS_TARGET, WINDOW_WIDTH, WINDOW_HEIGHT);
@@ -705,6 +793,7 @@ void Game::createLight() {
 	SDL_SetTextureBlendMode(rendertexLight, SDL_BLENDMODE_MOD);
 
 	SDL_DestroySurface(lightSurf);
+	SDL_DestroySurface(ambientLightSurf);
 }
 
 #pragma endregion

@@ -7,11 +7,20 @@
 
 #include <SDL3/SDL.h>
 
-RunicTest::RunicTest(mask sol, int length, Book* book, GameObject* page) {
+/// <summary>
+/// Crea una nueva prueba rúnica, de seleccion de caracteres
+/// </summary>
+/// <param name="sol">mascara binaria de la solucion</param>
+/// <param name="length">longitud de la solucion</param>
+/// <param name="book">libro donde está el test</param>
+/// <param name="page">pagina a mostrar</param>
+/// <param name="pageIndex">index de la página</param>
+RunicTest::RunicTest(mask sol, int length, Book* book, GameObject* page, int pageIndex) {
 	codeLength = length;
 	solutionCode = sol;
 	this->book = book;
 	newPage = page;
+	this->pageIndex = pageIndex;
 }
 
 void RunicTest::clearMask() {
@@ -46,7 +55,7 @@ void RunicTest::onSuccess() {
 			s->gameObject->setIsActive(false);
 		}
 
-		book->remplacePage(newPage, 3);
+		book->remplacePage(newPage, pageIndex);
 		completed = true;
 	}
 	else {

@@ -31,5 +31,5 @@ void Selector::deSelect() {
 }
 
 void Selector::onComponentAdd() {
-	//gameObject->spriteRenderer->isEnabled = false;
+	gameObject->spriteRenderer->isEnabled = false;
 }

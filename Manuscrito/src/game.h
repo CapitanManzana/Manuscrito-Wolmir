@@ -30,6 +30,8 @@ public:
 
 	static constexpr unsigned short RUNIC_TEST_SOLUTION = 0b000000010000;
 	static constexpr unsigned short RUNIC_TEST_LENGHT = 1;
+	static constexpr unsigned short ASTROLOGY_TEST_SOLUTION = 0b1000001;
+	static constexpr unsigned short ASTROLOGY_TEST_LENGHT = 2;
 
 	enum TextureName
 	{

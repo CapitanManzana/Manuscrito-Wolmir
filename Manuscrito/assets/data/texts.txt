@@ -338,7 +338,7 @@ Page_5
         color: #C41A00
         uv: 0
 Page_6
-    TextsCount: 5
+    TextsCount: 7
      T_1
         text: ESCORPIO
         x: -50
@@ -378,6 +378,22 @@ Page_6
         size: 70
         textEnd: 1500
         color: #C41A00
+        uv: 0
+     T_6     
+        text: 30 de septiembre de 1534
+        x: -50       
+        y: -135
+        size: 90
+        textEnd: 1500
+        color: #C41A00
+        uv: 0
+    T_7
+        text: Nos han encontrado, han llegado hasta nuestro pueblo, hemos tenido que huir. Helena quería luchar, siempre ha sido la fuerte de las dos. Ahora nos dirigimos hacia la Orden Wincanster, nos han prometido comida y cobijo. Al parecer hay mas gente como nosotras allí.
+        x: 5        
+        y: -100
+        size: 76
+        textEnd: 1500
+        color: #6B2604
         uv: 0
 Page_7
     TextsCount: 4

@@ -13,6 +13,7 @@ class RunicTest : public MonoBehaviour
 private:
 	Book* book = nullptr;
 	GameObject* newPage = nullptr;
+	int pageIndex;
 	std::vector<Selector*> selectors;
 
 	mask solutionCode = 1;
@@ -29,7 +30,7 @@ private:
 
 public:
 	RunicTest() = default;
-	RunicTest(mask solution, int length, Book* book, GameObject* newPage);
+	RunicTest(mask solution, int length, Book* book, GameObject* newPage, int pageIndex);
 
 	void addSelector(Selector* sl);
 	void updateState(int index);
