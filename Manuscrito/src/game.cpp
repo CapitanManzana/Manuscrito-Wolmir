@@ -76,6 +76,17 @@ vector<GameObject*> uvObjects;
 float cur_posX;
 float cur_posY;
 
+// Luz ambiente
+SDL_Color ambientLightDarkZone = { 24, 0, 115, 100 };
+SDL_Color ambientLightIlumZone = { 255, 139, 0, 160 };
+SDL_Texture* ambientLight_tex;
+SDL_Texture* rendertex_ambientLight;
+SDL_Texture* rendertexLight;
+SDL_FRect rect_ambientLight;
+
+float lightIntensity = 1.0f;
+Vector2D<float> lightScale = Vector2D<float>(lightIntensity, lightIntensity);
+
 #pragma endregion
 
 
@@ -163,6 +174,22 @@ void
 Game::render() const
 {
 	SDL_RenderClear(renderer);
+	 
+	// 1. PREPARAR LA MÁSCARA DE LUZ
+	SDL_SetRenderDrawColor(renderer, ambientLightDarkZone.r, ambientLightDarkZone.g, ambientLightDarkZone.b, ambientLightDarkZone.a);
+	// Apunta a tu textura de luz (que tiene BLENDMODE_MOD)
+	SDL_SetRenderTarget(renderer, rendertex_ambientLight);
+	// Limpia la textura de luz a negro (oscuridad total)
+	SDL_RenderClear(renderer);
+	// Renderiza el gradiente (light_tex, que tiene BLENDMODE_ADD) 
+	// sobre la textura negra.
+	SDL_RenderTexture(renderer, ambientLight_tex, NULL, &rect_ambientLight);
+
+	// 2. RENDERIZAR LA ESCENA FINAL A LA PANTALLA
+
+	// Apunta de nuevo a la pantalla
+	SDL_SetRenderTarget(renderer, NULL);
+	SDL_RenderClear(renderer); // Limpia la pantalla
 
 	if (!blackLight) {
 		renderObjects();
@@ -175,6 +202,9 @@ Game::render() const
 			SDL_SetRenderDrawColor(renderer, 0, 16, 48, 160);
 			SDL_RenderFillRect(renderer, nullptr);
 		}
+
+		SDL_SetRenderDrawColor(renderer, ambientLightIlumZone.r, ambientLightIlumZone.g, ambientLightIlumZone.b, ambientLightIlumZone.a);
+		SDL_RenderFillRect(renderer, nullptr);
 	}
 	else {
 		rectLight.x = cur_posX - (rectLight.w / 2.f);
@@ -210,6 +240,9 @@ Game::render() const
 		// Multiplica el mapa por tu máscara de luz (rendertex_light)
 		SDL_RenderTexture(renderer, rendertex_light, NULL, NULL);
 	}
+
+	// Multiplica el mapa por tu máscara de luz (rendertex_light)
+	SDL_RenderTexture(renderer, rendertex_ambientLight, NULL, NULL);
 
 	// Muestra el resultado
 	SDL_RenderPresent(renderer);
@@ -647,6 +680,8 @@ void Game::renderObjects() const {
 }
 
 void Game::createLight() {
+
+	// LUZ UV
 	SDL_Surface* lightSurf = IMG_Load("../assets/images/light.png");
 	rectLight = { 0, 0, static_cast<float>(lightSurf->w), static_cast<float>(lightSurf->h) };
 	light_tex = SDL_CreateTextureFromSurface(renderer, lightSurf);
@@ -657,6 +692,17 @@ void Game::createLight() {
 
 	rendertex = SDL_CreateTexture(renderer, SDL_PIXELFORMAT_RGBA8888, SDL_TEXTUREACCESS_TARGET, WINDOW_WIDTH, WINDOW_HEIGHT);
 	SDL_SetTextureBlendMode(rendertex, SDL_BLENDMODE_MOD);
+
+	// LUZ AMBIENTE
+	rect_ambientLight = { 0, 0, static_cast<float>(lightSurf->w) * lightIntensity, static_cast<float>(lightSurf->h) * lightIntensity };
+	ambientLight_tex = SDL_CreateTextureFromSurface(renderer, lightSurf);
+	SDL_SetTextureBlendMode(ambientLight_tex, SDL_BLENDMODE_ADD);
+
+	rendertex_ambientLight = SDL_CreateTexture(renderer, SDL_PIXELFORMAT_RGBA8888, SDL_TEXTUREACCESS_TARGET, WINDOW_WIDTH, WINDOW_HEIGHT);
+	SDL_SetTextureBlendMode(rendertex_ambientLight, SDL_BLENDMODE_MOD);
+
+	rendertexLight = SDL_CreateTexture(renderer, SDL_PIXELFORMAT_RGBA8888, SDL_TEXTUREACCESS_TARGET, WINDOW_WIDTH, WINDOW_HEIGHT);
+	SDL_SetTextureBlendMode(rendertexLight, SDL_BLENDMODE_MOD);
 
 	SDL_DestroySurface(lightSurf);
 }
