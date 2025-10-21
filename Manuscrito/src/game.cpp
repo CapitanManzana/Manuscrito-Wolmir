@@ -34,6 +34,8 @@ constexpr array<TextureSpec, Game::NUM_TEXTURES> textureList{
 	{"TablaRunas.JPEG"},
 	{"Selector.png"},
 	{"Hoja1.JPEG"},
+	{"Hoja5.JPEG"},
+	{"Hoja6.JPEG"},
 	{"HojaVacia.png"}
 };
 
@@ -310,7 +312,7 @@ Game::handleEvents()
 			// GAFAS DESCIFRADORAS
 			if (event.key.key == SDLK_Q) {
 				glasses = !glasses;
-				if (currentText) {
+				/*if (currentText) {
 					Text* t = currentText->getComponent<Text>();
 					if (glasses) {
 						t->changeFont(baseFont, t->getFontSize() - 16);
@@ -318,7 +320,7 @@ Game::handleEvents()
 					else {
 						t->changeFont(manuscritoFont, t->getFontSize());
 					}
-				}
+				}*/
 			}
 
 			// CAMBIO DE PÁGINA DERECHA
@@ -359,17 +361,27 @@ void Game::createGameObjects() {
 	hoja2->addComponent<SpriteRenderer>(getTexture(HOJA_VACIA), 0, 0);
 
 	GameObject* hoja3 = new GameObject("Hoja3", 2);
-	hoja3->addComponent<Transform>(Vector2D<float>(1, 1), 0.16);
+	hoja3->addComponent<Transform>(Vector2D<float>(1, 1), 0.1875);
 	hoja3->addComponent<SpriteRenderer>(getTexture(TABLA_RUNAS), 0, 0);
 
 	GameObject* hoja4 = new GameObject("Hoja4", 2);
-	hoja4->addComponent<Transform>(Vector2D<float>(1, 1), 0.16);
+	hoja4->addComponent<Transform>(Vector2D<float>(1, 1), 0.1875);
 	hoja4->addComponent<SpriteRenderer>(getTexture(RUNAS), 0, 0);
+
+	GameObject* hoja5 = new GameObject("Hoja5", 2);
+	hoja5->addComponent<Transform>(Vector2D<float>(1, 1), 0.1875);
+	hoja5->addComponent<SpriteRenderer>(getTexture(HOJA5), 0, 0);
+
+	GameObject* hoja6 = new GameObject("Hoja6", 2);
+	hoja6->addComponent<Transform>(Vector2D<float>(1, 1), 0.1875);
+	hoja6->addComponent<SpriteRenderer>(getTexture(HOJA6), 0, 0);
 
 	bookPages.push_back(hoja1);
 	bookPages.push_back(hoja2);
 	bookPages.push_back(hoja3);
 	bookPages.push_back(hoja4);
+	bookPages.push_back(hoja5);
+	bookPages.push_back(hoja6);
 
 	manuscrito = new Book(bookPages, WINDOW_WIDTH / 2 - 5, WINDOW_HEIGHT / 2 - 9, 125);
 	pagesCount = manuscrito->getPageCount();
@@ -384,6 +396,8 @@ void Game::createGameObjects() {
 	gameObjects.push_back(hoja3);
 	gameObjects.push_back(hoja4);
 	gameObjects.push_back(hoja4_2);
+	gameObjects.push_back(hoja5);
+	gameObjects.push_back(hoja6);
 
 #pragma endregion
 
@@ -567,24 +581,30 @@ void Game::createGameObjects() {
 
 #pragma endregion
 
-	manuscrito->changePage(0);
+#pragma region Mapa Estelar
+	GameObject* selector1E = new GameObject("Selector1E", 4, hoja5);
+	selector1E->addComponent<Transform>(Vector2D<float>(71, -51), 0.03);
+	selector1E->addComponent<SpriteRenderer>(getTexture(SELECTOR), 0, 0);
+	Selector* sl1E = selector1E->addComponent<Selector>();
+	Button* btS1E = selector1E->addComponent<Button>();
+	btS1E->onClick = [sl1E]() { sl1E->onClick(); };
+
+	overlays.push_back(selector1E);
+	gameObjects.push_back(selector1E);
+#pragma endregion
+
+	manuscrito->changePage(4);
 }
 
 #pragma region ButtonEvents
 
 // Muestra el texto asociado al botón
 void Game::showText(GameObject* text) {
-	if (glasses) {
-		// Si ya hay un texto mostrado, lo ocultamos
-		if (currentText != nullptr && currentText != text) {
-			Text* textComp = currentText->getComponent<Text>();
-			textComp->changeFont(manuscritoFont, textComp->getFontSize());
-		}
-
+	Text* t = text->getComponent<Text>();
+	if (glasses && !t->showed) {
 		// Mostramos el texto seleccionado
-		Text* t = text->getComponent<Text>();
 		t->changeFont(baseFont, t->getFontSize() - 16);
-		currentText = text;
+		t->showed = true;
 	}
 }
 #pragma endregion

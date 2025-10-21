@@ -1,23 +1,31 @@
-PagesCount: 4
+PagesCount: 6
 Page_1
-    TextsCount: 5
+    TextsCount: 6
     T_1
-        text: Mucho tiempo ha pasado ya desde aquel fatídico día. Echo mucho de menos a mi hermana Helena, pero fue un suceso inevitable.
+        text: Echo mucho de menos a mi hermana Helena, pero fue un suceso inevitable.
         x: 10
-        y: -130
+        y: -140
         size: 76
         textEnd: 1500
         color: #6B2604
         uv: 0
-    T_2
-        text: Aún recuerdo cuando Helena y yo jugábamos a "busca la bola", el juego de buscar el orbe por el pueblo. Madre se enfadaba mucho porque le daba miedo que alguien nos descubriera, cosa que acabó pasando.
+    T_2     
+        text: 19 de agosto de 1534
+        x: -45       
+        y: -110
+        size: 90
+        textEnd: 1500
+        color: #C41A00
+        uv: 0
+    T_3
+        text: Madre nos ha enseñado trucos nuevos, y Helena y yo hemos jugado a nuestro juego favorito, Busca la bola, consiste en buscar un orbe mágico por el pueblo, quien lo encuentre primero gana.
         x: -45        
-        y: -50
+        y: -45
         size: 76
         textEnd: 750
         color: #6B2604
         uv: 0
-    T_3
+    T_4
         text: Orbe
         x: 50       
         y: -10
@@ -25,24 +33,24 @@ Page_1
         textEnd: 1500
         color: #C41A00
         uv: 0
-    T_4
+    T_5
         text: TINTA NOVIDE
         x: 0       
-        y: 25
+        y: 32
         size: 130
         textEnd: 1500
         color: #C41A00
         uv: 0
-    T_5
+    T_6
         text: Nota: al mezclar sangre de cabra y un poco de zumo de uva se crea una tinta imperceptible a la vista. 
-        x: 65
-        y: 80
+        x: 70
+        y: 100
         size: 76
-        textEnd: 750
+        textEnd: 700
         color: #6B2604
         uv: 0
 Page_2
-    TextsCount: 4
+    TextsCount: 5
      T_1
         text: ORITUS COMÚN
         x: 0
@@ -60,14 +68,22 @@ Page_2
         color: #0DFF00
         uv: 1
     T_3
-        text: Tampoco nos podemos fiar de la Orden Wincanster, el Sr. Wolmir necesita a Helena para algo, para un proyecto. Casi nos atrapa en su mansión.
+        text: 8 de octubre de 1534
+        x: 40       
+        y: 0
+        size: 100
+        textEnd: 900
+        color: #0DFF00
+        uv: 1
+    T_4
+        text: No podemos volver a casa, no tenemos donde ir, solo pido que no nos encuentre. Ahora entiendo todo, porque madre nos hacía ocultar los poderes a Helena y a mi. Todo esto es culpa mía… CULPA MÍA.
         x: 45       
         y: 60
         size: 76
         textEnd: 900
         color: #0DFF00
         uv: 1
-    T_4
+    T_5
         text: NO TE FIES DE NADIE
         x: 0       
         y: 135
@@ -80,7 +96,7 @@ Page_3
      T_1
         text: Tenemos que llegar, hay que llegar, me temo lo peor.
         x: 0
-        y: -140
+        y: -150
         size: 60
         textEnd: 1500
         color: #C41A00
@@ -88,7 +104,7 @@ Page_3
     T_2
         text: En pocos días será la nueva luna. Polaris es la clave para evitar que a Helena la detenga la Inquisición y legar hasta la Orden Wincanster.
         x: 5
-        y: -110
+        y: -120
         size: 76
         textEnd: 1500
         color: #6B2604
@@ -96,15 +112,15 @@ Page_3
     T_3
         text: RUNAS
         x: 0
-        y: -80
+        y: -85
         size: 100
         textEnd: 1500
-        color: #6B2604
+        color: #C41A00
         uv: 0
     T_4
         text: GUERRA
         x: -27
-        y: -47
+        y: -45
         size: 76
         textEnd: 1500
         color: #C41A00
@@ -112,7 +128,7 @@ Page_3
     T_4
         text: IGUAL
         x: -27
-        y: -10
+        y: -5
         size: 76
         textEnd: 1500
         color: #C41A00
@@ -120,7 +136,7 @@ Page_3
     T_5
         text: UNION
         x: -27
-        y: 25
+        y: 30
         size: 76
         textEnd: 1500
         color: #C41A00
@@ -128,7 +144,7 @@ Page_3
     T_6
         text: MAZO
         x: -27
-        y: 55 
+        y: 60
         size: 76
         textEnd: 1500
         color: #C41A00
@@ -136,7 +152,7 @@ Page_3
     T_7
         text: VACIO
         x: -27
-        y: 90
+        y: 95
         size: 76
         textEnd: 1500
         color: #C41A00
@@ -144,7 +160,7 @@ Page_3
     T_8
         text: ROTURA
         x: -27
-        y: 120 
+        y: 125 
         size: 76
         textEnd: 1500
         color: #C41A00
@@ -152,7 +168,7 @@ Page_3
     T_9
         text: RAYO
         x: 67
-        y: -47
+        y: -45
         size: 76
         textEnd: 1500
         color: #C41A00
@@ -160,7 +176,7 @@ Page_3
     T_10
         text: FERTIL
         x: 67
-        y: -10
+        y: -5
         size: 76
         textEnd: 1500
         color: #C41A00
@@ -168,7 +184,7 @@ Page_3
     T_11
         text: HOMBRE
         x: 67
-        y: 25
+        y: 30
         size: 76
         textEnd: 1500
         color: #C41A00
@@ -176,7 +192,7 @@ Page_3
     T_12
         text: MAR
         x: 67
-        y: 55 
+        y: 60 
         size: 76
         textEnd: 1500
         color: #C41A00
@@ -184,7 +200,7 @@ Page_3
     T_13
         text: SOL
         x: 67
-        y: 90
+        y: 95
         size: 76
         textEnd: 1500
         color: #C41A00
@@ -192,7 +208,7 @@ Page_3
     T_14
         text: PAZ
         x: 67
-        y: 120 
+        y: 125 
         size: 76
         textEnd: 1500
         color: #C41A00
@@ -231,11 +247,119 @@ Page_4
         textEnd: 1500
         color: #C41A00
         uv: 0
-    T_3
-        text: Es demasiado tarde, la inquisición nos ha encontrado
-        x: -60
-        y: -50
+Page_5
+    TextsCount: 9
+     T_1
+        text: MAPA ESTELAR
+        x: -30
+        y: -145
+        size: 130
+        textEnd: 1500
+        color: #6B2604
+        uv: 0
+    T_2
+        text: Noche 13 de octubre de 1534
+        x: -37
+        y: -130
         size: 80
+        textEnd: 1500
+        color: #C41A00
+        uv: 0
+    T_3
+        text: OSA MENOR
+        x: 35
+        y: -85
+        size: 100
+        textEnd: 1500
+        color: #C41A00
+        uv: 0
+    T_4
+        text: LYRA
+        x: -10
+        y: 25
+        size: 100
+        textEnd: 1500
+        color: #C41A00
+        uv: 0
+    T_5
+        text: OSA MAYOR
+        x: -67
+        y: 110
+        size: 100
+        textEnd: 1500
+        color: #C41A00
+        uv: 0
+    T_6
+        text: Polaris
+        x: 75
+        y: -63
+        size: 70
+        textEnd: 1500
+        color: #C41A00
+        uv: 0
+    T_7
+        text: Vega
+        x: -30
+        y: -65
+        size: 70
+        textEnd: 1500
+        color: #C41A00
+        uv: 0
+    T_8
+        text: Sulafat
+        x: -90
+        y: 20
+        size: 70
+        textEnd: 1500
+        color: #C41A00
+        uv: 0
+    T_9 
+        text: Alioth
+        x: -30
+        y: 65
+        size: 70
+        textEnd: 1500
+        color: #C41A00
+        uv: 0
+Page_6
+    TextsCount: 5
+     T_1
+        text: ESCORPIO
+        x: -50
+        y: -30
+        size: 100
+        textEnd: 1500
+        color: #C41A00
+        uv: 0
+    T_2
+        text: CASIOPEA
+        x: 70
+        y: 55
+        size: 100
+        textEnd: 1500
+        color: #C41A00
+        uv: 0
+    T_3 
+        text: Antares
+        x: 10
+        y: -55
+        size: 70
+        textEnd: 1500
+        color: #C41A00
+        uv: 0
+    T_4 
+        text: Shaula
+        x: -70
+        y: 30
+        size: 70
+        textEnd: 1500
+        color: #C41A00
+        uv: 0
+    T_5 
+        text: Segin
+        x: 0
+        y: 150
+        size: 70
         textEnd: 1500
         color: #C41A00
         uv: 0

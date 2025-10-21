@@ -21,6 +21,7 @@ private:
 	SDL_Renderer* renderer;
 	SDL_Texture* textureSDL;
 
+
 	void updateSurface();
 
 public:
@@ -38,4 +39,6 @@ public:
 
 	void changeFont(TTF_Font* newFont, int size);
 	void changeFont(TTF_Font* newFont, size_t textureWidth);
+
+	bool showed = false;
 };

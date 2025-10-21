@@ -28,7 +28,7 @@ public:
 	static constexpr int FONT_SIZE = 60;
 	static constexpr float MANUS_FONT_SIZE = 76.5;
 
-	static constexpr unsigned short RUNIC_TEST_SOLUTION = 0b000000000000;
+	static constexpr unsigned short RUNIC_TEST_SOLUTION = 0b000000010000;
 	static constexpr unsigned short RUNIC_TEST_LENGHT = 1;
 
 	enum TextureName
@@ -38,6 +38,8 @@ public:
 		TABLA_RUNAS,
 		SELECTOR,
 		HOJA1,
+		HOJA5,
+		HOJA6,
 		HOJA_VACIA,
 		NUM_TEXTURES
 	};
