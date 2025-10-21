@@ -110,7 +110,7 @@ Page_3
         color: #C41A00
         uv: 0
     T_2
-        text: En pocos días será la nueva luna. Polaris es la clave para evitar que a Helena la detenga la Inquisición y legar hasta la Orden Wincanster.
+        text: En pocos días será la nueva luna. Polaris es la clave para evitar que a Helena la detenga la Inquisición y llegar hasta la Orden Wincanster.
         x: 5
         y: -120
         size: 76

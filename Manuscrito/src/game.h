@@ -30,8 +30,11 @@ public:
 
 	static constexpr unsigned short RUNIC_TEST_SOLUTION = 0b000100100010; // 12
 	static constexpr unsigned short RUNIC_TEST_LENGHT = 3;
-	static constexpr unsigned short ASTROLOGY_TEST_SOLUTION = 0b0100000; // 7
-	static constexpr unsigned short ASTROLOGY_TEST_LENGHT = 1;
+	static constexpr unsigned short ASTROLOGY_TEST_SOLUTION = 0b1000011; // 7
+	static constexpr unsigned short ASTROLOGY_TEST_LENGHT = 8;
+
+	static TTF_Font* baseFont;
+	static TTF_Font* manuscritoFont;
 
 	enum TextureName
 	{
@@ -47,8 +50,7 @@ public:
 		NUM_TEXTURES
 	};
 
-	TTF_Font* baseFont;
-	TTF_Font* manuscritoFont;
+	
 
 private:
 	SDL_Window* window;

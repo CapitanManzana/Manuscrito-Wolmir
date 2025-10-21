@@ -41,6 +41,9 @@ constexpr array<TextureSpec, Game::NUM_TEXTURES> textureList{
 };
 
 #pragma region VARIABLES
+// FUENTES
+TTF_Font* Game::baseFont = nullptr;
+TTF_Font* Game::manuscritoFont = nullptr;
 
 // OBJETOS DEL JUEGO
 vector<GameObject*> Game::gameObjects;
@@ -281,27 +284,15 @@ Game::update()
 void
 Game::run()
 {
-	const Uint32 frameDelay = 1000 / FRAME_RATE;
-	Uint32 frameStart;
-	Uint32 frameTime;
-
 	for (size_t i = 0; i < gameObjects.size(); i++) {
 		gameObjects[i]->start();
 	}
 
 	// Bucle principal del juego
 	while (!exit) {
-		frameStart = SDL_GetTicks();
-
 		handleEvents();
 		update();
 		render();
-
-		frameTime = SDL_GetTicks() - frameStart;
-
-		if (frameDelay > frameTime) {
-			SDL_Delay(frameDelay - frameTime);
-		}
 	}
 }
 
@@ -734,7 +725,7 @@ void Game::createGameObjects() {
 
 #pragma endregion
 
-	manuscrito->changePage(4);
+	manuscrito->changePage(0);
 }
 
 #pragma region ButtonEvents
@@ -742,10 +733,9 @@ void Game::createGameObjects() {
 // Muestra el texto asociado al botón
 void Game::showText(GameObject* text) {
 	Text* t = text->getComponent<Text>();
-	if (glasses && !t->showed) {
+	if (glasses && !t->showText) {
 		// Mostramos el texto seleccionado
-		t->changeFont(baseFont, t->getFontSize() - 16);
-		t->showed = true;
+		t->showText = true;
 	}
 }
 #pragma endregion

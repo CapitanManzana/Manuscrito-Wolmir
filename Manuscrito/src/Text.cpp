@@ -1,6 +1,7 @@
 #include "Text.h"
 #include "GameObject.h"
 #include "texture.h"
+#include "game.h"
 
 #pragma region Constructores y destructores
 
@@ -14,10 +15,12 @@ Text::Text() {
 	font = nullptr;
 	renderer = nullptr;
 	textureSDL = nullptr;
+	currentText = "";
 }
 
 Text::Text(std::string text, SDL_Color newColor, TTF_Font* font, int width, int size, SDL_Renderer* renderer) {
 	this->text = text;
+	currentText = text;
 	this->color = newColor;
 	this->font = font;
 	this->renderer = renderer;
@@ -51,6 +54,58 @@ Text::~Text() {
 
 #pragma endregion
 
+void Text::Update(float deltaTime) {
+	if (showText) {
+		// 1. Comprobar si aún quedan caracteres por mostrar
+		if (charIndex < text.length()) {
+			if (!startedTyping) {
+				currentText = "";
+				font = Game::baseFont;
+				TTF_SetFontSize(font, fontSize - 16);
+				startedTyping = true;
+
+				if (text.length() == 0) {
+					timePerChar = 0.0f;
+					return;
+				}
+
+				timePerChar = totalTypingTime / (float)text.length();
+			}
+			// 2. Acumular el tiempo
+			timer += deltaTime;
+			// 3. Si ha pasado el tiempo necesario para el siguiente carácter
+			if (timer >= timePerChar) {
+				// 4. Añadir el siguiente carácter al texto visible
+				currentText += text[charIndex];
+				// 5. Avanzar al siguiente índice
+				charIndex++;
+				// 6. Restar el tiempo consumido (esto es más preciso que timer = 0)
+				timer -= timePerChar;
+				// 7. Actualizar la superficie y textura con el nuevo texto
+				updateSurface();
+			}
+		}
+		else {
+			showText = false;
+		}
+	}
+}
+
+void Text::onComponentAdd() {
+	if (!font) {
+		SDL_LogError(SDL_LOG_CATEGORY_APPLICATION, "No font assigned to Text component in GameObject %s", gameObject->getName());
+		return;
+	}
+
+	if (!renderer) {
+		SDL_LogError(SDL_LOG_CATEGORY_APPLICATION, "No renderer assigned to Text component in GameObject %s", gameObject->getName());
+		return;
+	}
+
+	//1. Actualizar la superficie con el texto, color y fuente actuales
+	updateSurface();
+}
+
 void Text::updateSurface() {
 	if (surface) {
 		SDL_DestroySurface(surface);
@@ -61,7 +116,7 @@ void Text::updateSurface() {
 		delete texture;
 	}
 
-	surface = TTF_RenderText_Blended_Wrapped(font, text.c_str(), 0, color, textureWidth);
+	surface = TTF_RenderText_Blended_Wrapped(font, currentText.c_str(), 0, color, textureWidth);
 	if (!surface) {
 		SDL_LogError(SDL_LOG_CATEGORY_APPLICATION, "Couldn't create text surface: %s", SDL_GetError());
 	}
@@ -91,21 +146,6 @@ void Text::updateSurface() {
 		SDL_DestroySurface(surface);
 		surface = nullptr;
 	}
-}
-
-void Text::onComponentAdd() {
-	if (!font) {
-		SDL_LogError(SDL_LOG_CATEGORY_APPLICATION, "No font assigned to Text component in GameObject %s", gameObject->getName());
-		return;
-	}
-
-	if (!renderer) {
-		SDL_LogError(SDL_LOG_CATEGORY_APPLICATION, "No renderer assigned to Text component in GameObject %s", gameObject->getName());
-		return;
-	}
-
-	//1. Actualizar la superficie con el texto, color y fuente actuales
-	updateSurface();
 }
 
 void Text::changeFont(TTF_Font* newFont, int size) {

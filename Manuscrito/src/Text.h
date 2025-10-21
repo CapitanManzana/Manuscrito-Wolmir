@@ -10,7 +10,19 @@ class Game;
 class Text : public Component
 {
 private:
+	// Tiempo total para escribir todo el texto (segundos)
+	float totalTypingTime = 1.5f;
+	// Velocidad de escritura del texto (segundos por caracter)
+	float timePerChar;
+	// Índice del caracter actual a mostrar
+	int charIndex = 0;
+	// Temporizador para controlar el tiempo entre caracteres
+	float timer = 0.0f;
+	// Indica si se ha empezado a escribir el texto
+	bool startedTyping = false;
+
 	std::string text;
+	std::string currentText;
 	SDL_Color color;
 	int textureWidth;
 	int fontSize;
@@ -34,11 +46,13 @@ public:
 	SDL_Color getColor() const;
 	int getFontSize() const;
 
+	void Update(float deltaTime) override;
+
 	void setText(const std::string& newText);
 	void setColor(SDL_Color newColor);
 
 	void changeFont(TTF_Font* newFont, int size);
 	void changeFont(TTF_Font* newFont, size_t textureWidth);
 
-	bool showed = false;
+	bool showText = false;
 };
