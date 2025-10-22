@@ -33,10 +33,12 @@ constexpr array<TextureSpec, Game::NUM_TEXTURES> textureList{
 	{"Runas.JPEG"},
 	{"TablaRunas.JPEG"},
 	{"Selector.png"},
+	{"Marco.PNG"},
 	{"Hoja1.JPEG"},
 	{"Hoja5.JPEG"},
 	{"Hoja6.JPEG"},
 	{"Hoja8.JPEG"},
+	{"Folio.PNG"},
 	{"HojaVacia.png"}
 };
 
@@ -53,6 +55,10 @@ Book* manuscrito;
 int currentPage = 0;
 int pagesCount = 0;
 
+//Cuaderno de notas
+GameObject* notebook;
+vector<GameObject*> notebookElems;
+
 // TEXTOS
 vector<GameObject*> texts;
 GameObject* currentText = nullptr;
@@ -67,6 +73,7 @@ RunicTest* astrologyTest;
 // HERAMIENTAS
 bool blackLight = false;
 bool glasses = false;
+bool paperNotes = false;
 
 // Mascara de luz uv
 SDL_Texture* light_tex;
@@ -215,6 +222,8 @@ Game::render() const
 			SDL_SetRenderDrawColor(renderer, ambientLightIlumZone.r, ambientLightIlumZone.g, ambientLightIlumZone.b, ambientLightIlumZone.a);
 			SDL_RenderFillRect(renderer, nullptr);
 		}
+
+
 	}
 	else {
 		rectLight.x = cur_posX - (rectLight.w / 2.f);
@@ -253,7 +262,6 @@ Game::render() const
 
 	// Multiplica el mapa por tu máscara de luz (rendertex_light)
 	SDL_RenderTexture(renderer, rendertex_ambientLight, NULL, NULL);
-
 	// Muestra el resultado
 	SDL_RenderPresent(renderer);
 }
@@ -345,15 +353,6 @@ Game::handleEvents()
 			// GAFAS DESCIFRADORAS
 			if (event.key.key == SDLK_Q) {
 				glasses = !glasses;
-				/*if (currentText) {
-					Text* t = currentText->getComponent<Text>();
-					if (glasses) {
-						t->changeFont(baseFont, t->getFontSize() - 16);
-					}
-					else {
-						t->changeFont(manuscritoFont, t->getFontSize());
-					}
-				}*/
 			}
 
 			// CAMBIO DE PÁGINA DERECHA
@@ -370,6 +369,10 @@ Game::handleEvents()
 				if (currentPage < 0) currentPage = 0;
 
 				manuscrito->changePage(currentPage);
+			}
+
+			if (event.key.key == SDLK_TAB) {
+				notebook->setIsActive(!notebook->getIsActive());
 			}
 
 			// SALIR DEL JUEGO
@@ -726,6 +729,32 @@ void Game::createGameObjects() {
 #pragma endregion
 
 	manuscrito->changePage(0);
+
+	// Cuaderno de notas
+	notebook = new GameObject("Cuaderno", 2);
+	notebook->addComponent<Transform>(Vector2D<float>(WINDOW_WIDTH /2, WINDOW_HEIGHT /2), 0.37);
+	notebook->addComponent<SpriteRenderer>(getTexture(FOLIO), 0, 0);
+
+	GameObject* note = new GameObject("Nota", 2, notebook);
+	note->addComponent<Transform>(Vector2D<float>(0, 0), 0.1);
+	note->addComponent<SpriteRenderer>(getTexture(MARCO), 0, 0);
+
+	GameObject* noteText = new GameObject("TextoNota", 3, note);
+	noteText->addComponent<Transform>(Vector2D<float>(0, 0), 0.8);
+	noteText->addComponent<SpriteRenderer>();
+	SDL_Color black = { 0,0,0,255 };
+	noteText->addComponent<Text>("13 / 10 / 1534", black, baseFont, 200, 30, renderer);
+
+	gameObjects.push_back(notebook);
+	notebookElems.push_back(notebook);
+
+	gameObjects.push_back(note);
+	gameObjects.push_back(noteText);
+
+	notebookElems.push_back(note);
+	notebookElems.push_back(noteText);
+
+	notebook->setIsActive(false);
 }
 
 #pragma region ButtonEvents
@@ -746,8 +775,8 @@ void Game::renderObjects() const {
 	getTexture(BACKGROUND)->render();
 	// El fondo del cuaderno
 	for (size_t i = 0; i < pagesCount; i++) {
- 		GameObject* page = manuscrito->getPage(i);
-		if (page->getIsActive() && page->spriteRenderer != nullptr && page->spriteRenderer->isEnabled && page->getName()!= "Hoja6_2")
+		GameObject* page = manuscrito->getPage(i);
+		if (page->getIsActive() && page->spriteRenderer != nullptr && page->spriteRenderer->isEnabled && page->getName() != "Hoja6_2")
 			page->render();
 	}
 
@@ -761,6 +790,11 @@ void Game::renderObjects() const {
 	for (size_t i = 0; i < overlays.size(); i++) {
 		if (overlays[i]->getIsActive() && overlays[i]->spriteRenderer != nullptr && overlays[i]->spriteRenderer->isEnabled)
 			overlays[i]->render();
+	}
+
+	for (size_t i = 0; i < notebookElems.size(); i++) {
+		if (notebookElems[i]->getIsActive() && notebookElems[i]->spriteRenderer != nullptr && notebookElems[i]->spriteRenderer->isEnabled)
+			notebookElems[i]->render();
 	}
 }
 

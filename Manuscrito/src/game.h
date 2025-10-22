@@ -42,10 +42,12 @@ public:
 		RUNAS,
 		TABLA_RUNAS,
 		SELECTOR,
+		MARCO,
 		HOJA1,
 		HOJA5,
 		HOJA6,
 		HOJA8,
+		FOLIO,
 		HOJA_VACIA,
 		NUM_TEXTURES
 	};
