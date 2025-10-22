@@ -16,6 +16,7 @@ Text::Text() {
 	renderer = nullptr;
 	textureSDL = nullptr;
 	currentText = "";
+	fontSize = 16;
 }
 
 Text::Text(std::string text, SDL_Color newColor, TTF_Font* font, int width, int size, SDL_Renderer* renderer) {
@@ -31,6 +32,7 @@ Text::Text(std::string text, SDL_Color newColor, TTF_Font* font, int width, int 
 	textureSDL = nullptr;
 
 	TTF_SetFontSize(font, size);
+	TTF_SetFontWrapAlignment(font, TTF_HORIZONTAL_ALIGN_LEFT);
 	fontSize = size;
 }
 
@@ -148,20 +150,9 @@ void Text::updateSurface() {
 	}
 }
 
-void Text::changeFont(TTF_Font* newFont, int size) {
-	if (font != newFont) {
-		font = newFont;
-		TTF_SetFontSize(font, size);
-		updateSurface();
-	}
-}
-
-void Text::changeFont(TTF_Font* newFont, size_t size) {
-	if (font != newFont) {
-		font = newFont;
-
-		updateSurface();
-	}
+void Text::setHorizontalAlign(TTF_HorizontalAlignment align) {
+	TTF_SetFontWrapAlignment(font, align);
+	updateSurface();
 }
 
 #pragma region Setters

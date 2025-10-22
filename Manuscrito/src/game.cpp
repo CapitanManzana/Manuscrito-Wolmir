@@ -1,6 +1,7 @@
 #include "game.h"
 
 #include <SDL3_image/SDL_image.h>
+#include <fstream>
 
 #include "texture.h"
 #include "GameObject.h"
@@ -10,6 +11,7 @@
 #include "LoadTexts.h"
 #include "Selector.h"
 #include "RunicTest.h"
+#include "Notebook.h"
 
 using namespace std;
 
@@ -27,6 +29,8 @@ struct TextureSpec
 
 constexpr const char* const imgBase = "../assets/images/";
 constexpr const char* const fontBase = "../assets/font/";
+constexpr const char* const notesData = "../assets/data/notes.txt";
+constexpr const char* const textsData = "../assets/data/texts.txt";
 
 constexpr array<TextureSpec, Game::NUM_TEXTURES> textureList{
 	TextureSpec{"fondo.jpg"},
@@ -56,8 +60,8 @@ int currentPage = 0;
 int pagesCount = 0;
 
 //Cuaderno de notas
-GameObject* notebook;
-vector<GameObject*> notebookElems;
+GameObject* notebookParent;
+Notebook* notebook;
 
 // TEXTOS
 vector<GameObject*> texts;
@@ -174,6 +178,7 @@ Game::~Game()
 	}
 
 	delete manuscrito;
+	delete notebook;
 
 	SDL_DestroyTexture(light_tex);
 	SDL_DestroyTexture(rendertex_light);
@@ -372,7 +377,7 @@ Game::handleEvents()
 			}
 
 			if (event.key.key == SDLK_TAB) {
-				notebook->setIsActive(!notebook->getIsActive());
+				notebookParent->setIsActive(!notebookParent->getIsActive());
 			}
 
 			// SALIR DEL JUEGO
@@ -458,7 +463,7 @@ void Game::createGameObjects() {
 
 #pragma region TEXTOS DEL MANUSCRITO
 	// Cargamos el archivo de textos
-	LoadTexts* textsLoader = new LoadTexts("../assets/data/texts.txt");
+	LoadTexts* textsLoader = new LoadTexts(textsData);
 	// Recorremos las páginas y los textos para crearlos
 	for (int i = 0; i < pagesCount; i++) {
 
@@ -731,30 +736,41 @@ void Game::createGameObjects() {
 	manuscrito->changePage(0);
 
 	// Cuaderno de notas
-	notebook = new GameObject("Cuaderno", 2);
-	notebook->addComponent<Transform>(Vector2D<float>(WINDOW_WIDTH /2, WINDOW_HEIGHT /2), 0.37);
-	notebook->addComponent<SpriteRenderer>(getTexture(FOLIO), 0, 0);
+	notebookParent = new GameObject("Cuaderno", 2);
+	notebookParent->addComponent<Transform>(Vector2D<float>(WINDOW_WIDTH /2, WINDOW_HEIGHT /2), 0.37);
+	notebookParent->addComponent<SpriteRenderer>(getTexture(FOLIO), 0, 0);
 
-	GameObject* note = new GameObject("Nota", 2, notebook);
-	note->addComponent<Transform>(Vector2D<float>(0, 0), 0.1);
-	note->addComponent<SpriteRenderer>(getTexture(MARCO), 0, 0);
+	ifstream notesFile(notesData);
 
-	GameObject* noteText = new GameObject("TextoNota", 3, note);
-	noteText->addComponent<Transform>(Vector2D<float>(0, 0), 0.8);
-	noteText->addComponent<SpriteRenderer>();
+	if (notesFile.is_open()) {
+		notebook = new Notebook(notesFile, notebookParent, baseFont, getTexture(MARCO), renderer);
+	}
+	else {
+		SDL_LogError(SDL_LOG_CATEGORY_APPLICATION, "Couldn't load notes data file");
+	}
+
+	/*GameObject* note = new GameObject("TextoNota", 3, notebook);
+	note->addComponent<Transform>(Vector2D<float>(0,0), 0.15);
+	note->addComponent<SpriteRenderer>();
 	SDL_Color black = { 0,0,0,255 };
-	noteText->addComponent<Text>("13 / 10 / 1534", black, baseFont, 200, 30, renderer);
+	Text* text = note->addComponent<Text>("13 de octubre de 1534", black, baseFont, 500, 70, renderer);
+	text->setHorizontalAlign(TTF_HORIZONTAL_ALIGN_CENTER);
+
+	GameObject* marco = new GameObject("Nota", 2, note);
+	marco->addComponent<Transform>(Vector2D<float>(0, 0), Vector2D<float>(note->spriteRenderer->getTexture()->getWidth() * note->transform->getScale().x, note->spriteRenderer->getTexture()->getHeight()* note->transform->getScale().y));
+	marco->addComponent<SpriteRenderer>(getTexture(MARCO), 0, 0);
 
 	gameObjects.push_back(notebook);
 	notebookElems.push_back(notebook);
 
 	gameObjects.push_back(note);
-	gameObjects.push_back(noteText);
+	gameObjects.push_back(marco);
 
 	notebookElems.push_back(note);
-	notebookElems.push_back(noteText);
-
-	notebook->setIsActive(false);
+	notebookElems.push_back(marco)*/
+	gameObjects.push_back(notebookParent);
+	overlays.push_back(notebookParent);
+	notebookParent->setIsActive(false);
 }
 
 #pragma region ButtonEvents
@@ -792,10 +808,8 @@ void Game::renderObjects() const {
 			overlays[i]->render();
 	}
 
-	for (size_t i = 0; i < notebookElems.size(); i++) {
-		if (notebookElems[i]->getIsActive() && notebookElems[i]->spriteRenderer != nullptr && notebookElems[i]->spriteRenderer->isEnabled)
-			notebookElems[i]->render();
-	}
+	// Renderizamos todo del cuaderno de notas
+	notebook->render();
 }
 
 void Game::createLight() {

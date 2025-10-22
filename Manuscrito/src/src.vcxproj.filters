@@ -69,12 +69,12 @@
     <ClCompile Include="RunicTest.cpp">
       <Filter>Archivos de código fuente\Scripts</Filter>
     </ClCompile>
+    <ClCompile Include="Notebook.cpp">
+      <Filter>Archivos de código fuente\Scripts</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="game.h">
-      <Filter>Archivos de encabezado</Filter>
-    </ClInclude>
-    <ClInclude Include="texture.h">
       <Filter>Archivos de encabezado</Filter>
     </ClInclude>
     <ClInclude Include="GameObject.h">
@@ -113,10 +113,21 @@
     <ClInclude Include="RunicTest.h">
       <Filter>Archivos de encabezado\Scripts</Filter>
     </ClInclude>
+    <ClInclude Include="Notebook.h">
+      <Filter>Archivos de encabezado</Filter>
+    </ClInclude>
+    <ClInclude Include="texture.h">
+      <Filter>Archivos de encabezado\Scripts</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="..\assets\data\texts.txt">
       <Filter>Archivos de recursos</Filter>
     </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="..\assets\data\notes.txt">
+      <Filter>Archivos de recursos</Filter>
+    </Text>
   </ItemGroup>
 </Project>

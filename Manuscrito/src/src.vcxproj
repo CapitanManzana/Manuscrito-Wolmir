@@ -108,6 +108,7 @@
     <ClCompile Include="LoadTexts.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="MonoBehaviour.cpp" />
+    <ClCompile Include="Notebook.cpp" />
     <ClCompile Include="RunicTest.cpp" />
     <ClCompile Include="Selector.cpp" />
     <ClCompile Include="SpriteRenderer.cpp" />
@@ -123,6 +124,7 @@
     <ClInclude Include="GameObject.h" />
     <ClInclude Include="LoadTexts.h" />
     <ClInclude Include="MonoBehaviour.h" />
+    <ClInclude Include="Notebook.h" />
     <ClInclude Include="RunicTest.h" />
     <ClInclude Include="Selector.h" />
     <ClInclude Include="SpriteRenderer.h" />
@@ -133,6 +135,9 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="..\assets\data\texts.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="..\assets\data\notes.txt" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

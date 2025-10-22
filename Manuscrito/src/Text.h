@@ -50,9 +50,7 @@ public:
 
 	void setText(const std::string& newText);
 	void setColor(SDL_Color newColor);
-
-	void changeFont(TTF_Font* newFont, int size);
-	void changeFont(TTF_Font* newFont, size_t textureWidth);
+	void setHorizontalAlign(TTF_HorizontalAlignment align);
 
 	bool showText = false;
 };
