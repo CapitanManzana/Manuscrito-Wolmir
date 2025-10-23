@@ -39,6 +39,7 @@ public:
 	// Revela una nota en el cuaderno (un descubrimiento)
 	void discoverNote(int index);
 	void render() const;
+	void renderLines() const;
 
 	GameObject* getNote(int index) const;
 	std::vector<GameObject*> getNotes() const { return notes; }

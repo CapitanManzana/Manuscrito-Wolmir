@@ -34,6 +34,7 @@ public:
 
 	Vector2D<float> getScale() const;
 	Vector2D<float> getPosition() const;
+	Vector2D<float> getGlobalPosition() const;
 	void setPosition(Vector2D<float> newPosition);
 	void setScale(Vector2D<float> neScale);
 

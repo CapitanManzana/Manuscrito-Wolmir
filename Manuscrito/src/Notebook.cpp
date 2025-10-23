@@ -144,7 +144,46 @@ void Notebook::render() const {
 		if (totalObjects[i]->getIsActive() && totalObjects[i]->spriteRenderer != nullptr && totalObjects[i]->spriteRenderer->isEnabled)
 			totalObjects[i]->render();
 	}
+
+	renderLines();
 }
+
+void Notebook::renderLines() const {
+	SDL_SetRenderDrawColor(renderer, 0, 0, 0, 255); // Color dorado para las líneas
+	
+	for (int i = 0; i < notesCount; i++) {
+		if (noteConnections.contains(i) && notes[i]->spriteRenderer->IsActive()) {
+			int connectionsCount = noteConnections.at(i).size();
+			GameObject* noteA = notes[i];
+
+			for (int j = 0; j < connectionsCount; j++) {
+				GameObject* noteB = notes[noteConnections.at(i)[j]];
+				if (noteB->spriteRenderer->IsActive()) {
+					// Calculamos el centro de ambas notas
+					Transform* transformA = noteA->transform;
+					Transform* transformB = noteB->transform;
+					SpriteRenderer* spriteA = noteA->spriteRenderer;
+					SpriteRenderer* spriteB = noteB->spriteRenderer;
+
+					if (!transformA || !transformB || !spriteA || !spriteB) {
+						SDL_LogError(SDL_LOG_CATEGORY_APPLICATION, "Error calculating note connection line centers.");
+						continue;
+					}
+
+					float posA_x = transformA->getGlobalPosition().x + (spriteA->getTexture()->getWidth() * transformA->getScale().x) / 2;
+					float posA_y = transformB->getGlobalPosition().y + (spriteA->getTexture()->getHeight() * transformA->getScale().y) / 2;
+
+					float posB_x = transformB->getGlobalPosition().x + (spriteB->getTexture()->getWidth() * transformB->getScale().x) / 2;
+					float posB_y = transformB->getGlobalPosition().y + (spriteB->getTexture()->getHeight() * transformB->getScale().y) / 2;
+
+					// Dibujamos la línea entre los centros
+					SDL_RenderLine(renderer, posA_x, posA_y, posB_x, posB_y);
+				}
+			}
+		}
+	}
+}
+
 
 GameObject* Notebook::getNote(int index) const {
 	if (index < 0 || index >= notesCount) {

@@ -50,6 +50,15 @@ Vector2D<float> Transform::getPosition() const {
 	return position;
 }
 
+Vector2D<float> Transform::getGlobalPosition() const {
+	if (parentTransform == nullptr) {
+		return position;
+	}
+	else {
+		return parentTransform->getGlobalPosition() + position;
+	}
+}
+
 // Actualiza la posición y el rectángulo destino
 void Transform::setPosition(Vector2D<float> newPosition) {
 	position = newPosition;
