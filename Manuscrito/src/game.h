@@ -34,6 +34,7 @@ public:
 	static constexpr unsigned short ASTROLOGY_TEST_LENGHT = 8;
 
 	static TTF_Font* baseFont;
+	static TTF_Font* baseFontCentered;
 	static TTF_Font* manuscritoFont;
 
 	enum TextureName

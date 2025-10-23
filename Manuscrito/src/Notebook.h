@@ -12,9 +12,11 @@ class Notebook
 {
 private:
 	const int MAIN_FONT_SIZE = 90;
-	const int SECONDARY_FONT_SIZE = 60;
+	const int SECONDARY_FONT_SIZE = 70;
 	const int MAIN_TEXT_WIDTH = 700;
 	const int SECONDARY_TEXT_WIDTH = 500;
+
+	const int MIN_NOTE_HEIGHT = 50;
 
 	const int NOTE_SPACING = 10;
 

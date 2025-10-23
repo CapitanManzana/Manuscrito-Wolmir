@@ -8,6 +8,13 @@
 
 #include<SDL3_ttf/SDL_ttf.h>
 
+enum Direction {
+	UP,
+	DOWN,
+	LEFT,
+	RIGHT
+};
+
 Notebook::Notebook(std::istream& is, GameObject* parent, TTF_Font* font, Texture* tex, SDL_Renderer* rend) {
 	notebookObject = parent;
 
@@ -67,7 +74,7 @@ Notebook::Notebook(std::istream& is, GameObject* parent, TTF_Font* font, Texture
 		switch (category) {
 		case 0: // MAIN
 			text = noteObject->addComponent<Text>(title, mainNoteColor, font, MAIN_TEXT_WIDTH, MAIN_FONT_SIZE, renderer);
-				break;
+			break;
 
 		case 1: // SECONDARY
 			text = noteObject->addComponent<Text>(title, secondaryNoteColor, font, SECONDARY_TEXT_WIDTH, SECONDARY_FONT_SIZE, renderer);
@@ -78,12 +85,13 @@ Notebook::Notebook(std::istream& is, GameObject* parent, TTF_Font* font, Texture
 		}
 
 		if (text) {
-			text->setHorizontalAlign(TTF_HORIZONTAL_ALIGN_CENTER);
 			noteObject->addComponent<NotebookElement>(title);
 
 			//Creamos el marco de la nota
 			float w = noteObject->spriteRenderer->getTexture()->getWidth() * noteObject->transform->getScale().x + NOTE_SPACING;
 			float h = noteObject->spriteRenderer->getTexture()->getHeight() * noteObject->transform->getScale().y + NOTE_SPACING;
+
+			if (h < MIN_NOTE_HEIGHT) h = MIN_NOTE_HEIGHT;
 
 			GameObject* marco = new GameObject("MarcoNota_" + std::to_string(i), 2, noteObject);
 			marco->addComponent<Transform>(Vector2D<float>(0, 0), Vector2D<float>(w, h));
@@ -97,8 +105,8 @@ Notebook::Notebook(std::istream& is, GameObject* parent, TTF_Font* font, Texture
 			totalObjects.push_back(noteObject);
 			notes.push_back(noteObject);
 
-			noteObject->spriteRenderer->isEnabled = false;
-			marco->spriteRenderer->isEnabled = false;
+			noteObject->spriteRenderer->isEnabled = true;
+			marco->spriteRenderer->isEnabled = true;
 		}
 		else {
 			delete noteObject;
@@ -150,15 +158,22 @@ void Notebook::render() const {
 
 void Notebook::renderLines() const {
 	SDL_SetRenderDrawColor(renderer, 0, 0, 0, 255); // Color dorado para las líneas
-	
+
 	for (int i = 0; i < notesCount; i++) {
+
 		if (noteConnections.contains(i) && notes[i]->spriteRenderer->IsActive()) {
 			int connectionsCount = noteConnections.at(i).size();
 			GameObject* noteA = notes[i];
 
 			for (int j = 0; j < connectionsCount; j++) {
 				GameObject* noteB = notes[noteConnections.at(i)[j]];
+				if (!noteB) {
+					SDL_LogError(SDL_LOG_CATEGORY_APPLICATION, "Error retrieving connected note %d for note %d", noteConnections.at(i)[j], i);
+					continue;
+				}
+
 				if (noteB->spriteRenderer->IsActive()) {
+
 					// Calculamos el centro de ambas notas
 					Transform* transformA = noteA->transform;
 					Transform* transformB = noteB->transform;
@@ -170,11 +185,36 @@ void Notebook::renderLines() const {
 						continue;
 					}
 
-					float posA_x = transformA->getGlobalPosition().x + (spriteA->getTexture()->getWidth() * transformA->getScale().x) / 2;
-					float posA_y = transformB->getGlobalPosition().y + (spriteA->getTexture()->getHeight() * transformA->getScale().y) / 2;
+					// Calculamos los centros
+					float centerA_x = transformA->getGlobalPosition().x;
+					float centerA_y = transformA->getGlobalPosition().y;
 
-					float posB_x = transformB->getGlobalPosition().x + (spriteB->getTexture()->getWidth() * transformB->getScale().x) / 2;
-					float posB_y = transformB->getGlobalPosition().y + (spriteB->getTexture()->getHeight() * transformB->getScale().y) / 2;
+					float centerB_x = transformB->getGlobalPosition().x;
+					float centerB_y = transformB->getGlobalPosition().y;
+
+					// Vector desde A hasta B
+					float dx = centerB_x - centerA_x;
+					float dy = centerB_y - centerA_y;
+
+					// Tamaños de las notas
+					float halfWidthA = ((spriteA->getTexture()->getWidth() + NOTE_SPACING) * transformA->getScale().x) / 2;
+					float halfHeightA = ((spriteA->getTexture()->getHeight() + NOTE_SPACING) * transformA->getScale().y) / 2;
+
+					float halfWidthB = ((spriteB->getTexture()->getWidth() + NOTE_SPACING) * transformB->getScale().x) / 2;
+					float halfHeightB = ((spriteB->getTexture()->getHeight() + NOTE_SPACING) * transformB->getScale().y) / 2;
+
+					// Normalizamos el vector
+					float len = sqrt(dx * dx + dy * dy);
+					float nx = dx / len;
+					float ny = dy / len;
+
+					// Desde el borde de A hacia afuera
+					float posA_x = centerA_x + nx * halfWidthA;
+					float posA_y = centerA_y + ny * halfHeightA;
+
+					// Desde el borde de B hacia adentro
+					float posB_x = centerB_x - nx * halfWidthB;
+					float posB_y = centerB_y - ny * halfHeightB;
 
 					// Dibujamos la línea entre los centros
 					SDL_RenderLine(renderer, posA_x, posA_y, posB_x, posB_y);
@@ -191,4 +231,19 @@ GameObject* Notebook::getNote(int index) const {
 	}
 
 	return notes[index];
+}
+
+Direction nodeDirection(Vector2D<float> A, Vector2D<float> B) {
+	if (A.x < B.x) {
+		return RIGHT;
+	}
+	else if (A.x > B.x) {
+		return LEFT;
+	}
+	else if (A.y < B.y) {
+		return DOWN;
+	}
+	else {
+		return UP;
+	}
 }

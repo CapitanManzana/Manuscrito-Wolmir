@@ -26,6 +26,14 @@ public:
 	friend std::ostream& operator<<(std::ostream& out, const Vector2D& v) {
 		return out << '{' << v.x << ", " << v.y << '}';
 	}
+
+	bool operator > (const Vector2D& otro) const {
+		return (x > otro.x && y > otro.y);
+	}
+
+	bool operator < (const Vector2D& otro) const {
+		return (x < otro.x && y < otro.y);
+	}
 };
 
 #endif // VECTOR2D_H

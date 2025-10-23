@@ -32,7 +32,6 @@ Text::Text(std::string text, SDL_Color newColor, TTF_Font* font, int width, int 
 	textureSDL = nullptr;
 
 	TTF_SetFontSize(font, size);
-	TTF_SetFontWrapAlignment(font, TTF_HORIZONTAL_ALIGN_LEFT);
 	fontSize = size;
 }
 
@@ -149,11 +148,6 @@ void Text::updateSurface() {
 		SDL_DestroySurface(surface);
 		surface = nullptr;
 	}
-}
-
-void Text::setHorizontalAlign(TTF_HorizontalAlignment align) {
-	TTF_SetFontWrapAlignment(font, align);
-	updateSurface();
 }
 
 #pragma region Setters

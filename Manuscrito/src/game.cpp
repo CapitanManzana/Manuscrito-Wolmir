@@ -50,6 +50,7 @@ constexpr array<TextureSpec, Game::NUM_TEXTURES> textureList{
 #pragma region VARIABLES
 // FUENTES
 TTF_Font* Game::baseFont = nullptr;
+TTF_Font* Game::baseFontCentered = nullptr;
 TTF_Font* Game::manuscritoFont = nullptr;
 
 // OBJETOS DEL JUEGO
@@ -136,6 +137,13 @@ Game::Game() : exit(false)
 	if (!baseFont) {
 		SDL_LogError(SDL_LOG_CATEGORY_APPLICATION, "Couldn't load font");
 	}
+	TTF_SetFontWrapAlignment(baseFont, TTF_HORIZONTAL_ALIGN_LEFT);
+
+	baseFontCentered = TTF_OpenFont(((string)fontBase + "OldNewspaperTypes.ttf").c_str(), FONT_SIZE);
+	if (!baseFontCentered) {
+		SDL_LogError(SDL_LOG_CATEGORY_APPLICATION, "Couldn't load font");
+	}
+	TTF_SetFontWrapAlignment(baseFontCentered, TTF_HORIZONTAL_ALIGN_CENTER);
 
 	manuscritoFont = TTF_OpenFont(((string)fontBase + "ManuscritoWolmir2.ttf").c_str(), MANUS_FONT_SIZE);
 	if (!manuscritoFont) {
@@ -298,15 +306,26 @@ Game::update()
 void
 Game::run()
 {
+	const Uint32 frameDelay = 1000 / FRAME_RATE;
+	Uint32 frameStart;
+	Uint32 frameTime;
+
 	for (size_t i = 0; i < gameObjects.size(); i++) {
 		gameObjects[i]->start();
 	}
 
 	// Bucle principal del juego
 	while (!exit) {
+		frameStart = SDL_GetTicks();
+
 		handleEvents();
 		update();
 		render();
+
+		frameTime = SDL_GetTicks() - frameStart;
+		if (frameDelay > frameTime) {
+			SDL_Delay(frameDelay - frameTime);
+		}
 	}
 }
 
@@ -470,7 +489,7 @@ void Game::createGameObjects() {
 	ifstream notesFile(notesData);
 
 	if (notesFile.is_open()) {
-		notebook = new Notebook(notesFile, notebookParent, baseFont, getTexture(MARCO), renderer);
+		notebook = new Notebook(notesFile, notebookParent, baseFontCentered, getTexture(MARCO), renderer);
 	}
 	else {
 		SDL_LogError(SDL_LOG_CATEGORY_APPLICATION, "Couldn't load notes data file");
@@ -802,7 +821,9 @@ void Game::renderObjects() const {
 	}
 
 	// Renderizamos todo del cuaderno de notas
-	notebook->render();
+	if (notebookParent->getIsActive()) {
+		notebook->render();
+	}
 }
 
 void Game::createLight() {
