@@ -109,6 +109,8 @@
     <ClCompile Include="main.cpp" />
     <ClCompile Include="MonoBehaviour.cpp" />
     <ClCompile Include="Notebook.cpp" />
+    <ClCompile Include="NotebookElement.cpp" />
+    <ClCompile Include="NoteRevealer.cpp" />
     <ClCompile Include="RunicTest.cpp" />
     <ClCompile Include="Selector.cpp" />
     <ClCompile Include="SpriteRenderer.cpp" />
@@ -125,6 +127,8 @@
     <ClInclude Include="LoadTexts.h" />
     <ClInclude Include="MonoBehaviour.h" />
     <ClInclude Include="Notebook.h" />
+    <ClInclude Include="NotebookElement.h" />
+    <ClInclude Include="NoteRevealer.h" />
     <ClInclude Include="RunicTest.h" />
     <ClInclude Include="Selector.h" />
     <ClInclude Include="SpriteRenderer.h" />

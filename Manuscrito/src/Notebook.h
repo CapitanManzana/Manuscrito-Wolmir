@@ -1,7 +1,7 @@
 #pragma once
 #include <vector>
 #include <iostream>
-
+#include <map>
 #include <SDL3/SDL.h>
 #include <SDL3_ttf/SDL_ttf.h>
 
@@ -26,6 +26,7 @@ private:
 	Texture* marcoTexture;
 
 	GameObject* notebookObject;
+	std::map<int, std::vector<int>> noteConnections;
 	std::vector<GameObject*> notes;
 	std::vector<GameObject*> totalObjects;
 	int notesCount;
@@ -36,7 +37,7 @@ public:
 	~Notebook();
 
 	// Revela una nota en el cuaderno (un descubrimiento)
-	void revealNote(int index);
+	void discoverNote(int index);
 	void render() const;
 
 	GameObject* getNote(int index) const;

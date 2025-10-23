@@ -72,6 +72,12 @@
     <ClCompile Include="Notebook.cpp">
       <Filter>Archivos de código fuente\Scripts</Filter>
     </ClCompile>
+    <ClCompile Include="NotebookElement.cpp">
+      <Filter>Archivos de código fuente\Componentes</Filter>
+    </ClCompile>
+    <ClCompile Include="NoteRevealer.cpp">
+      <Filter>Archivos de código fuente\Componentes</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="game.h">
@@ -118,6 +124,12 @@
     </ClInclude>
     <ClInclude Include="texture.h">
       <Filter>Archivos de encabezado\Scripts</Filter>
+    </ClInclude>
+    <ClInclude Include="NotebookElement.h">
+      <Filter>Archivos de encabezado\Componentes</Filter>
+    </ClInclude>
+    <ClInclude Include="NoteRevealer.h">
+      <Filter>Archivos de encabezado\Componentes</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

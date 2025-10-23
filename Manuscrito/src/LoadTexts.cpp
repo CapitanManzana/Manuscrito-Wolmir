@@ -47,6 +47,7 @@ LoadTexts::LoadTexts(std::string filePath)
 			}
 
 			file >> tag >> textData.uv;
+			file >> tag >> textData.revealNoteIndex;
 
 			// Eliminamos el primer espacio en blanco
 			textData.text.erase(0, 1);

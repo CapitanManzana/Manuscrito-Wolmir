@@ -17,6 +17,8 @@ struct TextData
 	SDL_Color color;
 	bool uv;
 
+	int revealNoteIndex = -1;
+
 	TextData(std::string text, Vector2D<int> position, int textEnd) {
 		this->text = text;
 		this->position = position;

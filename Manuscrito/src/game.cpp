@@ -12,6 +12,7 @@
 #include "Selector.h"
 #include "RunicTest.h"
 #include "Notebook.h"
+#include "NoteRevealer.h"
 
 using namespace std;
 
@@ -64,7 +65,7 @@ GameObject* notebookParent;
 Notebook* notebook;
 
 // TEXTOS
-vector<GameObject*> texts;
+vector<GameObject*> Game::texts;
 GameObject* currentText = nullptr;
 
 // OVERLAY
@@ -461,6 +462,22 @@ void Game::createGameObjects() {
 
 #pragma endregion
 
+#pragma region CUADERNO DE NOTAS
+	notebookParent = new GameObject("Cuaderno", 2);
+	notebookParent->addComponent<Transform>(Vector2D<float>(WINDOW_WIDTH / 2, WINDOW_HEIGHT / 2), 0.37);
+	notebookParent->addComponent<SpriteRenderer>(getTexture(FOLIO), 0, 0);
+
+	ifstream notesFile(notesData);
+
+	if (notesFile.is_open()) {
+		notebook = new Notebook(notesFile, notebookParent, baseFont, getTexture(MARCO), renderer);
+	}
+	else {
+		SDL_LogError(SDL_LOG_CATEGORY_APPLICATION, "Couldn't load notes data file");
+	}
+
+#pragma endregion
+
 #pragma region TEXTOS DEL MANUSCRITO
 	// Cargamos el archivo de textos
 	LoadTexts* textsLoader = new LoadTexts(textsData);
@@ -488,6 +505,10 @@ void Game::createGameObjects() {
 			btT->onClick = [this, texto]() {
 				showText(texto);
 				};
+
+			if (textData.revealNoteIndex != -1) {
+				texto->addComponent<NoteRevealer>(textData.revealNoteIndex, notebook);
+			}
 
 			if (textData.uv) {
 				uvObjects.push_back(texto);
@@ -736,38 +757,6 @@ void Game::createGameObjects() {
 	manuscrito->changePage(0);
 
 	// Cuaderno de notas
-	notebookParent = new GameObject("Cuaderno", 2);
-	notebookParent->addComponent<Transform>(Vector2D<float>(WINDOW_WIDTH /2, WINDOW_HEIGHT /2), 0.37);
-	notebookParent->addComponent<SpriteRenderer>(getTexture(FOLIO), 0, 0);
-
-	ifstream notesFile(notesData);
-
-	if (notesFile.is_open()) {
-		notebook = new Notebook(notesFile, notebookParent, baseFont, getTexture(MARCO), renderer);
-	}
-	else {
-		SDL_LogError(SDL_LOG_CATEGORY_APPLICATION, "Couldn't load notes data file");
-	}
-
-	/*GameObject* note = new GameObject("TextoNota", 3, notebook);
-	note->addComponent<Transform>(Vector2D<float>(0,0), 0.15);
-	note->addComponent<SpriteRenderer>();
-	SDL_Color black = { 0,0,0,255 };
-	Text* text = note->addComponent<Text>("13 de octubre de 1534", black, baseFont, 500, 70, renderer);
-	text->setHorizontalAlign(TTF_HORIZONTAL_ALIGN_CENTER);
-
-	GameObject* marco = new GameObject("Nota", 2, note);
-	marco->addComponent<Transform>(Vector2D<float>(0, 0), Vector2D<float>(note->spriteRenderer->getTexture()->getWidth() * note->transform->getScale().x, note->spriteRenderer->getTexture()->getHeight()* note->transform->getScale().y));
-	marco->addComponent<SpriteRenderer>(getTexture(MARCO), 0, 0);
-
-	gameObjects.push_back(notebook);
-	notebookElems.push_back(notebook);
-
-	gameObjects.push_back(note);
-	gameObjects.push_back(marco);
-
-	notebookElems.push_back(note);
-	notebookElems.push_back(marco)*/
 	gameObjects.push_back(notebookParent);
 	overlays.push_back(notebookParent);
 	notebookParent->setIsActive(false);
@@ -778,9 +767,13 @@ void Game::createGameObjects() {
 // Muestra el texto asociado al botón
 void Game::showText(GameObject* text) {
 	Text* t = text->getComponent<Text>();
+	NoteRevealer* nr = text->getComponent<NoteRevealer>();
 	if (glasses && !t->showText) {
 		// Mostramos el texto seleccionado
 		t->showText = true;
+		if (nr) {
+			nr->notebook->discoverNote(nr->noteIndex);
+		}
 	}
 }
 #pragma endregion

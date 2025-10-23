@@ -64,6 +64,7 @@ void Text::Update(float deltaTime) {
 				currentText = "";
 				font = Game::baseFont;
 				TTF_SetFontSize(font, fontSize - 16);
+				TTF_SetFontWrapAlignment(font, TTF_HORIZONTAL_ALIGN_LEFT);
 				startedTyping = true;
 
 				if (text.length() == 0) {
@@ -157,10 +158,14 @@ void Text::setHorizontalAlign(TTF_HorizontalAlignment align) {
 
 #pragma region Setters
 void Text::setText(const std::string& newText) {
-	if (text != newText) {
-		text = newText;
+	if (currentText != newText) {
+		currentText = newText;
 		updateSurface();
 	}
+}
+
+std::string Text::getText() const {
+	return text;
 }
 
 void Text::setColor(SDL_Color newColor) {

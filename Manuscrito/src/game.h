@@ -52,7 +52,7 @@ public:
 		NUM_TEXTURES
 	};
 
-	
+	static std::vector<GameObject*> texts;
 
 private:
 	SDL_Window* window;

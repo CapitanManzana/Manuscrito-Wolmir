@@ -49,6 +49,7 @@ public:
 	void Update(float deltaTime) override;
 
 	void setText(const std::string& newText);
+	std::string getText() const;
 	void setColor(SDL_Color newColor);
 	void setHorizontalAlign(TTF_HorizontalAlignment align);
 

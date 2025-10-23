@@ -5,11 +5,13 @@ NotesCount: 2
 		PosX: 0
 		PosY: 0
 		Category: 0
-		Conexions: 0
+		Conexions: 1
+			1
 	N2:
 		Title: 13 de Octubre de 1534
 		Description:
 		PosX: 100
 		PosY: 0
 		Category: 1
-		Conexions: 0
+		Conexions: 1
+			0
