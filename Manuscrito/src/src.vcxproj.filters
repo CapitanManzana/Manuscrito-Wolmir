@@ -78,6 +78,9 @@
     <ClCompile Include="NoteRevealer.cpp">
       <Filter>Archivos de código fuente\Componentes</Filter>
     </ClCompile>
+    <ClCompile Include="Hover.cpp">
+      <Filter>Archivos de código fuente\Componentes</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="game.h">
@@ -129,6 +132,9 @@
       <Filter>Archivos de encabezado\Componentes</Filter>
     </ClInclude>
     <ClInclude Include="NoteRevealer.h">
+      <Filter>Archivos de encabezado\Componentes</Filter>
+    </ClInclude>
+    <ClInclude Include="Hover.h">
       <Filter>Archivos de encabezado\Componentes</Filter>
     </ClInclude>
   </ItemGroup>

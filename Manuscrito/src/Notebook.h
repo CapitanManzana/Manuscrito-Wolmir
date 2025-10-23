@@ -7,12 +7,15 @@
 
 class GameObject;
 class Texture;
+class Game;
 
 class Notebook
 {
 private:
+	const int TITLE_FONT_SIZE = 200;
+
 	const int MAIN_FONT_SIZE = 90;
-	const int SECONDARY_FONT_SIZE = 70;
+	const int SECONDARY_FONT_SIZE = 65;
 	const int MAIN_TEXT_WIDTH = 700;
 	const int SECONDARY_TEXT_WIDTH = 500;
 
@@ -31,11 +34,14 @@ private:
 	std::map<int, std::vector<int>> noteConnections;
 	std::vector<GameObject*> notes;
 	std::vector<GameObject*> totalObjects;
+	std::vector<GameObject*> infoObjects;
 	int notesCount;
 	int discoveredNotes;
 
+	GameObject* lastInfoObject = nullptr;
+	void onClickNote(int index);
 public:
-	Notebook(std::istream& is, GameObject* parent, TTF_Font* font, Texture* tex, SDL_Renderer* rend);
+	Notebook(std::istream& is, GameObject* parent, TTF_Font* font, Texture* tex, SDL_Renderer* rend, Game* game);
 	~Notebook();
 
 	// Revela una nota en el cuaderno (un descubrimiento)

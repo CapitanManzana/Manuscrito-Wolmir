@@ -5,6 +5,7 @@
 #include "NotebookElement.h"
 #include "game.h"
 #include "NoteRevealer.h"
+#include "Button.h"
 
 #include<SDL3_ttf/SDL_ttf.h>
 
@@ -15,8 +16,9 @@ enum Direction {
 	RIGHT
 };
 
-Notebook::Notebook(std::istream& is, GameObject* parent, TTF_Font* font, Texture* tex, SDL_Renderer* rend) {
+Notebook::Notebook(std::istream& is, GameObject* parent, TTF_Font* font, Texture* tex, SDL_Renderer* rend, Game* game) {
 	notebookObject = parent;
+	totalObjects.push_back(notebookObject);
 
 	notesCount = 0;
 	discoveredNotes = 0;
@@ -25,11 +27,25 @@ Notebook::Notebook(std::istream& is, GameObject* parent, TTF_Font* font, Texture
 	this->font = font;
 	marcoTexture = tex;
 
+	std::vector<GameObject*> tempInfoObjects;
 
 	std::string tag;
-
+	std::string title;
+	//Leemos el titulo
+	is >> tag;
+	std::getline(is, title);
 	// Leemos la cantidad de notas
 	is >> tag >> notesCount;
+
+	//Creamos el titulo
+	GameObject* titleObject = new GameObject("NotebookTitle", 3, notebookObject);
+	titleObject->addComponent<Transform>(Vector2D<float>(0, -200), 0.15);
+	titleObject->addComponent<SpriteRenderer>();
+	Text* titleText = titleObject->addComponent<Text>(title, mainNoteColor, font, 10000, TITLE_FONT_SIZE, renderer);
+
+	totalObjects.push_back(titleObject);
+	Game::gameObjects.push_back(titleObject);
+
 	for (int i = 0; i < notesCount; i++) {
 		// Leemos NX:
 		is >> tag;
@@ -74,10 +90,12 @@ Notebook::Notebook(std::istream& is, GameObject* parent, TTF_Font* font, Texture
 		switch (category) {
 		case 0: // MAIN
 			text = noteObject->addComponent<Text>(title, mainNoteColor, font, MAIN_TEXT_WIDTH, MAIN_FONT_SIZE, renderer);
+			noteObject->addComponent<NotebookElement>(title, MAIN_FONT_SIZE);
 			break;
 
 		case 1: // SECONDARY
 			text = noteObject->addComponent<Text>(title, secondaryNoteColor, font, SECONDARY_TEXT_WIDTH, SECONDARY_FONT_SIZE, renderer);
+			noteObject->addComponent<NotebookElement>(title, SECONDARY_FONT_SIZE);
 			break;
 
 		default:
@@ -85,17 +103,32 @@ Notebook::Notebook(std::istream& is, GameObject* parent, TTF_Font* font, Texture
 		}
 
 		if (text) {
-			noteObject->addComponent<NotebookElement>(title);
-
 			//Creamos el marco de la nota
 			float w = noteObject->spriteRenderer->getTexture()->getWidth() * noteObject->transform->getScale().x + NOTE_SPACING;
 			float h = noteObject->spriteRenderer->getTexture()->getHeight() * noteObject->transform->getScale().y + NOTE_SPACING;
 
 			if (h < MIN_NOTE_HEIGHT) h = MIN_NOTE_HEIGHT;
 
-			GameObject* marco = new GameObject("MarcoNota_" + std::to_string(i), 2, noteObject);
+			// Creamos el marco
+			GameObject* marco = new GameObject("MarcoNota_" + std::to_string(i), 3, noteObject);
 			marco->addComponent<Transform>(Vector2D<float>(0, 0), Vector2D<float>(w, h));
 			marco->addComponent<SpriteRenderer>(marcoTexture, 0, 0);
+			marco->addComponent<Button>([this, i]() { onClickNote(i); });
+
+			//Creamos la info de la nota
+			GameObject* hoverInfo = new GameObject("NoteHoverInfo_" + std::to_string(i), 2, noteObject);
+			hoverInfo->addComponent<Transform>(Vector2D<float>(0, -h*2), 0.09);
+			hoverInfo->addComponent<SpriteRenderer>(game->getTexture(Game::FOLIO), 0, 0);
+
+			hoverInfo->spriteRenderer->isEnabled = false;
+
+			//Añadimos el texto a la info de la nota
+			GameObject* infoTextObject = new GameObject("NoteInfoText_" + std::to_string(i), 1, hoverInfo);
+			infoTextObject->addComponent<Transform>(Vector2D<float>(0, 0), 0.15);
+			infoTextObject->addComponent<SpriteRenderer>();
+			Text* infoText = infoTextObject->addComponent<Text>(desciption, secondaryNoteColor, font, 1100, SECONDARY_FONT_SIZE, renderer);
+
+			infoTextObject->spriteRenderer->isEnabled = false;
 
 			// Asignamos las conexiones
 			noteConnections[i] = relatedNotes;
@@ -104,21 +137,31 @@ Notebook::Notebook(std::istream& is, GameObject* parent, TTF_Font* font, Texture
 			totalObjects.push_back(marco);
 			totalObjects.push_back(noteObject);
 			notes.push_back(noteObject);
+			infoObjects.push_back(hoverInfo);
+			tempInfoObjects.push_back(infoTextObject);
 
-			noteObject->spriteRenderer->isEnabled = true;
-			marco->spriteRenderer->isEnabled = true;
+			noteObject->spriteRenderer->isEnabled = false;
+			marco->spriteRenderer->isEnabled = false;
+
+			Game::gameObjects.push_back(noteObject);
+			Game::gameObjects.push_back(marco);
+			Game::gameObjects.push_back(hoverInfo);
+			Game::gameObjects.push_back(infoTextObject);
 		}
 		else {
 			delete noteObject;
 			SDL_LogError(SDL_LOG_CATEGORY_APPLICATION, "Error creating note %d in Notebook", i);
 		}
 	}
+
+	// Se añade despues para que este por encima
+	for (int i = 0; i < infoObjects.size(); i++) {
+		totalObjects.push_back(infoObjects[i]);
+		totalObjects.push_back(tempInfoObjects[i]);
+	}
 }
 
 Notebook::~Notebook() {
-	for (GameObject* note : totalObjects) {
-		delete note;
-	}
 	notes.clear();
 }
 
@@ -148,22 +191,38 @@ void Notebook::discoverNote(int index) {
 }
 
 void Notebook::render() const {
-	for (size_t i = 0; i < totalObjects.size(); i++) {
+	//renderizamos el fondo
+	totalObjects[0]->render();
+
+	//renderizamos las lineas de conexion
+	renderLines();
+
+	//renderizamos las notas
+	for (size_t i = 1; i < totalObjects.size(); i++) {
 		if (totalObjects[i]->getIsActive() && totalObjects[i]->spriteRenderer != nullptr && totalObjects[i]->spriteRenderer->isEnabled)
 			totalObjects[i]->render();
 	}
-
-	renderLines();
 }
 
 void Notebook::renderLines() const {
 	SDL_SetRenderDrawColor(renderer, 0, 0, 0, 255); // Color dorado para las líneas
 
-	for (int i = 0; i < notesCount; i++) {
+	for (int i = 0; i < noteConnections.size(); i++) {
 
 		if (noteConnections.contains(i) && notes[i]->spriteRenderer->IsActive()) {
 			int connectionsCount = noteConnections.at(i).size();
 			GameObject* noteA = notes[i];
+			NotebookElement* neA = noteA->getComponent<NotebookElement>();
+
+			if (neA) {
+				if (neA->discovered == false) {
+					continue; // Si la nota A no está descubierta, no dibujamos sus conexiones
+				}
+			}
+			else {
+				SDL_LogError(SDL_LOG_CATEGORY_APPLICATION, "Error retrieving NotebookElement component for note %d", i);
+				continue;
+			}
 
 			for (int j = 0; j < connectionsCount; j++) {
 				GameObject* noteB = notes[noteConnections.at(i)[j]];
@@ -233,17 +292,26 @@ GameObject* Notebook::getNote(int index) const {
 	return notes[index];
 }
 
-Direction nodeDirection(Vector2D<float> A, Vector2D<float> B) {
-	if (A.x < B.x) {
-		return RIGHT;
+void Notebook::onClickNote(int index) {
+	if (index < 0 || index >= notesCount) {
+		return;
 	}
-	else if (A.x > B.x) {
-		return LEFT;
+
+	if (notes[index]->getComponent<NotebookElement>()->discovered == false) {
+		return;
 	}
-	else if (A.y < B.y) {
-		return DOWN;
+
+	if (lastInfoObject && lastInfoObject != infoObjects[index]) {
+		lastInfoObject->spriteRenderer->isEnabled = false;
+		if (lastInfoObject->getChild(0)) {
+			lastInfoObject->getChild(0)->spriteRenderer->isEnabled = false;
+		}
 	}
-	else {
-		return UP;
+
+	infoObjects[index]->spriteRenderer->isEnabled = !infoObjects[index]->spriteRenderer->isEnabled;
+
+	if (infoObjects[index]->getChild(0)) {
+		infoObjects[index]->getChild(0)->spriteRenderer->isEnabled = infoObjects[index]->spriteRenderer->isEnabled;
 	}
+	lastInfoObject = infoObjects[index];
 }

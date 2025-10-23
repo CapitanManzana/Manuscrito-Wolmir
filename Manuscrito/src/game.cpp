@@ -13,6 +13,7 @@
 #include "RunicTest.h"
 #include "Notebook.h"
 #include "NoteRevealer.h"
+#include "Hover.h"
 
 using namespace std;
 
@@ -265,10 +266,12 @@ Game::render() const
 		SDL_SetRenderDrawColor(renderer, 24, 0, 115, 160);
 		SDL_RenderFillRect(renderer, nullptr);
 
-		// Renderiza los elementos que se ven con la uv light
-		for (size_t i = 0; i < uvObjects.size(); i++) {
-			if (uvObjects[i]->getIsActive() && uvObjects[i]->spriteRenderer != nullptr && uvObjects[i]->spriteRenderer->isEnabled)
-				uvObjects[i]->render();
+		// Renderiza los elementos que se ven con la uv light si no esta activo el cuaderno
+		if (!notebookParent->getIsActive()) {
+			for (size_t i = 0; i < uvObjects.size(); i++) {
+				if (uvObjects[i]->getIsActive() && uvObjects[i]->spriteRenderer != nullptr && uvObjects[i]->spriteRenderer->isEnabled)
+					uvObjects[i]->render();
+			}
 		}
 		// Multiplica el mapa por tu máscara de luz (rendertex_light)
 		SDL_RenderTexture(renderer, rendertex_light, NULL, NULL);
@@ -366,6 +369,21 @@ Game::handleEvents()
 
 		if (event.type == SDL_EVENT_MOUSE_MOTION) {
 			SDL_RenderCoordinatesFromWindow(renderer, event.motion.x, event.motion.y, &cur_posX, &cur_posY);
+
+			for (GameObject* go : gameObjects) {
+				if (go->getIsActive()) {
+					Hover* h = go->getComponent<Hover>();
+
+					if (h != nullptr && h->isEnabled) {
+						Transform* t = go->getComponent<Transform>();
+						SDL_FPoint cur_pos = { cur_posX, cur_posY };
+
+						if (SDL_PointInRectFloat(&cur_pos, &t->dstRect)) {
+							h->onHover();
+						}
+					}
+				}
+			}
 		}
 
 		if (event.type == SDL_EVENT_KEY_DOWN) {
@@ -489,11 +507,15 @@ void Game::createGameObjects() {
 	ifstream notesFile(notesData);
 
 	if (notesFile.is_open()) {
-		notebook = new Notebook(notesFile, notebookParent, baseFontCentered, getTexture(MARCO), renderer);
+		notebook = new Notebook(notesFile, notebookParent, baseFontCentered, getTexture(MARCO), renderer, this);
 	}
 	else {
 		SDL_LogError(SDL_LOG_CATEGORY_APPLICATION, "Couldn't load notes data file");
 	}
+
+	// Cuaderno de notas
+	gameObjects.push_back(notebookParent);
+	notebookParent->setIsActive(false);
 
 #pragma endregion
 
@@ -774,11 +796,6 @@ void Game::createGameObjects() {
 #pragma endregion
 
 	manuscrito->changePage(0);
-
-	// Cuaderno de notas
-	gameObjects.push_back(notebookParent);
-	overlays.push_back(notebookParent);
-	notebookParent->setIsActive(false);
 }
 
 #pragma region ButtonEvents
@@ -787,12 +804,9 @@ void Game::createGameObjects() {
 void Game::showText(GameObject* text) {
 	Text* t = text->getComponent<Text>();
 	NoteRevealer* nr = text->getComponent<NoteRevealer>();
-	if (glasses && !t->showText) {
+	if (glasses && !t->showText && !Text::showingText) {
 		// Mostramos el texto seleccionado
 		t->showText = true;
-		if (nr) {
-			nr->notebook->discoverNote(nr->noteIndex);
-		}
 	}
 }
 #pragma endregion
@@ -801,28 +815,31 @@ void Game::showText(GameObject* text) {
 
 void Game::renderObjects() const {
 	getTexture(BACKGROUND)->render();
-	// El fondo del cuaderno
-	for (size_t i = 0; i < pagesCount; i++) {
-		GameObject* page = manuscrito->getPage(i);
-		if (page->getIsActive() && page->spriteRenderer != nullptr && page->spriteRenderer->isEnabled && page->getName() != "Hoja6_2")
-			page->render();
-	}
-
-	// EL texto
-	for (size_t i = 0; i < texts.size(); i++) {
-		if (texts[i]->getIsActive() && texts[i]->spriteRenderer != nullptr && texts[i]->spriteRenderer->isEnabled)
-			texts[i]->render();
-	}
-
-	// Elementos extra
-	for (size_t i = 0; i < overlays.size(); i++) {
-		if (overlays[i]->getIsActive() && overlays[i]->spriteRenderer != nullptr && overlays[i]->spriteRenderer->isEnabled)
-			overlays[i]->render();
-	}
 
 	// Renderizamos todo del cuaderno de notas
 	if (notebookParent->getIsActive()) {
 		notebook->render();
+	}
+	else 
+	{
+		// El fondo del cuaderno
+		for (size_t i = 0; i < pagesCount; i++) {
+			GameObject* page = manuscrito->getPage(i);
+			if (page->getIsActive() && page->spriteRenderer != nullptr && page->spriteRenderer->isEnabled && page->getName() != "Hoja6_2")
+				page->render();
+		}
+
+		// EL texto
+		for (size_t i = 0; i < texts.size(); i++) {
+			if (texts[i]->getIsActive() && texts[i]->spriteRenderer != nullptr && texts[i]->spriteRenderer->isEnabled)
+				texts[i]->render();
+		}
+
+		// Elementos extra
+		for (size_t i = 0; i < overlays.size(); i++) {
+			if (overlays[i]->getIsActive() && overlays[i]->spriteRenderer != nullptr && overlays[i]->spriteRenderer->isEnabled)
+				overlays[i]->render();
+		}
 	}
 }
 

@@ -2,6 +2,10 @@
 #include "GameObject.h"
 #include "texture.h"
 #include "game.h"
+#include "NoteRevealer.h"
+#include "Notebook.h"
+
+bool Text::showingText = false;
 
 #pragma region Constructores y destructores
 
@@ -62,9 +66,12 @@ void Text::Update(float deltaTime) {
 			if (!startedTyping) {
 				currentText = "";
 				font = Game::baseFont;
+
 				TTF_SetFontSize(font, fontSize - 16);
 				TTF_SetFontWrapAlignment(font, TTF_HORIZONTAL_ALIGN_LEFT);
+
 				startedTyping = true;
+				showingText = true;
 
 				if (text.length() == 0) {
 					timePerChar = 0.0f;
@@ -89,6 +96,11 @@ void Text::Update(float deltaTime) {
 		}
 		else {
 			showText = false;
+			showingText = false;
+			NoteRevealer* nr = gameObject->getComponent<NoteRevealer>();
+			if (nr) {
+				nr->notebook->discoverNote(nr->noteIndex);
+			}
 		}
 	}
 }
@@ -154,6 +166,15 @@ void Text::updateSurface() {
 void Text::setText(const std::string& newText) {
 	if (currentText != newText) {
 		currentText = newText;
+		updateSurface();
+	}
+}
+
+void Text::setText(const std::string& newText, int size) {
+	if (currentText != newText) {
+		currentText = newText;
+		fontSize = size;
+		TTF_SetFontSize(font, fontSize);
 		updateSurface();
 	}
 }

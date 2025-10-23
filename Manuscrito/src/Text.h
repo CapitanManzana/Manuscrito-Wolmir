@@ -41,6 +41,8 @@ public:
 	Text(std::string text, SDL_Color newColor, TTF_Font* font, int width, int size, SDL_Renderer* renderer);
 	~Text();
 
+	static bool showingText;
+
 	void onComponentAdd() override;
 
 	SDL_Color getColor() const;
@@ -49,6 +51,7 @@ public:
 	void Update(float deltaTime) override;
 
 	void setText(const std::string& newText);
+	void setText(const std::string& newText, int size);
 	std::string getText() const;
 	void setColor(SDL_Color newColor);
 

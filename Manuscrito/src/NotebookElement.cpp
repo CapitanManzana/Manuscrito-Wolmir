@@ -3,8 +3,9 @@
 #include "GameObject.h"
 
 #pragma region Constructores y destructores
-NotebookElement::NotebookElement(const std::string& title) {
+NotebookElement::NotebookElement(const std::string& title, int fSize) {
 	this->title = title;
+	this->fontSize = fSize;
 }
 #pragma endregion
 
@@ -20,13 +21,9 @@ void NotebookElement::reveal() {
 	}
 
 	if (!discovered) {
-		if (targetText) {
-			targetText->setText("?");
-		}
+		targetText->setText("?", fontSize);
 	}
 	else {
-		if (targetText) {
-			targetText->setText(title);
-		}
+		targetText->setText(title, fontSize);
 	}
 }

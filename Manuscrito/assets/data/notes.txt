@@ -1,63 +1,76 @@
-﻿NotesCount: 11
+﻿Title: Hoja de notas
+NotesCount: 12
     N0:
         Title: 13 de Octubre de 1534
-        Description:
+        Description: En este fatidico día la Inquisición y la Orden Wincanster mataron a la madre de las hermanas. También Helena fue encerrada en un libro mágico, por su hermana, para protegerla de ellos.
         PosX: 0
         PosY: 0
         Category: 0
-        Conexions: 1
+        Conexions: 4
             1
+            2
+            5
+            11
     N1:
         Title: Helena
-        Description:
+        Description: Es la hermana de la autora del libro. Al parecer ambas y su madre tienen poderes.
         PosX: -200
+        PosY: 0
+        Category: 0
+        Conexions: 4
+            0
+            2
+            3
+            4
+    N2:
+        Title: Algo pasó con Helena
+        Description: Algo sucedió con Helena el 13 de Octubre de 1534.
+        PosX: -100
+        PosY: -75
+        Category: 1
+        Conexions: 2
+            0
+            1
+    N3:
+        Title: Helena poderosa
+        Description: Helena tiene poderes muy fuertes. 
+        PosX: -100
+        PosY: 75
+        Category: 1
+        Conexions: 2
+            1
+			7
+    N4:
+        Title: Atrapada en el libro
+        Description: La hermana de Helena la encerró en este libro para protegerla de la Inquisición y la Orden Wincanster.
+        PosX: -300
+        PosY: 75
+        Category: 1
+        Conexions: 1
+            1
+    N5:
+        Title: Orden Wincanster
+        Description: La Orden Wincanster es una organización que da protección a gente como la anonima autora de este libro y su familia.
+        PosX: 200
         PosY: 0
         Category: 0
         Conexions: 3
             0
-            2
-            4
-    N2:
-        Title: Perdón
-        Description:
-        PosX: -100
-        PosY: -75
-        Category: 1
-        Conexions: 1
-            0
-    N3:
-        Title: Más poderosa
-        Description:
-        PosX: -100
-        PosY: 75
-        Category: 1
-        Conexions: 0
-    N4:
-        Title: Atrapada en el libro
-        Description:
-        PosX: -300
-        PosY: 75
-        Category: 1
-        Conexions: 0
-    N5:
-        Title: Orden Wincanster
-        Description:
-        PosX: 200
-        PosY: 0
-        Category: 0
-        Conexions: 1
-            0
+            6
+            8
     N6:
         Title: Refujio en la Orden
-        Description:
+        Description: La autora del libro y su familia se vieron obligadas a refugiarse en la Orden Wincanster, porque la Inquisición las perseguía.
         PosX: 150
         PosY: 75
         Category: 1
-        Conexions: 1
+        Conexions: 3
             5
+            7
+            9
     N7:
         Title: Traición de la Orden
-        Description:
+        Description: Parece que la Orden Wincanster no era tan buena como parecía. Esta traicionó a la familia de la autora del libro y les encerraron. Parece que la orden quería a Helen para algo.
         PosX: 0
         PosY: 75
         Category: 1
@@ -66,7 +79,7 @@
             6
     N8:
         Title: Familia Wolmir
-        Description:
+        Description: Es la familia que dirigía la Orden Wincanster y que al parecer tambien los que te han contratado para descifrar este libro.
         PosX: 250
         PosY: 150
         Category: 0
@@ -74,16 +87,27 @@
             5
     N9:
         Title: Persecución de la Inquisición
-        Description:
-        PosX: 25
-        PosY: 125
-        Category: 2
-        Conexions: 0
+        Description: La Inquisición perseguía a la familia de la autora del libro. El motivo es desconocido.
+        PosX: -50
+        PosY: 150
+        Category: 1
+        Conexions: 2
+            6
+            10
     N10:
         Title: Inquisición
-        Description:
-        PosX: -75
-        PosY: 125
+        Description: La Inquisición es una organización que persigue a gente con poderes como la autora del libro y su familia.
+        PosX: -175
+        PosY: 150
         Category: 0
-        Conexions: 0
+        Conexions: 1
+            9
+    N11:
+		Title: Madre
+		Description: Es un misterio, solo se refiere a ella como madre. Se desconoce su nombre y sus capacidades.
+		PosX: 150
+		PosY: -110
+		Category: 0
+		Conexions: 1
+			0
    

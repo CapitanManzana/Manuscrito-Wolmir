@@ -105,6 +105,7 @@
     <ClCompile Include="Button.cpp" />
     <ClCompile Include="game.cpp" />
     <ClCompile Include="GameObject.cpp" />
+    <ClCompile Include="Hover.cpp" />
     <ClCompile Include="LoadTexts.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="MonoBehaviour.cpp" />
@@ -124,6 +125,7 @@
     <ClInclude Include="Component.h" />
     <ClInclude Include="game.h" />
     <ClInclude Include="GameObject.h" />
+    <ClInclude Include="Hover.h" />
     <ClInclude Include="LoadTexts.h" />
     <ClInclude Include="MonoBehaviour.h" />
     <ClInclude Include="Notebook.h" />

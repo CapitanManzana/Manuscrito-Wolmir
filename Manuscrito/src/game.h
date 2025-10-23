@@ -54,6 +54,7 @@ public:
 	};
 
 	static std::vector<GameObject*> texts;
+	static std::vector<GameObject*> gameObjects;
 
 private:
 	SDL_Window* window;
@@ -71,7 +72,6 @@ private:
 
 	bool exit;
 
-	static std::vector<GameObject*> gameObjects;
 
 	Uint64 perfFrequency; // Frecuencia del contador de alto rendimiento (ticks por segundo)
 	Uint64 lastTime;

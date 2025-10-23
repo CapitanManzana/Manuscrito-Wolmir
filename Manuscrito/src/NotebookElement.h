@@ -8,9 +8,10 @@ class NotebookElement : public Component
 {
 private:
 	std::string title;
+	int fontSize = 16;
 
 public:
-	NotebookElement(const std::string& title);
+	NotebookElement(const std::string& title, int fSize);
 	bool discovered = false;
 
 	void reveal();
