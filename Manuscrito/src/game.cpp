@@ -14,6 +14,7 @@
 #include "Notebook.h"
 #include "NoteRevealer.h"
 #include "Hover.h"
+#include "CodeTest.h"
 
 using namespace std;
 
@@ -76,6 +77,7 @@ vector<GameObject*> overlays;
 // TESTS
 RunicTest* runicTest;
 RunicTest* astrologyTest;
+CodeTest* finalCodeTest;
 
 // HERAMIENTAS
 bool blackLight = false;
@@ -176,6 +178,7 @@ Game::~Game()
 
 	delete runicTest;
 	delete astrologyTest;
+	delete finalCodeTest;
 
 	// Elimina los objetos del juego
 	for (size_t i = 0; i < gameObjects.size(); i++) {
@@ -386,6 +389,15 @@ Game::handleEvents()
 			}
 		}
 
+		if (event.type == SDL_EVENT_TEXT_INPUT) {
+			char c = event.text.text[0];
+
+			if (c >= '0' && c <= '9') {
+				SDL_Log("Input code: %c", c);
+				finalCodeTest->setInputCode(c);
+			}
+		}
+
 		if (event.type == SDL_EVENT_KEY_DOWN) {
 
 			// LUZ UV
@@ -412,6 +424,16 @@ Game::handleEvents()
 				if (currentPage < 0) currentPage = 0;
 
 				manuscrito->changePage(currentPage);
+			}
+
+			if (event.key.key >= SDLK_0 && event.key.key <= SDLK_9) {
+				if (currentPage == 6)
+				{
+					int number = event.key.key - SDLK_0;
+					char c = '0' + number;
+
+					finalCodeTest->setInputCode(c);
+				}
 			}
 
 			if (event.key.key == SDLK_TAB) {
@@ -795,7 +817,47 @@ void Game::createGameObjects() {
 
 #pragma endregion
 
-	manuscrito->changePage(0);
+#pragma region Prueba fina
+
+	manuscrito->changePage(6);
+	vector<Text*> codeTexts;
+
+	GameObject* code1 = new GameObject("code1", 3, hoja8);
+	code1->addComponent<Transform>(Vector2D<float>(-75, 0), 0.15);
+	code1->addComponent<SpriteRenderer>();
+	SDL_Color color = { 128, 18, 0, 255 };
+	Text* t1 = code1->addComponent<Text>("0", color, manuscritoFont, 0, 400, renderer);
+
+	GameObject* code2 = new GameObject("code2", 3, hoja8);
+	code2->addComponent<Transform>(Vector2D<float>(-25, 0), 0.15);
+	code2->addComponent<SpriteRenderer>();
+	Text* t2 = code2->addComponent<Text>("0", color, manuscritoFont, 0, 400, renderer);
+
+	GameObject* code3 = new GameObject("code3", 3, hoja8);
+	code3->addComponent<Transform>(Vector2D<float>(25, 0), 0.15);
+	code3->addComponent<SpriteRenderer>();
+	Text* t3= code3->addComponent<Text>("0", color, manuscritoFont, 0, 400, renderer);
+
+	GameObject* code4 = new GameObject("code4", 3, hoja8);
+	code4->addComponent<Transform>(Vector2D<float>(75, 0), 0.15);
+	code4->addComponent<SpriteRenderer>();
+	Text* t4 = code4->addComponent<Text>("0", color, manuscritoFont, 0, 400, renderer);
+
+	codeTexts.push_back(t1);
+	codeTexts.push_back(t2);
+	codeTexts.push_back(t3);
+	codeTexts.push_back(t4);
+
+	finalCodeTest = new CodeTest(codeTexts, FINAL_CODE_SOLUTION);
+
+	gameObjects.push_back(code1);
+	gameObjects.push_back(code2);
+	gameObjects.push_back(code3);
+	gameObjects.push_back(code4);
+
+#pragma endregion
+
+	manuscrito->changePage(6);
 }
 
 #pragma region ButtonEvents
@@ -834,6 +896,9 @@ void Game::renderObjects() const {
 			if (texts[i]->getIsActive() && texts[i]->spriteRenderer != nullptr && texts[i]->spriteRenderer->isEnabled)
 				texts[i]->render();
 		}
+
+		//Los textos del final test
+		finalCodeTest->render();
 
 		// Elementos extra
 		for (size_t i = 0; i < overlays.size(); i++) {

@@ -1,4 +1,4 @@
-PagesCount: 7
+PagesCount: 8
 Page_1
     TextsCount: 7
     T_1
@@ -571,3 +571,24 @@ Page_7
         color: #6B2604
         uv: 0
         revealNoteIndex: -1
+Page_8:
+	TextsCount: 2
+    T_1:
+        text: 4 esconden la verdad
+		x: 0
+		y: -120
+		size: 120
+		textEnd: 0
+		color: #C41A00
+		uv: 0
+		revealNoteIndex: -1
+    T_2:
+        text: Todos los seres vivos lo tienen. Supongo que será una especie de energía vital.
+		x: 68
+		y: 75
+		size: 70
+		textEnd: 700
+		color: #6B2604
+		uv: 0
+		revealNoteIndex: -1
+

@@ -81,6 +81,9 @@
     <ClCompile Include="Hover.cpp">
       <Filter>Archivos de código fuente\Componentes</Filter>
     </ClCompile>
+    <ClCompile Include="CodeTest.cpp">
+      <Filter>Archivos de código fuente\Scripts</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="game.h">
@@ -136,6 +139,9 @@
     </ClInclude>
     <ClInclude Include="Hover.h">
       <Filter>Archivos de encabezado\Componentes</Filter>
+    </ClInclude>
+    <ClInclude Include="CodeTest.h">
+      <Filter>Archivos de encabezado\Scripts</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

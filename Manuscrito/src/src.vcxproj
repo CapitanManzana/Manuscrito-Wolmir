@@ -103,6 +103,7 @@
   <ItemGroup>
     <ClCompile Include="Book.cpp" />
     <ClCompile Include="Button.cpp" />
+    <ClCompile Include="CodeTest.cpp" />
     <ClCompile Include="game.cpp" />
     <ClCompile Include="GameObject.cpp" />
     <ClCompile Include="Hover.cpp" />
@@ -122,6 +123,7 @@
   <ItemGroup>
     <ClInclude Include="Book.h" />
     <ClInclude Include="Button.h" />
+    <ClInclude Include="CodeTest.h" />
     <ClInclude Include="Component.h" />
     <ClInclude Include="game.h" />
     <ClInclude Include="GameObject.h" />
