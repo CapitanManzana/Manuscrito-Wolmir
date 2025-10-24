@@ -1,13 +1,19 @@
 #include "CodeTest.h"
 #include "Text.h"
 #include "GameObject.h"
+#include "Book.h"
 
-CodeTest::CodeTest(std::vector<Text*> texts, std::string solution)
+CodeTest::CodeTest(std::vector<Text*> texts, std::string solution, Book& book, GameObject* page, int pageIndex)
 {
 	codeTexts = texts;
 	correctSolution = solution;
 	codeLength = static_cast<int>(texts.size());
+
+	CodeTest::book = &book;
+	CodeTest::page = page;
+	CodeTest::pageIndex = pageIndex;
 }
+
 
 void CodeTest::setInputCode(char c)
 {
@@ -30,7 +36,13 @@ void CodeTest::setInputCode(char c)
 
 	if (currentText == correctSolution)
 	{
-		SDL_Log("CodeTest: Correct code entered!");
+		for (Text* t : codeTexts)
+		{
+			GameObject* g = t->gameObject;
+			g->setIsActive(false);
+
+			book->remplacePage(page, pageIndex);
+		}
 	}
 }
 

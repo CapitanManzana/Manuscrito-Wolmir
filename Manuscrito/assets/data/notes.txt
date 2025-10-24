@@ -50,7 +50,7 @@ NotesCount: 12
             1
     N5:
         Title: Orden Wincanster
-        Description: La Orden Wincanster es una organización que da protección a gente como la anonima autora de este libro y su familia.
+        Description: La Orden Wincanster es una organización que da protección a gente como la anónima autora de este libro y su familia.
         PosX: 200
         PosY: 0
         Category: 0
@@ -70,7 +70,7 @@ NotesCount: 12
             9
     N7:
         Title: Traición de la Orden
-        Description: Parece que la Orden Wincanster no era tan buena como parecía. Esta traicionó a la familia de la autora del libro y les encerraron. Parece que la orden quería a Helen para algo.
+        Description: Parece que la Orden Wincanster no era tan buena como parecía. Esta traicionó a la familia de la autora del libro y les encerraron. Parece que la orden quería a Helena para algo.
         PosX: 0
         PosY: 75
         Category: 1

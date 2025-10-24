@@ -87,14 +87,14 @@ Page_2
     T_3
         text: 8 de octubre de 1534
         x: 40       
-        y: -5
+        y: -10
         size: 100
         textEnd: 900
         color: #0DFF00
         uv: 1
         revealNoteIndex: -1
     T_4
-        text: No podemos volver a casa, no tenemos donde ir, solo pido que no nos encuentren. Ahora entiendo todo, porque madre nos hacía ocultar los poderes a Helena y a mi. Helena siempre me levanta el animo y me apolla, siempre ha sido mas poderosa y mas fuerte que yo pero no puedo evitar pensar que todo esto es culpa mía… CULPA MÍA. 
+        text: No podemos volver a casa, no tenemos donde ir, solo pido que no nos encuentren. Ahora entiendo todo, porque madre nos hacía ocultar los poderes a Helena y a mi. Helena me lleva apoyando desde 19 de abril de no se que año, 1518 o 1515, siempre ha sido mas poderosa y mas fuerte que yo pero no puedo evitar pensar que todo esto es culpa mía… CULPA MÍA. 
         x: 45       
         y: 70
         size: 76
@@ -105,7 +105,7 @@ Page_2
     T_5
         text: NO TE FIES DE NADIE
         x: 0       
-        y: 150
+        y: 155
         size: 130
         textEnd: 1500
         color: #0DFF00
@@ -123,14 +123,14 @@ Page_3
         uv: 0
         revealNoteIndex: -1
     T_2
-        text: En pocos días será la nueva luna. Polaris es la clave para evitar que a Helena la detenga la Inquisición y llegar hasta la Orden Wincanster.
+        text: En pocos días será la nueva luna. Polaris es la clave para evitar que a Helena la detenga la Inquisición.
         x: 5
         y: -120
         size: 76
         textEnd: 1500
         color: #6B2604
         uv: 0
-        revealNoteIndex: 10
+        revealNoteIndex: 9
     T_3
         text: RUNAS
         x: 0
@@ -572,7 +572,7 @@ Page_7
         uv: 0
         revealNoteIndex: -1
 Page_8:
-	TextsCount: 2
+	TextsCount: 8
     T_1:
         text: 4 esconden la verdad
 		x: 0
@@ -583,12 +583,66 @@ Page_8:
 		uv: 0
 		revealNoteIndex: -1
     T_2:
-        text: Todos los seres vivos lo tienen. Supongo que será una especie de energía vital.
+        text: Todos los seres vivos lo tienen, unas 4830 millones de u. Supongo que será una especie de energía vital.
 		x: 68
 		y: 75
 		size: 70
 		textEnd: 700
 		color: #6B2604
+		uv: 0
+		revealNoteIndex: -1
+    T_3     
+        text: 13 de octubre de 1534
+        x: -50       
+        y: -150
+        size: 90
+        textEnd: 1500
+        color: #C41A00
+        uv: 0
+        revealNoteIndex: -1
+    T_4:
+        text: Todo es culpa mía, espero que si alguien lee esto alguna vez sepa que lo hice por ella, por Helena para que no se la llevaran. 
+		x: 0
+		y: -120
+		size: 70
+		textEnd: 1500
+		color: #6B2604
+		uv: 0
+		revealNoteIndex: -1
+    T_5:
+        text: Todo comenzó en la fría mañana del 13 de octubre de 1534. Los desgarradores gritos de madre nos despertaron a Helena y a mi. Salimos a fuera, y ahí estaban, la Orden Wincanster y los soldados de la Inquisición. Tenían atada a madre a un palo, encima de una pila de paja. Bruja, Bruja… gritaban todos, y sin mediar palabra, el director de la orden, dejó caer su antorcha sobre la pila de paja. Solo se escuchaban los agonizantes gritos de madre en el inmenso silencio del bosque. Nos obligaron a ver como ardía, jamás olvidare al hombre que asesinó a mi madre, el Señor Wolmir, el director de la Orden Wincanster. 
+		x: 0
+		y: -30
+		size: 70
+		textEnd: 1500
+		color: #6B2604
+		uv: 0
+		revealNoteIndex: 8
+    T_6:
+        text: Helena no pudo soportarlo. Su poder se descontroló, consumido por el odio. Quería quemarlos a todos, empezando por Wolmir y su linaje. Tuve que detenerla. Tuve que encerrar su poder... y el mío... en este libro, para que no la capturasen. No me quiero imaginar lo que harían los Wolmir si se hicieran con el poder de Helena.
+		x: 0
+		y: 80
+		size: 70
+		textEnd: 1500
+		color: #6B2604
+		uv: 0
+		revealNoteIndex: 4
+    T_7:
+        text: CERRAR EL LIBRO
+		x: -60
+		y: 130
+		size: 80
+		textEnd: 1500
+		color: #C41A00
+		uv: 0
+		revealNoteIndex: 0
+     T_8:
+        text: LIBERAR A HELENA
+		x: 60
+		y: 130
+		size: 80
+		textEnd: 1500
+		color: #C41A00
 		uv: 0
 		revealNoteIndex: -1
 

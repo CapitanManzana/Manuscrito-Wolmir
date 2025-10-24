@@ -81,7 +81,6 @@ CodeTest* finalCodeTest;
 
 // HERAMIENTAS
 bool blackLight = false;
-bool glasses = false;
 bool paperNotes = false;
 
 // Mascara de luz uv
@@ -212,7 +211,7 @@ void
 Game::render() const
 {
 	SDL_RenderClear(renderer);
-	 
+
 	// 1. PREPARAR LA MÁSCARA DE LUZ
 	SDL_SetRenderDrawColor(renderer, ambientLightDarkZone.r, ambientLightDarkZone.g, ambientLightDarkZone.b, ambientLightDarkZone.a);
 	// Apunta a tu textura de luz (que tiene BLENDMODE_MOD)
@@ -232,16 +231,8 @@ Game::render() const
 	if (!blackLight) {
 		renderObjects();
 
-		if (glasses) {
-			SDL_SetRenderDrawColor(renderer, 0, 115, 0, 1);
-			SDL_RenderFillRect(renderer, nullptr);
-		}
-		else {
-			SDL_SetRenderDrawColor(renderer, ambientLightIlumZone.r, ambientLightIlumZone.g, ambientLightIlumZone.b, ambientLightIlumZone.a);
-			SDL_RenderFillRect(renderer, nullptr);
-		}
-
-
+		SDL_SetRenderDrawColor(renderer, ambientLightIlumZone.r, ambientLightIlumZone.g, ambientLightIlumZone.b, ambientLightIlumZone.a);
+		SDL_RenderFillRect(renderer, nullptr);
 	}
 	else {
 		rectLight.x = cur_posX - (rectLight.w / 2.f);
@@ -405,11 +396,6 @@ Game::handleEvents()
 				blackLight = !blackLight;
 			}
 
-			// GAFAS DESCIFRADORAS
-			if (event.key.key == SDLK_Q) {
-				glasses = !glasses;
-			}
-
 			// CAMBIO DE PÁGINA DERECHA
 			if (event.key.key == SDLK_D) {
 				currentPage += 2;
@@ -508,6 +494,10 @@ void Game::createGameObjects() {
 	hoja6_2->addComponent<SpriteRenderer>(getTexture(HOJA_VACIA), 0, 0);
 	hoja6_2->setIsActive(true);
 
+	GameObject* hoja8_2 = new GameObject("Hoja8_2", 2);
+	hoja8_2->addComponent<Transform>(Vector2D<float>(1, 1), 0.1875);
+	hoja8_2->addComponent<SpriteRenderer>(getTexture(HOJA_VACIA), 0, 0);
+
 	gameObjects.push_back(hoja1);
 	gameObjects.push_back(hoja2);
 	gameObjects.push_back(hoja3);
@@ -518,6 +508,7 @@ void Game::createGameObjects() {
 	gameObjects.push_back(hoja6_2);
 	gameObjects.push_back(hoja7);
 	gameObjects.push_back(hoja8);
+	gameObjects.push_back(hoja8_2);
 
 #pragma endregion
 
@@ -557,7 +548,7 @@ void Game::createGameObjects() {
 			TextData textData = textsLoader->getTextData(i, j);
 
 			//CREAMOS EL TEXTO
-			 GameObject* texto = new GameObject("Texto " + to_string(i) + "_" + to_string(j), 4, bookPages[i]);
+			GameObject* texto = new GameObject("Texto " + to_string(i) + "_" + to_string(j), 4, bookPages[i]);
 
 			// Añadimos los componentes
 			texto->addComponent<Transform>(Vector2D<float>(textData.position.x, textData.position.y), 0.15);
@@ -600,8 +591,22 @@ void Game::createGameObjects() {
 		hoja6->removeChildren(5);
 	}
 
+	//Recorremos los hijos y los metemos en un vector los necesarios
+	vector<GameObject*> hoja8Children;
+	for (int k = 2; k < hoja8->getChildren().size(); k++) {
+		hoja8Children.push_back(hoja8->getChild(k));
+	}
+	hoja8_2->setChildren(hoja8Children);
+
+	//Borramos los hijos
+	childsCount = hoja8->getChildren().size();
+	for (int k = 2; k < childsCount; k++) {
+		hoja8->removeChildren(2);
+	}
+
 	hoja4_2->setIsActive(false);
 	hoja6_2->setIsActive(false);
+	hoja8_2->setIsActive(false);
 
 	delete textsLoader;
 #pragma endregion
@@ -817,7 +822,7 @@ void Game::createGameObjects() {
 
 #pragma endregion
 
-#pragma region Prueba fina
+#pragma region Prueba final
 
 	manuscrito->changePage(6);
 	vector<Text*> codeTexts;
@@ -836,7 +841,7 @@ void Game::createGameObjects() {
 	GameObject* code3 = new GameObject("code3", 3, hoja8);
 	code3->addComponent<Transform>(Vector2D<float>(25, 0), 0.15);
 	code3->addComponent<SpriteRenderer>();
-	Text* t3= code3->addComponent<Text>("0", color, manuscritoFont, 0, 400, renderer);
+	Text* t3 = code3->addComponent<Text>("0", color, manuscritoFont, 0, 400, renderer);
 
 	GameObject* code4 = new GameObject("code4", 3, hoja8);
 	code4->addComponent<Transform>(Vector2D<float>(75, 0), 0.15);
@@ -848,7 +853,7 @@ void Game::createGameObjects() {
 	codeTexts.push_back(t3);
 	codeTexts.push_back(t4);
 
-	finalCodeTest = new CodeTest(codeTexts, FINAL_CODE_SOLUTION);
+	finalCodeTest = new CodeTest(codeTexts, FINAL_CODE_SOLUTION, *manuscrito, hoja8_2, 7);
 
 	gameObjects.push_back(code1);
 	gameObjects.push_back(code2);
@@ -857,7 +862,7 @@ void Game::createGameObjects() {
 
 #pragma endregion
 
-	manuscrito->changePage(6);
+	manuscrito->changePage(0);
 }
 
 #pragma region ButtonEvents
@@ -866,7 +871,7 @@ void Game::createGameObjects() {
 void Game::showText(GameObject* text) {
 	Text* t = text->getComponent<Text>();
 	NoteRevealer* nr = text->getComponent<NoteRevealer>();
-	if (glasses && !t->showText && !Text::showingText) {
+	if (!t->showText && !Text::showingText) {
 		// Mostramos el texto seleccionado
 		t->showText = true;
 	}
@@ -882,7 +887,7 @@ void Game::renderObjects() const {
 	if (notebookParent->getIsActive()) {
 		notebook->render();
 	}
-	else 
+	else
 	{
 		// El fondo del cuaderno
 		for (size_t i = 0; i < pagesCount; i++) {
