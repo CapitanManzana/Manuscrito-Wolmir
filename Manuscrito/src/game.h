@@ -55,28 +55,23 @@ public:
 		NUM_TEXTURES
 	};
 
-	static std::vector<GameObject*> texts;
 	static std::vector<GameObject*> gameObjects;
 
 private:
-	SDL_Window* window;
-	SDL_Renderer* renderer;
+	
 	std::array<Texture*, NUM_TEXTURES> textures;
 
 	void render() const;
 	void update();
 	void handleEvents();
-	void createGameObjects();
-
-	void showText(GameObject* text);
-	void renderObjects() const;
-	void createLight();
 
 	bool exit;
 
-
 	Uint64 perfFrequency; // Frecuencia del contador de alto rendimiento (ticks por segundo)
 	Uint64 lastTime;
+
+	SDL_Window* window;
+	SDL_Renderer* renderer;
 
 public:
 	Game();
