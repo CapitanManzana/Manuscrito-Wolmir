@@ -107,6 +107,7 @@
     <ClCompile Include="game.cpp" />
     <ClCompile Include="GameObject.cpp" />
     <ClCompile Include="Hover.cpp" />
+    <ClCompile Include="IntroScene.cpp" />
     <ClCompile Include="LoadTexts.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="MainGame.cpp" />
@@ -131,6 +132,7 @@
     <ClInclude Include="game.h" />
     <ClInclude Include="GameObject.h" />
     <ClInclude Include="Hover.h" />
+    <ClInclude Include="IntroScene.h" />
     <ClInclude Include="LoadTexts.h" />
     <ClInclude Include="MainGame.h" />
     <ClInclude Include="MonoBehaviour.h" />

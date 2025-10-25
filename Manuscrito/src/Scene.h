@@ -17,9 +17,10 @@ public:
 	virtual ~Scene() {}
 
 	virtual void Load() {}
+	virtual void HandleEvents(SDL_Event& event) {}
+
 	virtual void Update(float deltaTime) {}
 	virtual void Start() {}
-	virtual void HandleEvents(SDL_Event& event) {}
 	virtual void Render() {}
 };
 
