@@ -116,6 +116,7 @@
     <ClCompile Include="NoteRevealer.cpp" />
     <ClCompile Include="RunicTest.cpp" />
     <ClCompile Include="Scene.cpp" />
+    <ClCompile Include="SceneManager.cpp" />
     <ClCompile Include="Selector.cpp" />
     <ClCompile Include="SpriteRenderer.cpp" />
     <ClCompile Include="Text.cpp" />
@@ -138,6 +139,7 @@
     <ClInclude Include="NoteRevealer.h" />
     <ClInclude Include="RunicTest.h" />
     <ClInclude Include="Scene.h" />
+    <ClInclude Include="SceneManager.h" />
     <ClInclude Include="Selector.h" />
     <ClInclude Include="SpriteRenderer.h" />
     <ClInclude Include="Text.h" />

@@ -96,6 +96,9 @@
     <ClCompile Include="MainGame.cpp">
       <Filter>Archivos de código fuente\Scenes</Filter>
     </ClCompile>
+    <ClCompile Include="SceneManager.cpp">
+      <Filter>Archivos de código fuente</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="game.h">
@@ -160,6 +163,9 @@
     </ClInclude>
     <ClInclude Include="MainGame.h">
       <Filter>Archivos de encabezado\Scenes</Filter>
+    </ClInclude>
+    <ClInclude Include="SceneManager.h">
+      <Filter>Archivos de encabezado</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

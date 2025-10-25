@@ -1,8 +1,7 @@
 #pragma once
 #include "game.h"
-#include <vector>
 
-class Scene : public Game
+class Scene
 {
 private:
 	int sceneID;
@@ -10,18 +9,17 @@ private:
 
 protected:
 	std::vector<GameObject*> sceneObjects;
+	Game* game;
+	SDL_Renderer* renderer;
 
 public:
-	Scene() {
-		sceneID = totalScenes;
-		totalScenes++;
-	}
-	virtual ~Scene();
+	Scene(Game& game);
+	virtual ~Scene() {}
 
-	virtual void Load();
-	virtual void Update(float deltaTime);
-	virtual void Start();
-	virtual void HandleEvents(SDL_Event& event);
-	virtual void Render();
+	virtual void Load() {}
+	virtual void Update(float deltaTime) {}
+	virtual void Start() {}
+	virtual void HandleEvents(SDL_Event& event) {}
+	virtual void Render() {}
 };
 

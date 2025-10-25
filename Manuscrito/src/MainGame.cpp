@@ -1,4 +1,5 @@
 #include "MainGame.h"
+#include "Scene.h"
 
 #include <SDL3_image/SDL_image.h>
 #include <fstream>
@@ -15,6 +16,8 @@
 #include "NoteRevealer.h"
 #include "Hover.h"
 #include "CodeTest.h"
+
+vector<GameObject*> MainGame::texts;
 
 void MainGame::Load() {
 	createGameObjects();
@@ -184,35 +187,35 @@ void MainGame::createGameObjects() {
 
 	GameObject* hoja1 = new GameObject("Hoja1", 2);
 	hoja1->addComponent<Transform>(Vector2D<float>(1, 1), 0.1875);
-	hoja1->addComponent<SpriteRenderer>(getTexture(HOJA1), 0, 0);
+	hoja1->addComponent<SpriteRenderer>(game->getTexture(Game::HOJA1), 0, 0);
 
 	GameObject* hoja2 = new GameObject("Hoja2", 2);
 	hoja2->addComponent<Transform>(Vector2D<float>(1, 1), 0.1875);
-	hoja2->addComponent<SpriteRenderer>(getTexture(HOJA_VACIA), 0, 0);
+	hoja2->addComponent<SpriteRenderer>(game->getTexture(Game::HOJA_VACIA), 0, 0);
 
 	GameObject* hoja3 = new GameObject("Hoja3", 2);
 	hoja3->addComponent<Transform>(Vector2D<float>(1, 1), 0.1875);
-	hoja3->addComponent<SpriteRenderer>(getTexture(TABLA_RUNAS), 0, 0);
+	hoja3->addComponent<SpriteRenderer>(game->getTexture(Game::TABLA_RUNAS), 0, 0);
 
 	GameObject* hoja4 = new GameObject("Hoja4", 2);
 	hoja4->addComponent<Transform>(Vector2D<float>(1, 1), 0.1875);
-	hoja4->addComponent<SpriteRenderer>(getTexture(RUNAS), 0, 0);
+	hoja4->addComponent<SpriteRenderer>(game->getTexture(Game::RUNAS), 0, 0);
 
 	GameObject* hoja5 = new GameObject("Hoja5", 2);
 	hoja5->addComponent<Transform>(Vector2D<float>(1, 1), 0.1875);
-	hoja5->addComponent<SpriteRenderer>(getTexture(HOJA5), 0, 0);
+	hoja5->addComponent<SpriteRenderer>(game->getTexture(Game::HOJA5), 0, 0);
 
 	GameObject* hoja6 = new GameObject("Hoja6", 2);
 	hoja6->addComponent<Transform>(Vector2D<float>(1, 1), 0.1875);
-	hoja6->addComponent<SpriteRenderer>(getTexture(HOJA6), 0, 0);
+	hoja6->addComponent<SpriteRenderer>(game->getTexture(Game::HOJA6), 0, 0);
 
 	GameObject* hoja7 = new GameObject("Hoja7", 2);
 	hoja7->addComponent<Transform>(Vector2D<float>(1, 1), 0.1875);
-	hoja7->addComponent<SpriteRenderer>(getTexture(HOJA_VACIA), 0, 0);
+	hoja7->addComponent<SpriteRenderer>(game->getTexture(Game::HOJA_VACIA), 0, 0);
 
 	GameObject* hoja8 = new GameObject("Hoja8", 2);
 	hoja8->addComponent<Transform>(Vector2D<float>(1, 1), 0.1875);
-	hoja8->addComponent<SpriteRenderer>(getTexture(HOJA8), 0, 0);
+	hoja8->addComponent<SpriteRenderer>(game->getTexture(Game::HOJA8), 0, 0);
 
 	bookPages.push_back(hoja1);
 	bookPages.push_back(hoja2);
@@ -223,34 +226,34 @@ void MainGame::createGameObjects() {
 	bookPages.push_back(hoja7);
 	bookPages.push_back(hoja8);
 
-	manuscrito = new Book(bookPages, WINDOW_WIDTH / 2 - 5, WINDOW_HEIGHT / 2 - 9, 125);
+	manuscrito = new Book(bookPages, Game::WINDOW_WIDTH / 2 - 5, Game::WINDOW_HEIGHT / 2 - 9, 125);
 	pagesCount = manuscrito->getPageCount();
 
 	GameObject* hoja4_2 = new GameObject("Hoja4_2", 2);
 	hoja4_2->addComponent<Transform>(Vector2D<float>(1, 1), 0.16);
-	hoja4_2->addComponent<SpriteRenderer>(getTexture(HOJA_VACIA), 0, 0);
+	hoja4_2->addComponent<SpriteRenderer>(game->getTexture(Game::HOJA_VACIA), 0, 0);
 	hoja4_2->setIsActive(false);
 
 	GameObject* hoja6_2 = new GameObject("Hoja6_2", 2);
 	hoja6_2->addComponent<Transform>(Vector2D<float>(1, 1), 0.16);
-	hoja6_2->addComponent<SpriteRenderer>(getTexture(HOJA_VACIA), 0, 0);
+	hoja6_2->addComponent<SpriteRenderer>(game->getTexture(Game::HOJA_VACIA), 0, 0);
 	hoja6_2->setIsActive(true);
 
 	GameObject* hoja8_2 = new GameObject("Hoja8_2", 2);
 	hoja8_2->addComponent<Transform>(Vector2D<float>(1, 1), 0.1875);
-	hoja8_2->addComponent<SpriteRenderer>(getTexture(HOJA_VACIA), 0, 0);
+	hoja8_2->addComponent<SpriteRenderer>(game->getTexture(Game::HOJA_VACIA), 0, 0);
 
-	gameObjects.push_back(hoja1);
-	gameObjects.push_back(hoja2);
-	gameObjects.push_back(hoja3);
-	gameObjects.push_back(hoja4);
-	gameObjects.push_back(hoja4_2);
-	gameObjects.push_back(hoja5);
-	gameObjects.push_back(hoja6);
-	gameObjects.push_back(hoja6_2);
-	gameObjects.push_back(hoja7);
-	gameObjects.push_back(hoja8);
-	gameObjects.push_back(hoja8_2);
+	game->gameObjects.push_back(hoja1);
+	game->gameObjects.push_back(hoja2);
+	game->gameObjects.push_back(hoja3);
+	game->gameObjects.push_back(hoja4);
+	game->gameObjects.push_back(hoja4_2);
+	game->gameObjects.push_back(hoja5);
+	game->gameObjects.push_back(hoja6);
+	game->gameObjects.push_back(hoja6_2);
+	game->gameObjects.push_back(hoja7);
+	game->gameObjects.push_back(hoja8);
+	game->gameObjects.push_back(hoja8_2);
 
 	sceneObjects.push_back(hoja1);
 	sceneObjects.push_back(hoja2);
@@ -268,20 +271,20 @@ void MainGame::createGameObjects() {
 
 	#pragma region CUADERNO DE NOTAS
 	notebookParent = new GameObject("Cuaderno", 2);
-	notebookParent->addComponent<Transform>(Vector2D<float>(WINDOW_WIDTH / 2, WINDOW_HEIGHT / 2), 0.37);
-	notebookParent->addComponent<SpriteRenderer>(getTexture(FOLIO), 0, 0);
+	notebookParent->addComponent<Transform>(Vector2D<float>(Game::WINDOW_WIDTH / 2, Game::WINDOW_HEIGHT / 2), 0.37);
+	notebookParent->addComponent<SpriteRenderer>(game->getTexture(Game::FOLIO), 0, 0);
 
 	ifstream notesFile(notesData);
 
 	if (notesFile.is_open()) {
-		notebook = new Notebook(notesFile, notebookParent, baseFontCentered, getTexture(MARCO), renderer, this);
+		notebook = new Notebook(notesFile, notebookParent, game->baseFontCentered, game->getTexture(Game::MARCO), renderer, game);
 	}
 	else {
 		SDL_LogError(SDL_LOG_CATEGORY_APPLICATION, "Couldn't load notes data file");
 	}
 
 	// Cuaderno de notas
-	gameObjects.push_back(notebookParent);
+	game->gameObjects.push_back(notebookParent);
 	sceneObjects.push_back(notebookParent);
 	notebookParent->setIsActive(false);
 
@@ -308,7 +311,7 @@ void MainGame::createGameObjects() {
 			// Añadimos los componentes
 			texto->addComponent<Transform>(Vector2D<float>(textData.position.x, textData.position.y), 0.15);
 			texto->addComponent<SpriteRenderer>();
-			texto->addComponent<Text>(textData.text, textData.color, manuscritoFont, textData.textEnd, textData.size, renderer);
+			texto->addComponent<Text>(textData.text, textData.color, game->manuscritoFont, textData.textEnd, textData.size, renderer);
 
 			Button* btT = texto->addComponent<Button>();
 			btT->onClick = [this, texto]() {
@@ -325,7 +328,7 @@ void MainGame::createGameObjects() {
 			else {
 				texts.push_back(texto);
 			}
-			gameObjects.push_back(texto);
+			game->gameObjects.push_back(texto);
 			sceneObjects.push_back(texto);
 		}
 	}
@@ -379,84 +382,84 @@ void MainGame::createGameObjects() {
 
 	GameObject* selector1 = new GameObject("Selector1", 4, hoja4);
 	selector1->addComponent<Transform>(Vector2D<float>(9, -60), 0.06);
-	selector1->addComponent<SpriteRenderer>(getTexture(SELECTOR), 0, 0);
+	selector1->addComponent<SpriteRenderer>(game->getTexture(Game::SELECTOR), 0, 0);
 	Selector* sl1 = selector1->addComponent<Selector>();
 	Button* btS1 = selector1->addComponent<Button>();
 	btS1->onClick = [sl1]() { sl1->onClick(); };
 
 	GameObject* selector2 = new GameObject("Selector2", 4, hoja4);
 	selector2->addComponent<Transform>(Vector2D<float>(37, -50), 0.06);
-	selector2->addComponent<SpriteRenderer>(getTexture(SELECTOR), 0, 0);
+	selector2->addComponent<SpriteRenderer>(game->getTexture(Game::SELECTOR), 0, 0);
 	Selector* sl2 = selector2->addComponent<Selector>();
 	Button* btS2 = selector2->addComponent<Button>();
 	btS2->onClick = [sl2]() { sl2->onClick(); };
 
 	GameObject* selector3 = new GameObject("Selector3", 4, hoja4);
 	selector3->addComponent<Transform>(Vector2D<float>(57, -30), 0.06);
-	selector3->addComponent<SpriteRenderer>(getTexture(SELECTOR), 0, 0);
+	selector3->addComponent<SpriteRenderer>(game->getTexture(Game::SELECTOR), 0, 0);
 	Selector* sl3 = selector3->addComponent<Selector>();
 	Button* btS3 = selector3->addComponent<Button>();
 	btS3->onClick = [sl3]() { sl3->onClick(); };
 
 	GameObject* selector4 = new GameObject("Selector4", 4, hoja4);
 	selector4->addComponent<Transform>(Vector2D<float>(60, -3), 0.06);
-	selector4->addComponent<SpriteRenderer>(getTexture(SELECTOR), 0, 0);
+	selector4->addComponent<SpriteRenderer>(game->getTexture(Game::SELECTOR), 0, 0);
 	Selector* sl4 = selector4->addComponent<Selector>();
 	Button* btS4 = selector4->addComponent<Button>();
 	btS4->onClick = [sl4]() { sl4->onClick(); };
 
 	GameObject* selector5 = new GameObject("Selector5", 4, hoja4);
 	selector5->addComponent<Transform>(Vector2D<float>(53, 30), 0.06);
-	selector5->addComponent<SpriteRenderer>(getTexture(SELECTOR), 0, 0);
+	selector5->addComponent<SpriteRenderer>(game->getTexture(Game::SELECTOR), 0, 0);
 	Selector* sl5 = selector5->addComponent<Selector>();
 	Button* btS5 = selector5->addComponent<Button>();
 	btS5->onClick = [sl5]() { sl5->onClick(); };
 
 	GameObject* selector6 = new GameObject("Selector6", 4, hoja4);
 	selector6->addComponent<Transform>(Vector2D<float>(37, 57), 0.06);
-	selector6->addComponent<SpriteRenderer>(getTexture(SELECTOR), 0, 0);
+	selector6->addComponent<SpriteRenderer>(game->getTexture(Game::SELECTOR), 0, 0);
 	Selector* sl6 = selector6->addComponent<Selector>();
 	Button* btS6 = selector6->addComponent<Button>();
 	btS6->onClick = [sl6]() { sl6->onClick(); };
 
 	GameObject* selector7 = new GameObject("Selector7", 4, hoja4);
 	selector7->addComponent<Transform>(Vector2D<float>(2, 67), 0.06);
-	selector7->addComponent<SpriteRenderer>(getTexture(SELECTOR), 0, 0);
+	selector7->addComponent<SpriteRenderer>(game->getTexture(Game::SELECTOR), 0, 0);
 	Selector* sl7 = selector7->addComponent<Selector>();
 	Button* btS7 = selector7->addComponent<Button>();
 	btS7->onClick = [sl7]() { sl7->onClick(); };
 
 	GameObject* selector8 = new GameObject("Selector8", 4, hoja4);
 	selector8->addComponent<Transform>(Vector2D<float>(-30, 60), 0.06);
-	selector8->addComponent<SpriteRenderer>(getTexture(SELECTOR), 0, 0);
+	selector8->addComponent<SpriteRenderer>(game->getTexture(Game::SELECTOR), 0, 0);
 	Selector* sl8 = selector8->addComponent<Selector>();
 	Button* btS8 = selector8->addComponent<Button>();
 	btS8->onClick = [sl8]() { sl8->onClick(); };
 
 	GameObject* selector9 = new GameObject("Selector9", 4, hoja4);
 	selector9->addComponent<Transform>(Vector2D<float>(-50, 35), 0.06);
-	selector9->addComponent<SpriteRenderer>(getTexture(SELECTOR), 0, 0);
+	selector9->addComponent<SpriteRenderer>(game->getTexture(Game::SELECTOR), 0, 0);
 	Selector* sl9 = selector9->addComponent<Selector>();
 	Button* btS9 = selector9->addComponent<Button>();
 	btS9->onClick = [sl9]() { sl9->onClick(); };
 
 	GameObject* selector10 = new GameObject("Selector10", 4, hoja4);
 	selector10->addComponent<Transform>(Vector2D<float>(-56, 0), 0.06);
-	selector10->addComponent<SpriteRenderer>(getTexture(SELECTOR), 0, 0);
+	selector10->addComponent<SpriteRenderer>(game->getTexture(Game::SELECTOR), 0, 0);
 	Selector* sl10 = selector10->addComponent<Selector>();
 	Button* btS10 = selector10->addComponent<Button>();
 	btS10->onClick = [sl10]() { sl10->onClick(); };
 
 	GameObject* selector11 = new GameObject("Selector11", 4, hoja4);
 	selector11->addComponent<Transform>(Vector2D<float>(-50, -33), 0.06);
-	selector11->addComponent<SpriteRenderer>(getTexture(SELECTOR), 0, 0);
+	selector11->addComponent<SpriteRenderer>(game->getTexture(Game::SELECTOR), 0, 0);
 	Selector* sl11 = selector11->addComponent<Selector>();
 	Button* btS11 = selector11->addComponent<Button>();
 	btS11->onClick = [sl11]() { sl11->onClick(); };
 
 	GameObject* selector12 = new GameObject("Selector12", 4, hoja4);
 	selector12->addComponent<Transform>(Vector2D<float>(-25, -55), 0.06);
-	selector12->addComponent<SpriteRenderer>(getTexture(SELECTOR), 0, 0);
+	selector12->addComponent<SpriteRenderer>(game->getTexture(Game::SELECTOR), 0, 0);
 	Selector* sl12 = selector12->addComponent<Selector>();
 	Button* btS12 = selector12->addComponent<Button>();
 	btS12->onClick = [sl12]() { sl12->onClick(); };
@@ -474,18 +477,18 @@ void MainGame::createGameObjects() {
 	overlays.push_back(selector11);
 	overlays.push_back(selector12);
 
-	gameObjects.push_back(selector1);
-	gameObjects.push_back(selector2);
-	gameObjects.push_back(selector3);
-	gameObjects.push_back(selector4);
-	gameObjects.push_back(selector5);
-	gameObjects.push_back(selector6);
-	gameObjects.push_back(selector7);
-	gameObjects.push_back(selector8);
-	gameObjects.push_back(selector9);
-	gameObjects.push_back(selector10);
-	gameObjects.push_back(selector11);
-	gameObjects.push_back(selector12);
+	game->gameObjects.push_back(selector1);
+	game->gameObjects.push_back(selector2);
+	game->gameObjects.push_back(selector3);
+	game->gameObjects.push_back(selector4);
+	game->gameObjects.push_back(selector5);
+	game->gameObjects.push_back(selector6);
+	game->gameObjects.push_back(selector7);
+	game->gameObjects.push_back(selector8);
+	game->gameObjects.push_back(selector9);
+	game->gameObjects.push_back(selector10);
+	game->gameObjects.push_back(selector11);
+	game->gameObjects.push_back(selector12);
 
 	sceneObjects.push_back(selector1);
 	sceneObjects.push_back(selector2);
@@ -500,7 +503,7 @@ void MainGame::createGameObjects() {
 	sceneObjects.push_back(selector11);
 	sceneObjects.push_back(selector12);
 
-	runicTest = new RunicTest(RUNIC_TEST_SOLUTION, RUNIC_TEST_LENGHT, manuscrito, hoja4_2, 3);
+	runicTest = new RunicTest(Game::RUNIC_TEST_SOLUTION, Game::RUNIC_TEST_LENGHT, manuscrito, hoja4_2, 3);
 	runicTest->addSelector(sl1);
 	runicTest->addSelector(sl2);
 	runicTest->addSelector(sl3);
@@ -519,49 +522,49 @@ void MainGame::createGameObjects() {
 	#pragma region Mapa Estelar
 	GameObject* selector1E = new GameObject("Selector1E", 4, hoja5);
 	selector1E->addComponent<Transform>(Vector2D<float>(71, -51), 0.03);
-	selector1E->addComponent<SpriteRenderer>(getTexture(SELECTOR), 0, 0);
+	selector1E->addComponent<SpriteRenderer>(game->getTexture(Game::SELECTOR), 0, 0);
 	Selector* sl1E = selector1E->addComponent<Selector>();
 	Button* btS1E = selector1E->addComponent<Button>();
 	btS1E->onClick = [sl1E]() { sl1E->onClick(); };
 
 	GameObject* selector2E = new GameObject("Selector2E", 4, hoja5);
 	selector2E->addComponent<Transform>(Vector2D<float>(-30, -55), 0.03);
-	selector2E->addComponent<SpriteRenderer>(getTexture(SELECTOR), 0, 0);
+	selector2E->addComponent<SpriteRenderer>(game->getTexture(Game::SELECTOR), 0, 0);
 	Selector* sl2E = selector2E->addComponent<Selector>();
 	Button* btS2E = selector2E->addComponent<Button>();
 	btS2E->onClick = [sl2E]() { sl2E->onClick(); };
 
 	GameObject* selector3E = new GameObject("Selector3E", 4, hoja5);
 	selector3E->addComponent<Transform>(Vector2D<float>(-107, 10), 0.03);
-	selector3E->addComponent<SpriteRenderer>(getTexture(SELECTOR), 0, 0);
+	selector3E->addComponent<SpriteRenderer>(game->getTexture(Game::SELECTOR), 0, 0);
 	Selector* sl3E = selector3E->addComponent<Selector>();
 	Button* btS3E = selector3E->addComponent<Button>();
 	btS3E->onClick = [sl3E]() { sl3E->onClick(); };
 
 	GameObject* selector4E = new GameObject("Selector4E", 4, hoja5);
 	selector4E->addComponent<Transform>(Vector2D<float>(-45, 77), 0.03);
-	selector4E->addComponent<SpriteRenderer>(getTexture(SELECTOR), 0, 0);
+	selector4E->addComponent<SpriteRenderer>(game->getTexture(Game::SELECTOR), 0, 0);
 	Selector* sl4E = selector4E->addComponent<Selector>();
 	Button* btS4E = selector4E->addComponent<Button>();
 	btS4E->onClick = [sl4E]() { sl4E->onClick(); };
 
 	GameObject* selector5E = new GameObject("Selector5E", 4, hoja6);
 	selector5E->addComponent<Transform>(Vector2D<float>(43, -53), 0.035);
-	selector5E->addComponent<SpriteRenderer>(getTexture(SELECTOR), 0, 0);
+	selector5E->addComponent<SpriteRenderer>(game->getTexture(Game::SELECTOR), 0, 0);
 	Selector* sl5E = selector5E->addComponent<Selector>();
 	Button* btS5E = selector5E->addComponent<Button>();
 	btS5E->onClick = [sl5E]() { sl5E->onClick(); };
 
 	GameObject* selector6E = new GameObject("Selector6E", 4, hoja6);
 	selector6E->addComponent<Transform>(Vector2D<float>(-73, 44), 0.03);
-	selector6E->addComponent<SpriteRenderer>(getTexture(SELECTOR), 0, 0);
+	selector6E->addComponent<SpriteRenderer>(game->getTexture(Game::SELECTOR), 0, 0);
 	Selector* sl6E = selector6E->addComponent<Selector>();
 	Button* btS6E = selector6E->addComponent<Button>();
 	btS6E->onClick = [sl6E]() { sl6E->onClick(); };
 
 	GameObject* selector7E = new GameObject("Selector7E", 4, hoja6);
 	selector7E->addComponent<Transform>(Vector2D<float>(23, 152), 0.03);
-	selector7E->addComponent<SpriteRenderer>(getTexture(SELECTOR), 0, 0);
+	selector7E->addComponent<SpriteRenderer>(game->getTexture(Game::SELECTOR), 0, 0);
 	Selector* sl7E = selector7E->addComponent<Selector>();
 	Button* btS7E = selector7E->addComponent<Button>();
 	btS7E->onClick = [sl7E]() { sl7E->onClick(); };
@@ -573,13 +576,13 @@ void MainGame::createGameObjects() {
 	overlays.push_back(selector5E);
 	overlays.push_back(selector6E);
 	overlays.push_back(selector7E);
-	gameObjects.push_back(selector1E);
-	gameObjects.push_back(selector2E);
-	gameObjects.push_back(selector3E);
-	gameObjects.push_back(selector4E);
-	gameObjects.push_back(selector5E);
-	gameObjects.push_back(selector6E);
-	gameObjects.push_back(selector7E);
+	game->gameObjects.push_back(selector1E);
+	game->gameObjects.push_back(selector2E);
+	game->gameObjects.push_back(selector3E);
+	game->gameObjects.push_back(selector4E);
+	game->gameObjects.push_back(selector5E);
+	game->gameObjects.push_back(selector6E);
+	game->gameObjects.push_back(selector7E);
 
 	sceneObjects.push_back(selector1E);
 	sceneObjects.push_back(selector2E);
@@ -589,7 +592,7 @@ void MainGame::createGameObjects() {
 	sceneObjects.push_back(selector6E);
 	sceneObjects.push_back(selector7E);
 	
-	astrologyTest = new RunicTest(ASTROLOGY_TEST_SOLUTION, ASTROLOGY_TEST_LENGHT, manuscrito, hoja6_2, 5);
+	astrologyTest = new RunicTest(Game::ASTROLOGY_TEST_SOLUTION, Game::ASTROLOGY_TEST_LENGHT, manuscrito, hoja6_2, 5);
 	astrologyTest->addSelector(sl1E);
 	astrologyTest->addSelector(sl2E);
 	astrologyTest->addSelector(sl3E);
@@ -609,34 +612,34 @@ void MainGame::createGameObjects() {
 	code1->addComponent<Transform>(Vector2D<float>(-75, 0), 0.15);
 	code1->addComponent<SpriteRenderer>();
 	SDL_Color color = { 128, 18, 0, 255 };
-	Text* t1 = code1->addComponent<Text>("0", color, manuscritoFont, 0, 400, renderer);
+	Text* t1 = code1->addComponent<Text>("0", color, game->manuscritoFont, 0, 400, renderer);
 
 	GameObject* code2 = new GameObject("code2", 3, hoja8);
 	code2->addComponent<Transform>(Vector2D<float>(-25, 0), 0.15);
 	code2->addComponent<SpriteRenderer>();
-	Text* t2 = code2->addComponent<Text>("0", color, manuscritoFont, 0, 400, renderer);
+	Text* t2 = code2->addComponent<Text>("0", color, game->manuscritoFont, 0, 400, renderer);
 
 	GameObject* code3 = new GameObject("code3", 3, hoja8);
 	code3->addComponent<Transform>(Vector2D<float>(25, 0), 0.15);
 	code3->addComponent<SpriteRenderer>();
-	Text* t3 = code3->addComponent<Text>("0", color, manuscritoFont, 0, 400, renderer);
+	Text* t3 = code3->addComponent<Text>("0", color, game->manuscritoFont, 0, 400, renderer);
 
 	GameObject* code4 = new GameObject("code4", 3, hoja8);
 	code4->addComponent<Transform>(Vector2D<float>(75, 0), 0.15);
 	code4->addComponent<SpriteRenderer>();
-	Text* t4 = code4->addComponent<Text>("0", color, manuscritoFont, 0, 400, renderer);
+	Text* t4 = code4->addComponent<Text>("0", color, game->manuscritoFont, 0, 400, renderer);
 
 	codeTexts.push_back(t1);
 	codeTexts.push_back(t2);
 	codeTexts.push_back(t3);
 	codeTexts.push_back(t4);
 
-	finalCodeTest = new CodeTest(codeTexts, FINAL_CODE_SOLUTION, *manuscrito, hoja8_2, 7);
+	finalCodeTest = new CodeTest(codeTexts, Game::FINAL_CODE_SOLUTION, *manuscrito, hoja8_2, 7);
 
-	gameObjects.push_back(code1);
-	gameObjects.push_back(code2);
-	gameObjects.push_back(code3);
-	gameObjects.push_back(code4);
+	game->gameObjects.push_back(code1);
+	game->gameObjects.push_back(code2);
+	game->gameObjects.push_back(code3);
+	game->gameObjects.push_back(code4);
 
 	sceneObjects.push_back(code1);
 	sceneObjects.push_back(code2);
@@ -656,10 +659,10 @@ void MainGame::createUvLight() {
 	light_tex = SDL_CreateTextureFromSurface(renderer, lightSurf);
 	SDL_SetTextureBlendMode(light_tex, SDL_BLENDMODE_ADD);
 
-	rendertex_light = SDL_CreateTexture(renderer, SDL_PIXELFORMAT_RGBA8888, SDL_TEXTUREACCESS_TARGET, WINDOW_WIDTH, WINDOW_HEIGHT);
+	rendertex_light = SDL_CreateTexture(renderer, SDL_PIXELFORMAT_RGBA8888, SDL_TEXTUREACCESS_TARGET, Game::WINDOW_WIDTH, Game::WINDOW_HEIGHT);
 	SDL_SetTextureBlendMode(rendertex_light, SDL_BLENDMODE_MOD);
 
-	rendertex = SDL_CreateTexture(renderer, SDL_PIXELFORMAT_RGBA8888, SDL_TEXTUREACCESS_TARGET, WINDOW_WIDTH, WINDOW_HEIGHT);
+	rendertex = SDL_CreateTexture(renderer, SDL_PIXELFORMAT_RGBA8888, SDL_TEXTUREACCESS_TARGET, Game::WINDOW_WIDTH, Game::WINDOW_HEIGHT);
 	SDL_SetTextureBlendMode(rendertex, SDL_BLENDMODE_MOD);
 
 	// LUZ AMBIENTE
@@ -667,10 +670,10 @@ void MainGame::createUvLight() {
 	ambientLight_tex = SDL_CreateTextureFromSurface(renderer, ambientLightSurf);
 	SDL_SetTextureBlendMode(ambientLight_tex, SDL_BLENDMODE_ADD);
 
-	rendertex_ambientLight = SDL_CreateTexture(renderer, SDL_PIXELFORMAT_RGBA8888, SDL_TEXTUREACCESS_TARGET, WINDOW_WIDTH, WINDOW_HEIGHT);
+	rendertex_ambientLight = SDL_CreateTexture(renderer, SDL_PIXELFORMAT_RGBA8888, SDL_TEXTUREACCESS_TARGET, Game::WINDOW_WIDTH, Game::WINDOW_HEIGHT);
 	SDL_SetTextureBlendMode(rendertex_ambientLight, SDL_BLENDMODE_MOD);
 
-	rendertexLight = SDL_CreateTexture(renderer, SDL_PIXELFORMAT_RGBA8888, SDL_TEXTUREACCESS_TARGET, WINDOW_WIDTH, WINDOW_HEIGHT);
+	rendertexLight = SDL_CreateTexture(renderer, SDL_PIXELFORMAT_RGBA8888, SDL_TEXTUREACCESS_TARGET, Game::WINDOW_WIDTH, Game::WINDOW_HEIGHT);
 	SDL_SetTextureBlendMode(rendertexLight, SDL_BLENDMODE_MOD);
 
 	SDL_DestroySurface(lightSurf);
@@ -690,7 +693,7 @@ void MainGame::showText(GameObject* text) {
 #pragma region Render Objects
 
 void MainGame::renderObjects() const {
-	getTexture(BACKGROUND)->render();
+	game->getTexture(Game::BACKGROUND)->render();
 
 	// Renderizamos todo del cuaderno de notas
 	if (notebookParent->getIsActive()) {

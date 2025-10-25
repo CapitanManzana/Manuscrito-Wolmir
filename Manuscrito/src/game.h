@@ -70,7 +70,6 @@ private:
 	Uint64 perfFrequency; // Frecuencia del contador de alto rendimiento (ticks por segundo)
 	Uint64 lastTime;
 
-protected:
 	SDL_Window* window;
 	SDL_Renderer* renderer;
 

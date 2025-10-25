@@ -6,23 +6,13 @@
 #include "texture.h"
 #include "GameObject.h"
 #include "Button.h"
-#include "Text.h"
-#include "Book.h"
-#include "LoadTexts.h"
-#include "Selector.h"
-#include "RunicTest.h"
-#include "Notebook.h"
-#include "NoteRevealer.h"
 #include "Hover.h"
-#include "CodeTest.h"
+#include "SceneManager.h"
 
 using namespace std;
 
-// Constantes
 constexpr const char* const WINDOW_TITLE = "Manuscrito Wolmir";
 
-// Estructura para especificar las texturas que hay que
-// cargar y el tamaño de su matriz de frames
 struct TextureSpec
 {
 	const char* name;
@@ -54,7 +44,6 @@ TTF_Font* Game::manuscritoFont = nullptr;
 
 // OBJETOS DEL JUEGO
 vector<GameObject*> Game::gameObjects;
-
 
 Game::Game() : exit(false)
 {
@@ -134,7 +123,7 @@ Game::~Game()
 void
 Game::render() const
 {
-	
+	SceneManager::activeScene->Render();
 }
 
 void
@@ -150,13 +139,7 @@ Game::update()
 	// 3. Actualizamos lastTime para el siguiente fotograma
 	lastTime = currentTime;
 
-	// 4. Ahora llamamos al update de todos los GameObjects, pasando el deltaTime
-	for (size_t i = 0; i < gameObjects.size(); i++) {
-		if (gameObjects[i]->getIsActive())
-			gameObjects[i]->update(deltaTime); // Pasamos el valor calculado
-	}
-
-	
+	SceneManager::activeScene->Update(deltaTime);
 }
 
 void
@@ -166,9 +149,7 @@ Game::run()
 	Uint32 frameStart;
 	Uint32 frameTime;
 
-	for (size_t i = 0; i < gameObjects.size(); i++) {
-		gameObjects[i]->start();
-	}
+	SceneManager::activeScene->Start();
 
 	// Bucle principal del juego
 	while (!exit) {
@@ -246,5 +227,7 @@ Game::handleEvents()
 				exit = true;
 			}
 		}
+
+		SceneManager::activeScene->HandleEvents(event);
 	}
 }

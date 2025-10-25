@@ -1,6 +1,5 @@
 #pragma once
 #include "Scene.h"
-#include <vector>
 #include "vector2D.h"
 
 class RunicTest;
@@ -16,13 +15,13 @@ class MainGame : public Scene
 {
 private:
 	// MANUSCRITO
-	Book* manuscrito;
+	Book* manuscrito = nullptr;
 	int currentPage = 0;
 	int pagesCount = 0;
 
 	//Cuaderno de notas
-	GameObject* notebookParent;
-	Notebook* notebook;
+	GameObject* notebookParent = nullptr;
+	Notebook* notebook = nullptr;
 
 	// TEXTOS
 	GameObject* currentText = nullptr;
@@ -31,31 +30,31 @@ private:
 	vector<GameObject*> overlays;
 
 	// TESTS
-	RunicTest* runicTest;
-	RunicTest* astrologyTest;
-	CodeTest* finalCodeTest;
+	RunicTest* runicTest = nullptr;
+	RunicTest* astrologyTest = nullptr;
+	CodeTest* finalCodeTest = nullptr;
 
 	// HERAMIENTAS
 	bool blackLight = false;
 	bool paperNotes = false;
 
 	// Mascara de luz uv
-	SDL_Texture* light_tex;
-	SDL_Texture* rendertex_light;
-	SDL_Texture* rendertex;
+	SDL_Texture* light_tex = nullptr;
+	SDL_Texture* rendertex_light = nullptr;
+	SDL_Texture* rendertex = nullptr;
 	SDL_FRect rectLight;
 
 	vector<GameObject*> uvObjects;
 
-	float cur_posX;
-	float cur_posY;
+	float cur_posX = 0;
+	float cur_posY = 0;
 
 	// Luz ambiente
 	SDL_Color ambientLightDarkZone = { 24, 0, 115, 225 };
 	SDL_Color ambientLightIlumZone = { 212, 135, 51, 100 };
-	SDL_Texture* ambientLight_tex;
-	SDL_Texture* rendertex_ambientLight;
-	SDL_Texture* rendertexLight;
+	SDL_Texture* ambientLight_tex = nullptr;
+	SDL_Texture* rendertex_ambientLight = nullptr;
+	SDL_Texture* rendertexLight = nullptr;
 	SDL_FRect rect_ambientLight;
 
 	float lightRadius = 2.3f;
@@ -65,8 +64,8 @@ private:
 	const char* const textsData = "../assets/data/texts.txt";
 
 public:
-	MainGame() = default;
-	virtual ~MainGame() = default;
+	MainGame(Game& game) : Scene(game) { }
+	~MainGame() override;
 
 	void Load() override;
 	void Update(float deltaTime) override;
