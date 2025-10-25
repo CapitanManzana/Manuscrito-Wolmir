@@ -1,4 +1,5 @@
-#include "IntroScene.h"
+#include "CerrarScene.h"
+
 #include "SceneManager.h"
 #include "GameObject.h"
 #include "Text.h"
@@ -10,7 +11,7 @@
 
 using namespace std;
 
-void IntroScene::Load() {
+void CerrarScene::Load() {
 	fstream file(INTRO_TEXT_DIR);
 	string btonText;
 
@@ -28,7 +29,7 @@ void IntroScene::Load() {
 	SDL_Color color = { 196, 26, 0, 255 };
 	SDL_Color hoverColor = { 242, 83, 63, 255 };
 
-	Text* t =continueButton->addComponent<Text>(btonText, color, game->baseFontCentered, 0, BUTTON_SIZE, renderer);
+	Text* t = continueButton->addComponent<Text>(btonText, color, game->baseFontCentered, 0, BUTTON_SIZE, renderer);
 	continueButton->addComponent<Fader>(SHOW_TEXT_SPEED, true);
 	continueButton->addComponent<Button>([this]() { fadeOutText();});
 	Hover* h = continueButton->addComponent<Hover>(renderer);
@@ -42,7 +43,19 @@ void IntroScene::Load() {
 	nextText();
 }
 
-void IntroScene::loadTexts(istream& file, string& buttonText) {
+void CerrarScene::Render() {
+
+	SDL_SetRenderDrawColor(renderer, 0, 0, 0, 255);
+	SDL_RenderFillRect(renderer, nullptr);
+
+	for (GameObject* g : sceneObjects) {
+		if (g->getIsActive() && g->spriteRenderer != nullptr && g->spriteRenderer->isEnabled) {
+			g->render();
+		}
+	}
+}
+
+void CerrarScene::loadTexts(istream& file, string& buttonText) {
 	string tag;
 	file >> tag >> textsCount;
 	file >> tag;
@@ -97,18 +110,18 @@ void IntroScene::loadTexts(istream& file, string& buttonText) {
 	}
 }
 
-void IntroScene::nextText() {
+void CerrarScene::nextText() {
 	if (currentText < textsCount) {
 		texts[currentText]->setIsActive(true);
 		prevText = texts[currentText];
 		currentText++;
 	}
 	else {
-		SceneManager::changeScene(MAIN_GAME);
+		SceneManager::changeScene(INTRO);
 	}
 }
 
-void IntroScene::fadeOutText() {
+void CerrarScene::fadeOutText() {
 	if (!canContinue) {
 		return;
 	}
@@ -131,6 +144,6 @@ void IntroScene::fadeOutText() {
 	}
 }
 
-void IntroScene::onFadeInEnd() {
+void CerrarScene::onFadeInEnd() {
 	canContinue = true;
 }

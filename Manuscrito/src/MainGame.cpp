@@ -17,6 +17,7 @@
 #include "Hover.h"
 #include "CodeTest.h"
 #include "Fader.h"
+#include "SceneManager.h"
 
 vector<GameObject*> MainGame::texts;
 
@@ -41,7 +42,7 @@ void MainGame::Start() {
 	}
 }
 
-void MainGame::Update(float deltaTime){
+void MainGame::Update(float deltaTime) {
 	// Páginas del manuscrito
 	for (size_t i = 0; i < sceneObjects.size(); i++) {
 		if (sceneObjects[i]->getIsActive()) {
@@ -193,7 +194,7 @@ void MainGame::HandleEvents(SDL_Event& event) {
 #pragma region Load Objects
 
 void MainGame::createGameObjects() {
-	#pragma region HOJAS DEL MANUSCRITO
+#pragma region HOJAS DEL MANUSCRITO
 	vector<GameObject*> bookPages;
 
 	GameObject* hoja1 = new GameObject("Hoja1", 2);
@@ -265,6 +266,7 @@ void MainGame::createGameObjects() {
 	game->gameObjects.push_back(hoja7);
 	game->gameObjects.push_back(hoja8);
 	game->gameObjects.push_back(hoja8_2);
+	
 
 	sceneObjects.push_back(hoja1);
 	sceneObjects.push_back(hoja2);
@@ -280,7 +282,7 @@ void MainGame::createGameObjects() {
 
 #pragma endregion
 
-	#pragma region CUADERNO DE NOTAS
+#pragma region CUADERNO DE NOTAS
 	notebookParent = new GameObject("Cuaderno", 2);
 	notebookParent->addComponent<Transform>(Vector2D<float>(Game::WINDOW_WIDTH / 2, Game::WINDOW_HEIGHT / 2), 0.37);
 	notebookParent->addComponent<SpriteRenderer>(game->getTexture(Game::FOLIO), 0, 0);
@@ -301,7 +303,7 @@ void MainGame::createGameObjects() {
 
 #pragma endregion
 
-	#pragma region TEXTOS DEL MANUSCRITO
+#pragma region TEXTOS DEL MANUSCRITO
 	// Cargamos el archivo de textos
 	LoadTexts* textsLoader = new LoadTexts(textsData);
 	// Recorremos las páginas y los textos para crearlos
@@ -342,7 +344,34 @@ void MainGame::createGameObjects() {
 			game->gameObjects.push_back(texto);
 			sceneObjects.push_back(texto);
 		}
+
+		if (i == 7) {
+			SDL_Color colorBtn = { 196, 26, 0, 255 };
+			GameObject* btCerrar = new GameObject("btCerrar", 4, bookPages[i]);
+			btCerrar->addComponent<Transform>(Vector2D<float>(-60, 130), 0.15);
+			btCerrar->addComponent<SpriteRenderer>();
+			btCerrar->addComponent<Text>("CERRAR LIBRO", colorBtn, game->baseFont, 0, 80, renderer);
+			Button* btC = btCerrar->addComponent<Button>();
+			btC->onClick = [this]() { changeScene(FINAL_CERRAR); };
+
+			GameObject* btLiberar = new GameObject("btLiberar", 4, bookPages[i]);
+			btLiberar->addComponent<Transform>(Vector2D<float>(60, 130), 0.15);
+			btLiberar->addComponent<SpriteRenderer>();
+			btLiberar->addComponent<Text>("LIBERAR", colorBtn, game->baseFont, 0, 80, renderer);
+
+			Button* btL = btLiberar->addComponent<Button>();
+			btL->onClick = [this]() { changeScene(FINAL_LIBERAR); };
+
+			texts.push_back(btCerrar);
+			texts.push_back(btLiberar);
+
+			game->gameObjects.push_back(btCerrar);
+			game->gameObjects.push_back(btLiberar);
+			sceneObjects.push_back(btCerrar);
+			sceneObjects.push_back(btLiberar);
+		}
 	}
+
 	//LOS HIJOS DE LA HOJA 4 PASAN A LA 4_2 PORQUE ESTAN OCULTOS
 	//LOS HIJOS DE LA HOJA 6 SOLO NECESITAMOS LOS DEL FINAL DESPUES DEL 5 PORQUE SON LOS OCULTOS
 	hoja4_2->setChildren(hoja4->getChildren());
@@ -381,7 +410,7 @@ void MainGame::createGameObjects() {
 	delete textsLoader;
 #pragma endregion
 
-	#pragma region RunicTest
+#pragma region RunicTest
 	/*
 	*  1. Creamos el GameObject
 	*  2. Añadimos transform y renderer
@@ -530,7 +559,7 @@ void MainGame::createGameObjects() {
 
 #pragma endregion
 
-	#pragma region Mapa Estelar
+#pragma region Mapa Estelar
 	GameObject* selector1E = new GameObject("Selector1E", 4, hoja5);
 	selector1E->addComponent<Transform>(Vector2D<float>(71, -51), 0.03);
 	selector1E->addComponent<SpriteRenderer>(game->getTexture(Game::SELECTOR), 0, 0);
@@ -602,7 +631,7 @@ void MainGame::createGameObjects() {
 	sceneObjects.push_back(selector5E);
 	sceneObjects.push_back(selector6E);
 	sceneObjects.push_back(selector7E);
-	
+
 	astrologyTest = new RunicTest(Game::ASTROLOGY_TEST_SOLUTION, Game::ASTROLOGY_TEST_LENGHT, manuscrito, hoja6_2, 5);
 	astrologyTest->addSelector(sl1E);
 	astrologyTest->addSelector(sl2E);
@@ -614,7 +643,7 @@ void MainGame::createGameObjects() {
 
 #pragma endregion
 
-	#pragma region Prueba final
+#pragma region Prueba final
 
 	manuscrito->changePage(6);
 	vector<Text*> codeTexts;
@@ -722,7 +751,7 @@ void MainGame::renderObjects() const {
 		// EL texto
 		for (size_t i = 0; i < texts.size(); i++) {
 			if (texts[i]->getIsActive() && texts[i]->spriteRenderer != nullptr && texts[i]->spriteRenderer->isEnabled)
-				texts[i]->render();
+ 				texts[i]->render();
 		}
 
 		//Los textos del final test
@@ -737,3 +766,10 @@ void MainGame::renderObjects() const {
 }
 
 #pragma endregion
+
+
+void MainGame::changeScene(SceneType scene) {
+	Fader* f = fader->getComponent<Fader>();
+	f->startFadeIn();
+	f->onFadeInEnd = [scene]() { SceneManager::changeScene(scene); };
+}

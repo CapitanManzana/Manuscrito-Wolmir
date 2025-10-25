@@ -3,8 +3,8 @@
 Scene* SceneManager::activeScene;
 std::vector<Scene*> SceneManager::scenes;
 
-void SceneManager::changeScene(int index) {
-	activeScene = scenes[index];
+void SceneManager::changeScene(SceneType scene) {
+	activeScene = scenes[scene];
 }
 
 void SceneManager::addScene(Scene* scene) {

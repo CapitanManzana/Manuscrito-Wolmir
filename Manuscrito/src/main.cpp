@@ -3,6 +3,8 @@
 #include "MainGame.h"
 #include "IntroScene.h"
 #include "SceneManager.h"
+#include "LiberarScene.h"
+#include "CerrarScene.h"
 
 int main(int argc, char* argv[])
 {
@@ -16,6 +18,13 @@ int main(int argc, char* argv[])
 		MainGame* mainGame = new MainGame(*game);
 		mainGame->Load();
 
+		LiberarScene* liberarScene = new LiberarScene(*game);
+		liberarScene->Load();
+
+		CerrarScene* cerrarScene = new CerrarScene(*game);
+		cerrarScene->Load();
+
+		SceneManager::changeScene(MAIN_GAME);
 		game->run();
 
 		SceneManager::unload();

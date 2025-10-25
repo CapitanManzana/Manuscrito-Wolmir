@@ -92,5 +92,8 @@ void Fader::onComponentAdd() {
 	if (tx) {
 		texture = tx->getTexture();
 		SDL_SetTextureBlendMode(texture, SDL_BLENDMODE_BLEND);
+		if (fadeIn) {
+			SDL_SetTextureAlphaMod(texture, 0);
+		}
 	}
 }

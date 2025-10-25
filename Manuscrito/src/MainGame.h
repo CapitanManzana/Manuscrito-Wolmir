@@ -1,6 +1,7 @@
 #pragma once
 #include "Scene.h"
 #include "vector2D.h"
+#include "SceneManager.h"
 
 class RunicTest;
 class CodeTest;
@@ -83,6 +84,8 @@ private:
 
 	void createGameObjects();
 	void createUvLight();
+
+	void changeScene(SceneType scene);
 
 	static vector<GameObject*> texts;
 };

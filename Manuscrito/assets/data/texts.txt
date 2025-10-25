@@ -572,7 +572,7 @@ Page_7
         uv: 0
         revealNoteIndex: -1
 Page_8:
-	TextsCount: 8
+	TextsCount: 6
     T_1:
         text: 4 esconden la verdad
 		x: 0
@@ -627,22 +627,3 @@ Page_8:
 		color: #6B2604
 		uv: 0
 		revealNoteIndex: 4
-    T_7:
-        text: CERRAR EL LIBRO
-		x: -60
-		y: 130
-		size: 80
-		textEnd: 1500
-		color: #C41A00
-		uv: 0
-		revealNoteIndex: 0
-     T_8:
-        text: LIBERAR A HELENA
-		x: 60
-		y: 130
-		size: 80
-		textEnd: 1500
-		color: #C41A00
-		uv: 0
-		revealNoteIndex: -1
-

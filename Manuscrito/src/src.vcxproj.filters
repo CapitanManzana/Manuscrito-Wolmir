@@ -105,6 +105,12 @@
     <ClCompile Include="Fader.cpp">
       <Filter>Archivos de código fuente\Componentes</Filter>
     </ClCompile>
+    <ClCompile Include="LiberarScene.cpp">
+      <Filter>Archivos de código fuente\Scenes</Filter>
+    </ClCompile>
+    <ClCompile Include="CerrarScene.cpp">
+      <Filter>Archivos de código fuente\Scenes</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="game.h">
@@ -179,6 +185,12 @@
     <ClInclude Include="Fader.h">
       <Filter>Archivos de encabezado\Componentes</Filter>
     </ClInclude>
+    <ClInclude Include="LiberarScene.h">
+      <Filter>Archivos de encabezado\Scenes</Filter>
+    </ClInclude>
+    <ClInclude Include="CerrarScene.h">
+      <Filter>Archivos de encabezado\Scenes</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="..\assets\data\texts.txt">
@@ -190,6 +202,12 @@
       <Filter>Archivos de recursos</Filter>
     </Text>
     <Text Include="..\assets\data\introTexts.txt">
+      <Filter>Archivos de recursos</Filter>
+    </Text>
+    <Text Include="..\assets\data\finalLiberarTexts.txt">
+      <Filter>Archivos de recursos</Filter>
+    </Text>
+    <Text Include="..\assets\data\finalCerrarTexts.txt">
       <Filter>Archivos de recursos</Filter>
     </Text>
   </ItemGroup>

@@ -1,0 +1,32 @@
+﻿TextsCount: 5
+ButtonName: > Continuar <
+	T0:
+		Text: El libro comienza a temblar de manera repentina, las luces de la habitanción parpadean, las páginas comienzan ha pasar a gran velociad...
+		PosX: -1
+		PosY: -1
+		Size: 100
+		EndText: 4000
+	T1:
+		Text: El Sr. Wolmir alertado por el ruido entra en la habitación...
+		PosX: -1
+		PosY: -1
+		Size: 100
+		EndText: 4000
+	T2:
+		Text: Ambos os quedais atónitos con la situación. Hasta que de repente...
+		PosX: -1
+		PosY: -1
+		Size: 100
+		EndText: 4000
+	T3:
+		Text: Todo se detiene, ambos os quedais callados, y entre el intenso silencio se escucha una voz
+		PosX: -1
+		PosY: -1
+		Size: 100
+		EndText: 4000
+	T4:
+		Text: "Hermana... eres tú" 
+		PosX: -1
+		PosY: -1
+		Size: 100
+		EndText: 4000

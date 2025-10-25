@@ -1,0 +1,26 @@
+﻿TextsCount: 4
+ButtonName: > Continuar <
+	T0:
+		Text: El texto por arte de mágia se vueve a cifrar, pasan las páginas hasta cerrarse.
+		PosX: -1
+		PosY: -1
+		Size: 100
+		EndText: 4000
+	T1:
+		Text: Le comunicas al Sr. Wolmir que no has sido capaz de descifrarlo. Puedes apreciar su cara de ira y decepción.
+		PosX: -1
+		PosY: -1
+		Size: 100
+		EndText: 4000
+	T2:
+		Text: Recoges tus cosas y vuelves a casa en mitad de la fría noche. Una vez en casa, te acomodas en la calidez de tus sábanas. Justo antes de dormir escuchas...
+		PosX: -1
+		PosY: -1
+		Size: 100
+		EndText: 4000
+	T3:
+		Text: "Muchas gracias..."
+		PosX: -1
+		PosY: -1
+		Size: 100
+		EndText: 4000

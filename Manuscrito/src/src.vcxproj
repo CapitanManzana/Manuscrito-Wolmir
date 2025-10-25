@@ -103,12 +103,14 @@
   <ItemGroup>
     <ClCompile Include="Book.cpp" />
     <ClCompile Include="Button.cpp" />
+    <ClCompile Include="CerrarScene.cpp" />
     <ClCompile Include="CodeTest.cpp" />
     <ClCompile Include="Fader.cpp" />
     <ClCompile Include="game.cpp" />
     <ClCompile Include="GameObject.cpp" />
     <ClCompile Include="Hover.cpp" />
     <ClCompile Include="IntroScene.cpp" />
+    <ClCompile Include="LiberarScene.cpp" />
     <ClCompile Include="LoadTexts.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="MainGame.cpp" />
@@ -128,6 +130,7 @@
   <ItemGroup>
     <ClInclude Include="Book.h" />
     <ClInclude Include="Button.h" />
+    <ClInclude Include="CerrarScene.h" />
     <ClInclude Include="CodeTest.h" />
     <ClInclude Include="Component.h" />
     <ClInclude Include="Fader.h" />
@@ -135,6 +138,7 @@
     <ClInclude Include="GameObject.h" />
     <ClInclude Include="Hover.h" />
     <ClInclude Include="IntroScene.h" />
+    <ClInclude Include="LiberarScene.h" />
     <ClInclude Include="LoadTexts.h" />
     <ClInclude Include="MainGame.h" />
     <ClInclude Include="MonoBehaviour.h" />
@@ -155,6 +159,8 @@
     <None Include="..\assets\data\texts.txt" />
   </ItemGroup>
   <ItemGroup>
+    <Text Include="..\assets\data\finalCerrarTexts.txt" />
+    <Text Include="..\assets\data\finalLiberarTexts.txt" />
     <Text Include="..\assets\data\introTexts.txt" />
     <Text Include="..\assets\data\notes.txt" />
   </ItemGroup>
