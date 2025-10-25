@@ -130,6 +130,8 @@ void Text::updateSurface() {
 		delete texture;
 	}
 
+	TTF_SetFontSize(font, fontSize);
+
 	surface = TTF_RenderText_Blended_Wrapped(font, currentText.c_str(), 0, color, textureWidth);
 	if (!surface) {
 		SDL_LogError(SDL_LOG_CATEGORY_APPLICATION, "No se pudo crear la superficie: %s", SDL_GetError());
@@ -184,13 +186,13 @@ std::string Text::getText() const {
 }
 
 void Text::setColor(SDL_Color newColor) {
-	if (color.r != newColor.r || color.g != newColor.g || color.b != newColor.b || color.a != newColor.a) {
-		color = newColor;
-		updateSurface();
-	}
+	if (color.r == newColor.r && color.g == newColor.g && color.b == newColor.b && color.a == newColor.a) return;
+
+	color = newColor;
+	updateSurface();
 }
 
-SDL_Color Text::getColor() const{
+SDL_Color Text::getColor() const {
 	return color;
 }
 

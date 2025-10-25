@@ -206,26 +206,6 @@ Game::handleEvents()
 			}
 		}
 
-		if (event.type == SDL_EVENT_MOUSE_MOTION) {
-			float cur_posX, cur_posY;
-			SDL_RenderCoordinatesFromWindow(renderer, event.motion.x, event.motion.y, &cur_posX, &cur_posY);
-
-			for (GameObject* go : gameObjects) {
-				if (go->getIsActive()) {
-					Hover* h = go->getComponent<Hover>();
-
-					if (h != nullptr && h->isEnabled) {
-						Transform* t = go->getComponent<Transform>();
-						SDL_FPoint cur_pos = { cur_posX, cur_posY };
-
-						if (SDL_PointInRectFloat(&cur_pos, &t->dstRect)) {
-							h->onHover();
-						}
-					}
-				}
-			}
-		}
-
 		if (event.type == SDL_EVENT_KEY_DOWN) {
 			// SALIR DEL JUEGO
 			if (event.key.key == SDLK_ESCAPE) {

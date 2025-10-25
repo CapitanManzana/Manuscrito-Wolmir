@@ -4,6 +4,7 @@
 #include "Text.h"
 #include "Fader.h"
 #include "Button.h"
+#include "Hover.h"
 
 #include <fstream>
 
@@ -23,10 +24,17 @@ void IntroScene::Load() {
 	continueButton = new GameObject("ContinueButton", 5);
 	continueButton->addComponent<Transform>(Vector2D<float>(Game::WINDOW_WIDTH / 2, BUTTON_HEIGHT), 0.15);
 	continueButton->addComponent<SpriteRenderer>();
+
 	SDL_Color color = { 196, 26, 0, 255 };
-	continueButton->addComponent<Text>(btonText, color, game->baseFontCentered, 0, BUTTON_SIZE, renderer);
+	SDL_Color hoverColor = { 242, 83, 63, 255 };
+
+	Text* t =continueButton->addComponent<Text>(btonText, color, game->baseFontCentered, 0, BUTTON_SIZE, renderer);
 	continueButton->addComponent<Fader>(SHOW_TEXT_SPEED, true);
 	continueButton->addComponent<Button>([this]() { fadeOutText();});
+	Hover* h = continueButton->addComponent<Hover>(renderer);
+
+	h->onEnterHover = [t, hoverColor]() { t->setColor(hoverColor); };
+	h->onExitHover = [t, color]() { t->setColor(color); };
 
 	game->gameObjects.push_back(continueButton);
 	sceneObjects.push_back(continueButton);
