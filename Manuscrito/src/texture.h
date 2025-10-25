@@ -43,6 +43,8 @@ public:
 	int getWidth() const;
 	int getHeight() const;
 
+	SDL_Texture* getTexture() const;
+
 	/// Render the whole picture filling the entire screen
 	void render() const;
 	/// Render the whole picture to the given rectangle
@@ -107,4 +109,8 @@ Texture::getHeight() const
 	return height;
 }
 
+inline SDL_Texture*
+Texture::getTexture() const {
+	return texture;
+}
 #endif // TEXTURE_H

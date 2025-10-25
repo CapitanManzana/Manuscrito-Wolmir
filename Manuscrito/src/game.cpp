@@ -25,6 +25,7 @@ constexpr const char* const fontBase = "../assets/font/";
 
 constexpr array<TextureSpec, Game::NUM_TEXTURES> textureList{
 	TextureSpec{"fondo.jpg"},
+	{"Fader.jpg"},
 	{"Runas.JPEG"},
 	{"TablaRunas.JPEG"},
 	{"Selector.png"},

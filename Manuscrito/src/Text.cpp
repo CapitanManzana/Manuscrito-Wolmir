@@ -107,12 +107,12 @@ void Text::Update(float deltaTime) {
 
 void Text::onComponentAdd() {
 	if (!font) {
-		SDL_LogError(SDL_LOG_CATEGORY_APPLICATION, "No font assigned to Text component in GameObject %s", gameObject->getName());
+		SDL_LogError(SDL_LOG_CATEGORY_APPLICATION, "No hay fuete asignada a %s", gameObject->getName());
 		return;
 	}
 
 	if (!renderer) {
-		SDL_LogError(SDL_LOG_CATEGORY_APPLICATION, "No renderer assigned to Text component in GameObject %s", gameObject->getName());
+		SDL_LogError(SDL_LOG_CATEGORY_APPLICATION, "Noy hay render asignado a %s", gameObject->getName());
 		return;
 	}
 
@@ -132,7 +132,7 @@ void Text::updateSurface() {
 
 	surface = TTF_RenderText_Blended_Wrapped(font, currentText.c_str(), 0, color, textureWidth);
 	if (!surface) {
-		SDL_LogError(SDL_LOG_CATEGORY_APPLICATION, "Couldn't create text surface: %s", SDL_GetError());
+		SDL_LogError(SDL_LOG_CATEGORY_APPLICATION, "No se pudo crear la superficie: %s", SDL_GetError());
 	}
 
 	//2. Crear la textura a partir de la superficie
@@ -140,7 +140,7 @@ void Text::updateSurface() {
 	if (surface) {
 		textureSDL = SDL_CreateTextureFromSurface(renderer, surface);
 		if (!textureSDL) {
-			SDL_LogError(SDL_LOG_CATEGORY_APPLICATION, "Couldn't create text texture: %s", SDL_GetError());
+			SDL_LogError(SDL_LOG_CATEGORY_APPLICATION, "No se pudo crear la textura: %s", SDL_GetError());
 		}
 		else {
 			texture = new Texture(renderer, textureSDL, 1, 1);
@@ -148,7 +148,7 @@ void Text::updateSurface() {
 				gameObject->spriteRenderer->setTexture(texture);
 			}
 			else {
-				SDL_LogError(SDL_LOG_CATEGORY_APPLICATION, "No SpriteRenderer component in GameObject %s to assign the text texture", gameObject->getName());
+				SDL_LogError(SDL_LOG_CATEGORY_APPLICATION, "No hay SpriteRenderer component en GameObject %s", gameObject->getName());
 			}
 		}
 

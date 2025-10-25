@@ -14,6 +14,10 @@ using namespace std;
 class MainGame : public Scene 
 {
 private:
+	// Fader
+	GameObject* fader = nullptr;
+	float fadeTime = 5.0f;
+
 	// MANUSCRITO
 	Book* manuscrito = nullptr;
 	int currentPage = 0;

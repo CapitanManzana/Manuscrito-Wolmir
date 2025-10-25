@@ -16,12 +16,22 @@
 #include "NoteRevealer.h"
 #include "Hover.h"
 #include "CodeTest.h"
+#include "Fader.h"
 
 vector<GameObject*> MainGame::texts;
 
 void MainGame::Load() {
 	createGameObjects();
 	createUvLight();
+
+	fader = new GameObject("Fader", 3);
+	fader->addComponent<Transform>(Vector2D<float>(Game::WINDOW_WIDTH / 2, Game::WINDOW_HEIGHT / 2), 1);
+	fader->addComponent<SpriteRenderer>(game->getTexture(Game::FADER), 0, 0);
+	bool starFadeIn = false;
+	fader->addComponent<Fader>(fadeTime, starFadeIn);
+
+	sceneObjects.push_back(fader);
+	game->gameObjects.push_back(fader);
 }
 
 void MainGame::Start() {
@@ -125,6 +135,9 @@ void MainGame::Render() {
 
 	// Multiplica el mapa por tu máscara de luz (rendertex_light)
 	SDL_RenderTexture(renderer, rendertex_ambientLight, NULL, NULL);
+
+	// El fader de la escena es lo ultimo que se dibuja
+	fader->render();
 }
 
 void MainGame::HandleEvents(SDL_Event& event) {
