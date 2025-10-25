@@ -28,6 +28,12 @@
     <Filter Include="Archivos de encabezado\Scripts">
       <UniqueIdentifier>{effa39c0-66ea-4578-8393-26ea6392773f}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Archivos de encabezado\Scenes">
+      <UniqueIdentifier>{6aad2606-89af-4e50-9953-286563aaf307}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Archivos de código fuente\Scenes">
+      <UniqueIdentifier>{6bcbe3d6-1c4a-4b20-b6ba-840f797cf1bb}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="game.cpp">
@@ -83,6 +89,12 @@
     </ClCompile>
     <ClCompile Include="CodeTest.cpp">
       <Filter>Archivos de código fuente\Scripts</Filter>
+    </ClCompile>
+    <ClCompile Include="Scene.cpp">
+      <Filter>Archivos de código fuente</Filter>
+    </ClCompile>
+    <ClCompile Include="MainGame.cpp">
+      <Filter>Archivos de código fuente\Scenes</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -142,6 +154,12 @@
     </ClInclude>
     <ClInclude Include="CodeTest.h">
       <Filter>Archivos de encabezado\Scripts</Filter>
+    </ClInclude>
+    <ClInclude Include="Scene.h">
+      <Filter>Archivos de encabezado</Filter>
+    </ClInclude>
+    <ClInclude Include="MainGame.h">
+      <Filter>Archivos de encabezado\Scenes</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
