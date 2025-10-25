@@ -5,6 +5,7 @@
 #include "SceneManager.h"
 #include "LiberarScene.h"
 #include "CerrarScene.h"
+#include "SplashScreen.h"
 
 int main(int argc, char* argv[])
 {
@@ -12,6 +13,9 @@ int main(int argc, char* argv[])
 		Game* game = new Game();
 
 		// Creamos las escenas
+		SplashScreen* splashScene = new SplashScreen(*game);
+		splashScene->Load();
+
 		IntroScene* introScene = new IntroScene(*game);
 		introScene->Load();
 

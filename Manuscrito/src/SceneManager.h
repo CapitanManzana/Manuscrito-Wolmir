@@ -2,7 +2,8 @@
 #include "Scene.h"
 
 enum SceneType {
-	INTRO = 0,
+	SPLASH_SCREEN = 0,
+	INTRO,
 	MAIN_GAME,
 	FINAL_LIBERAR,
 	FINAL_CERRAR

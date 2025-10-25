@@ -4,13 +4,13 @@ Scene* SceneManager::activeScene;
 std::vector<Scene*> SceneManager::scenes;
 
 void SceneManager::changeScene(SceneType scene) {
+	SDL_Log("Cambiando a escena %i", scene);
 	activeScene = scenes[scene];
 }
 
 void SceneManager::addScene(Scene* scene) {
 	if (std::find(scenes.begin(), scenes.end(), scene) == scenes.end()) {
 		scenes.push_back(scene);
-
 		if (scenes.size() == 1) {
 			activeScene = scene;
 		}

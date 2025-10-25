@@ -42,6 +42,7 @@ public:
 	enum TextureName
 	{
 		BACKGROUND,
+		LOGO,
 		FADER,
 		RUNAS,
 		TABLA_RUNAS,
