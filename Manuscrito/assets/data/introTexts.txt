@@ -1,4 +1,4 @@
-﻿TextsCount: 3
+﻿TextsCount: 5
 ButtonName: > Continuar <
 	T0:
 		Text: Febrero, 1972. El teléfono rompe el silencio de la madrugada. Eres especialista en simbología arcana y manuscritos medievales, una eminencia en tu campo.
@@ -7,13 +7,25 @@ ButtonName: > Continuar <
 		Size: 100
 		EndText: 4000
 	T1:
-		Text: Al otro lado, la voz grave y con un marcado acento alemán de Franz Wolmir. Es un enigmático multimillonario y no se anda con rodeos: te necesita. Urgentemente.
+		Text: Al otro lado lado del telefono te contesta la voz de un hombre con un marcado acento alemán. Se nota que está nervioso y agitado, después de un breve silencio se presenta. Su nombre es Franz Wolmir un enigmático multimillonario. Te necesita. Urgentemente.
 		PosX: -1
 		PosY: -1
 		Size: 100
 		EndText: 4000
 	T2:
-		Text: El motivo: un libro. Un extraño manuscrito que su familia ha custodiado en secreto durante siglos. Lo llaman el Manuscrito Wolmir. Nadie ha podido descifrarlo jamás, pero Wolmir ha estado siguiendo tu trabajo... y está convencido de que solo tú tienes la clave. 
+		Text: El motivo: un libro. Un extraño manuscrito que su familia ha custodiado en secreto durante siglos. Nadie ha podido descifrarlo jamás, pero Wolmir ha estado siguiendo tu trabajo... y está convencido de que solo tú tienes la clave.
+		PosX: -1
+		PosY: -1
+		Size: 100
+		EndText: 4000
+	T3:
+		Text: El Sr. Wolmir te ofrece una absurda cantidad de dinero por ir a su mansión inmediatamente. Después de pensarlo un mometo, aceptas, tienes un nuevo encargo...
+		PosX: -1
+		PosY: -1
+		Size: 100
+		EndText: 4000
+	T4:
+		Text: Descifrar el Manuscrito Wolmir...
 		PosX: -1
 		PosY: -1
 		Size: 100
