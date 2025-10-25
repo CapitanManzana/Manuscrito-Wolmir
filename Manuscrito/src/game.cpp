@@ -123,7 +123,11 @@ Game::~Game()
 void
 Game::render() const
 {
+	SDL_RenderClear(renderer);
+
 	SceneManager::activeScene->Render();
+
+	SDL_RenderPresent(renderer);
 }
 
 void

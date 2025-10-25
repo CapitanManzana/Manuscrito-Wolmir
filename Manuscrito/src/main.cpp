@@ -11,9 +11,9 @@ int main(int argc, char* argv[])
 
 		// Creamos las escenas
 		IntroScene* introScene = new IntroScene(*game);
-		MainGame* mainGame = new MainGame(*game);
-
 		introScene->Load();
+
+		MainGame* mainGame = new MainGame(*game);
 		mainGame->Load();
 
 		game->run();

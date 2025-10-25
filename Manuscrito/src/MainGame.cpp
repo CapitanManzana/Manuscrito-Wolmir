@@ -34,7 +34,9 @@ void MainGame::Start() {
 void MainGame::Update(float deltaTime){
 	// Páginas del manuscrito
 	for (size_t i = 0; i < sceneObjects.size(); i++) {
-		sceneObjects[i]->update(deltaTime);
+		if (sceneObjects[i]->getIsActive()) {
+			sceneObjects[i]->update(deltaTime);
+		}
 	}
 
 	runicTest->DoUpdate(deltaTime);
@@ -62,8 +64,6 @@ MainGame::~MainGame() {
 }
 
 void MainGame::Render() {
-	SDL_RenderClear(renderer);
-
 	// 1. PREPARAR LA MÁSCARA DE LUZ
 	SDL_SetRenderDrawColor(renderer, ambientLightDarkZone.r, ambientLightDarkZone.g, ambientLightDarkZone.b, ambientLightDarkZone.a);
 	// Apunta a tu textura de luz (que tiene BLENDMODE_MOD)
@@ -125,8 +125,6 @@ void MainGame::Render() {
 
 	// Multiplica el mapa por tu máscara de luz (rendertex_light)
 	SDL_RenderTexture(renderer, rendertex_ambientLight, NULL, NULL);
-	// Muestra el resultado
-	SDL_RenderPresent(renderer);
 }
 
 void MainGame::HandleEvents(SDL_Event& event) {

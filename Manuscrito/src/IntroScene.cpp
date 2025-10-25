@@ -2,7 +2,6 @@
 #include "SceneManager.h"
 #include "GameObject.h"
 #include "Text.h"
-#include "texture.h"
 
 using namespace std;
 
@@ -14,7 +13,7 @@ void IntroScene::Load() {
 	// Añadimos los componentes
 	texto->addComponent<Transform>(Vector2D<float>(Game::WINDOW_WIDTH / 2, Game::WINDOW_HEIGHT / 2), 0.15);
 	texto->addComponent<SpriteRenderer>();
-	texto->addComponent<Text>(s, color, game->baseFontCentered, 3000, 200, renderer);
+	texto->addComponent<Text>(s, color, game->baseFontCentered, 4000, 100, renderer);
 
 	game->gameObjects.push_back(texto);
 	sceneObjects.push_back(texto);
@@ -25,25 +24,5 @@ void IntroScene::HandleEvents(SDL_Event& event) {
 		if (event.key.key == SDLK_T) {
 			SceneManager::changeScene(1);
 		}
-	}
-}
-
-void IntroScene::Start() {
-	for (GameObject* g : sceneObjects) {
-		g->start();
-	}
-}
-
-void IntroScene::Update(float deltaTime) {
-	for (GameObject* g : sceneObjects) {
-		g->update(deltaTime);
-	}
-}
-
-void IntroScene::Render() {
-	game->getTexture(Game::BACKGROUND)->render();
-
-	for (GameObject* g : sceneObjects) {
-		g->render();
 	}
 }
