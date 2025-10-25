@@ -192,7 +192,7 @@ void Notebook::discoverNote(int index) {
 
 void Notebook::render() const {
 	//renderizamos el fondo
-	totalObjects[0]->render();
+	totalObjects[0]->render(); 
 
 	//renderizamos las lineas de conexion
 	renderLines();
