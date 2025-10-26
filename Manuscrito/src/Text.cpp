@@ -67,7 +67,7 @@ void Text::Update(float deltaTime) {
 				currentText = "";
 				font = Game::baseFont;
 
-				TTF_SetFontSize(font, fontSize - 26);
+				TTF_SetFontSize(font, fontSize - 16);
 				TTF_SetFontWrapAlignment(font, TTF_HORIZONTAL_ALIGN_LEFT);
 
 				startedTyping = true;
@@ -130,8 +130,6 @@ void Text::updateSurface() {
 		delete texture;
 	}
 
-	TTF_SetFontSize(font, fontSize);
-
 	surface = TTF_RenderText_Blended_Wrapped(font, currentText.c_str(), 0, color, textureWidth);
 	if (!surface) {
 		SDL_LogError(SDL_LOG_CATEGORY_APPLICATION, "No se pudo crear la superficie: %s", SDL_GetError());
@@ -189,6 +187,7 @@ void Text::setColor(SDL_Color newColor) {
 	if (color.r == newColor.r && color.g == newColor.g && color.b == newColor.b && color.a == newColor.a) return;
 
 	color = newColor;
+	TTF_SetFontSize(font, fontSize);
 	updateSurface();
 }
 
