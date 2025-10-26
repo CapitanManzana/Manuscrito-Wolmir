@@ -7,7 +7,8 @@
 #include "Button.h"
 #include "Fader.h"
 #include "Hover.h"
-#include "SDL3_image/SDL_image.h"
+#include "SDL3/SDL_image.h"
+#include "AudioManager.h"
 
 using namespace std;
 
@@ -179,4 +180,5 @@ void MainMenu::changeScene(SceneType scene) {
 	Fader* f = fader->getComponent<Fader>();
 	f->startFadeIn();
 	f->onFadeInEnd = [scene]() { SceneManager::changeScene(scene); };
+	game->audioManager->playSong(AudioManager::THE_RIVER);
 }

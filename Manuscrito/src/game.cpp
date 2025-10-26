@@ -1,6 +1,6 @@
 #include "game.h"
 
-#include <SDL3_image/SDL_image.h>
+#include <SDL3/SDL_image.h>
 #include <fstream>
 
 #include "texture.h"
@@ -8,6 +8,7 @@
 #include "Button.h"
 #include "Hover.h"
 #include "SceneManager.h"
+#include "AudioManager.h"
 
 using namespace std;
 
@@ -22,7 +23,6 @@ struct TextureSpec
 
 constexpr const char* const imgBase = "../assets/images/";
 constexpr const char* const fontBase = "../assets/font/";
-constexpr const char* const musciBase = "../assets/music/";
 
 constexpr array<TextureSpec, Game::NUM_TEXTURES> textureList{
 	TextureSpec{"fondo.jpg"},
@@ -103,36 +103,6 @@ Game::Game() : exit(false)
 		SDL_LogError(SDL_LOG_CATEGORY_APPLICATION, "Couldn't load font");
 	}
 
-	// --- 2. Crear un Mixer ---
-	// Usamos el dispositivo de audio por defecto
-	mixer = MIX_CreateMixerDevice(SDL_AUDIO_DEVICE_DEFAULT_PLAYBACK, nullptr);
-	if (!mixer) {
-		SDL_LogError(SDL_LOG_CATEGORY_APPLICATION, "Error al crear el mixer");
-		exit = true;
-	}
-
-	MIX_Audio* music = MIX_LoadAudio(mixer, ((string)musciBase + "The River.mp3").c_str(), true);
-	if (!music) {
-		SDL_LogError(SDL_LOG_CATEGORY_APPLICATION, "Error al cargar la musica");
-	}
-
-	musicTrack = MIX_CreateTrack(mixer);
-	if (musicTrack) {
-		// Asignamos el audio a la pista
-		MIX_SetTrackAudio(musicTrack, music);
-
-		SDL_PropertiesID prop = SDL_CreateProperties();
-		SDL_SetNumberProperty(prop, MIX_PROP_PLAY_LOOPS_NUMBER, -1);
-		SDL_SetNumberProperty(prop, MIX_PROP_PLAY_FADE_IN_MILLISECONDS_NUMBER, 1000);
-
-		// Reproducimos la pista. 
-		// 0 bucles = se reproduce 1 vez. 
-		// -1 bucles = se reproduce infinitamente (loop).
-		// 1000 ms de "fade-in" (fundido de entrada)
-		MIX_PlayTrack(musicTrack, prop);
-	}
-
-
 	// Carga las texturas al inicio
 	for (size_t i = 0; i < textures.size(); i++) {
 		auto [name, nrows, ncols] = textureList[i];
@@ -142,13 +112,19 @@ Game::Game() : exit(false)
 	SDL_SetRenderDrawBlendMode(renderer, SDL_BLENDMODE_MUL);
 	SDL_SetRenderLogicalPresentation(renderer, WINDOW_WIDTH, WINDOW_HEIGHT, SDL_LOGICAL_PRESENTATION_STRETCH);
 
-	MIX_Init();
+	audioManager = new AudioManager();
 }
 
 Game::~Game()
 {
 	TTF_CloseFont(baseFont);
+	TTF_CloseFont(manuscritoFont);
+	TTF_CloseFont(baseFontCentered);
 	baseFont = nullptr;
+	manuscritoFont = nullptr;
+	baseFontCentered = nullptr;
+
+	delete audioManager;
 
 	// Elimina los objetos del juego
 	for (size_t i = 0; i < gameObjects.size(); i++) {

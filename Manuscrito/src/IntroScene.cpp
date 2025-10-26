@@ -5,6 +5,7 @@
 #include "Fader.h"
 #include "Button.h"
 #include "Hover.h"
+#include "AudioManager.h"
 
 #include <fstream>
 
@@ -132,6 +133,7 @@ void IntroScene::nextText() {
 	}
 	else {
 		SceneManager::changeScene(MAIN_GAME);
+		game->audioManager->stopMusic();
 	}
 }
 

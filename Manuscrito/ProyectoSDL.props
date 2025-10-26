@@ -5,9 +5,9 @@
   <PropertyGroup>
     <OutDir>$(SolutionDir)bin\</OutDir>
     <TargetName>$(ProjectName)$(Configuration)</TargetName>
-    <IncludePath>$(SolutionDir)libs\SDL3\include;$(SolutionDir)libs\SDL3_image\include;$(SolutionDir)libs\SDL3_ttf\include;$(SolutionDir)libs\SDL3_mixer\include;$(IncludePath)</IncludePath>
-    <LibraryPath>$(SolutionDir)libs\SDL3\lib;$(SolutionDir)libs\SDL3_image\lib;$(SolutionDir)libs\SDL3_ttf\lib;$(SolutionDir)libs\SDL3_mixer\lib;$(LibraryPath)</LibraryPath>
-    <LocalDebuggerEnvironment>PATH=$(SolutionDir)libs\SDL3\lib;$(SolutionDir)libs\SDL3_image\lib;$(SolutionDir)libs\SDL3_ttf\lib;$(SolutionDir)libs\SDL3_mixer\lib;$(VC_ExecutablePath_x64);%PATH%;ASAN_SYMBOLIZER_PATH=$(VC_ExecutablePath_x64);$(LocalDebuggerEnvironment)</LocalDebuggerEnvironment>
+    <IncludePath>$(SolutionDir)libs\SDL3\include;$(IncludePath)</IncludePath>
+    <LibraryPath>$(SolutionDir)libs\SDL3\lib;$(LibraryPath)</LibraryPath>
+    <LocalDebuggerEnvironment>PATH=$(SolutionDir)libs\SDL3\lib;$(VC_ExecutablePath_x64);%PATH%;ASAN_SYMBOLIZER_PATH=$(VC_ExecutablePath_x64);$(LocalDebuggerEnvironment)</LocalDebuggerEnvironment>
   </PropertyGroup>
   <ItemDefinitionGroup>
     <ClCompile>

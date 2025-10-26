@@ -17,7 +17,6 @@ private:
 	bool fadeOut = false;
 	bool fadeIn = false;
 
-	bool onAnimation = false;
 	bool fadeInFirst = false;
 
 	SDL_Texture* texture;
@@ -28,6 +27,7 @@ public:
 	Fader(float fadeDuration, bool fadeInFirst);
 
 	using OnFadeOutEnd = std::function<void()>;
+	bool onAnimation = false;
 
 
 	void Update(float deltaTime) override;

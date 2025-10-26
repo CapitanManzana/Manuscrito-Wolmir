@@ -1,7 +1,7 @@
 #include "MainGame.h"
 #include "Scene.h"
 
-#include <SDL3_image/SDL_image.h>
+#include <SDL3/SDL_image.h>
 #include <fstream>
 
 #include "texture.h"
@@ -731,7 +731,8 @@ void MainGame::createUvLight() {
 void MainGame::showText(GameObject* text) {
 	Text* t = text->getComponent<Text>();
 	NoteRevealer* nr = text->getComponent<NoteRevealer>();
-	if (!t->showText && !Text::showingText) {
+	Fader* f = fader->getComponent<Fader>();
+	if (!t->showText && !Text::showingText && !f->onAnimation) {
 		// Mostramos el texto seleccionado
 		t->showText = true;
 	}

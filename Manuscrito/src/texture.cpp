@@ -1,6 +1,6 @@
 #include "texture.h"
 
-#include <SDL3_image/SDL_image.h>
+#include <SDL3/SDL_image.h>
 #include <string>
 
 using namespace std;

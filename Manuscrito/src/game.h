@@ -2,7 +2,7 @@
 #define GAME_H
 
 #include <SDL3/SDL.h>
-#include <SDL3_ttf/SDL_ttf.h>
+#include <SDL3/SDL_ttf.h>
 #include <SDL3/SDL_mixer.h>
 
 #include <array>
@@ -14,6 +14,7 @@ class Texture;
 class GameObject;
 class Book;
 class Scene;
+class AudioManager;
 
 /**
  * Clase principal del juego.
@@ -61,6 +62,8 @@ public:
 
 	static std::vector<GameObject*> gameObjects;
 
+	AudioManager* audioManager;
+
 private:
 	
 	std::array<Texture*, NUM_TEXTURES> textures;
@@ -76,9 +79,6 @@ private:
 
 	SDL_Window* window;
 	SDL_Renderer* renderer;
-
-	MIX_Mixer* mixer;
-	MIX_Track* musicTrack;
 
 	Scene* currentScene;
 	Scene* prevScene;

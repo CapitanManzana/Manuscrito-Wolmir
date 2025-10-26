@@ -1,30 +1,35 @@
 #pragma once
 #include <SDL3/SDL_mixer.h>
 #include <string>
-#include <unordered_map>
+#include <array>
 
 class AudioManager {
 public:
-    static AudioManager& getInstance();
+	enum MusicName
+	{
+		THE_RIVER,
+		NUM_MUSIC
+	};
 
-    bool init();
-    void close();
+	struct MusicData {
+		MIX_Audio* music;
+		SDL_PropertiesID prop;
+	};
 
-    // Cargar sonidos y música
-    void loadSound(const std::string& id, const std::string& path);
-    void loadMusic(const std::string& id, const std::string& path);
-
-    // Reproducir
-    void playSound(const std::string& id, int loops = 0);
-    void playMusic(const std::string& id, int loops = -1);
-
-    // Control de volumen
-    void setSoundVolume(const std::string& id, int volume);
-    void setMusicVolume(int volume);
+	std::array<MusicData, NUM_MUSIC> music;
 
 private:
-    AudioManager() = default;
-    ~AudioManager() = default;
+	MIX_Mixer* mixer;
+	MIX_Track* musicTrack;
+
+	int fadeOutMiliseconds = 50000;
+
+public:
+	AudioManager();
+	~AudioManager();
+
+	void playSong(MusicName name);
+	void stopMusic();
 };
 
 
