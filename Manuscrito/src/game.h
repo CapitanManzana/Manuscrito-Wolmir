@@ -12,6 +12,7 @@
 class Texture;
 class GameObject;
 class Book;
+class Scene;
 
 /**
  * Clase principal del juego.
@@ -75,10 +76,13 @@ private:
 	SDL_Window* window;
 	SDL_Renderer* renderer;
 
+	Scene* currentScene;
+	Scene* prevScene;
 public:
 	Game();
 	~Game();
 
+	void exitGame();
 	// Obtiene una textura por su nombre
 	Texture* getTexture(TextureName name) const;
 	SDL_Renderer* getRenderer() const;
@@ -95,6 +99,11 @@ Game::getTexture(TextureName name) const
 inline SDL_Renderer* Game::getRenderer() const
 {
 	return renderer;
+}
+
+inline void
+Game::exitGame() {
+	exit = true;
 }
 
 #endif // GAME_H

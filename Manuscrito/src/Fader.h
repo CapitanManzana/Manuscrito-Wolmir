@@ -18,6 +18,7 @@ private:
 	bool fadeIn = false;
 
 	bool onAnimation = false;
+	bool fadeInFirst = false;
 
 	SDL_Texture* texture;
 
@@ -33,6 +34,8 @@ public:
 	void onComponentAdd() override;
 	void startFadeOut();
 	void startFadeIn();
+
+	void resetFade();
 
 	OnFadeOutEnd onFadeOutEnd;
 	OnFadeOutEnd onFadeInEnd;

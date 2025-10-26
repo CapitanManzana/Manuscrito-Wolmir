@@ -17,6 +17,7 @@ Fader::Fader(float fadeDuration, bool fadeInFirst) {
 	fadeInEnd = false;
 	Fader::fadeDuration = fadeDuration;
 	texture = nullptr;
+	Fader::fadeInFirst = fadeInFirst;
 
 	fadeIn = fadeInFirst;
 	fadeOut = !fadeIn;
@@ -47,7 +48,8 @@ void Fader::Update(float deltaTime) {
 		if (onFadeInEnd) {
 			onFadeInEnd();
 		}
-		fadeInEnd;
+		fadeInEnd = false;
+		fadeIn = false;
 	}
 
 	if (fadeOut && !fadeOutEnd) {
@@ -71,6 +73,7 @@ void Fader::Update(float deltaTime) {
 		if (onFadeOutEnd) {
 			onFadeOutEnd();
 		}
+		fadeOutEnd = false;
 		fadeOut = false;
 	}
 }
@@ -85,6 +88,16 @@ void Fader::startFadeIn() {
 	if (!onAnimation) {
 		fadeIn = true;
 	}
+}
+
+void Fader::resetFade() {
+	fadeInEnd = false;
+	fadeOutEnd = false;
+	fadeIn = fadeInFirst;
+	fadeOut = !fadeIn;
+	onAnimation = true;
+	elapsedTime = 0;
+	SDL_SetTextureAlphaMod(texture, 0);
 }
 
 void Fader::onComponentAdd() {

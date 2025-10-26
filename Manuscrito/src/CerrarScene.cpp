@@ -43,6 +43,21 @@ void CerrarScene::Load() {
 	nextText();
 }
 
+void CerrarScene::Reload() {
+	for (GameObject* g : sceneObjects) {
+		Fader* f = g->getComponent<Fader>();
+		if (f) {
+			f->resetFade();
+			g->setIsActive(false);
+		}
+	}
+
+	currentText = 0;
+	nextText();
+	continueButton->getComponent<Fader>()->resetFade();
+	continueButton->setIsActive(true);
+}
+
 void CerrarScene::Render() {
 
 	SDL_SetRenderDrawColor(renderer, 0, 0, 0, 255);
@@ -117,7 +132,7 @@ void CerrarScene::nextText() {
 		currentText++;
 	}
 	else {
-		SceneManager::changeScene(INTRO);
+		SceneManager::changeScene(MAIN_MENU);
 	}
 }
 

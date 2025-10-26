@@ -17,6 +17,7 @@ public:
 	virtual ~Scene() {}
 
 	virtual void Load() {}
+	virtual void Reload() {}
 	virtual void HandleEvents(SDL_Event& event) {}
 
 	virtual void Update(float deltaTime);

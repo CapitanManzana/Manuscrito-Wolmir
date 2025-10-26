@@ -114,6 +114,7 @@
     <ClCompile Include="LoadTexts.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="MainGame.cpp" />
+    <ClCompile Include="MainMenu.cpp" />
     <ClCompile Include="MonoBehaviour.cpp" />
     <ClCompile Include="Notebook.cpp" />
     <ClCompile Include="NotebookElement.cpp" />
@@ -142,6 +143,7 @@
     <ClInclude Include="LiberarScene.h" />
     <ClInclude Include="LoadTexts.h" />
     <ClInclude Include="MainGame.h" />
+    <ClInclude Include="MainMenu.h" />
     <ClInclude Include="MonoBehaviour.h" />
     <ClInclude Include="Notebook.h" />
     <ClInclude Include="NotebookElement.h" />
@@ -164,6 +166,7 @@
     <Text Include="..\assets\data\finalCerrarTexts.txt" />
     <Text Include="..\assets\data\finalLiberarTexts.txt" />
     <Text Include="..\assets\data\introTexts.txt" />
+    <Text Include="..\assets\data\MainMenu.txt" />
     <Text Include="..\assets\data\notes.txt" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

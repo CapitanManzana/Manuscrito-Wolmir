@@ -1,0 +1,117 @@
+﻿PagesCount: 4
+Page_0:
+    TextsCount: 1
+    T_1
+        text: MANUSCRITO WOLMIR
+        x: 0
+        y: -40
+        size: 150
+        textEnd: 1500
+        color: #000000
+        uv: 0
+        revealNoteIndex: -1
+Page_1:
+    TextsCount: 5
+    T_1
+        text: Controles
+        x: 0
+        y: -130
+        size: 100
+        textEnd: 1500
+        color: #000000
+        uv: 0
+        revealNoteIndex: -1
+    T_2
+        text: - Para pasar las páginas del libro A y D
+        x: 0
+        y: -100
+        size: 76
+        textEnd: 1500
+        color: #000000
+        uv: 0
+        revealNoteIndex: -1
+    T_3
+        text: - Click en los textos para descifrarlos
+        x: -8
+        y: -80
+        size: 76
+        textEnd: 1500
+        color: #000000
+        uv: 0
+        revealNoteIndex: -1
+    T_4
+        text: JUGAR
+        x: 0
+        y: 0
+        size: 160
+        textEnd: 1500
+        color: #C41A00
+        uv: 0
+        revealNoteIndex: -1
+    T_5
+        text: SALIR
+        x: 0
+        y: 60
+        size: 160
+        textEnd: 1500
+        color: #C41A00
+        uv: 0
+        revealNoteIndex: -1
+Page_2:
+    TextsCount: 2
+    T_1
+        text: Un juego de:
+        x: 0
+        y: -30
+        size: 76
+        textEnd: 1500
+        color: #000000
+        uv: 0
+        revealNoteIndex: -1
+     T_2
+        text: CapitánManzana
+        x: 0
+        y: 0
+        size: 130
+        textEnd: 1500
+        color: #C41A00
+        uv: 0
+        revealNoteIndex: -1
+Page_3:
+    TextsCount: 4
+    T_1
+        text: Youtube
+        x: 0
+        y: -40
+        size: 76
+        textEnd: 1500
+        color: #000000
+        uv: 0
+        revealNoteIndex: -1
+     T_2
+        text: @capitanmanzana
+        x: 0
+        y: -20
+        size: 90
+        textEnd: 1500
+        color: #C41A00
+        uv: 0
+        revealNoteIndex: -1
+    T_3
+        text: Tik Tok
+        x: 0
+        y: 20
+        size: 76
+        textEnd: 1500
+        color: #000000
+        uv: 0
+        revealNoteIndex: -1
+     T_4
+        text: @capimanzana_
+        x: 0
+        y: 40
+        size: 90
+        textEnd: 1500
+        color: #C41A00
+        uv: 0
+        revealNoteIndex: -1

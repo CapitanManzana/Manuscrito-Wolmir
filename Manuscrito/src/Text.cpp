@@ -67,7 +67,7 @@ void Text::Update(float deltaTime) {
 				currentText = "";
 				font = Game::baseFont;
 
-				TTF_SetFontSize(font, fontSize - 16);
+				TTF_SetFontSize(font, fontSize - 26);
 				TTF_SetFontWrapAlignment(font, TTF_HORIZONTAL_ALIGN_LEFT);
 
 				startedTyping = true;

@@ -11,7 +11,7 @@ void SplashScreen::Load() {
 	logo->addComponent<Transform>(Vector2D<float>(Game::WINDOW_WIDTH / 2, Game::WINDOW_HEIGHT / 2), 0.2);
 	logo->addComponent<SpriteRenderer>(game->getTexture(Game::LOGO), 0, 0);
 	Fader* f = logo->addComponent<Fader>(logoDuration, true);
-	SceneType scene = INTRO;
+	SceneType scene = MAIN_MENU;
 	f->onFadeOutEnd = [scene]() { SceneManager::changeScene(scene); };
 	f->onFadeInEnd = [f]() { f->startFadeOut(); };
 

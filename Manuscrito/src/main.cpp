@@ -6,6 +6,7 @@
 #include "LiberarScene.h"
 #include "CerrarScene.h"
 #include "SplashScreen.h"
+#include "MainMenu.h"
 
 int main(int argc, char* argv[])
 {
@@ -15,6 +16,9 @@ int main(int argc, char* argv[])
 		// Creamos las escenas
 		SplashScreen* splashScene = new SplashScreen(*game);
 		splashScene->Load();
+
+		MainMenu* menu = new MainMenu(*game);
+		menu->Load();
 
 		IntroScene* introScene = new IntroScene(*game);
 		introScene->Load();
@@ -28,7 +32,7 @@ int main(int argc, char* argv[])
 		CerrarScene* cerrarScene = new CerrarScene(*game);
 		cerrarScene->Load();
 
-		SceneManager::changeScene(MAIN_GAME);
+		//SceneManager::changeScene(MAIN_MENU);
 		game->run();
 
 		SceneManager::unload();

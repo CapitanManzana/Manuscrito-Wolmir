@@ -127,7 +127,7 @@ Game::render() const
 {
 	SDL_RenderClear(renderer);
 
-	SceneManager::activeScene->Render();
+	currentScene->Render();
 
 	SDL_RenderPresent(renderer);
 }
@@ -145,17 +145,19 @@ Game::update()
 	// 3. Actualizamos lastTime para el siguiente fotograma
 	lastTime = currentTime;
 
-	SceneManager::activeScene->Update(deltaTime);
+	currentScene->Update(deltaTime);
 }
 
 void
 Game::run()
 {
+	currentScene = SceneManager::activeScene;
+
 	const Uint32 frameDelay = 1000 / FRAME_RATE;
 	Uint32 frameStart;
 	Uint32 frameTime;
 
-	SceneManager::activeScene->Start();
+	currentScene->Start();
 
 	// Bucle principal del juego
 	while (!exit) {
@@ -164,6 +166,14 @@ Game::run()
 		handleEvents();
 		update();
 		render();
+
+		prevScene = SceneManager::activeScene;
+		SceneManager::applySceneChange();
+		currentScene = SceneManager::activeScene;
+
+		if (prevScene != currentScene) {
+			prevScene->Reload(); //recarga la escena anterior
+		}
 
 		frameTime = SDL_GetTicks() - frameStart;
 		if (frameDelay > frameTime) {
@@ -214,6 +224,6 @@ Game::handleEvents()
 			}
 		}
 
-		SceneManager::activeScene->HandleEvents(event);
+		currentScene->HandleEvents(event);
 	}
 }

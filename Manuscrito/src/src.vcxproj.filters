@@ -114,6 +114,9 @@
     <ClCompile Include="SplashScreen.cpp">
       <Filter>Archivos de código fuente\Scenes</Filter>
     </ClCompile>
+    <ClCompile Include="MainMenu.cpp">
+      <Filter>Archivos de código fuente\Scenes</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="game.h">
@@ -197,6 +200,9 @@
     <ClInclude Include="SplashScreen.h">
       <Filter>Archivos de encabezado\Scenes</Filter>
     </ClInclude>
+    <ClInclude Include="MainMenu.h">
+      <Filter>Archivos de encabezado\Scenes</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="..\assets\data\texts.txt">
@@ -214,6 +220,9 @@
       <Filter>Archivos de recursos</Filter>
     </Text>
     <Text Include="..\assets\data\finalCerrarTexts.txt">
+      <Filter>Archivos de recursos</Filter>
+    </Text>
+    <Text Include="..\assets\data\MainMenu.txt">
       <Filter>Archivos de recursos</Filter>
     </Text>
   </ItemGroup>

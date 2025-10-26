@@ -35,6 +35,10 @@ void MainGame::Load() {
 	game->gameObjects.push_back(fader);
 }
 
+void MainGame::Reload() {
+	fader->getComponent<Fader>()->resetFade();
+}
+
 void MainGame::Start() {
 	// Páginas del manuscrito
 	for (size_t i = 0; i < sceneObjects.size(); i++) {
@@ -142,6 +146,10 @@ void MainGame::Render() {
 }
 
 void MainGame::HandleEvents(SDL_Event& event) {
+
+	if (event.type == SDL_EVENT_MOUSE_MOTION) {
+		SDL_RenderCoordinatesFromWindow(renderer, event.motion.x, event.motion.y, &cur_posX, &cur_posY);
+	}
 
 	if (event.type == SDL_EVENT_TEXT_INPUT) {
 		char c = event.text.text[0];

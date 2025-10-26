@@ -73,6 +73,7 @@ public:
 	~MainGame() override;
 
 	void Load() override;
+	void Reload() override;
 	void Update(float deltaTime) override;
 	void Start() override;
 	void HandleEvents(SDL_Event& event) override;

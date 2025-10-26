@@ -6,7 +6,7 @@ class IntroScene : public Scene
 {
 private:
 	const char* const INTRO_TEXT_DIR = "../assets/data/introTexts.txt";
-	const float SHOW_TEXT_SPEED = 3.0f;
+	const float SHOW_TEXT_SPEED = 2;
 	const int BUTTON_HEIGHT = 400;
 	const int BUTTON_SIZE = 100;
 
@@ -20,8 +20,9 @@ private:
 
 public:
 	IntroScene(Game& game) : Scene(game) { }
-
+	void Render() override;
 	void Load() override;
+	void Reload() override;
 
 private:
 	void loadTexts(std::istream& file, std::string& btnText);

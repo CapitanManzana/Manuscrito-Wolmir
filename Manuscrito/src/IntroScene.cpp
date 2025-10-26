@@ -42,6 +42,33 @@ void IntroScene::Load() {
 	nextText();
 }
 
+void IntroScene::Reload() {
+	for (GameObject* g : sceneObjects) {
+		Fader* f = g->getComponent<Fader>();
+		if (f) {
+			f->resetFade();
+			g->setIsActive(false);
+		}
+	}
+
+	currentText = 0;
+	nextText();
+	continueButton->getComponent<Fader>()->resetFade();
+	continueButton->setIsActive(true);
+}
+
+void IntroScene::Render() {
+
+	SDL_SetRenderDrawColor(renderer, 0, 0, 0, 255);
+	SDL_RenderFillRect(renderer, nullptr);
+
+	for (GameObject* g : sceneObjects) {
+		if (g->getIsActive() && g->spriteRenderer != nullptr && g->spriteRenderer->isEnabled) {
+			g->render();
+		}
+	}
+}
+
 void IntroScene::loadTexts(istream& file, string& buttonText) {
 	string tag;
 	file >> tag >> textsCount;
