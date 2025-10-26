@@ -150,7 +150,7 @@ void IntroScene::fadeOutText() {
 	if (currentText < textsCount) {
 		Fader* f = prevText->getComponent<Fader>();
 		if (f) {
-			if (currentText == 4) AudioManager::playSong(AudioManager::INTRO_P3);
+			if (currentText == 3) AudioManager::playSong(AudioManager::INTRO_P3);
 			f->startFadeOut();
 		}
 	}

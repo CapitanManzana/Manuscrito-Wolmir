@@ -14,6 +14,7 @@ constexpr const char* const soundsBase = "../assets/sounds/";
 MIX_Mixer* AudioManager::mixer;
 MIX_Track* AudioManager::musicTrackA;
 MIX_Track* AudioManager::musicTrackB;
+MIX_Track* AudioManager::musicTrackC;
 
 bool AudioManager::usingTrackA;
 int AudioManager::musicLength;
@@ -22,7 +23,7 @@ bool AudioManager::doLoop;
 
 AudioManager::MusicName AudioManager::currentMusic;
 
-int AudioManager::fadeOut = 2;
+int AudioManager::fadeOut = 4;
 
 std::array<AudioManager::AudioData, AudioManager::NUM_MUSIC> AudioManager::music;
 std::array<MIX_Audio*, AudioManager::NUM_SOUNDS> AudioManager::sounds;
@@ -58,7 +59,8 @@ void AudioManager::Init() {
 	// Creamos el track para la musica
 	musicTrackA = MIX_CreateTrack(mixer);
 	musicTrackB = MIX_CreateTrack(mixer);
-	if (!musicTrackA || !musicTrackB) {
+	musicTrackC = MIX_CreateTrack(mixer);
+	if (!musicTrackA || !musicTrackB || !musicTrackC) {
 		SDL_LogError(SDL_LOG_CATEGORY_APPLICATION, "Error al crear el musicTrack");
 	}
 
@@ -99,7 +101,7 @@ void AudioManager::Unload() {
 }
 
 void AudioManager::Update(float deltaTime) {
-	SDL_Log("A: %i     B: %i", MIX_TrackPlaying(musicTrackA), MIX_TrackPlaying(musicTrackB));
+	SDL_Log("A: %i     B: %i    C: %i", MIX_TrackPlaying(musicTrackA), MIX_TrackPlaying(musicTrackB), MIX_TrackPlaying(musicTrackC));
 
 	if (!doLoop) return;
 
@@ -127,13 +129,25 @@ void AudioManager::doCrossFade(MusicName audioA, MusicName audioB) {
 	MIX_Track* newTrack = usingTrackA ? musicTrackB : musicTrackA;
 	AudioData& dataAudioB = music[audioB];
 
-	MIX_SetTrackAudio(newTrack, dataAudioB.audio);
-	MIX_PlayTrack(newTrack, dataAudioB.prop);
-	// Fade out del anterior
-	MIX_StopTrack(usingTrackA ? musicTrackA : musicTrackB, fadeOut * 44100);
+	if (MIX_TrackPlaying(musicTrackA) && MIX_TrackPlaying(musicTrackB)) {
 
-	usingTrackA = !usingTrackA;
-	currentMusic = audioB;
+		MIX_SetTrackAudio(musicTrackC, dataAudioB.audio);
+		MIX_PlayTrack(musicTrackC, dataAudioB.prop);
+		// Fade out del anterior
+		stopMusic();
+		usingTrackA = true;
+		currentMusic = audioB;
+	}
+	else {
+		MIX_SetTrackAudio(newTrack, dataAudioB.audio);
+		MIX_PlayTrack(newTrack, dataAudioB.prop);
+		// Fade out del anterior
+		MIX_StopTrack(usingTrackA ? musicTrackA : musicTrackB, fadeOut * 44100);
+		if (MIX_TrackPlaying(musicTrackC)) MIX_StopTrack(musicTrackC, fadeOut * 44100);
+
+		usingTrackA = !usingTrackA;
+		currentMusic = audioB;
+	}
 }
 
 void AudioManager::playSound(SoundName name) {
