@@ -166,6 +166,8 @@ Game::update()
 	lastTime = currentTime;
 
 	currentScene->Update(deltaTime);
+
+	AudioManager::Update(deltaTime);
 }
 
 void

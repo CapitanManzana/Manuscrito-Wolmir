@@ -183,7 +183,7 @@ void MainMenu::changeScene(SceneType scene) {
 	if (f && !f->onAnimation) {
 		f->startFadeIn();
 		f->onFadeInEnd = [scene]() { SceneManager::changeScene(scene); };
-		AudioManager::playSong(AudioManager::MAIN);
+		AudioManager::playSong(AudioManager::INTRO_P1);
 	}
 }
 

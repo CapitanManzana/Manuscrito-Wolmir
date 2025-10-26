@@ -4,7 +4,7 @@ using namespace std;
 
 struct MusicSpec {
 	const char* name;
-	int loop;
+	bool loop;
 	int fade;
 };
 
@@ -16,20 +16,25 @@ MIX_Track* AudioManager::musicTrackA;
 MIX_Track* AudioManager::musicTrackB;
 
 bool AudioManager::usingTrackA;
-Uint64 AudioManager::musicLengthUs;  // duración en microsegundos (la API de SDL_mixer usa microsegundos)
-Uint64 AudioManager::fadeStartTimeUs;
-bool AudioManager::fadingInProgress;
+int AudioManager::musicLength;
+float AudioManager::elapsedTime;
+bool AudioManager::doLoop;
 
 AudioManager::MusicName AudioManager::currentMusic;
 
-int AudioManager::fadeOut = 5;
+int AudioManager::fadeOut = 2;
 
 std::array<AudioManager::AudioData, AudioManager::NUM_MUSIC> AudioManager::music;
 std::array<MIX_Audio*, AudioManager::NUM_SOUNDS> AudioManager::sounds;
 
 constexpr array<MusicSpec, AudioManager::NUM_MUSIC> musicList{
-	MusicSpec{"main.mp3", 0, 7000},
-	{"menu.mp3", -1, 7000}
+	MusicSpec{"main.mp3", 1, 5000},
+	{"menu.mp3", 1, 5000},
+	{"introP1.mp3", 1, 5000},
+	{"introP2.mp3", 1, 5000},
+	{"introP3.mp3", 1, 5000},
+	{"introP4.mp3", 1, 5000},
+	{"riser.mp3", 0, 5000}
 };
 
 constexpr array<const char*, AudioManager::NUM_SOUNDS> soundsList{
@@ -60,14 +65,15 @@ void AudioManager::Init() {
 	// Cargamos las canciones
 	for (size_t i = 0; i < musicList.size(); i++) {
 		string name = musicList[i].name;
-		int loop = musicList[i].loop;
+		bool loop = musicList[i].loop;
 		int fade = musicList[i].fade;
 
 		AudioData data;
 		data.audio = MIX_LoadAudio(mixer, ((string)musicBase + name).c_str(), true);
 		data.prop = SDL_CreateProperties();
-		SDL_SetNumberProperty(data.prop, MIX_PROP_PLAY_LOOPS_NUMBER, loop);
 		SDL_SetNumberProperty(data.prop, MIX_PROP_PLAY_FADE_IN_MILLISECONDS_NUMBER, fade);
+
+		data.doLoop = loop;
 
 		music[i] = data;
 		if (data.audio) SDL_Log("[AudioManager] Pista %i. CORRECTO", i);
@@ -80,8 +86,6 @@ void AudioManager::Init() {
 	}
 
 	usingTrackA = true;
-	fadingInProgress = false;
-	musicLengthUs = 0;
 }
 
 void AudioManager::Unload() {
@@ -94,21 +98,16 @@ void AudioManager::Unload() {
 	MIX_Quit();
 }
 
-void AudioManager::Update() {
-	if (musicLengthUs == 0 || fadingInProgress) return;
+void AudioManager::Update(float deltaTime) {
+	SDL_Log("A: %i     B: %i", MIX_TrackPlaying(musicTrackA), MIX_TrackPlaying(musicTrackB));
 
-	Uint64 now = SDL_GetTicksNS() / 1000ULL; // tiempo actual en microsegundos
-	Uint64 elapsed = now - fadeStartTimeUs;
+	if (!doLoop) return;
 
-	// Empieza nueva pista 5 segundos (5e6 µs) antes de que acabe
-	if (elapsed > (musicLengthUs - 5'000'000)) {
-		fadingInProgress = true;
+	elapsedTime += deltaTime;
 
-		doCrossFade(currentMusic, currentMusic);
-
-		usingTrackA = !usingTrackA;
-		fadeStartTimeUs = now;
-		fadingInProgress = false;
+	if (elapsedTime > musicLength - musicDelta) {
+		playSong(currentMusic);
+		elapsedTime = 0; 
 	}
 }
 
@@ -116,23 +115,12 @@ void AudioManager::playSong(MusicName name) {
 	MIX_Track* track = usingTrackA ? musicTrackA : musicTrackB;
 	AudioData& data = music[name];
 
-	if (MIX_TrackPlaying(track)) {
-		doCrossFade(currentMusic, name);
-	}
-	else {
-		currentMusic = name;
-
-		MIX_SetTrackAudio(musicTrackA, data.audio);
-		MIX_PlayTrack(musicTrackA, data.prop);
-	}
+	doCrossFade(currentMusic, name);
 
 	// Calcular duración del audio en microsegundos
 	double durationSamples = MIX_GetAudioDuration(data.audio);
-	double durationSeconds = durationSamples / 44100.0;
-	musicLengthUs = static_cast<Uint64>(durationSeconds * 1'000'000);
-
-	fadeStartTimeUs = SDL_GetTicksNS() / 1000ULL;
-	fadingInProgress = false;
+	musicLength = durationSamples / 44100.0;
+	doLoop = data.doLoop;
 }
 
 void AudioManager::doCrossFade(MusicName audioA, MusicName audioB) {
@@ -153,5 +141,6 @@ void AudioManager::playSound(SoundName name) {
 }
 
 void AudioManager::stopMusic() {
-	MIX_StopTrack(musicTrackA, fadeOut);
+	MIX_StopTrack(musicTrackA, fadeOut * 44100);
+	MIX_StopTrack(musicTrackB, fadeOut * 44100);
 }

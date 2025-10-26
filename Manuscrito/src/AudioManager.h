@@ -10,6 +10,11 @@ public:
 	{
 		MAIN,
 		MENU,
+		INTRO_P1,
+		INTRO_P2,
+		INTRO_P3,
+		INTRO_P4,
+		RISER,
 		NUM_MUSIC
 	};
 
@@ -24,16 +29,21 @@ public:
 	struct AudioData {
 		MIX_Audio* audio;
 		SDL_PropertiesID prop;
+		bool doLoop;
 	};
 	
 private:
 	static MIX_Mixer* mixer;
 	static MIX_Track* musicTrackA;
 	static MIX_Track* musicTrackB;
+	static MIX_Track* musicTrackC; // Solo se utiliza para situaciones donde las otras dos están ocupadas
+
 	static bool usingTrackA;
-	static Uint64 musicLengthUs;  // duración en microsegundos (la API de SDL_mixer usa microsegundos)
-	static Uint64 fadeStartTimeUs;
-	static bool fadingInProgress;
+	static int musicLength;
+	// El tiempo que se deja antes de reproducirse a si misma
+	static const int musicDelta = 5;
+	static float elapsedTime;
+	static bool doLoop;
 
 	static int fadeOut;
 
@@ -46,7 +56,7 @@ public:
 
 	static void Init();
 	static void Unload();
-	static void Update();
+	static void Update(float deltaTime);
 	static void playSong(MusicName name);
 	static void playSound(SoundName name);
 	static void stopMusic();

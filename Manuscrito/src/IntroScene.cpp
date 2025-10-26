@@ -127,6 +127,8 @@ void IntroScene::loadTexts(istream& file, string& buttonText) {
 
 void IntroScene::nextText() {
 	if (currentText < textsCount) {
+		if (currentText == 2) AudioManager::playSong(AudioManager::INTRO_P2);
+
 		texts[currentText]->setIsActive(true);
 		prevText = texts[currentText];
 		currentText++;
@@ -148,6 +150,7 @@ void IntroScene::fadeOutText() {
 	if (currentText < textsCount) {
 		Fader* f = prevText->getComponent<Fader>();
 		if (f) {
+			if (currentText == 4) AudioManager::playSong(AudioManager::INTRO_P3);
 			f->startFadeOut();
 		}
 	}
@@ -156,6 +159,8 @@ void IntroScene::fadeOutText() {
 		Fader* bf = continueButton->getComponent<Fader>();
 
 		if (f && bf) {
+			AudioManager::playSong(AudioManager::RISER);
+
 			f->startFadeOut();
 			bf->startFadeOut();
 		}
