@@ -17,11 +17,14 @@ public:
 	static void unload();
 
 	static Scene* activeScene;
+	static SceneType scene;
 	static SceneType nextScene;
 
 	static void changeScene(SceneType scene);
 	static void addScene(Scene* scene);
 	static void applySceneChange();
+
+	static SceneType getActiveScene();
 
 	static std::vector<Scene*> scenes;
 };

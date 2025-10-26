@@ -2,6 +2,7 @@
 #include <SDL3/SDL_mixer.h>
 #include <string>
 #include <array>
+#include <random>
 
 class AudioManager {
 public:
@@ -11,25 +12,38 @@ public:
 		NUM_MUSIC
 	};
 
-	struct MusicData {
-		MIX_Audio* music;
-		SDL_PropertiesID prop;
+	enum SoundName
+	{
+		CHANGE_PAGE,
+		PENCIL_CIRCLE,
+		BUTTON,
+		NUM_SOUNDS
 	};
 
-	std::array<MusicData, NUM_MUSIC> music;
-
+	struct AudioData {
+		MIX_Audio* audio;
+		SDL_PropertiesID prop;
+	};
+	
 private:
-	MIX_Mixer* mixer;
-	MIX_Track* musicTrack;
+	static MIX_Mixer* mixer;
+	static MIX_Track* musicTrack;
+	static MIX_Track* soundsTrack;
 
-	int fadeOutMiliseconds = 50000;
+	static int fadeOutMiliseconds;
+
+	static std::array<AudioData, NUM_MUSIC> music;
+	static std::array<MIX_Audio*, NUM_SOUNDS> sounds;
 
 public:
-	AudioManager();
-	~AudioManager();
+	AudioManager() = default;
+	~AudioManager() = default;
 
-	void playSong(MusicName name);
-	void stopMusic();
+	static void Init();
+	static void Unload();
+	static void playSong(MusicName name);
+	static void playSound(SoundName name);
+	static void stopMusic();
 };
 
 

@@ -62,8 +62,6 @@ public:
 
 	static std::vector<GameObject*> gameObjects;
 
-	AudioManager* audioManager;
-
 private:
 	
 	std::array<Texture*, NUM_TEXTURES> textures;

@@ -2,6 +2,7 @@
 #include "RunicTest.h"
 #include "SpriteRenderer.h"
 #include "GameObject.h"
+#include "AudioManager.h"
 
 Selector::~Selector() {
 	test = nullptr;
@@ -11,6 +12,8 @@ void Selector::onClick() {
 	if (test) {
 		test->updateState(index);
 		active = !active;
+
+		AudioManager::playSound(AudioManager::PENCIL_CIRCLE);
 
 		if (gameObject->spriteRenderer) {
 			gameObject->spriteRenderer->isEnabled = active;

@@ -4,6 +4,7 @@
 
 class GameObject;
 class Transform;
+class AudioManager;
 
 class Book
 {
@@ -21,6 +22,7 @@ private:
 
 	Vector2D<float> position;
 	int pageSeparation;
+
 public:
 	Book();
 	Book(const std::vector<GameObject*> &pages, float x, float y, float separation);

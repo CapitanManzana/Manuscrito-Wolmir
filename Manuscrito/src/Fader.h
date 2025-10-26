@@ -29,7 +29,6 @@ public:
 	using OnFadeOutEnd = std::function<void()>;
 	bool onAnimation = false;
 
-
 	void Update(float deltaTime) override;
 	void onComponentAdd() override;
 	void startFadeOut();

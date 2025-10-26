@@ -2,6 +2,7 @@
 #include "Text.h"
 #include "GameObject.h"
 #include "Book.h"
+#include "AudioManager.h"
 
 CodeTest::CodeTest(std::vector<Text*> texts, std::string solution, Book& book, GameObject* page, int pageIndex)
 {
@@ -17,6 +18,8 @@ CodeTest::CodeTest(std::vector<Text*> texts, std::string solution, Book& book, G
 
 void CodeTest::setInputCode(char c)
 {
+	AudioManager::playSound(AudioManager::BUTTON);
+
 	if (selectedTextIndex >= codeLength)
 	{
 		selectedTextIndex = 0;

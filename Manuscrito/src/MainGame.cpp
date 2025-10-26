@@ -732,7 +732,7 @@ void MainGame::showText(GameObject* text) {
 	Text* t = text->getComponent<Text>();
 	NoteRevealer* nr = text->getComponent<NoteRevealer>();
 	Fader* f = fader->getComponent<Fader>();
-	if (!t->showText && !Text::showingText && !f->onAnimation) {
+	if (!t->showText && !Text::showingText) {
 		// Mostramos el texto seleccionado
 		t->showText = true;
 	}

@@ -1,6 +1,8 @@
 #include "Book.h"
 #include "GameObject.h"
 #include "Transform.h"
+#include "AudioManager.h"
+#include "SceneManager.h"
 
 Book::Book() {
 	pagesNumber = 0;
@@ -46,6 +48,8 @@ void Book::changePage(size_t index) {
 		return;
 	}
 
+	if (index == currentDisplayPage) return;
+
 	// 1. Oculta todas las páginas primero.
 	for (auto& page : pages) {
 		if (page) page->setIsActive(false);
@@ -70,6 +74,10 @@ void Book::changePage(size_t index) {
 	}
 	else {
 		rightPage = nullptr;
+	}
+
+	if (SceneManager::getActiveScene() == SceneType::MAIN_MENU || SceneManager::getActiveScene() == SceneType::MAIN_GAME) {
+		AudioManager::playSound(AudioManager::CHANGE_PAGE);
 	}
 }
 

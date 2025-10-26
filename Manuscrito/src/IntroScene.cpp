@@ -133,7 +133,7 @@ void IntroScene::nextText() {
 	}
 	else {
 		SceneManager::changeScene(MAIN_GAME);
-		game->audioManager->stopMusic();
+		AudioManager::stopMusic();
 	}
 }
 
@@ -141,6 +141,8 @@ void IntroScene::fadeOutText() {
 	if (!canContinue) {
 		return;
 	}
+
+	AudioManager::playSound(AudioManager::BUTTON);
 
 	canContinue = false;
 	if (currentText < textsCount) {

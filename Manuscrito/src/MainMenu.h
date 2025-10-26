@@ -42,5 +42,6 @@ public:
 
 private:
 	void changeScene(SceneType scene);
+	void exitGame();
 };
 

@@ -112,7 +112,7 @@ Game::Game() : exit(false)
 	SDL_SetRenderDrawBlendMode(renderer, SDL_BLENDMODE_MUL);
 	SDL_SetRenderLogicalPresentation(renderer, WINDOW_WIDTH, WINDOW_HEIGHT, SDL_LOGICAL_PRESENTATION_STRETCH);
 
-	audioManager = new AudioManager();
+	AudioManager::Init();
 }
 
 Game::~Game()
@@ -124,7 +124,7 @@ Game::~Game()
 	manuscritoFont = nullptr;
 	baseFontCentered = nullptr;
 
-	delete audioManager;
+	AudioManager::Unload();
 
 	// Elimina los objetos del juego
 	for (size_t i = 0; i < gameObjects.size(); i++) {
@@ -222,7 +222,7 @@ Game::handleEvents()
 			SDL_RenderCoordinatesFromWindow(renderer, mouseX, mouseY, &logicalX, &logicalY);
 			SDL_FPoint mousePoint = { logicalX, logicalY };
 
-			for (GameObject* go : gameObjects) {
+			for (GameObject* go : currentScene->sceneObjects) {
 				if (go->getIsActive()) {
 					Button* bt = go->getComponent<Button>();
 

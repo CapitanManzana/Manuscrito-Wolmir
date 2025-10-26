@@ -85,7 +85,7 @@ void MainMenu::Load() {
 			}
 			else if (i == 1 && j == 4) {
 				Button* b = texto->addComponent<Button>();
-				b->onClick = [this]() { game->exitGame(); };
+				b->onClick = [this]() { exitGame(); };
 
 				SDL_Color hoverColor = { 100, 0, 0, 255 };
 				SDL_Color color = textData.color;
@@ -140,7 +140,7 @@ void MainMenu::Render() {
 	SDL_RenderClear(renderer);
 	SDL_RenderTexture(renderer, ambientLight_tex, NULL, &rect_ambientLight);
 	SDL_SetRenderTarget(renderer, NULL);
-	SDL_RenderClear(renderer); 
+	SDL_RenderClear(renderer);
 
 	game->getTexture(Game::BACKGROUND)->render();
 	for (GameObject* g : sceneObjects) {
@@ -178,7 +178,16 @@ void MainMenu::HandleEvents(SDL_Event& event) {
 
 void MainMenu::changeScene(SceneType scene) {
 	Fader* f = fader->getComponent<Fader>();
-	f->startFadeIn();
-	f->onFadeInEnd = [scene]() { SceneManager::changeScene(scene); };
-	game->audioManager->playSong(AudioManager::THE_RIVER);
+	AudioManager::playSound(AudioManager::BUTTON);
+
+	if (f && !f->onAnimation) {
+		f->startFadeIn();
+		f->onFadeInEnd = [scene]() { SceneManager::changeScene(scene); };
+		AudioManager::playSong(AudioManager::THE_RIVER);
+	}
+}
+
+void MainMenu::exitGame() {
+	AudioManager::playSound(AudioManager::BUTTON);
+	game->exitGame();
 }

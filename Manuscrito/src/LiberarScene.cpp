@@ -141,6 +141,8 @@ void LiberarScene::fadeOutText() {
 		return;
 	}
 
+	AudioManager::playSound(AudioManager::BUTTON);
+
 	canContinue = false;
 	if (currentText < textsCount) {
 		Fader* f = prevText->getComponent<Fader>();
