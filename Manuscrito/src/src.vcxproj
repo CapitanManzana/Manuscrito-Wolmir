@@ -101,6 +101,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="AudioManager.cpp" />
     <ClCompile Include="Book.cpp" />
     <ClCompile Include="Button.cpp" />
     <ClCompile Include="CerrarScene.cpp" />
@@ -130,6 +131,7 @@
     <ClCompile Include="Transform.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="AudioManager.h" />
     <ClInclude Include="Book.h" />
     <ClInclude Include="Button.h" />
     <ClInclude Include="CerrarScene.h" />

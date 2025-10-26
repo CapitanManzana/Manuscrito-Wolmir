@@ -3,6 +3,7 @@
 
 #include <SDL3/SDL.h>
 #include <SDL3_ttf/SDL_ttf.h>
+#include <SDL3/SDL_mixer.h>
 
 #include <array>
 #include <istream>
@@ -75,6 +76,9 @@ private:
 
 	SDL_Window* window;
 	SDL_Renderer* renderer;
+
+	MIX_Mixer* mixer;
+	MIX_Track* musicTrack;
 
 	Scene* currentScene;
 	Scene* prevScene;
