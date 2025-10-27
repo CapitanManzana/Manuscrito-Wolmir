@@ -25,7 +25,7 @@ constexpr const char* const imgBase = "../assets/images/";
 constexpr const char* const fontBase = "../assets/font/";
 
 constexpr array<TextureSpec, Game::NUM_TEXTURES> textureList{
-	TextureSpec{"fondo.jpg"},
+	TextureSpec{"fondo.JPEG"},
 	{"Logo.png"},
 	{"Fader.jpg"},
 	{"Runas.JPEG"},
@@ -117,6 +117,16 @@ Game::Game() : exit(false)
 
 	cursorDefault = SDL_CreateSystemCursor(SDL_SYSTEM_CURSOR_DEFAULT);
 	cursorHand = SDL_CreateSystemCursor(SDL_SYSTEM_CURSOR_POINTER);
+
+	SDL_Surface* icon = IMG_Load(((string)imgBase + "icon.png").c_str());
+	if (!icon) {
+		SDL_Log("Error cargando icono: %s", SDL_GetError());
+	}
+	else {
+		SDL_SetWindowIcon(window, icon);
+		SDL_DestroySurface(icon);
+	}
+
 }
 
 Game::~Game()
