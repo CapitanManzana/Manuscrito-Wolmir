@@ -21,6 +21,7 @@ public:
 		FINAL_P2,
 		FINAL_P3,
 		FINAL_P4,
+		DISCOVERY,
 		NUM_MUSIC
 	};
 
@@ -29,6 +30,8 @@ public:
 		CHANGE_PAGE,
 		PENCIL_CIRCLE,
 		BUTTON,
+		UV_ON,
+		UV_OFF,
 		NUM_SOUNDS
 	};
 

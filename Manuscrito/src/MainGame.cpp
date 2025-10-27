@@ -165,6 +165,12 @@ void MainGame::HandleEvents(SDL_Event& event) {
 		// LUZ UV
 		if (event.key.key == SDLK_E && discoveredBlackLight) {
 			blackLight = !blackLight;
+			if (blackLight) {
+				AudioManager::playSound(AudioManager::UV_ON);
+			}
+			else {
+				AudioManager::playSound(AudioManager::UV_OFF);
+			}
 		}
 
 		// CAMBIO DE PÁGINA DERECHA

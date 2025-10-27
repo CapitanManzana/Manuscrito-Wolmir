@@ -41,13 +41,16 @@ constexpr array<MusicSpec, AudioManager::NUM_MUSIC> musicList{
 	{"finalP1.mp3", 1, 5000},
 	{"finalP2.mp3", 1, 5000},
 	{"finalP3.mp3", 1, 5000},
-	{"finalP4.mp3", 0, 5000}
+	{"finalP4.mp3", 0, 5000},
+	{"discovery.mp3", 0, 5000}
 };
 
 constexpr array<const char*, AudioManager::NUM_SOUNDS> soundsList{
 	"Page.mp3",
 	"Pencil.mp3",
-	"Button.wav"
+	"Button.wav",
+	"uvLight.mp3",
+	"uvLightOff.mp3"
 };
 
 void AudioManager::Init() {

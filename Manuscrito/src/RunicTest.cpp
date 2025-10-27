@@ -56,7 +56,7 @@ void RunicTest::updateState(int index) {
 
 void RunicTest::onSuccess() {
 	if (id == 0) game->discoveredBlackLight = true;
-
+	AudioManager::playSong(AudioManager::DISCOVERY);
 	if (book) {
 		for (Selector* s : selectors) {
 			s->gameObject->setIsActive(false);
