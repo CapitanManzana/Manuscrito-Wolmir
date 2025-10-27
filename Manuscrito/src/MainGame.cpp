@@ -54,6 +54,15 @@ void MainGame::Update(float deltaTime) {
 		}
 	}
 
+	if (notifier->getIsActive()) {
+		elapsedTime += deltaTime;
+
+		if (elapsedTime > secondsOnScreen) {
+			elapsedTime = 0;
+			notifier->setIsActive(false);
+		}
+	}
+
 	runicTest->DoUpdate(deltaTime);
 	astrologyTest->DoUpdate(deltaTime);
 }
@@ -204,7 +213,7 @@ void MainGame::HandleEvents(SDL_Event& event) {
 			AudioManager::playSound(AudioManager::CHANGE_PAGE);
 		}
 
-		if (event.key.key == SDLK_ESCAPE) {
+		if (event.key.key == SDLK_ESCAPE && !notebookParent->getIsActive()) {
 			pauseMenu->setIsActive(!pauseMenu->getIsActive());
 			AudioManager::playSound(AudioManager::CHANGE_PAGE);
 		}
@@ -310,7 +319,7 @@ void MainGame::createGameObjects() {
 	ifstream notesFile(notesData);
 
 	if (notesFile.is_open()) {
-		notebook = new Notebook(notesFile, notebookParent, game->baseFontCentered, game->getTexture(Game::MARCO), renderer, game);
+		notebook = new Notebook(notesFile, notebookParent, game->baseFontCentered, game->getTexture(Game::MARCO), renderer, this);
 	}
 	else {
 		SDL_LogError(SDL_LOG_CATEGORY_APPLICATION, "Couldn't load notes data file");
@@ -721,16 +730,20 @@ void MainGame::createGameObjects() {
 
 #pragma endregion
 
+#pragma region Menu Pausa
+
+	// FONDO DEL MENU DE PAUSA
 	pauseMenu = new GameObject("MenuPausa", 3);
-	pauseMenu->addComponent<Transform>(Vector2D<float>(Game::WINDOW_WIDTH / 2, Game::WINDOW_HEIGHT / 2), 0.37);
+	pauseMenu->addComponent<Transform>(Vector2D<float>(Game::WINDOW_WIDTH / 2, Game::WINDOW_HEIGHT / 2), 0.30);
 	pauseMenu->addComponent<SpriteRenderer>(game->getTexture(Game::FOLIO), 0, 0);
 
 	SDL_Color red = { 196, 26, 0, 255 };
 
+	// VOLVER AL MENU PRINCIPAL
 	GameObject* mainMenu = new GameObject("MenuPrincipal", 4, pauseMenu);
-	// Añadimos los componentes
 	mainMenu->addComponent<Transform>(Vector2D<float>(0, -30), 0.15);
 	mainMenu->addComponent<SpriteRenderer>();
+
 	Text* t = mainMenu->addComponent<Text>("Menú Principal", red, game->baseFontCentered, 0, 150, renderer);
 	Button* b = mainMenu->addComponent<Button>();
 	b->onClick = [this]() { 
@@ -744,10 +757,11 @@ void MainGame::createGameObjects() {
 	h->onEnterHover = [t, hoverColor]() { t->setColor(hoverColor); };
 	h->onExitHover = [t, color]() { t->setColor(color); };
 
+	// SALIR DEL JUEGO
 	GameObject* salir = new GameObject("Salir", 4, pauseMenu);
-	// Añadimos los componentes
 	salir->addComponent<Transform>(Vector2D<float>(0, 30), 0.15);
 	salir->addComponent<SpriteRenderer>();
+
 	Text* tx = salir->addComponent<Text>("Salir", red, game->baseFontCentered, 0, 150, renderer);
 	Button* bt = salir->addComponent<Button>();
 	bt->onClick = [this]() {
@@ -772,6 +786,20 @@ void MainGame::createGameObjects() {
 	sceneObjects.push_back(salir);
 
 	pauseMenu->setIsActive(false);
+
+#pragma endregion
+
+	notifier = new GameObject("Notifier", 3);
+	notifier->addComponent<Transform>(Vector2D<float>(Game::WINDOW_WIDTH / 2, 50), 0.15);
+	notifier->addComponent<SpriteRenderer>();
+	SDL_Color blanco = { 255,255,255,255 };
+	notifier->addComponent<Text>("HOJA DE NOTAS ACTUALIZADA", blanco, game->baseFont, 0, 110, renderer);
+
+	notifier->setIsActive(false);
+
+	sceneObjects.push_back(notifier);
+	game->gameObjects.push_back(notifier);
+	overlays.push_back(notifier);
 
 	manuscrito->changePage(0);
 }
@@ -808,10 +836,15 @@ void MainGame::createUvLight() {
 void MainGame::showText(GameObject* text) {
 	Text* t = text->getComponent<Text>();
 	NoteRevealer* nr = text->getComponent<NoteRevealer>();
+
 	Fader* f = fader->getComponent<Fader>();
 	if (!t->showText && !Text::showingText) {
 		// Mostramos el texto seleccionado
 		t->showText = true;
+		if (nr) {
+			notifier->setIsActive(true);
+			AudioManager::playSound(AudioManager::PENCIL_DRAW);
+		}
 	}
 }
 #pragma endregion

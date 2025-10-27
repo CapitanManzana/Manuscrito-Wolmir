@@ -147,7 +147,7 @@ Game::render() const
 {
 	SDL_RenderClear(renderer);
 
-	currentScene->Render();
+ 	currentScene->Render();
 
 	SDL_RenderPresent(renderer);
 }

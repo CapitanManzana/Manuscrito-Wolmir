@@ -7,7 +7,7 @@ ButtonName: > Continuar <
 		Size: 100
 		EndText: 4000
 	T1:
-		Text: Al otro lado del telefono te contesta la voz de un hombre con un marcado acento alemán. Se nota que está nervioso y agitado, después de un breve silencio se presenta. Su nombre es Franz Wolmir un enigmático multimillonario. Te necesita. Urgentemente.
+		Text: Al otro lado del telefono te contesta la voz de un hombre con un marcado acento alemán. Se nota que está nervioso y agitado, después de un breve silencio se presenta. Su nombre es Franz Wolmir, un enigmático multimillonario. Te necesita. Urgentemente.
 		PosX: -1
 		PosY: -1
 		Size: 100
@@ -19,7 +19,7 @@ ButtonName: > Continuar <
 		Size: 100
 		EndText: 4000
 	T3:
-		Text: El Sr. Wolmir te ofrece una absurda cantidad de dinero por ir a su mansión inmediatamente. Después de pensarlo un mometo, aceptas, tienes un nuevo encargo...
+		Text: El Sr. Wolmir te ofrece una indecente cantidad de dinero por ir a su mansión inmediatamente. Después de pensarlo un mometo, aceptas, tienes un nuevo encargo...
 		PosX: -1
 		PosY: -1
 		Size: 100

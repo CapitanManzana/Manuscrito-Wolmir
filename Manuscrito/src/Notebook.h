@@ -8,6 +8,7 @@
 class GameObject;
 class Texture;
 class Game;
+class Scene;
 
 class Notebook
 {
@@ -39,15 +40,17 @@ private:
 	int discoveredNotes;
 
 	GameObject* lastInfoObject = nullptr;
+
 	void onClickNote(int index);
 public:
-	Notebook(std::istream& is, GameObject* parent, TTF_Font* font, Texture* tex, SDL_Renderer* rend, Game* game);
+	Notebook(std::istream& is, GameObject* parent, TTF_Font* font, Texture* tex, SDL_Renderer* rend, Scene* scene);
 	~Notebook();
 
 	// Revela una nota en el cuaderno (un descubrimiento)
 	void discoverNote(int index);
 	void render() const;
 	void renderLines() const;
+	void update(float deltaTime);
 
 	GameObject* getNote(int index) const;
 	std::vector<GameObject*> getNotes() const { return notes; }

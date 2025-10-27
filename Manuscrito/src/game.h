@@ -36,7 +36,7 @@ public:
 	static constexpr unsigned short ASTROLOGY_TEST_SOLUTION = 0b1000011; // 7
 	static constexpr unsigned short ASTROLOGY_TEST_LENGHT = 8;
 
-	static constexpr const char* const FINAL_CODE_SOLUTION = "1904";
+	static constexpr const char* const FINAL_CODE_SOLUTION = "1518";
 
 	static TTF_Font* baseFont;
 	static TTF_Font* baseFontCentered;

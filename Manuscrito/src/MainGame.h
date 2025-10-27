@@ -27,6 +27,9 @@ private:
 	//Cuaderno de notas
 	GameObject* notebookParent = nullptr;
 	Notebook* notebook = nullptr;
+	GameObject* notifier = nullptr;
+	float elapsedTime = 0;
+	float secondsOnScreen = 5;
 
 	//Menu de pausa
 	GameObject* pauseMenu = nullptr;

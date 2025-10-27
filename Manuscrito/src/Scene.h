@@ -9,10 +9,11 @@ private:
 	static int totalScenes;
 
 protected:
-	Game* game;
 	SDL_Renderer* renderer;
 
 public:
+	Game* game;
+
 	Scene(Game& game);
 	virtual ~Scene() {}
 

@@ -32,6 +32,7 @@ public:
 		BUTTON,
 		UV_ON,
 		UV_OFF,
+		PENCIL_DRAW,
 		NUM_SOUNDS
 	};
 

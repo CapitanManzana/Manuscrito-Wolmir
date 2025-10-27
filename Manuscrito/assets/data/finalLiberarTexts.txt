@@ -1,7 +1,7 @@
 ﻿TextsCount: 5
 ButtonName: > Continuar <
 	T0:
-		Text: El libro comienza a temblar de manera repentina, las luces de la habitanción parpadean, las páginas comienzan ha pasar a gran velociad...
+		Text: El libro comienza a temblar de manera repentina, las luces de la habitanción parpadean, las páginas comienzan a pasar a gran velociad...
 		PosX: -1
 		PosY: -1
 		Size: 100
