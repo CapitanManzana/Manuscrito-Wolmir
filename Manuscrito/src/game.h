@@ -61,6 +61,7 @@ public:
 	};
 
 	static std::vector<GameObject*> gameObjects;
+	Scene* currentScene;
 
 private:
 	
@@ -78,7 +79,6 @@ private:
 	SDL_Window* window;
 	SDL_Renderer* renderer;
 
-	Scene* currentScene;
 	Scene* prevScene;
 public:
 	Game();

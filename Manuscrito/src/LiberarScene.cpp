@@ -127,6 +127,9 @@ void LiberarScene::loadTexts(istream& file, string& buttonText) {
 
 void LiberarScene::nextText() {
 	if (currentText < textsCount) {
+		if (currentText == 1) AudioManager::playSong(AudioManager::FINAL_P2);
+		if (currentText == 2) AudioManager::playSong(AudioManager::FINAL_P3);
+
 		texts[currentText]->setIsActive(true);
 		prevText = texts[currentText];
 		currentText++;
@@ -147,6 +150,8 @@ void LiberarScene::fadeOutText() {
 	if (currentText < textsCount) {
 		Fader* f = prevText->getComponent<Fader>();
 		if (f) {
+			if (currentText == 4) AudioManager::playSong(AudioManager::FINAL_P4);
+
 			f->startFadeOut();
 		}
 	}

@@ -39,6 +39,7 @@ public:
 	void Reload() override;
 	void Render() override;
 	void HandleEvents(SDL_Event& event) override;
+	void OnLoadScene() override;
 
 private:
 	void changeScene(SceneType scene);

@@ -1,4 +1,4 @@
-#include "MainGame.h"
+Ôªø#include "MainGame.h"
 #include "Scene.h"
 
 #include <SDL3/SDL_image.h>
@@ -40,14 +40,14 @@ void MainGame::Reload() {
 }
 
 void MainGame::Start() {
-	// P·ginas del manuscrito
+	// P√°ginas del manuscrito
 	for (size_t i = 0; i < sceneObjects.size(); i++) {
 		sceneObjects[i]->start();
 	}
 }
 
 void MainGame::Update(float deltaTime) {
-	// P·ginas del manuscrito
+	// P√°ginas del manuscrito
 	for (size_t i = 0; i < sceneObjects.size(); i++) {
 		if (sceneObjects[i]->getIsActive()) {
 			sceneObjects[i]->update(deltaTime);
@@ -79,7 +79,7 @@ MainGame::~MainGame() {
 }
 
 void MainGame::Render() {
-	// 1. PREPARAR LA M¡SCARA DE LUZ
+	// 1. PREPARAR LA M√ÅSCARA DE LUZ
 	SDL_SetRenderDrawColor(renderer, ambientLightDarkZone.r, ambientLightDarkZone.g, ambientLightDarkZone.b, ambientLightDarkZone.a);
 	// Apunta a tu textura de luz (que tiene BLENDMODE_MOD)
 	SDL_SetRenderTarget(renderer, rendertex_ambientLight);
@@ -105,7 +105,7 @@ void MainGame::Render() {
 		rectLight.x = cur_posX - (rectLight.w / 2.f);
 		rectLight.y = cur_posY - (rectLight.h / 2.f);
 
-		// 1. PREPARAR LA M¡SCARA DE LUZ
+		// 1. PREPARAR LA M√ÅSCARA DE LUZ
 		SDL_SetRenderDrawColor(renderer, 0, 0, 0, 255);
 		// Apunta a tu textura de luz (que tiene BLENDMODE_MOD)
 		SDL_SetRenderTarget(renderer, rendertex_light);
@@ -134,11 +134,11 @@ void MainGame::Render() {
 					uvObjects[i]->render();
 			}
 		}
-		// Multiplica el mapa por tu m·scara de luz (rendertex_light)
+		// Multiplica el mapa por tu m√°scara de luz (rendertex_light)
 		SDL_RenderTexture(renderer, rendertex_light, NULL, NULL);
 	}
 
-	// Multiplica el mapa por tu m·scara de luz (rendertex_light)
+	// Multiplica el mapa por tu m√°scara de luz (rendertex_light)
 	SDL_RenderTexture(renderer, rendertex_ambientLight, NULL, NULL);
 
 	// El fader de la escena es lo ultimo que se dibuja
@@ -163,11 +163,11 @@ void MainGame::HandleEvents(SDL_Event& event) {
 	if (event.type == SDL_EVENT_KEY_DOWN) {
 
 		// LUZ UV
-		if (event.key.key == SDLK_E) {
+		if (event.key.key == SDLK_E && discoveredBlackLight) {
 			blackLight = !blackLight;
 		}
 
-		// CAMBIO DE P¡GINA DERECHA
+		// CAMBIO DE P√ÅGINA DERECHA
 		if (event.key.key == SDLK_D) {
 			currentPage += 2;
 			if (currentPage >= pagesCount) currentPage = pagesCount - 2;
@@ -175,7 +175,7 @@ void MainGame::HandleEvents(SDL_Event& event) {
 			manuscrito->changePage(currentPage);
 		}
 
-		// CAMBIO DE P¡GINA IZQUIERDA
+		// CAMBIO DE P√ÅGINA IZQUIERDA
 		if (event.key.key == SDLK_A) {
 			currentPage -= 2;
 			if (currentPage < 0) currentPage = 0;
@@ -195,6 +195,12 @@ void MainGame::HandleEvents(SDL_Event& event) {
 
 		if (event.key.key == SDLK_TAB) {
 			notebookParent->setIsActive(!notebookParent->getIsActive());
+			AudioManager::playSound(AudioManager::CHANGE_PAGE);
+		}
+
+		if (event.key.key == SDLK_ESCAPE) {
+			pauseMenu->setIsActive(!pauseMenu->getIsActive());
+			AudioManager::playSound(AudioManager::CHANGE_PAGE);
 		}
 	}
 }
@@ -314,7 +320,7 @@ void MainGame::createGameObjects() {
 #pragma region TEXTOS DEL MANUSCRITO
 	// Cargamos el archivo de textos
 	LoadTexts* textsLoader = new LoadTexts(textsData);
-	// Recorremos las p·ginas y los textos para crearlos
+	// Recorremos las p√°ginas y los textos para crearlos
 	for (int i = 0; i < pagesCount; i++) {
 
 		if (i % 2 == 0) {
@@ -323,13 +329,13 @@ void MainGame::createGameObjects() {
 
 		for (int j = 0; j < textsLoader->getTextsCount(i); j++) {
 
-			// La data del texto (pos, tamaÒo, contenido)
+			// La data del texto (pos, tama√±o, contenido)
 			TextData textData = textsLoader->getTextData(i, j);
 
 			//CREAMOS EL TEXTO
 			GameObject* texto = new GameObject("Texto " + to_string(i) + "_" + to_string(j), 4, bookPages[i]);
 
-			// AÒadimos los componentes
+			// A√±adimos los componentes
 			texto->addComponent<Transform>(Vector2D<float>(textData.position.x, textData.position.y), 0.15);
 			texto->addComponent<SpriteRenderer>();
 			texto->addComponent<Text>(textData.text, textData.color, game->manuscritoFont, textData.textEnd, textData.size, renderer);
@@ -358,17 +364,30 @@ void MainGame::createGameObjects() {
 			GameObject* btCerrar = new GameObject("btCerrar", 4, bookPages[i]);
 			btCerrar->addComponent<Transform>(Vector2D<float>(-60, 130), 0.15);
 			btCerrar->addComponent<SpriteRenderer>();
-			btCerrar->addComponent<Text>("CERRAR LIBRO", colorBtn, game->baseFont, 0, 80, renderer);
+			Text* t = btCerrar->addComponent<Text>("CERRAR LIBRO", colorBtn, game->baseFont, 0, 80, renderer);
 			Button* btC = btCerrar->addComponent<Button>();
 			btC->onClick = [this]() { changeScene(FINAL_CERRAR); };
+
+			SDL_Color hoverColor = { 100, 0, 0, 255 };
+
+			Hover* h = btCerrar->addComponent<Hover>(renderer);
+			h->onEnterHover = [t, hoverColor]() { t->setColor(hoverColor); };
+			h->onExitHover = [t, colorBtn]() { t->setColor(colorBtn); };
 
 			GameObject* btLiberar = new GameObject("btLiberar", 4, bookPages[i]);
 			btLiberar->addComponent<Transform>(Vector2D<float>(60, 130), 0.15);
 			btLiberar->addComponent<SpriteRenderer>();
-			btLiberar->addComponent<Text>("LIBERAR", colorBtn, game->baseFont, 0, 80, renderer);
+			Text* t2 = btLiberar->addComponent<Text>("LIBERAR", colorBtn, game->baseFont, 0, 80, renderer);
+
+			Hover* h2 = btLiberar->addComponent<Hover>(renderer);
+			h2->onEnterHover = [t2, hoverColor]() { t2->setColor(hoverColor); };
+			h2->onExitHover = [t2, colorBtn]() { t2->setColor(colorBtn); };
 
 			Button* btL = btLiberar->addComponent<Button>();
-			btL->onClick = [this]() { changeScene(FINAL_LIBERAR); };
+			btL->onClick = [this]() { 
+				changeScene(FINAL_LIBERAR);
+				AudioManager::playSong(AudioManager::FINAL_P1);
+			};
 
 			texts.push_back(btCerrar);
 			texts.push_back(btLiberar);
@@ -421,11 +440,11 @@ void MainGame::createGameObjects() {
 #pragma region RunicTest
 	/*
 	*  1. Creamos el GameObject
-	*  2. AÒadimos transform y renderer
-	*  3. AÒadimos el selector
-	*  4. AÒadimos el boton y le agregamos el metodo onClick de selector
+	*  2. A√±adimos transform y renderer
+	*  3. A√±adimos el selector
+	*  4. A√±adimos el boton y le agregamos el metodo onClick de selector
 	*  5. Ocultamos el render
-	*  6. Se aÒade a los vectores y a runicTest
+	*  6. Se a√±ade a los vectores y a runicTest
 	*/
 
 	GameObject* selector1 = new GameObject("Selector1", 4, hoja4);
@@ -551,7 +570,7 @@ void MainGame::createGameObjects() {
 	sceneObjects.push_back(selector11);
 	sceneObjects.push_back(selector12);
 
-	runicTest = new RunicTest(Game::RUNIC_TEST_SOLUTION, Game::RUNIC_TEST_LENGHT, manuscrito, hoja4_2, 3);
+	runicTest = new RunicTest(Game::RUNIC_TEST_SOLUTION, Game::RUNIC_TEST_LENGHT, manuscrito, hoja4_2, 3, this);
 	runicTest->addSelector(sl1);
 	runicTest->addSelector(sl2);
 	runicTest->addSelector(sl3);
@@ -640,7 +659,7 @@ void MainGame::createGameObjects() {
 	sceneObjects.push_back(selector6E);
 	sceneObjects.push_back(selector7E);
 
-	astrologyTest = new RunicTest(Game::ASTROLOGY_TEST_SOLUTION, Game::ASTROLOGY_TEST_LENGHT, manuscrito, hoja6_2, 5);
+	astrologyTest = new RunicTest(Game::ASTROLOGY_TEST_SOLUTION, Game::ASTROLOGY_TEST_LENGHT, manuscrito, hoja6_2, 5, this);
 	astrologyTest->addSelector(sl1E);
 	astrologyTest->addSelector(sl2E);
 	astrologyTest->addSelector(sl3E);
@@ -695,6 +714,58 @@ void MainGame::createGameObjects() {
 	sceneObjects.push_back(code4);
 
 #pragma endregion
+
+	pauseMenu = new GameObject("MenuPausa", 3);
+	pauseMenu->addComponent<Transform>(Vector2D<float>(Game::WINDOW_WIDTH / 2, Game::WINDOW_HEIGHT / 2), 0.37);
+	pauseMenu->addComponent<SpriteRenderer>(game->getTexture(Game::FOLIO), 0, 0);
+
+	SDL_Color red = { 196, 26, 0, 255 };
+
+	GameObject* mainMenu = new GameObject("MenuPrincipal", 4, pauseMenu);
+	// A√±adimos los componentes
+	mainMenu->addComponent<Transform>(Vector2D<float>(0, -30), 0.15);
+	mainMenu->addComponent<SpriteRenderer>();
+	Text* t = mainMenu->addComponent<Text>("Men√∫ Principal", red, game->baseFontCentered, 0, 150, renderer);
+	Button* b = mainMenu->addComponent<Button>();
+	b->onClick = [this]() { 
+		changeScene(MAIN_MENU);
+		AudioManager::playSound(AudioManager::BUTTON);
+	};
+
+	SDL_Color hoverColor = { 100, 0, 0, 255 };
+
+	Hover* h = mainMenu->addComponent<Hover>(renderer);
+	h->onEnterHover = [t, hoverColor]() { t->setColor(hoverColor); };
+	h->onExitHover = [t, color]() { t->setColor(color); };
+
+	GameObject* salir = new GameObject("Salir", 4, pauseMenu);
+	// A√±adimos los componentes
+	salir->addComponent<Transform>(Vector2D<float>(0, 30), 0.15);
+	salir->addComponent<SpriteRenderer>();
+	Text* tx = salir->addComponent<Text>("Salir", red, game->baseFontCentered, 0, 150, renderer);
+	Button* bt = salir->addComponent<Button>();
+	bt->onClick = [this]() {
+		game->exitGame();
+		AudioManager::playSound(AudioManager::BUTTON);
+		};
+
+	Hover* hv = salir->addComponent<Hover>(renderer);
+	hv->onEnterHover = [tx, hoverColor]() { tx->setColor(hoverColor); };
+	hv->onExitHover = [tx, color]() { tx->setColor(color); };
+
+	game->gameObjects.push_back(pauseMenu);
+	game->gameObjects.push_back(mainMenu);
+	game->gameObjects.push_back(salir);
+
+	overlays.push_back(pauseMenu);
+	overlays.push_back(mainMenu);
+	overlays.push_back(salir);
+
+	sceneObjects.push_back(pauseMenu);
+	sceneObjects.push_back(mainMenu);
+	sceneObjects.push_back(salir);
+
+	pauseMenu->setIsActive(false);
 
 	manuscrito->changePage(0);
 }

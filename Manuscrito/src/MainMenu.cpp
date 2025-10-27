@@ -176,6 +176,10 @@ void MainMenu::HandleEvents(SDL_Event& event) {
 	}
 }
 
+void MainMenu::OnLoadScene() {
+	AudioManager::playSong(AudioManager::MENU);
+}
+
 void MainMenu::changeScene(SceneType scene) {
 	Fader* f = fader->getComponent<Fader>();
 	AudioManager::playSound(AudioManager::BUTTON);

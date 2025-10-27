@@ -239,13 +239,6 @@ Game::handleEvents()
 			}
 		}
 
-		if (event.type == SDL_EVENT_KEY_DOWN) {
-			// SALIR DEL JUEGO
-			if (event.key.key == SDLK_ESCAPE) {
-				exit = true;
-			}
-		}
-
 		currentScene->HandleEvents(event);
 	}
 }

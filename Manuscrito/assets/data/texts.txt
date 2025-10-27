@@ -258,7 +258,7 @@ Page_3
         uv: 1
         revealNoteIndex: -1
 Page_4
-    TextsCount: 4
+    TextsCount: 5
      T_1
         text: El otro día descubrí un hechizo muy curioso, capaz de lanzar una luz que revela elementos que no se ven a simple vista.
         x: 5
@@ -278,18 +278,27 @@ Page_4
         uv: 0
         revealNoteIndex: -1
     T_3
-        text: 5 de octubre de 1534
-        x: -60
-        y: -50
-        size: 80
+        text: Invocar hechizo: tecla E
+        x: 0
+        y: -60
+        size: 70
         textEnd: 1500
         color: #C41A00
         uv: 0
         revealNoteIndex: -1
     T_4
+        text: 5 de octubre de 1534
+        x: -60
+        y: -30
+        size: 80
+        textEnd: 1500
+        color: #C41A00
+        uv: 0
+        revealNoteIndex: -1
+    T_5
         text: Era todo mentira, todo una farsa, menos mal que hemos conseguido escapar. La Orden no nos quería ayudar, nos quería atrapar. Han intentado llevarse a mi hermana y casi nos matan a madre y a mi. Hemos huido por la noche, a través de las cloacas.
         x: 5        
-        y: -5
+        y: 15
         size: 76
         textEnd: 1500
         color: #6B2604

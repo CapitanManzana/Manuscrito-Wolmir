@@ -12,5 +12,6 @@ private:
 public:
 	SplashScreen(Game& game) : Scene(game) { }
 	void Load() override;
+	void OnLoadScene() override;
 };
 

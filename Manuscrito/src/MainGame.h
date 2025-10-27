@@ -28,6 +28,9 @@ private:
 	GameObject* notebookParent = nullptr;
 	Notebook* notebook = nullptr;
 
+	//Menu de pausa
+	GameObject* pauseMenu = nullptr;
+
 	// TEXTOS
 	GameObject* currentText = nullptr;
 
@@ -78,6 +81,8 @@ public:
 	void Start() override;
 	void HandleEvents(SDL_Event& event) override;
 	void Render() override;
+
+	bool discoveredBlackLight = false;
 
 private:
 	void showText(GameObject* text);

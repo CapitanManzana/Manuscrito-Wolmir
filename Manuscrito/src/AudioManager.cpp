@@ -35,7 +35,13 @@ constexpr array<MusicSpec, AudioManager::NUM_MUSIC> musicList{
 	{"introP2.mp3", 1, 5000},
 	{"introP3.mp3", 1, 5000},
 	{"introP4.mp3", 1, 5000},
-	{"riser.mp3", 0, 5000}
+	{"riser.mp3", 0, 5000},
+	{"finalCerrar.mp3", 1, 5000},
+	{"endFinalCerrar.mp3", 0, 5000},
+	{"finalP1.mp3", 1, 5000},
+	{"finalP2.mp3", 1, 5000},
+	{"finalP3.mp3", 1, 5000},
+	{"finalP4.mp3", 0, 5000}
 };
 
 constexpr array<const char*, AudioManager::NUM_SOUNDS> soundsList{
@@ -101,8 +107,6 @@ void AudioManager::Unload() {
 }
 
 void AudioManager::Update(float deltaTime) {
-	SDL_Log("A: %i     B: %i    C: %i", MIX_TrackPlaying(musicTrackA), MIX_TrackPlaying(musicTrackB), MIX_TrackPlaying(musicTrackC));
-
 	if (!doLoop) return;
 
 	elapsedTime += deltaTime;

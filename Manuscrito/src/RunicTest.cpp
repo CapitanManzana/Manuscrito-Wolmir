@@ -2,11 +2,13 @@
 
 #include "GameObject.h"
 #include "Selector.h"
+#include "MainGame.h"
 #include "Book.h"
 #include <bit>
 
 #include <SDL3/SDL.h>
 
+int RunicTest::testsCount = 0;
 /// <summary>
 /// Crea una nueva prueba rúnica, de seleccion de caracteres
 /// </summary>
@@ -15,12 +17,15 @@
 /// <param name="book">libro donde está el test</param>
 /// <param name="page">pagina a mostrar</param>
 /// <param name="pageIndex">index de la página</param>
-RunicTest::RunicTest(mask sol, int length, Book* book, GameObject* page, int pageIndex) {
+RunicTest::RunicTest(mask sol, int length, Book* book, GameObject* page, int pageIndex, MainGame* game) {
 	codeLength = length;
 	solutionCode = sol;
 	this->book = book;
 	newPage = page;
 	this->pageIndex = pageIndex;
+
+	id = testsCount++;
+	this->game = game;
 }
 
 void RunicTest::clearMask() {
@@ -50,6 +55,8 @@ void RunicTest::updateState(int index) {
 }
 
 void RunicTest::onSuccess() {
+	if (id == 0) game->discoveredBlackLight = true;
+
 	if (book) {
 		for (Selector* s : selectors) {
 			s->gameObject->setIsActive(false);

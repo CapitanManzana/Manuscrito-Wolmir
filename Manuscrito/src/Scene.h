@@ -25,5 +25,7 @@ public:
 	virtual void Update(float deltaTime);
 	virtual void Start();
 	virtual void Render();
+
+	virtual void OnLoadScene() {}
 };
 

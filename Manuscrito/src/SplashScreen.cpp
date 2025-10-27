@@ -19,5 +19,8 @@ void SplashScreen::Load() {
 	game->gameObjects.push_back(logo);
 	sceneObjects.push_back(logo);
 
+}
+
+void SplashScreen::OnLoadScene() {
 	AudioManager::playSong(AudioManager::MENU);
 }

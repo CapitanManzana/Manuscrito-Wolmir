@@ -45,6 +45,7 @@ void CodeTest::setInputCode(char c)
 			g->setIsActive(false);
 
 			book->remplacePage(page, pageIndex);
+			AudioManager::playSong(AudioManager::FINAL_CERRAR);
 		}
 	}
 }

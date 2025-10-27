@@ -127,6 +127,8 @@ void CerrarScene::loadTexts(istream& file, string& buttonText) {
 
 void CerrarScene::nextText() {
 	if (currentText < textsCount) {
+		if (currentText == 3) AudioManager::playSong(AudioManager::END_FINAL_CERRAR);
+
 		texts[currentText]->setIsActive(true);
 		prevText = texts[currentText];
 		currentText++;

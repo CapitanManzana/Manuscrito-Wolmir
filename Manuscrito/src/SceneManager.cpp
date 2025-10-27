@@ -14,6 +14,7 @@ void SceneManager::applySceneChange() {
 	if (nextScene != (SceneType)-1) {
 		SDL_Log("Aplicando cambio a escena %i", nextScene);
 		activeScene = scenes[nextScene];
+		activeScene->OnLoadScene();
 		scene = nextScene;
 		nextScene = (SceneType)-1; // resetea el marcador
 	}
