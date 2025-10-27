@@ -79,6 +79,7 @@ Game::Game() : exit(false)
 
 	if (renderer == nullptr)
 		throw "renderer: "s + SDL_GetError();
+
 #pragma endregion
 
 	// Inicializamos las variables de tiempo
@@ -113,6 +114,9 @@ Game::Game() : exit(false)
 	SDL_SetRenderLogicalPresentation(renderer, WINDOW_WIDTH, WINDOW_HEIGHT, SDL_LOGICAL_PRESENTATION_STRETCH);
 
 	AudioManager::Init();
+
+	cursorDefault = SDL_CreateSystemCursor(SDL_SYSTEM_CURSOR_DEFAULT);
+	cursorHand = SDL_CreateSystemCursor(SDL_SYSTEM_CURSOR_POINTER);
 }
 
 Game::~Game()
@@ -214,6 +218,36 @@ Game::handleEvents()
 
 		if (event.type == SDL_EVENT_QUIT)
 			exit = true;
+		if (event.type == SDL_EVENT_MOUSE_MOTION) {
+			float mouseX = event.motion.x;
+			float mouseY = event.motion.y;
+
+			float logicalX, logicalY;
+			SDL_RenderCoordinatesFromWindow(renderer, mouseX, mouseY, &logicalX, &logicalY);
+			SDL_FPoint mousePoint = { logicalX, logicalY };
+
+			bool cursorOverClickable = false;
+
+			for (GameObject* go : currentScene->sceneObjects) {
+				if (go->getIsActive()) {
+					Button* bt = go->getComponent<Button>();
+
+					if (bt != nullptr && bt->isEnabled) {
+						Transform* t = go->getComponent<Transform>();
+
+						if (SDL_PointInRectFloat(&mousePoint, &t->dstRect)) {
+							cursorOverClickable = true;
+							break;
+						}
+					}
+				}
+			}
+
+			if (cursorOverClickable)
+				SDL_SetCursor(cursorHand);
+			else
+				SDL_SetCursor(cursorDefault);
+		}
 
 		if (event.type == SDL_EVENT_MOUSE_BUTTON_DOWN) {
 			float mouseX = event.button.x;

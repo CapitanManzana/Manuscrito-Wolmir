@@ -79,6 +79,9 @@ private:
 	SDL_Window* window;
 	SDL_Renderer* renderer;
 
+	SDL_Cursor* cursorDefault;
+	SDL_Cursor* cursorHand;
+
 	Scene* prevScene;
 public:
 	Game();
