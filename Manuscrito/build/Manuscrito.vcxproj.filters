@@ -1,97 +1,102 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="17.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
-    <ClCompile Include="C:\Users\manza.DESKTOP-N61SGRF\Desktop\UNIVERSIDAD\GitHub\Manuscrito\Manuscrito\src\AudioManager.cpp">
+    <ClCompile Include="C:\Users\manza\Desktop\Universidad\TPV1\Manuscrito\Manuscrito\src\AudioManager.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="C:\Users\manza.DESKTOP-N61SGRF\Desktop\UNIVERSIDAD\GitHub\Manuscrito\Manuscrito\src\Book.cpp">
+    <ClCompile Include="C:\Users\manza\Desktop\Universidad\TPV1\Manuscrito\Manuscrito\src\Book.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="C:\Users\manza.DESKTOP-N61SGRF\Desktop\UNIVERSIDAD\GitHub\Manuscrito\Manuscrito\src\Button.cpp">
+    <ClCompile Include="C:\Users\manza\Desktop\Universidad\TPV1\Manuscrito\Manuscrito\src\Button.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="C:\Users\manza.DESKTOP-N61SGRF\Desktop\UNIVERSIDAD\GitHub\Manuscrito\Manuscrito\src\CerrarScene.cpp">
+    <ClCompile Include="C:\Users\manza\Desktop\Universidad\TPV1\Manuscrito\Manuscrito\src\CerrarScene.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="C:\Users\manza.DESKTOP-N61SGRF\Desktop\UNIVERSIDAD\GitHub\Manuscrito\Manuscrito\src\CodeTest.cpp">
+    <ClCompile Include="C:\Users\manza\Desktop\Universidad\TPV1\Manuscrito\Manuscrito\src\CodeTest.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="C:\Users\manza.DESKTOP-N61SGRF\Desktop\UNIVERSIDAD\GitHub\Manuscrito\Manuscrito\src\Fader.cpp">
+    <ClCompile Include="C:\Users\manza\Desktop\Universidad\TPV1\Manuscrito\Manuscrito\src\Fader.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="C:\Users\manza.DESKTOP-N61SGRF\Desktop\UNIVERSIDAD\GitHub\Manuscrito\Manuscrito\src\GameObject.cpp">
+    <ClCompile Include="C:\Users\manza\Desktop\Universidad\TPV1\Manuscrito\Manuscrito\src\GameObject.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="C:\Users\manza.DESKTOP-N61SGRF\Desktop\UNIVERSIDAD\GitHub\Manuscrito\Manuscrito\src\Hover.cpp">
+    <ClCompile Include="C:\Users\manza\Desktop\Universidad\TPV1\Manuscrito\Manuscrito\src\Hover.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="C:\Users\manza.DESKTOP-N61SGRF\Desktop\UNIVERSIDAD\GitHub\Manuscrito\Manuscrito\src\IntroScene.cpp">
+    <ClCompile Include="C:\Users\manza\Desktop\Universidad\TPV1\Manuscrito\Manuscrito\src\IntroScene.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="C:\Users\manza.DESKTOP-N61SGRF\Desktop\UNIVERSIDAD\GitHub\Manuscrito\Manuscrito\src\LiberarScene.cpp">
+    <ClCompile Include="C:\Users\manza\Desktop\Universidad\TPV1\Manuscrito\Manuscrito\src\LiberarScene.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="C:\Users\manza.DESKTOP-N61SGRF\Desktop\UNIVERSIDAD\GitHub\Manuscrito\Manuscrito\src\LoadTexts.cpp">
+    <ClCompile Include="C:\Users\manza\Desktop\Universidad\TPV1\Manuscrito\Manuscrito\src\LoadTexts.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="C:\Users\manza.DESKTOP-N61SGRF\Desktop\UNIVERSIDAD\GitHub\Manuscrito\Manuscrito\src\MainGame.cpp">
+    <ClCompile Include="C:\Users\manza\Desktop\Universidad\TPV1\Manuscrito\Manuscrito\src\MainGame.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="C:\Users\manza.DESKTOP-N61SGRF\Desktop\UNIVERSIDAD\GitHub\Manuscrito\Manuscrito\src\MainMenu.cpp">
+    <ClCompile Include="C:\Users\manza\Desktop\Universidad\TPV1\Manuscrito\Manuscrito\src\MainMenu.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="C:\Users\manza.DESKTOP-N61SGRF\Desktop\UNIVERSIDAD\GitHub\Manuscrito\Manuscrito\src\MonoBehaviour.cpp">
+    <ClCompile Include="C:\Users\manza\Desktop\Universidad\TPV1\Manuscrito\Manuscrito\src\MonoBehaviour.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="C:\Users\manza.DESKTOP-N61SGRF\Desktop\UNIVERSIDAD\GitHub\Manuscrito\Manuscrito\src\NoteRevealer.cpp">
+    <ClCompile Include="C:\Users\manza\Desktop\Universidad\TPV1\Manuscrito\Manuscrito\src\NoteRevealer.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="C:\Users\manza.DESKTOP-N61SGRF\Desktop\UNIVERSIDAD\GitHub\Manuscrito\Manuscrito\src\Notebook.cpp">
+    <ClCompile Include="C:\Users\manza\Desktop\Universidad\TPV1\Manuscrito\Manuscrito\src\Notebook.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="C:\Users\manza.DESKTOP-N61SGRF\Desktop\UNIVERSIDAD\GitHub\Manuscrito\Manuscrito\src\NotebookElement.cpp">
+    <ClCompile Include="C:\Users\manza\Desktop\Universidad\TPV1\Manuscrito\Manuscrito\src\NotebookElement.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="C:\Users\manza.DESKTOP-N61SGRF\Desktop\UNIVERSIDAD\GitHub\Manuscrito\Manuscrito\src\RunicTest.cpp">
+    <ClCompile Include="C:\Users\manza\Desktop\Universidad\TPV1\Manuscrito\Manuscrito\src\RunicTest.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="C:\Users\manza.DESKTOP-N61SGRF\Desktop\UNIVERSIDAD\GitHub\Manuscrito\Manuscrito\src\Scene.cpp">
+    <ClCompile Include="C:\Users\manza\Desktop\Universidad\TPV1\Manuscrito\Manuscrito\src\Scene.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="C:\Users\manza.DESKTOP-N61SGRF\Desktop\UNIVERSIDAD\GitHub\Manuscrito\Manuscrito\src\SceneManager.cpp">
+    <ClCompile Include="C:\Users\manza\Desktop\Universidad\TPV1\Manuscrito\Manuscrito\src\SceneManager.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="C:\Users\manza.DESKTOP-N61SGRF\Desktop\UNIVERSIDAD\GitHub\Manuscrito\Manuscrito\src\Selector.cpp">
+    <ClCompile Include="C:\Users\manza\Desktop\Universidad\TPV1\Manuscrito\Manuscrito\src\Selector.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="C:\Users\manza.DESKTOP-N61SGRF\Desktop\UNIVERSIDAD\GitHub\Manuscrito\Manuscrito\src\SplashScreen.cpp">
+    <ClCompile Include="C:\Users\manza\Desktop\Universidad\TPV1\Manuscrito\Manuscrito\src\SplashScreen.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="C:\Users\manza.DESKTOP-N61SGRF\Desktop\UNIVERSIDAD\GitHub\Manuscrito\Manuscrito\src\SpriteRenderer.cpp">
+    <ClCompile Include="C:\Users\manza\Desktop\Universidad\TPV1\Manuscrito\Manuscrito\src\SpriteRenderer.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="C:\Users\manza.DESKTOP-N61SGRF\Desktop\UNIVERSIDAD\GitHub\Manuscrito\Manuscrito\src\Text.cpp">
+    <ClCompile Include="C:\Users\manza\Desktop\Universidad\TPV1\Manuscrito\Manuscrito\src\Text.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="C:\Users\manza.DESKTOP-N61SGRF\Desktop\UNIVERSIDAD\GitHub\Manuscrito\Manuscrito\src\Transform.cpp">
+    <ClCompile Include="C:\Users\manza\Desktop\Universidad\TPV1\Manuscrito\Manuscrito\src\Transform.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="C:\Users\manza.DESKTOP-N61SGRF\Desktop\UNIVERSIDAD\GitHub\Manuscrito\Manuscrito\src\game.cpp">
+    <ClCompile Include="C:\Users\manza\Desktop\Universidad\TPV1\Manuscrito\Manuscrito\src\game.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="C:\Users\manza.DESKTOP-N61SGRF\Desktop\UNIVERSIDAD\GitHub\Manuscrito\Manuscrito\src\main.cpp">
+    <ClCompile Include="C:\Users\manza\Desktop\Universidad\TPV1\Manuscrito\Manuscrito\src\main.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="C:\Users\manza.DESKTOP-N61SGRF\Desktop\UNIVERSIDAD\GitHub\Manuscrito\Manuscrito\src\texture.cpp">
+    <ClCompile Include="C:\Users\manza\Desktop\Universidad\TPV1\Manuscrito\Manuscrito\src\texture.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <CustomBuild Include="C:\Users\manza.DESKTOP-N61SGRF\Desktop\UNIVERSIDAD\GitHub\Manuscrito\Manuscrito\CMakeLists.txt" />
+    <CustomBuild Include="C:\Users\manza\Desktop\Universidad\TPV1\Manuscrito\Manuscrito\CMakeLists.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="C:\Users\manza\Desktop\Universidad\TPV1\Manuscrito\Manuscrito\src\icono.rc">
+      <Filter>Source Files</Filter>
+    </ResourceCompile>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Source Files">
-      <UniqueIdentifier>{4208BB06-668F-3CE4-AD49-1620F6F88B8A}</UniqueIdentifier>
+      <UniqueIdentifier>{939F99C0-9F2F-3E36-B93B-8C6114A3BB69}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

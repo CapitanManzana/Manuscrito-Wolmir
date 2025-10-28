@@ -22,7 +22,7 @@
     </ProjectConfiguration>
   </ItemGroup>
   <PropertyGroup Label="Globals">
-    <ProjectGuid>{AFD19FB3-50AC-325C-8BB9-96AE323CBBA5}</ProjectGuid>
+    <ProjectGuid>{037B175D-A62C-3891-B2C4-CF62FDE3B8A4}</ProjectGuid>
     <Keyword>Win32Proj</Keyword>
     <WindowsTargetPlatformVersion>10.0.22621.0</WindowsTargetPlatformVersion>
     <Platform>x64</Platform>
@@ -59,25 +59,25 @@
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup>
     <_ProjectFileVersion>10.0.20506.1</_ProjectFileVersion>
-    <OutDir Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">C:\Users\manza.DESKTOP-N61SGRF\Desktop\UNIVERSIDAD\GitHub\Manuscrito\Manuscrito\build\Debug\</OutDir>
+    <OutDir Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">C:\Users\manza\Desktop\Universidad\TPV1\Manuscrito\Manuscrito\build\Debug\</OutDir>
     <IntDir Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Manuscrito.dir\Debug\</IntDir>
     <TargetName Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Manuscrito</TargetName>
     <TargetExt Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">.exe</TargetExt>
     <LinkIncremental Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</LinkIncremental>
     <GenerateManifest Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</GenerateManifest>
-    <OutDir Condition="'$(Configuration)|$(Platform)'=='Release|x64'">C:\Users\manza.DESKTOP-N61SGRF\Desktop\UNIVERSIDAD\GitHub\Manuscrito\Manuscrito\build\Release\</OutDir>
+    <OutDir Condition="'$(Configuration)|$(Platform)'=='Release|x64'">C:\Users\manza\Desktop\Universidad\TPV1\Manuscrito\Manuscrito\build\Release\</OutDir>
     <IntDir Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Manuscrito.dir\Release\</IntDir>
     <TargetName Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Manuscrito</TargetName>
     <TargetExt Condition="'$(Configuration)|$(Platform)'=='Release|x64'">.exe</TargetExt>
     <LinkIncremental Condition="'$(Configuration)|$(Platform)'=='Release|x64'">false</LinkIncremental>
     <GenerateManifest Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</GenerateManifest>
-    <OutDir Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">C:\Users\manza.DESKTOP-N61SGRF\Desktop\UNIVERSIDAD\GitHub\Manuscrito\Manuscrito\build\MinSizeRel\</OutDir>
+    <OutDir Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">C:\Users\manza\Desktop\Universidad\TPV1\Manuscrito\Manuscrito\build\MinSizeRel\</OutDir>
     <IntDir Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">Manuscrito.dir\MinSizeRel\</IntDir>
     <TargetName Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">Manuscrito</TargetName>
     <TargetExt Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">.exe</TargetExt>
     <LinkIncremental Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">false</LinkIncremental>
     <GenerateManifest Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">true</GenerateManifest>
-    <OutDir Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">C:\Users\manza.DESKTOP-N61SGRF\Desktop\UNIVERSIDAD\GitHub\Manuscrito\Manuscrito\build\RelWithDebInfo\</OutDir>
+    <OutDir Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">C:\Users\manza\Desktop\Universidad\TPV1\Manuscrito\Manuscrito\build\RelWithDebInfo\</OutDir>
     <IntDir Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">Manuscrito.dir\RelWithDebInfo\</IntDir>
     <TargetName Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">Manuscrito</TargetName>
     <TargetExt Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">.exe</TargetExt>
@@ -86,7 +86,7 @@
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <ClCompile>
-      <AdditionalIncludeDirectories>C:\Users\manza.DESKTOP-N61SGRF\Desktop\UNIVERSIDAD\GitHub\Manuscrito\Manuscrito\src;C:\Users\manza.DESKTOP-N61SGRF\Desktop\UNIVERSIDAD\GitHub\Manuscrito\Manuscrito\libs\SDL3\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>C:\Users\manza\Desktop\Universidad\TPV1\Manuscrito\Manuscrito\src;C:\Users\manza\Desktop\Universidad\TPV1\Manuscrito\Manuscrito\libs\SDL3\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <AssemblerListingLocation>$(IntDir)</AssemblerListingLocation>
       <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
       <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
@@ -104,10 +104,10 @@
     </ClCompile>
     <ResourceCompile>
       <PreprocessorDefinitions>%(PreprocessorDefinitions);WIN32;_DEBUG;_WINDOWS;CMAKE_INTDIR=\"Debug\"</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>C:\Users\manza.DESKTOP-N61SGRF\Desktop\UNIVERSIDAD\GitHub\Manuscrito\Manuscrito\src;C:\Users\manza.DESKTOP-N61SGRF\Desktop\UNIVERSIDAD\GitHub\Manuscrito\Manuscrito\libs\SDL3\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>C:\Users\manza\Desktop\Universidad\TPV1\Manuscrito\Manuscrito\src;C:\Users\manza\Desktop\Universidad\TPV1\Manuscrito\Manuscrito\libs\SDL3\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ResourceCompile>
     <Midl>
-      <AdditionalIncludeDirectories>C:\Users\manza.DESKTOP-N61SGRF\Desktop\UNIVERSIDAD\GitHub\Manuscrito\Manuscrito\src;C:\Users\manza.DESKTOP-N61SGRF\Desktop\UNIVERSIDAD\GitHub\Manuscrito\Manuscrito\libs\SDL3\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>C:\Users\manza\Desktop\Universidad\TPV1\Manuscrito\Manuscrito\src;C:\Users\manza\Desktop\Universidad\TPV1\Manuscrito\Manuscrito\libs\SDL3\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <OutputDirectory>$(ProjectDir)/$(IntDir)</OutputDirectory>
       <HeaderFileName>%(Filename).h</HeaderFileName>
       <TypeLibraryName>%(Filename).tlb</TypeLibraryName>
@@ -117,7 +117,7 @@
     <PostBuildEvent>
       <Message></Message>
       <Command>setlocal
-"C:\Program Files\Microsoft Visual Studio\2022\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\bin\cmake.exe" -E copy_if_different C:/Users/manza.DESKTOP-N61SGRF/Desktop/UNIVERSIDAD/GitHub/Manuscrito/Manuscrito/libs/SDL3/lib/SDL3.dll C:/Users/manza.DESKTOP-N61SGRF/Desktop/UNIVERSIDAD/GitHub/Manuscrito/Manuscrito/libs/SDL3/lib/SDL3_image.dll C:/Users/manza.DESKTOP-N61SGRF/Desktop/UNIVERSIDAD/GitHub/Manuscrito/Manuscrito/libs/SDL3/lib/SDL3_ttf.dll C:/Users/manza.DESKTOP-N61SGRF/Desktop/UNIVERSIDAD/GitHub/Manuscrito/Manuscrito/libs/SDL3/lib/SDL3_mixer.dll $&lt;TARGET
+"C:\Program Files\Microsoft Visual Studio\2022\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\bin\cmake.exe" -E copy_if_different C:/Users/manza/Desktop/Universidad/TPV1/Manuscrito/Manuscrito/libs/SDL3/lib/SDL3.dll C:/Users/manza/Desktop/Universidad/TPV1/Manuscrito/Manuscrito/libs/SDL3/lib/SDL3_image.dll C:/Users/manza/Desktop/Universidad/TPV1/Manuscrito/Manuscrito/libs/SDL3/lib/SDL3_ttf.dll C:/Users/manza/Desktop/Universidad/TPV1/Manuscrito/Manuscrito/libs/SDL3/lib/SDL3_mixer.dll $&lt;TARGET
 if %errorlevel% neq 0 goto :cmEnd
 :cmEnd
 endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
@@ -128,13 +128,13 @@ if %errorlevel% neq 0 goto :VCEnd</Command>
     </PostBuildEvent>
     <Link>
       <AdditionalDependencies>SDL3.lib;SDL3_image.lib;SDL3_ttf.lib;SDL3_mixer.lib;kernel32.lib;user32.lib;gdi32.lib;winspool.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;comdlg32.lib;advapi32.lib</AdditionalDependencies>
-      <AdditionalLibraryDirectories>C:/Users/manza.DESKTOP-N61SGRF/Desktop/UNIVERSIDAD/GitHub/Manuscrito/Manuscrito/libs/SDL3/lib;C:/Users/manza.DESKTOP-N61SGRF/Desktop/UNIVERSIDAD/GitHub/Manuscrito/Manuscrito/libs/SDL3/lib/$(Configuration);%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>C:/Users/manza/Desktop/Universidad/TPV1/Manuscrito/Manuscrito/libs/SDL3/lib;C:/Users/manza/Desktop/Universidad/TPV1/Manuscrito/Manuscrito/libs/SDL3/lib/$(Configuration);%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <AdditionalOptions>%(AdditionalOptions) /machine:x64</AdditionalOptions>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <IgnoreSpecificDefaultLibraries>%(IgnoreSpecificDefaultLibraries)</IgnoreSpecificDefaultLibraries>
-      <ImportLibrary>C:/Users/manza.DESKTOP-N61SGRF/Desktop/UNIVERSIDAD/GitHub/Manuscrito/Manuscrito/build/Debug/Manuscrito.lib</ImportLibrary>
-      <ProgramDataBaseFile>C:/Users/manza.DESKTOP-N61SGRF/Desktop/UNIVERSIDAD/GitHub/Manuscrito/Manuscrito/build/Debug/Manuscrito.pdb</ProgramDataBaseFile>
-      <SubSystem>Console</SubSystem>
+      <ImportLibrary>C:/Users/manza/Desktop/Universidad/TPV1/Manuscrito/Manuscrito/build/Debug/Manuscrito.lib</ImportLibrary>
+      <ProgramDataBaseFile>C:/Users/manza/Desktop/Universidad/TPV1/Manuscrito/Manuscrito/build/Debug/Manuscrito.pdb</ProgramDataBaseFile>
+      <SubSystem>Windows</SubSystem>
     </Link>
     <ProjectReference>
       <LinkLibraryDependencies>false</LinkLibraryDependencies>
@@ -142,7 +142,7 @@ if %errorlevel% neq 0 goto :VCEnd</Command>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <ClCompile>
-      <AdditionalIncludeDirectories>C:\Users\manza.DESKTOP-N61SGRF\Desktop\UNIVERSIDAD\GitHub\Manuscrito\Manuscrito\src;C:\Users\manza.DESKTOP-N61SGRF\Desktop\UNIVERSIDAD\GitHub\Manuscrito\Manuscrito\libs\SDL3\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>C:\Users\manza\Desktop\Universidad\TPV1\Manuscrito\Manuscrito\src;C:\Users\manza\Desktop\Universidad\TPV1\Manuscrito\Manuscrito\libs\SDL3\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <AssemblerListingLocation>$(IntDir)</AssemblerListingLocation>
       <ExceptionHandling>Sync</ExceptionHandling>
       <InlineFunctionExpansion>AnySuitable</InlineFunctionExpansion>
@@ -160,10 +160,10 @@ if %errorlevel% neq 0 goto :VCEnd</Command>
     </ClCompile>
     <ResourceCompile>
       <PreprocessorDefinitions>%(PreprocessorDefinitions);WIN32;_WINDOWS;NDEBUG;CMAKE_INTDIR=\"Release\"</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>C:\Users\manza.DESKTOP-N61SGRF\Desktop\UNIVERSIDAD\GitHub\Manuscrito\Manuscrito\src;C:\Users\manza.DESKTOP-N61SGRF\Desktop\UNIVERSIDAD\GitHub\Manuscrito\Manuscrito\libs\SDL3\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>C:\Users\manza\Desktop\Universidad\TPV1\Manuscrito\Manuscrito\src;C:\Users\manza\Desktop\Universidad\TPV1\Manuscrito\Manuscrito\libs\SDL3\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ResourceCompile>
     <Midl>
-      <AdditionalIncludeDirectories>C:\Users\manza.DESKTOP-N61SGRF\Desktop\UNIVERSIDAD\GitHub\Manuscrito\Manuscrito\src;C:\Users\manza.DESKTOP-N61SGRF\Desktop\UNIVERSIDAD\GitHub\Manuscrito\Manuscrito\libs\SDL3\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>C:\Users\manza\Desktop\Universidad\TPV1\Manuscrito\Manuscrito\src;C:\Users\manza\Desktop\Universidad\TPV1\Manuscrito\Manuscrito\libs\SDL3\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <OutputDirectory>$(ProjectDir)/$(IntDir)</OutputDirectory>
       <HeaderFileName>%(Filename).h</HeaderFileName>
       <TypeLibraryName>%(Filename).tlb</TypeLibraryName>
@@ -173,7 +173,7 @@ if %errorlevel% neq 0 goto :VCEnd</Command>
     <PostBuildEvent>
       <Message></Message>
       <Command>setlocal
-"C:\Program Files\Microsoft Visual Studio\2022\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\bin\cmake.exe" -E copy_if_different C:/Users/manza.DESKTOP-N61SGRF/Desktop/UNIVERSIDAD/GitHub/Manuscrito/Manuscrito/libs/SDL3/lib/SDL3.dll C:/Users/manza.DESKTOP-N61SGRF/Desktop/UNIVERSIDAD/GitHub/Manuscrito/Manuscrito/libs/SDL3/lib/SDL3_image.dll C:/Users/manza.DESKTOP-N61SGRF/Desktop/UNIVERSIDAD/GitHub/Manuscrito/Manuscrito/libs/SDL3/lib/SDL3_ttf.dll C:/Users/manza.DESKTOP-N61SGRF/Desktop/UNIVERSIDAD/GitHub/Manuscrito/Manuscrito/libs/SDL3/lib/SDL3_mixer.dll $&lt;TARGET
+"C:\Program Files\Microsoft Visual Studio\2022\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\bin\cmake.exe" -E copy_if_different C:/Users/manza/Desktop/Universidad/TPV1/Manuscrito/Manuscrito/libs/SDL3/lib/SDL3.dll C:/Users/manza/Desktop/Universidad/TPV1/Manuscrito/Manuscrito/libs/SDL3/lib/SDL3_image.dll C:/Users/manza/Desktop/Universidad/TPV1/Manuscrito/Manuscrito/libs/SDL3/lib/SDL3_ttf.dll C:/Users/manza/Desktop/Universidad/TPV1/Manuscrito/Manuscrito/libs/SDL3/lib/SDL3_mixer.dll $&lt;TARGET
 if %errorlevel% neq 0 goto :cmEnd
 :cmEnd
 endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
@@ -184,13 +184,13 @@ if %errorlevel% neq 0 goto :VCEnd</Command>
     </PostBuildEvent>
     <Link>
       <AdditionalDependencies>SDL3.lib;SDL3_image.lib;SDL3_ttf.lib;SDL3_mixer.lib;kernel32.lib;user32.lib;gdi32.lib;winspool.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;comdlg32.lib;advapi32.lib</AdditionalDependencies>
-      <AdditionalLibraryDirectories>C:/Users/manza.DESKTOP-N61SGRF/Desktop/UNIVERSIDAD/GitHub/Manuscrito/Manuscrito/libs/SDL3/lib;C:/Users/manza.DESKTOP-N61SGRF/Desktop/UNIVERSIDAD/GitHub/Manuscrito/Manuscrito/libs/SDL3/lib/$(Configuration);%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>C:/Users/manza/Desktop/Universidad/TPV1/Manuscrito/Manuscrito/libs/SDL3/lib;C:/Users/manza/Desktop/Universidad/TPV1/Manuscrito/Manuscrito/libs/SDL3/lib/$(Configuration);%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <AdditionalOptions>%(AdditionalOptions) /machine:x64</AdditionalOptions>
       <GenerateDebugInformation>false</GenerateDebugInformation>
       <IgnoreSpecificDefaultLibraries>%(IgnoreSpecificDefaultLibraries)</IgnoreSpecificDefaultLibraries>
-      <ImportLibrary>C:/Users/manza.DESKTOP-N61SGRF/Desktop/UNIVERSIDAD/GitHub/Manuscrito/Manuscrito/build/Release/Manuscrito.lib</ImportLibrary>
-      <ProgramDataBaseFile>C:/Users/manza.DESKTOP-N61SGRF/Desktop/UNIVERSIDAD/GitHub/Manuscrito/Manuscrito/build/Release/Manuscrito.pdb</ProgramDataBaseFile>
-      <SubSystem>Console</SubSystem>
+      <ImportLibrary>C:/Users/manza/Desktop/Universidad/TPV1/Manuscrito/Manuscrito/build/Release/Manuscrito.lib</ImportLibrary>
+      <ProgramDataBaseFile>C:/Users/manza/Desktop/Universidad/TPV1/Manuscrito/Manuscrito/build/Release/Manuscrito.pdb</ProgramDataBaseFile>
+      <SubSystem>Windows</SubSystem>
     </Link>
     <ProjectReference>
       <LinkLibraryDependencies>false</LinkLibraryDependencies>
@@ -198,7 +198,7 @@ if %errorlevel% neq 0 goto :VCEnd</Command>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">
     <ClCompile>
-      <AdditionalIncludeDirectories>C:\Users\manza.DESKTOP-N61SGRF\Desktop\UNIVERSIDAD\GitHub\Manuscrito\Manuscrito\src;C:\Users\manza.DESKTOP-N61SGRF\Desktop\UNIVERSIDAD\GitHub\Manuscrito\Manuscrito\libs\SDL3\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>C:\Users\manza\Desktop\Universidad\TPV1\Manuscrito\Manuscrito\src;C:\Users\manza\Desktop\Universidad\TPV1\Manuscrito\Manuscrito\libs\SDL3\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <AssemblerListingLocation>$(IntDir)</AssemblerListingLocation>
       <ExceptionHandling>Sync</ExceptionHandling>
       <InlineFunctionExpansion>OnlyExplicitInline</InlineFunctionExpansion>
@@ -216,10 +216,10 @@ if %errorlevel% neq 0 goto :VCEnd</Command>
     </ClCompile>
     <ResourceCompile>
       <PreprocessorDefinitions>%(PreprocessorDefinitions);WIN32;_WINDOWS;NDEBUG;CMAKE_INTDIR=\"MinSizeRel\"</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>C:\Users\manza.DESKTOP-N61SGRF\Desktop\UNIVERSIDAD\GitHub\Manuscrito\Manuscrito\src;C:\Users\manza.DESKTOP-N61SGRF\Desktop\UNIVERSIDAD\GitHub\Manuscrito\Manuscrito\libs\SDL3\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>C:\Users\manza\Desktop\Universidad\TPV1\Manuscrito\Manuscrito\src;C:\Users\manza\Desktop\Universidad\TPV1\Manuscrito\Manuscrito\libs\SDL3\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ResourceCompile>
     <Midl>
-      <AdditionalIncludeDirectories>C:\Users\manza.DESKTOP-N61SGRF\Desktop\UNIVERSIDAD\GitHub\Manuscrito\Manuscrito\src;C:\Users\manza.DESKTOP-N61SGRF\Desktop\UNIVERSIDAD\GitHub\Manuscrito\Manuscrito\libs\SDL3\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>C:\Users\manza\Desktop\Universidad\TPV1\Manuscrito\Manuscrito\src;C:\Users\manza\Desktop\Universidad\TPV1\Manuscrito\Manuscrito\libs\SDL3\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <OutputDirectory>$(ProjectDir)/$(IntDir)</OutputDirectory>
       <HeaderFileName>%(Filename).h</HeaderFileName>
       <TypeLibraryName>%(Filename).tlb</TypeLibraryName>
@@ -229,7 +229,7 @@ if %errorlevel% neq 0 goto :VCEnd</Command>
     <PostBuildEvent>
       <Message></Message>
       <Command>setlocal
-"C:\Program Files\Microsoft Visual Studio\2022\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\bin\cmake.exe" -E copy_if_different C:/Users/manza.DESKTOP-N61SGRF/Desktop/UNIVERSIDAD/GitHub/Manuscrito/Manuscrito/libs/SDL3/lib/SDL3.dll C:/Users/manza.DESKTOP-N61SGRF/Desktop/UNIVERSIDAD/GitHub/Manuscrito/Manuscrito/libs/SDL3/lib/SDL3_image.dll C:/Users/manza.DESKTOP-N61SGRF/Desktop/UNIVERSIDAD/GitHub/Manuscrito/Manuscrito/libs/SDL3/lib/SDL3_ttf.dll C:/Users/manza.DESKTOP-N61SGRF/Desktop/UNIVERSIDAD/GitHub/Manuscrito/Manuscrito/libs/SDL3/lib/SDL3_mixer.dll $&lt;TARGET
+"C:\Program Files\Microsoft Visual Studio\2022\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\bin\cmake.exe" -E copy_if_different C:/Users/manza/Desktop/Universidad/TPV1/Manuscrito/Manuscrito/libs/SDL3/lib/SDL3.dll C:/Users/manza/Desktop/Universidad/TPV1/Manuscrito/Manuscrito/libs/SDL3/lib/SDL3_image.dll C:/Users/manza/Desktop/Universidad/TPV1/Manuscrito/Manuscrito/libs/SDL3/lib/SDL3_ttf.dll C:/Users/manza/Desktop/Universidad/TPV1/Manuscrito/Manuscrito/libs/SDL3/lib/SDL3_mixer.dll $&lt;TARGET
 if %errorlevel% neq 0 goto :cmEnd
 :cmEnd
 endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
@@ -240,13 +240,13 @@ if %errorlevel% neq 0 goto :VCEnd</Command>
     </PostBuildEvent>
     <Link>
       <AdditionalDependencies>SDL3.lib;SDL3_image.lib;SDL3_ttf.lib;SDL3_mixer.lib;kernel32.lib;user32.lib;gdi32.lib;winspool.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;comdlg32.lib;advapi32.lib</AdditionalDependencies>
-      <AdditionalLibraryDirectories>C:/Users/manza.DESKTOP-N61SGRF/Desktop/UNIVERSIDAD/GitHub/Manuscrito/Manuscrito/libs/SDL3/lib;C:/Users/manza.DESKTOP-N61SGRF/Desktop/UNIVERSIDAD/GitHub/Manuscrito/Manuscrito/libs/SDL3/lib/$(Configuration);%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>C:/Users/manza/Desktop/Universidad/TPV1/Manuscrito/Manuscrito/libs/SDL3/lib;C:/Users/manza/Desktop/Universidad/TPV1/Manuscrito/Manuscrito/libs/SDL3/lib/$(Configuration);%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <AdditionalOptions>%(AdditionalOptions) /machine:x64</AdditionalOptions>
       <GenerateDebugInformation>false</GenerateDebugInformation>
       <IgnoreSpecificDefaultLibraries>%(IgnoreSpecificDefaultLibraries)</IgnoreSpecificDefaultLibraries>
-      <ImportLibrary>C:/Users/manza.DESKTOP-N61SGRF/Desktop/UNIVERSIDAD/GitHub/Manuscrito/Manuscrito/build/MinSizeRel/Manuscrito.lib</ImportLibrary>
-      <ProgramDataBaseFile>C:/Users/manza.DESKTOP-N61SGRF/Desktop/UNIVERSIDAD/GitHub/Manuscrito/Manuscrito/build/MinSizeRel/Manuscrito.pdb</ProgramDataBaseFile>
-      <SubSystem>Console</SubSystem>
+      <ImportLibrary>C:/Users/manza/Desktop/Universidad/TPV1/Manuscrito/Manuscrito/build/MinSizeRel/Manuscrito.lib</ImportLibrary>
+      <ProgramDataBaseFile>C:/Users/manza/Desktop/Universidad/TPV1/Manuscrito/Manuscrito/build/MinSizeRel/Manuscrito.pdb</ProgramDataBaseFile>
+      <SubSystem>Windows</SubSystem>
     </Link>
     <ProjectReference>
       <LinkLibraryDependencies>false</LinkLibraryDependencies>
@@ -254,7 +254,7 @@ if %errorlevel% neq 0 goto :VCEnd</Command>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">
     <ClCompile>
-      <AdditionalIncludeDirectories>C:\Users\manza.DESKTOP-N61SGRF\Desktop\UNIVERSIDAD\GitHub\Manuscrito\Manuscrito\src;C:\Users\manza.DESKTOP-N61SGRF\Desktop\UNIVERSIDAD\GitHub\Manuscrito\Manuscrito\libs\SDL3\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>C:\Users\manza\Desktop\Universidad\TPV1\Manuscrito\Manuscrito\src;C:\Users\manza\Desktop\Universidad\TPV1\Manuscrito\Manuscrito\libs\SDL3\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <AssemblerListingLocation>$(IntDir)</AssemblerListingLocation>
       <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
       <ExceptionHandling>Sync</ExceptionHandling>
@@ -271,10 +271,10 @@ if %errorlevel% neq 0 goto :VCEnd</Command>
     </ClCompile>
     <ResourceCompile>
       <PreprocessorDefinitions>%(PreprocessorDefinitions);WIN32;_WINDOWS;NDEBUG;CMAKE_INTDIR=\"RelWithDebInfo\"</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>C:\Users\manza.DESKTOP-N61SGRF\Desktop\UNIVERSIDAD\GitHub\Manuscrito\Manuscrito\src;C:\Users\manza.DESKTOP-N61SGRF\Desktop\UNIVERSIDAD\GitHub\Manuscrito\Manuscrito\libs\SDL3\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>C:\Users\manza\Desktop\Universidad\TPV1\Manuscrito\Manuscrito\src;C:\Users\manza\Desktop\Universidad\TPV1\Manuscrito\Manuscrito\libs\SDL3\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ResourceCompile>
     <Midl>
-      <AdditionalIncludeDirectories>C:\Users\manza.DESKTOP-N61SGRF\Desktop\UNIVERSIDAD\GitHub\Manuscrito\Manuscrito\src;C:\Users\manza.DESKTOP-N61SGRF\Desktop\UNIVERSIDAD\GitHub\Manuscrito\Manuscrito\libs\SDL3\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>C:\Users\manza\Desktop\Universidad\TPV1\Manuscrito\Manuscrito\src;C:\Users\manza\Desktop\Universidad\TPV1\Manuscrito\Manuscrito\libs\SDL3\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <OutputDirectory>$(ProjectDir)/$(IntDir)</OutputDirectory>
       <HeaderFileName>%(Filename).h</HeaderFileName>
       <TypeLibraryName>%(Filename).tlb</TypeLibraryName>
@@ -284,7 +284,7 @@ if %errorlevel% neq 0 goto :VCEnd</Command>
     <PostBuildEvent>
       <Message></Message>
       <Command>setlocal
-"C:\Program Files\Microsoft Visual Studio\2022\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\bin\cmake.exe" -E copy_if_different C:/Users/manza.DESKTOP-N61SGRF/Desktop/UNIVERSIDAD/GitHub/Manuscrito/Manuscrito/libs/SDL3/lib/SDL3.dll C:/Users/manza.DESKTOP-N61SGRF/Desktop/UNIVERSIDAD/GitHub/Manuscrito/Manuscrito/libs/SDL3/lib/SDL3_image.dll C:/Users/manza.DESKTOP-N61SGRF/Desktop/UNIVERSIDAD/GitHub/Manuscrito/Manuscrito/libs/SDL3/lib/SDL3_ttf.dll C:/Users/manza.DESKTOP-N61SGRF/Desktop/UNIVERSIDAD/GitHub/Manuscrito/Manuscrito/libs/SDL3/lib/SDL3_mixer.dll $&lt;TARGET
+"C:\Program Files\Microsoft Visual Studio\2022\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\bin\cmake.exe" -E copy_if_different C:/Users/manza/Desktop/Universidad/TPV1/Manuscrito/Manuscrito/libs/SDL3/lib/SDL3.dll C:/Users/manza/Desktop/Universidad/TPV1/Manuscrito/Manuscrito/libs/SDL3/lib/SDL3_image.dll C:/Users/manza/Desktop/Universidad/TPV1/Manuscrito/Manuscrito/libs/SDL3/lib/SDL3_ttf.dll C:/Users/manza/Desktop/Universidad/TPV1/Manuscrito/Manuscrito/libs/SDL3/lib/SDL3_mixer.dll $&lt;TARGET
 if %errorlevel% neq 0 goto :cmEnd
 :cmEnd
 endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
@@ -295,24 +295,24 @@ if %errorlevel% neq 0 goto :VCEnd</Command>
     </PostBuildEvent>
     <Link>
       <AdditionalDependencies>SDL3.lib;SDL3_image.lib;SDL3_ttf.lib;SDL3_mixer.lib;kernel32.lib;user32.lib;gdi32.lib;winspool.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;comdlg32.lib;advapi32.lib</AdditionalDependencies>
-      <AdditionalLibraryDirectories>C:/Users/manza.DESKTOP-N61SGRF/Desktop/UNIVERSIDAD/GitHub/Manuscrito/Manuscrito/libs/SDL3/lib;C:/Users/manza.DESKTOP-N61SGRF/Desktop/UNIVERSIDAD/GitHub/Manuscrito/Manuscrito/libs/SDL3/lib/$(Configuration);%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>C:/Users/manza/Desktop/Universidad/TPV1/Manuscrito/Manuscrito/libs/SDL3/lib;C:/Users/manza/Desktop/Universidad/TPV1/Manuscrito/Manuscrito/libs/SDL3/lib/$(Configuration);%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <AdditionalOptions>%(AdditionalOptions) /machine:x64</AdditionalOptions>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <IgnoreSpecificDefaultLibraries>%(IgnoreSpecificDefaultLibraries)</IgnoreSpecificDefaultLibraries>
-      <ImportLibrary>C:/Users/manza.DESKTOP-N61SGRF/Desktop/UNIVERSIDAD/GitHub/Manuscrito/Manuscrito/build/RelWithDebInfo/Manuscrito.lib</ImportLibrary>
-      <ProgramDataBaseFile>C:/Users/manza.DESKTOP-N61SGRF/Desktop/UNIVERSIDAD/GitHub/Manuscrito/Manuscrito/build/RelWithDebInfo/Manuscrito.pdb</ProgramDataBaseFile>
-      <SubSystem>Console</SubSystem>
+      <ImportLibrary>C:/Users/manza/Desktop/Universidad/TPV1/Manuscrito/Manuscrito/build/RelWithDebInfo/Manuscrito.lib</ImportLibrary>
+      <ProgramDataBaseFile>C:/Users/manza/Desktop/Universidad/TPV1/Manuscrito/Manuscrito/build/RelWithDebInfo/Manuscrito.pdb</ProgramDataBaseFile>
+      <SubSystem>Windows</SubSystem>
     </Link>
     <ProjectReference>
       <LinkLibraryDependencies>false</LinkLibraryDependencies>
     </ProjectReference>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <CustomBuild Include="C:\Users\manza.DESKTOP-N61SGRF\Desktop\UNIVERSIDAD\GitHub\Manuscrito\Manuscrito\CMakeLists.txt">
+    <CustomBuild Include="C:\Users\manza\Desktop\Universidad\TPV1\Manuscrito\Manuscrito\CMakeLists.txt">
       <UseUtf8Encoding>Always</UseUtf8Encoding>
-      <Message Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Building Custom Rule C:/Users/manza.DESKTOP-N61SGRF/Desktop/UNIVERSIDAD/GitHub/Manuscrito/Manuscrito/CMakeLists.txt</Message>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Building Custom Rule C:/Users/manza/Desktop/Universidad/TPV1/Manuscrito/Manuscrito/CMakeLists.txt</Message>
       <Command Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">setlocal
-"C:\Program Files\Microsoft Visual Studio\2022\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\bin\cmake.exe" -SC:/Users/manza.DESKTOP-N61SGRF/Desktop/UNIVERSIDAD/GitHub/Manuscrito/Manuscrito -BC:/Users/manza.DESKTOP-N61SGRF/Desktop/UNIVERSIDAD/GitHub/Manuscrito/Manuscrito/build --check-stamp-file C:/Users/manza.DESKTOP-N61SGRF/Desktop/UNIVERSIDAD/GitHub/Manuscrito/Manuscrito/build/CMakeFiles/generate.stamp
+"C:\Program Files\Microsoft Visual Studio\2022\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\bin\cmake.exe" -SC:/Users/manza/Desktop/Universidad/TPV1/Manuscrito/Manuscrito -BC:/Users/manza/Desktop/Universidad/TPV1/Manuscrito/Manuscrito/build --check-stamp-file C:/Users/manza/Desktop/Universidad/TPV1/Manuscrito/Manuscrito/build/CMakeFiles/generate.stamp
 if %errorlevel% neq 0 goto :cmEnd
 :cmEnd
 endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
@@ -320,12 +320,12 @@ endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
 exit /b %1
 :cmDone
 if %errorlevel% neq 0 goto :VCEnd</Command>
-      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">C:\Program Files\Microsoft Visual Studio\2022\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.29\Modules\CMakeCInformation.cmake;C:\Program Files\Microsoft Visual Studio\2022\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.29\Modules\CMakeCXXInformation.cmake;C:\Program Files\Microsoft Visual Studio\2022\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.29\Modules\CMakeCommonLanguageInclude.cmake;C:\Program Files\Microsoft Visual Studio\2022\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.29\Modules\CMakeGenericSystem.cmake;C:\Program Files\Microsoft Visual Studio\2022\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.29\Modules\CMakeInitializeConfigs.cmake;C:\Program Files\Microsoft Visual Studio\2022\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.29\Modules\CMakeLanguageInformation.cmake;C:\Program Files\Microsoft Visual Studio\2022\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.29\Modules\CMakeRCInformation.cmake;C:\Program Files\Microsoft Visual Studio\2022\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.29\Modules\CMakeSystemSpecificInformation.cmake;C:\Program Files\Microsoft Visual Studio\2022\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.29\Modules\CMakeSystemSpecificInitialize.cmake;C:\Program Files\Microsoft Visual Studio\2022\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.29\Modules\Compiler\CMakeCommonCompilerMacros.cmake;C:\Program Files\Microsoft Visual Studio\2022\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.29\Modules\Compiler\MSVC-C.cmake;C:\Program Files\Microsoft Visual Studio\2022\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.29\Modules\Compiler\MSVC-CXX.cmake;C:\Program Files\Microsoft Visual Studio\2022\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.29\Modules\Compiler\MSVC.cmake;C:\Program Files\Microsoft Visual Studio\2022\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.29\Modules\Platform\Windows-Initialize.cmake;C:\Program Files\Microsoft Visual Studio\2022\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.29\Modules\Platform\Windows-MSVC-C.cmake;C:\Program Files\Microsoft Visual Studio\2022\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.29\Modules\Platform\Windows-MSVC-CXX.cmake;C:\Program Files\Microsoft Visual Studio\2022\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.29\Modules\Platform\Windows-MSVC.cmake;C:\Program Files\Microsoft Visual Studio\2022\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.29\Modules\Platform\Windows.cmake;C:\Program Files\Microsoft Visual Studio\2022\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.29\Modules\Platform\WindowsPaths.cmake;C:\Users\manza.DESKTOP-N61SGRF\Desktop\UNIVERSIDAD\GitHub\Manuscrito\Manuscrito\build\CMakeFiles\3.29.5-msvc4\CMakeCCompiler.cmake;C:\Users\manza.DESKTOP-N61SGRF\Desktop\UNIVERSIDAD\GitHub\Manuscrito\Manuscrito\build\CMakeFiles\3.29.5-msvc4\CMakeCXXCompiler.cmake;C:\Users\manza.DESKTOP-N61SGRF\Desktop\UNIVERSIDAD\GitHub\Manuscrito\Manuscrito\build\CMakeFiles\3.29.5-msvc4\CMakeRCCompiler.cmake;C:\Users\manza.DESKTOP-N61SGRF\Desktop\UNIVERSIDAD\GitHub\Manuscrito\Manuscrito\build\CMakeFiles\3.29.5-msvc4\CMakeSystem.cmake;%(AdditionalInputs)</AdditionalInputs>
-      <Outputs Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">C:\Users\manza.DESKTOP-N61SGRF\Desktop\UNIVERSIDAD\GitHub\Manuscrito\Manuscrito\build\CMakeFiles\generate.stamp</Outputs>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">C:\Program Files\Microsoft Visual Studio\2022\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.29\Modules\CMakeCInformation.cmake;C:\Program Files\Microsoft Visual Studio\2022\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.29\Modules\CMakeCXXInformation.cmake;C:\Program Files\Microsoft Visual Studio\2022\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.29\Modules\CMakeCommonLanguageInclude.cmake;C:\Program Files\Microsoft Visual Studio\2022\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.29\Modules\CMakeGenericSystem.cmake;C:\Program Files\Microsoft Visual Studio\2022\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.29\Modules\CMakeInitializeConfigs.cmake;C:\Program Files\Microsoft Visual Studio\2022\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.29\Modules\CMakeLanguageInformation.cmake;C:\Program Files\Microsoft Visual Studio\2022\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.29\Modules\CMakeRCInformation.cmake;C:\Program Files\Microsoft Visual Studio\2022\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.29\Modules\CMakeSystemSpecificInformation.cmake;C:\Program Files\Microsoft Visual Studio\2022\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.29\Modules\CMakeSystemSpecificInitialize.cmake;C:\Program Files\Microsoft Visual Studio\2022\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.29\Modules\Compiler\CMakeCommonCompilerMacros.cmake;C:\Program Files\Microsoft Visual Studio\2022\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.29\Modules\Compiler\MSVC-C.cmake;C:\Program Files\Microsoft Visual Studio\2022\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.29\Modules\Compiler\MSVC-CXX.cmake;C:\Program Files\Microsoft Visual Studio\2022\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.29\Modules\Compiler\MSVC.cmake;C:\Program Files\Microsoft Visual Studio\2022\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.29\Modules\Platform\Windows-Initialize.cmake;C:\Program Files\Microsoft Visual Studio\2022\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.29\Modules\Platform\Windows-MSVC-C.cmake;C:\Program Files\Microsoft Visual Studio\2022\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.29\Modules\Platform\Windows-MSVC-CXX.cmake;C:\Program Files\Microsoft Visual Studio\2022\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.29\Modules\Platform\Windows-MSVC.cmake;C:\Program Files\Microsoft Visual Studio\2022\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.29\Modules\Platform\Windows.cmake;C:\Program Files\Microsoft Visual Studio\2022\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.29\Modules\Platform\WindowsPaths.cmake;C:\Users\manza\Desktop\Universidad\TPV1\Manuscrito\Manuscrito\build\CMakeFiles\3.29.5-msvc4\CMakeCCompiler.cmake;C:\Users\manza\Desktop\Universidad\TPV1\Manuscrito\Manuscrito\build\CMakeFiles\3.29.5-msvc4\CMakeCXXCompiler.cmake;C:\Users\manza\Desktop\Universidad\TPV1\Manuscrito\Manuscrito\build\CMakeFiles\3.29.5-msvc4\CMakeRCCompiler.cmake;C:\Users\manza\Desktop\Universidad\TPV1\Manuscrito\Manuscrito\build\CMakeFiles\3.29.5-msvc4\CMakeSystem.cmake;%(AdditionalInputs)</AdditionalInputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">C:\Users\manza\Desktop\Universidad\TPV1\Manuscrito\Manuscrito\build\CMakeFiles\generate.stamp</Outputs>
       <LinkObjects Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">false</LinkObjects>
-      <Message Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Building Custom Rule C:/Users/manza.DESKTOP-N61SGRF/Desktop/UNIVERSIDAD/GitHub/Manuscrito/Manuscrito/CMakeLists.txt</Message>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Building Custom Rule C:/Users/manza/Desktop/Universidad/TPV1/Manuscrito/Manuscrito/CMakeLists.txt</Message>
       <Command Condition="'$(Configuration)|$(Platform)'=='Release|x64'">setlocal
-"C:\Program Files\Microsoft Visual Studio\2022\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\bin\cmake.exe" -SC:/Users/manza.DESKTOP-N61SGRF/Desktop/UNIVERSIDAD/GitHub/Manuscrito/Manuscrito -BC:/Users/manza.DESKTOP-N61SGRF/Desktop/UNIVERSIDAD/GitHub/Manuscrito/Manuscrito/build --check-stamp-file C:/Users/manza.DESKTOP-N61SGRF/Desktop/UNIVERSIDAD/GitHub/Manuscrito/Manuscrito/build/CMakeFiles/generate.stamp
+"C:\Program Files\Microsoft Visual Studio\2022\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\bin\cmake.exe" -SC:/Users/manza/Desktop/Universidad/TPV1/Manuscrito/Manuscrito -BC:/Users/manza/Desktop/Universidad/TPV1/Manuscrito/Manuscrito/build --check-stamp-file C:/Users/manza/Desktop/Universidad/TPV1/Manuscrito/Manuscrito/build/CMakeFiles/generate.stamp
 if %errorlevel% neq 0 goto :cmEnd
 :cmEnd
 endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
@@ -333,12 +333,12 @@ endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
 exit /b %1
 :cmDone
 if %errorlevel% neq 0 goto :VCEnd</Command>
-      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Release|x64'">C:\Program Files\Microsoft Visual Studio\2022\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.29\Modules\CMakeCInformation.cmake;C:\Program Files\Microsoft Visual Studio\2022\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.29\Modules\CMakeCXXInformation.cmake;C:\Program Files\Microsoft Visual Studio\2022\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.29\Modules\CMakeCommonLanguageInclude.cmake;C:\Program Files\Microsoft Visual Studio\2022\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.29\Modules\CMakeGenericSystem.cmake;C:\Program Files\Microsoft Visual Studio\2022\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.29\Modules\CMakeInitializeConfigs.cmake;C:\Program Files\Microsoft Visual Studio\2022\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.29\Modules\CMakeLanguageInformation.cmake;C:\Program Files\Microsoft Visual Studio\2022\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.29\Modules\CMakeRCInformation.cmake;C:\Program Files\Microsoft Visual Studio\2022\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.29\Modules\CMakeSystemSpecificInformation.cmake;C:\Program Files\Microsoft Visual Studio\2022\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.29\Modules\CMakeSystemSpecificInitialize.cmake;C:\Program Files\Microsoft Visual Studio\2022\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.29\Modules\Compiler\CMakeCommonCompilerMacros.cmake;C:\Program Files\Microsoft Visual Studio\2022\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.29\Modules\Compiler\MSVC-C.cmake;C:\Program Files\Microsoft Visual Studio\2022\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.29\Modules\Compiler\MSVC-CXX.cmake;C:\Program Files\Microsoft Visual Studio\2022\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.29\Modules\Compiler\MSVC.cmake;C:\Program Files\Microsoft Visual Studio\2022\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.29\Modules\Platform\Windows-Initialize.cmake;C:\Program Files\Microsoft Visual Studio\2022\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.29\Modules\Platform\Windows-MSVC-C.cmake;C:\Program Files\Microsoft Visual Studio\2022\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.29\Modules\Platform\Windows-MSVC-CXX.cmake;C:\Program Files\Microsoft Visual Studio\2022\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.29\Modules\Platform\Windows-MSVC.cmake;C:\Program Files\Microsoft Visual Studio\2022\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.29\Modules\Platform\Windows.cmake;C:\Program Files\Microsoft Visual Studio\2022\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.29\Modules\Platform\WindowsPaths.cmake;C:\Users\manza.DESKTOP-N61SGRF\Desktop\UNIVERSIDAD\GitHub\Manuscrito\Manuscrito\build\CMakeFiles\3.29.5-msvc4\CMakeCCompiler.cmake;C:\Users\manza.DESKTOP-N61SGRF\Desktop\UNIVERSIDAD\GitHub\Manuscrito\Manuscrito\build\CMakeFiles\3.29.5-msvc4\CMakeCXXCompiler.cmake;C:\Users\manza.DESKTOP-N61SGRF\Desktop\UNIVERSIDAD\GitHub\Manuscrito\Manuscrito\build\CMakeFiles\3.29.5-msvc4\CMakeRCCompiler.cmake;C:\Users\manza.DESKTOP-N61SGRF\Desktop\UNIVERSIDAD\GitHub\Manuscrito\Manuscrito\build\CMakeFiles\3.29.5-msvc4\CMakeSystem.cmake;%(AdditionalInputs)</AdditionalInputs>
-      <Outputs Condition="'$(Configuration)|$(Platform)'=='Release|x64'">C:\Users\manza.DESKTOP-N61SGRF\Desktop\UNIVERSIDAD\GitHub\Manuscrito\Manuscrito\build\CMakeFiles\generate.stamp</Outputs>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Release|x64'">C:\Program Files\Microsoft Visual Studio\2022\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.29\Modules\CMakeCInformation.cmake;C:\Program Files\Microsoft Visual Studio\2022\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.29\Modules\CMakeCXXInformation.cmake;C:\Program Files\Microsoft Visual Studio\2022\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.29\Modules\CMakeCommonLanguageInclude.cmake;C:\Program Files\Microsoft Visual Studio\2022\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.29\Modules\CMakeGenericSystem.cmake;C:\Program Files\Microsoft Visual Studio\2022\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.29\Modules\CMakeInitializeConfigs.cmake;C:\Program Files\Microsoft Visual Studio\2022\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.29\Modules\CMakeLanguageInformation.cmake;C:\Program Files\Microsoft Visual Studio\2022\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.29\Modules\CMakeRCInformation.cmake;C:\Program Files\Microsoft Visual Studio\2022\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.29\Modules\CMakeSystemSpecificInformation.cmake;C:\Program Files\Microsoft Visual Studio\2022\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.29\Modules\CMakeSystemSpecificInitialize.cmake;C:\Program Files\Microsoft Visual Studio\2022\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.29\Modules\Compiler\CMakeCommonCompilerMacros.cmake;C:\Program Files\Microsoft Visual Studio\2022\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.29\Modules\Compiler\MSVC-C.cmake;C:\Program Files\Microsoft Visual Studio\2022\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.29\Modules\Compiler\MSVC-CXX.cmake;C:\Program Files\Microsoft Visual Studio\2022\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.29\Modules\Compiler\MSVC.cmake;C:\Program Files\Microsoft Visual Studio\2022\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.29\Modules\Platform\Windows-Initialize.cmake;C:\Program Files\Microsoft Visual Studio\2022\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.29\Modules\Platform\Windows-MSVC-C.cmake;C:\Program Files\Microsoft Visual Studio\2022\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.29\Modules\Platform\Windows-MSVC-CXX.cmake;C:\Program Files\Microsoft Visual Studio\2022\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.29\Modules\Platform\Windows-MSVC.cmake;C:\Program Files\Microsoft Visual Studio\2022\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.29\Modules\Platform\Windows.cmake;C:\Program Files\Microsoft Visual Studio\2022\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.29\Modules\Platform\WindowsPaths.cmake;C:\Users\manza\Desktop\Universidad\TPV1\Manuscrito\Manuscrito\build\CMakeFiles\3.29.5-msvc4\CMakeCCompiler.cmake;C:\Users\manza\Desktop\Universidad\TPV1\Manuscrito\Manuscrito\build\CMakeFiles\3.29.5-msvc4\CMakeCXXCompiler.cmake;C:\Users\manza\Desktop\Universidad\TPV1\Manuscrito\Manuscrito\build\CMakeFiles\3.29.5-msvc4\CMakeRCCompiler.cmake;C:\Users\manza\Desktop\Universidad\TPV1\Manuscrito\Manuscrito\build\CMakeFiles\3.29.5-msvc4\CMakeSystem.cmake;%(AdditionalInputs)</AdditionalInputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Release|x64'">C:\Users\manza\Desktop\Universidad\TPV1\Manuscrito\Manuscrito\build\CMakeFiles\generate.stamp</Outputs>
       <LinkObjects Condition="'$(Configuration)|$(Platform)'=='Release|x64'">false</LinkObjects>
-      <Message Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">Building Custom Rule C:/Users/manza.DESKTOP-N61SGRF/Desktop/UNIVERSIDAD/GitHub/Manuscrito/Manuscrito/CMakeLists.txt</Message>
+      <Message Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">Building Custom Rule C:/Users/manza/Desktop/Universidad/TPV1/Manuscrito/Manuscrito/CMakeLists.txt</Message>
       <Command Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">setlocal
-"C:\Program Files\Microsoft Visual Studio\2022\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\bin\cmake.exe" -SC:/Users/manza.DESKTOP-N61SGRF/Desktop/UNIVERSIDAD/GitHub/Manuscrito/Manuscrito -BC:/Users/manza.DESKTOP-N61SGRF/Desktop/UNIVERSIDAD/GitHub/Manuscrito/Manuscrito/build --check-stamp-file C:/Users/manza.DESKTOP-N61SGRF/Desktop/UNIVERSIDAD/GitHub/Manuscrito/Manuscrito/build/CMakeFiles/generate.stamp
+"C:\Program Files\Microsoft Visual Studio\2022\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\bin\cmake.exe" -SC:/Users/manza/Desktop/Universidad/TPV1/Manuscrito/Manuscrito -BC:/Users/manza/Desktop/Universidad/TPV1/Manuscrito/Manuscrito/build --check-stamp-file C:/Users/manza/Desktop/Universidad/TPV1/Manuscrito/Manuscrito/build/CMakeFiles/generate.stamp
 if %errorlevel% neq 0 goto :cmEnd
 :cmEnd
 endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
@@ -346,12 +346,12 @@ endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
 exit /b %1
 :cmDone
 if %errorlevel% neq 0 goto :VCEnd</Command>
-      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">C:\Program Files\Microsoft Visual Studio\2022\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.29\Modules\CMakeCInformation.cmake;C:\Program Files\Microsoft Visual Studio\2022\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.29\Modules\CMakeCXXInformation.cmake;C:\Program Files\Microsoft Visual Studio\2022\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.29\Modules\CMakeCommonLanguageInclude.cmake;C:\Program Files\Microsoft Visual Studio\2022\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.29\Modules\CMakeGenericSystem.cmake;C:\Program Files\Microsoft Visual Studio\2022\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.29\Modules\CMakeInitializeConfigs.cmake;C:\Program Files\Microsoft Visual Studio\2022\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.29\Modules\CMakeLanguageInformation.cmake;C:\Program Files\Microsoft Visual Studio\2022\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.29\Modules\CMakeRCInformation.cmake;C:\Program Files\Microsoft Visual Studio\2022\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.29\Modules\CMakeSystemSpecificInformation.cmake;C:\Program Files\Microsoft Visual Studio\2022\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.29\Modules\CMakeSystemSpecificInitialize.cmake;C:\Program Files\Microsoft Visual Studio\2022\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.29\Modules\Compiler\CMakeCommonCompilerMacros.cmake;C:\Program Files\Microsoft Visual Studio\2022\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.29\Modules\Compiler\MSVC-C.cmake;C:\Program Files\Microsoft Visual Studio\2022\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.29\Modules\Compiler\MSVC-CXX.cmake;C:\Program Files\Microsoft Visual Studio\2022\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.29\Modules\Compiler\MSVC.cmake;C:\Program Files\Microsoft Visual Studio\2022\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.29\Modules\Platform\Windows-Initialize.cmake;C:\Program Files\Microsoft Visual Studio\2022\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.29\Modules\Platform\Windows-MSVC-C.cmake;C:\Program Files\Microsoft Visual Studio\2022\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.29\Modules\Platform\Windows-MSVC-CXX.cmake;C:\Program Files\Microsoft Visual Studio\2022\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.29\Modules\Platform\Windows-MSVC.cmake;C:\Program Files\Microsoft Visual Studio\2022\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.29\Modules\Platform\Windows.cmake;C:\Program Files\Microsoft Visual Studio\2022\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.29\Modules\Platform\WindowsPaths.cmake;C:\Users\manza.DESKTOP-N61SGRF\Desktop\UNIVERSIDAD\GitHub\Manuscrito\Manuscrito\build\CMakeFiles\3.29.5-msvc4\CMakeCCompiler.cmake;C:\Users\manza.DESKTOP-N61SGRF\Desktop\UNIVERSIDAD\GitHub\Manuscrito\Manuscrito\build\CMakeFiles\3.29.5-msvc4\CMakeCXXCompiler.cmake;C:\Users\manza.DESKTOP-N61SGRF\Desktop\UNIVERSIDAD\GitHub\Manuscrito\Manuscrito\build\CMakeFiles\3.29.5-msvc4\CMakeRCCompiler.cmake;C:\Users\manza.DESKTOP-N61SGRF\Desktop\UNIVERSIDAD\GitHub\Manuscrito\Manuscrito\build\CMakeFiles\3.29.5-msvc4\CMakeSystem.cmake;%(AdditionalInputs)</AdditionalInputs>
-      <Outputs Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">C:\Users\manza.DESKTOP-N61SGRF\Desktop\UNIVERSIDAD\GitHub\Manuscrito\Manuscrito\build\CMakeFiles\generate.stamp</Outputs>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">C:\Program Files\Microsoft Visual Studio\2022\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.29\Modules\CMakeCInformation.cmake;C:\Program Files\Microsoft Visual Studio\2022\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.29\Modules\CMakeCXXInformation.cmake;C:\Program Files\Microsoft Visual Studio\2022\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.29\Modules\CMakeCommonLanguageInclude.cmake;C:\Program Files\Microsoft Visual Studio\2022\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.29\Modules\CMakeGenericSystem.cmake;C:\Program Files\Microsoft Visual Studio\2022\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.29\Modules\CMakeInitializeConfigs.cmake;C:\Program Files\Microsoft Visual Studio\2022\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.29\Modules\CMakeLanguageInformation.cmake;C:\Program Files\Microsoft Visual Studio\2022\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.29\Modules\CMakeRCInformation.cmake;C:\Program Files\Microsoft Visual Studio\2022\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.29\Modules\CMakeSystemSpecificInformation.cmake;C:\Program Files\Microsoft Visual Studio\2022\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.29\Modules\CMakeSystemSpecificInitialize.cmake;C:\Program Files\Microsoft Visual Studio\2022\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.29\Modules\Compiler\CMakeCommonCompilerMacros.cmake;C:\Program Files\Microsoft Visual Studio\2022\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.29\Modules\Compiler\MSVC-C.cmake;C:\Program Files\Microsoft Visual Studio\2022\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.29\Modules\Compiler\MSVC-CXX.cmake;C:\Program Files\Microsoft Visual Studio\2022\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.29\Modules\Compiler\MSVC.cmake;C:\Program Files\Microsoft Visual Studio\2022\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.29\Modules\Platform\Windows-Initialize.cmake;C:\Program Files\Microsoft Visual Studio\2022\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.29\Modules\Platform\Windows-MSVC-C.cmake;C:\Program Files\Microsoft Visual Studio\2022\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.29\Modules\Platform\Windows-MSVC-CXX.cmake;C:\Program Files\Microsoft Visual Studio\2022\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.29\Modules\Platform\Windows-MSVC.cmake;C:\Program Files\Microsoft Visual Studio\2022\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.29\Modules\Platform\Windows.cmake;C:\Program Files\Microsoft Visual Studio\2022\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.29\Modules\Platform\WindowsPaths.cmake;C:\Users\manza\Desktop\Universidad\TPV1\Manuscrito\Manuscrito\build\CMakeFiles\3.29.5-msvc4\CMakeCCompiler.cmake;C:\Users\manza\Desktop\Universidad\TPV1\Manuscrito\Manuscrito\build\CMakeFiles\3.29.5-msvc4\CMakeCXXCompiler.cmake;C:\Users\manza\Desktop\Universidad\TPV1\Manuscrito\Manuscrito\build\CMakeFiles\3.29.5-msvc4\CMakeRCCompiler.cmake;C:\Users\manza\Desktop\Universidad\TPV1\Manuscrito\Manuscrito\build\CMakeFiles\3.29.5-msvc4\CMakeSystem.cmake;%(AdditionalInputs)</AdditionalInputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">C:\Users\manza\Desktop\Universidad\TPV1\Manuscrito\Manuscrito\build\CMakeFiles\generate.stamp</Outputs>
       <LinkObjects Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">false</LinkObjects>
-      <Message Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">Building Custom Rule C:/Users/manza.DESKTOP-N61SGRF/Desktop/UNIVERSIDAD/GitHub/Manuscrito/Manuscrito/CMakeLists.txt</Message>
+      <Message Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">Building Custom Rule C:/Users/manza/Desktop/Universidad/TPV1/Manuscrito/Manuscrito/CMakeLists.txt</Message>
       <Command Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">setlocal
-"C:\Program Files\Microsoft Visual Studio\2022\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\bin\cmake.exe" -SC:/Users/manza.DESKTOP-N61SGRF/Desktop/UNIVERSIDAD/GitHub/Manuscrito/Manuscrito -BC:/Users/manza.DESKTOP-N61SGRF/Desktop/UNIVERSIDAD/GitHub/Manuscrito/Manuscrito/build --check-stamp-file C:/Users/manza.DESKTOP-N61SGRF/Desktop/UNIVERSIDAD/GitHub/Manuscrito/Manuscrito/build/CMakeFiles/generate.stamp
+"C:\Program Files\Microsoft Visual Studio\2022\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\bin\cmake.exe" -SC:/Users/manza/Desktop/Universidad/TPV1/Manuscrito/Manuscrito -BC:/Users/manza/Desktop/Universidad/TPV1/Manuscrito/Manuscrito/build --check-stamp-file C:/Users/manza/Desktop/Universidad/TPV1/Manuscrito/Manuscrito/build/CMakeFiles/generate.stamp
 if %errorlevel% neq 0 goto :cmEnd
 :cmEnd
 endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
@@ -359,44 +359,45 @@ endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
 exit /b %1
 :cmDone
 if %errorlevel% neq 0 goto :VCEnd</Command>
-      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">C:\Program Files\Microsoft Visual Studio\2022\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.29\Modules\CMakeCInformation.cmake;C:\Program Files\Microsoft Visual Studio\2022\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.29\Modules\CMakeCXXInformation.cmake;C:\Program Files\Microsoft Visual Studio\2022\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.29\Modules\CMakeCommonLanguageInclude.cmake;C:\Program Files\Microsoft Visual Studio\2022\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.29\Modules\CMakeGenericSystem.cmake;C:\Program Files\Microsoft Visual Studio\2022\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.29\Modules\CMakeInitializeConfigs.cmake;C:\Program Files\Microsoft Visual Studio\2022\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.29\Modules\CMakeLanguageInformation.cmake;C:\Program Files\Microsoft Visual Studio\2022\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.29\Modules\CMakeRCInformation.cmake;C:\Program Files\Microsoft Visual Studio\2022\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.29\Modules\CMakeSystemSpecificInformation.cmake;C:\Program Files\Microsoft Visual Studio\2022\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.29\Modules\CMakeSystemSpecificInitialize.cmake;C:\Program Files\Microsoft Visual Studio\2022\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.29\Modules\Compiler\CMakeCommonCompilerMacros.cmake;C:\Program Files\Microsoft Visual Studio\2022\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.29\Modules\Compiler\MSVC-C.cmake;C:\Program Files\Microsoft Visual Studio\2022\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.29\Modules\Compiler\MSVC-CXX.cmake;C:\Program Files\Microsoft Visual Studio\2022\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.29\Modules\Compiler\MSVC.cmake;C:\Program Files\Microsoft Visual Studio\2022\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.29\Modules\Platform\Windows-Initialize.cmake;C:\Program Files\Microsoft Visual Studio\2022\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.29\Modules\Platform\Windows-MSVC-C.cmake;C:\Program Files\Microsoft Visual Studio\2022\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.29\Modules\Platform\Windows-MSVC-CXX.cmake;C:\Program Files\Microsoft Visual Studio\2022\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.29\Modules\Platform\Windows-MSVC.cmake;C:\Program Files\Microsoft Visual Studio\2022\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.29\Modules\Platform\Windows.cmake;C:\Program Files\Microsoft Visual Studio\2022\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.29\Modules\Platform\WindowsPaths.cmake;C:\Users\manza.DESKTOP-N61SGRF\Desktop\UNIVERSIDAD\GitHub\Manuscrito\Manuscrito\build\CMakeFiles\3.29.5-msvc4\CMakeCCompiler.cmake;C:\Users\manza.DESKTOP-N61SGRF\Desktop\UNIVERSIDAD\GitHub\Manuscrito\Manuscrito\build\CMakeFiles\3.29.5-msvc4\CMakeCXXCompiler.cmake;C:\Users\manza.DESKTOP-N61SGRF\Desktop\UNIVERSIDAD\GitHub\Manuscrito\Manuscrito\build\CMakeFiles\3.29.5-msvc4\CMakeRCCompiler.cmake;C:\Users\manza.DESKTOP-N61SGRF\Desktop\UNIVERSIDAD\GitHub\Manuscrito\Manuscrito\build\CMakeFiles\3.29.5-msvc4\CMakeSystem.cmake;%(AdditionalInputs)</AdditionalInputs>
-      <Outputs Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">C:\Users\manza.DESKTOP-N61SGRF\Desktop\UNIVERSIDAD\GitHub\Manuscrito\Manuscrito\build\CMakeFiles\generate.stamp</Outputs>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">C:\Program Files\Microsoft Visual Studio\2022\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.29\Modules\CMakeCInformation.cmake;C:\Program Files\Microsoft Visual Studio\2022\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.29\Modules\CMakeCXXInformation.cmake;C:\Program Files\Microsoft Visual Studio\2022\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.29\Modules\CMakeCommonLanguageInclude.cmake;C:\Program Files\Microsoft Visual Studio\2022\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.29\Modules\CMakeGenericSystem.cmake;C:\Program Files\Microsoft Visual Studio\2022\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.29\Modules\CMakeInitializeConfigs.cmake;C:\Program Files\Microsoft Visual Studio\2022\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.29\Modules\CMakeLanguageInformation.cmake;C:\Program Files\Microsoft Visual Studio\2022\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.29\Modules\CMakeRCInformation.cmake;C:\Program Files\Microsoft Visual Studio\2022\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.29\Modules\CMakeSystemSpecificInformation.cmake;C:\Program Files\Microsoft Visual Studio\2022\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.29\Modules\CMakeSystemSpecificInitialize.cmake;C:\Program Files\Microsoft Visual Studio\2022\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.29\Modules\Compiler\CMakeCommonCompilerMacros.cmake;C:\Program Files\Microsoft Visual Studio\2022\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.29\Modules\Compiler\MSVC-C.cmake;C:\Program Files\Microsoft Visual Studio\2022\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.29\Modules\Compiler\MSVC-CXX.cmake;C:\Program Files\Microsoft Visual Studio\2022\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.29\Modules\Compiler\MSVC.cmake;C:\Program Files\Microsoft Visual Studio\2022\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.29\Modules\Platform\Windows-Initialize.cmake;C:\Program Files\Microsoft Visual Studio\2022\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.29\Modules\Platform\Windows-MSVC-C.cmake;C:\Program Files\Microsoft Visual Studio\2022\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.29\Modules\Platform\Windows-MSVC-CXX.cmake;C:\Program Files\Microsoft Visual Studio\2022\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.29\Modules\Platform\Windows-MSVC.cmake;C:\Program Files\Microsoft Visual Studio\2022\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.29\Modules\Platform\Windows.cmake;C:\Program Files\Microsoft Visual Studio\2022\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.29\Modules\Platform\WindowsPaths.cmake;C:\Users\manza\Desktop\Universidad\TPV1\Manuscrito\Manuscrito\build\CMakeFiles\3.29.5-msvc4\CMakeCCompiler.cmake;C:\Users\manza\Desktop\Universidad\TPV1\Manuscrito\Manuscrito\build\CMakeFiles\3.29.5-msvc4\CMakeCXXCompiler.cmake;C:\Users\manza\Desktop\Universidad\TPV1\Manuscrito\Manuscrito\build\CMakeFiles\3.29.5-msvc4\CMakeRCCompiler.cmake;C:\Users\manza\Desktop\Universidad\TPV1\Manuscrito\Manuscrito\build\CMakeFiles\3.29.5-msvc4\CMakeSystem.cmake;%(AdditionalInputs)</AdditionalInputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">C:\Users\manza\Desktop\Universidad\TPV1\Manuscrito\Manuscrito\build\CMakeFiles\generate.stamp</Outputs>
       <LinkObjects Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">false</LinkObjects>
     </CustomBuild>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="C:\Users\manza.DESKTOP-N61SGRF\Desktop\UNIVERSIDAD\GitHub\Manuscrito\Manuscrito\src\AudioManager.cpp" />
-    <ClCompile Include="C:\Users\manza.DESKTOP-N61SGRF\Desktop\UNIVERSIDAD\GitHub\Manuscrito\Manuscrito\src\Book.cpp" />
-    <ClCompile Include="C:\Users\manza.DESKTOP-N61SGRF\Desktop\UNIVERSIDAD\GitHub\Manuscrito\Manuscrito\src\Button.cpp" />
-    <ClCompile Include="C:\Users\manza.DESKTOP-N61SGRF\Desktop\UNIVERSIDAD\GitHub\Manuscrito\Manuscrito\src\CerrarScene.cpp" />
-    <ClCompile Include="C:\Users\manza.DESKTOP-N61SGRF\Desktop\UNIVERSIDAD\GitHub\Manuscrito\Manuscrito\src\CodeTest.cpp" />
-    <ClCompile Include="C:\Users\manza.DESKTOP-N61SGRF\Desktop\UNIVERSIDAD\GitHub\Manuscrito\Manuscrito\src\Fader.cpp" />
-    <ClCompile Include="C:\Users\manza.DESKTOP-N61SGRF\Desktop\UNIVERSIDAD\GitHub\Manuscrito\Manuscrito\src\GameObject.cpp" />
-    <ClCompile Include="C:\Users\manza.DESKTOP-N61SGRF\Desktop\UNIVERSIDAD\GitHub\Manuscrito\Manuscrito\src\Hover.cpp" />
-    <ClCompile Include="C:\Users\manza.DESKTOP-N61SGRF\Desktop\UNIVERSIDAD\GitHub\Manuscrito\Manuscrito\src\IntroScene.cpp" />
-    <ClCompile Include="C:\Users\manza.DESKTOP-N61SGRF\Desktop\UNIVERSIDAD\GitHub\Manuscrito\Manuscrito\src\LiberarScene.cpp" />
-    <ClCompile Include="C:\Users\manza.DESKTOP-N61SGRF\Desktop\UNIVERSIDAD\GitHub\Manuscrito\Manuscrito\src\LoadTexts.cpp" />
-    <ClCompile Include="C:\Users\manza.DESKTOP-N61SGRF\Desktop\UNIVERSIDAD\GitHub\Manuscrito\Manuscrito\src\MainGame.cpp" />
-    <ClCompile Include="C:\Users\manza.DESKTOP-N61SGRF\Desktop\UNIVERSIDAD\GitHub\Manuscrito\Manuscrito\src\MainMenu.cpp" />
-    <ClCompile Include="C:\Users\manza.DESKTOP-N61SGRF\Desktop\UNIVERSIDAD\GitHub\Manuscrito\Manuscrito\src\MonoBehaviour.cpp" />
-    <ClCompile Include="C:\Users\manza.DESKTOP-N61SGRF\Desktop\UNIVERSIDAD\GitHub\Manuscrito\Manuscrito\src\NoteRevealer.cpp" />
-    <ClCompile Include="C:\Users\manza.DESKTOP-N61SGRF\Desktop\UNIVERSIDAD\GitHub\Manuscrito\Manuscrito\src\Notebook.cpp" />
-    <ClCompile Include="C:\Users\manza.DESKTOP-N61SGRF\Desktop\UNIVERSIDAD\GitHub\Manuscrito\Manuscrito\src\NotebookElement.cpp" />
-    <ClCompile Include="C:\Users\manza.DESKTOP-N61SGRF\Desktop\UNIVERSIDAD\GitHub\Manuscrito\Manuscrito\src\RunicTest.cpp" />
-    <ClCompile Include="C:\Users\manza.DESKTOP-N61SGRF\Desktop\UNIVERSIDAD\GitHub\Manuscrito\Manuscrito\src\Scene.cpp" />
-    <ClCompile Include="C:\Users\manza.DESKTOP-N61SGRF\Desktop\UNIVERSIDAD\GitHub\Manuscrito\Manuscrito\src\SceneManager.cpp" />
-    <ClCompile Include="C:\Users\manza.DESKTOP-N61SGRF\Desktop\UNIVERSIDAD\GitHub\Manuscrito\Manuscrito\src\Selector.cpp" />
-    <ClCompile Include="C:\Users\manza.DESKTOP-N61SGRF\Desktop\UNIVERSIDAD\GitHub\Manuscrito\Manuscrito\src\SplashScreen.cpp" />
-    <ClCompile Include="C:\Users\manza.DESKTOP-N61SGRF\Desktop\UNIVERSIDAD\GitHub\Manuscrito\Manuscrito\src\SpriteRenderer.cpp" />
-    <ClCompile Include="C:\Users\manza.DESKTOP-N61SGRF\Desktop\UNIVERSIDAD\GitHub\Manuscrito\Manuscrito\src\Text.cpp" />
-    <ClCompile Include="C:\Users\manza.DESKTOP-N61SGRF\Desktop\UNIVERSIDAD\GitHub\Manuscrito\Manuscrito\src\Transform.cpp" />
-    <ClCompile Include="C:\Users\manza.DESKTOP-N61SGRF\Desktop\UNIVERSIDAD\GitHub\Manuscrito\Manuscrito\src\game.cpp" />
-    <ClCompile Include="C:\Users\manza.DESKTOP-N61SGRF\Desktop\UNIVERSIDAD\GitHub\Manuscrito\Manuscrito\src\main.cpp" />
-    <ClCompile Include="C:\Users\manza.DESKTOP-N61SGRF\Desktop\UNIVERSIDAD\GitHub\Manuscrito\Manuscrito\src\texture.cpp" />
+    <ClCompile Include="C:\Users\manza\Desktop\Universidad\TPV1\Manuscrito\Manuscrito\src\AudioManager.cpp" />
+    <ClCompile Include="C:\Users\manza\Desktop\Universidad\TPV1\Manuscrito\Manuscrito\src\Book.cpp" />
+    <ClCompile Include="C:\Users\manza\Desktop\Universidad\TPV1\Manuscrito\Manuscrito\src\Button.cpp" />
+    <ClCompile Include="C:\Users\manza\Desktop\Universidad\TPV1\Manuscrito\Manuscrito\src\CerrarScene.cpp" />
+    <ClCompile Include="C:\Users\manza\Desktop\Universidad\TPV1\Manuscrito\Manuscrito\src\CodeTest.cpp" />
+    <ClCompile Include="C:\Users\manza\Desktop\Universidad\TPV1\Manuscrito\Manuscrito\src\Fader.cpp" />
+    <ClCompile Include="C:\Users\manza\Desktop\Universidad\TPV1\Manuscrito\Manuscrito\src\GameObject.cpp" />
+    <ClCompile Include="C:\Users\manza\Desktop\Universidad\TPV1\Manuscrito\Manuscrito\src\Hover.cpp" />
+    <ClCompile Include="C:\Users\manza\Desktop\Universidad\TPV1\Manuscrito\Manuscrito\src\IntroScene.cpp" />
+    <ClCompile Include="C:\Users\manza\Desktop\Universidad\TPV1\Manuscrito\Manuscrito\src\LiberarScene.cpp" />
+    <ClCompile Include="C:\Users\manza\Desktop\Universidad\TPV1\Manuscrito\Manuscrito\src\LoadTexts.cpp" />
+    <ClCompile Include="C:\Users\manza\Desktop\Universidad\TPV1\Manuscrito\Manuscrito\src\MainGame.cpp" />
+    <ClCompile Include="C:\Users\manza\Desktop\Universidad\TPV1\Manuscrito\Manuscrito\src\MainMenu.cpp" />
+    <ClCompile Include="C:\Users\manza\Desktop\Universidad\TPV1\Manuscrito\Manuscrito\src\MonoBehaviour.cpp" />
+    <ClCompile Include="C:\Users\manza\Desktop\Universidad\TPV1\Manuscrito\Manuscrito\src\NoteRevealer.cpp" />
+    <ClCompile Include="C:\Users\manza\Desktop\Universidad\TPV1\Manuscrito\Manuscrito\src\Notebook.cpp" />
+    <ClCompile Include="C:\Users\manza\Desktop\Universidad\TPV1\Manuscrito\Manuscrito\src\NotebookElement.cpp" />
+    <ClCompile Include="C:\Users\manza\Desktop\Universidad\TPV1\Manuscrito\Manuscrito\src\RunicTest.cpp" />
+    <ClCompile Include="C:\Users\manza\Desktop\Universidad\TPV1\Manuscrito\Manuscrito\src\Scene.cpp" />
+    <ClCompile Include="C:\Users\manza\Desktop\Universidad\TPV1\Manuscrito\Manuscrito\src\SceneManager.cpp" />
+    <ClCompile Include="C:\Users\manza\Desktop\Universidad\TPV1\Manuscrito\Manuscrito\src\Selector.cpp" />
+    <ClCompile Include="C:\Users\manza\Desktop\Universidad\TPV1\Manuscrito\Manuscrito\src\SplashScreen.cpp" />
+    <ClCompile Include="C:\Users\manza\Desktop\Universidad\TPV1\Manuscrito\Manuscrito\src\SpriteRenderer.cpp" />
+    <ClCompile Include="C:\Users\manza\Desktop\Universidad\TPV1\Manuscrito\Manuscrito\src\Text.cpp" />
+    <ClCompile Include="C:\Users\manza\Desktop\Universidad\TPV1\Manuscrito\Manuscrito\src\Transform.cpp" />
+    <ClCompile Include="C:\Users\manza\Desktop\Universidad\TPV1\Manuscrito\Manuscrito\src\game.cpp" />
+    <ResourceCompile Include="C:\Users\manza\Desktop\Universidad\TPV1\Manuscrito\Manuscrito\src\icono.rc" />
+    <ClCompile Include="C:\Users\manza\Desktop\Universidad\TPV1\Manuscrito\Manuscrito\src\main.cpp" />
+    <ClCompile Include="C:\Users\manza\Desktop\Universidad\TPV1\Manuscrito\Manuscrito\src\texture.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="C:\Users\manza.DESKTOP-N61SGRF\Desktop\UNIVERSIDAD\GitHub\Manuscrito\Manuscrito\build\ZERO_CHECK.vcxproj">
-      <Project>{BC44AFB5-D242-3B45-BABC-FA1A6FB81F29}</Project>
+    <ProjectReference Include="C:\Users\manza\Desktop\Universidad\TPV1\Manuscrito\Manuscrito\build\ZERO_CHECK.vcxproj">
+      <Project>{3AEDE197-BA06-351A-8ADC-12B005869A93}</Project>
       <Name>ZERO_CHECK</Name>
       <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>

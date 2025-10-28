@@ -1,4 +1,4 @@
-# Install script for directory: C:/Users/manza.DESKTOP-N61SGRF/Desktop/UNIVERSIDAD/GitHub/Manuscrito/Manuscrito
+# Install script for directory: C:/Users/manza/Desktop/Universidad/TPV1/Manuscrito/Manuscrito
 
 # Set the install prefix
 if(NOT DEFINED CMAKE_INSTALL_PREFIX)
@@ -40,5 +40,5 @@ endif()
 
 string(REPLACE ";" "\n" CMAKE_INSTALL_MANIFEST_CONTENT
        "${CMAKE_INSTALL_MANIFEST_FILES}")
-file(WRITE "C:/Users/manza.DESKTOP-N61SGRF/Desktop/UNIVERSIDAD/GitHub/Manuscrito/Manuscrito/build/${CMAKE_INSTALL_MANIFEST}"
+file(WRITE "C:/Users/manza/Desktop/Universidad/TPV1/Manuscrito/Manuscrito/build/${CMAKE_INSTALL_MANIFEST}"
      "${CMAKE_INSTALL_MANIFEST_CONTENT}")

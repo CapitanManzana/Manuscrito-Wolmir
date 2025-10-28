@@ -85,7 +85,7 @@ public:
 	void HandleEvents(SDL_Event& event) override;
 	void Render() override;
 
-	bool discoveredBlackLight = true;
+	bool discoveredBlackLight = false;
 
 private:
 	void showText(GameObject* text);
