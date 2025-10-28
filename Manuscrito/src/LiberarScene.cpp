@@ -12,7 +12,15 @@
 using namespace std;
 
 void LiberarScene::Load() {
-	fstream file(INTRO_TEXT_DIR);
+	std::string basePath = SDL_GetBasePath();
+	if (basePath.empty()) {
+		SDL_LogError(SDL_LOG_CATEGORY_APPLICATION, "¡No se pudo obtener la ruta base! %s", SDL_GetError());
+	}
+
+	// 2. Construye la ruta a tus fuentes subiendo dos niveles
+	std::string fileDir = basePath + INTRO_TEXT_DIR;
+
+	fstream file(fileDir);
 	string btonText;
 
 	if (file.is_open()) {
@@ -127,6 +135,10 @@ void LiberarScene::loadTexts(istream& file, string& buttonText) {
 
 void LiberarScene::nextText() {
 	if (currentText < textsCount) {
+		if (currentText == 1) AudioManager::playSong(AudioManager::FINAL_P2);
+		if (currentText == 2) AudioManager::playSong(AudioManager::FINAL_P3);
+		if (currentText == 4) AudioManager::playSound(AudioManager::VOZ1_LIBERAR);
+
 		texts[currentText]->setIsActive(true);
 		prevText = texts[currentText];
 		currentText++;
@@ -141,10 +153,14 @@ void LiberarScene::fadeOutText() {
 		return;
 	}
 
+	AudioManager::playSound(AudioManager::BUTTON);
+
 	canContinue = false;
 	if (currentText < textsCount) {
 		Fader* f = prevText->getComponent<Fader>();
 		if (f) {
+			if (currentText == 4) AudioManager::playSong(AudioManager::FINAL_P4);
+
 			f->startFadeOut();
 		}
 	}

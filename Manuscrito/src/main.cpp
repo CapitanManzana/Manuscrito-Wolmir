@@ -32,7 +32,7 @@ int main(int argc, char* argv[])
 		CerrarScene* cerrarScene = new CerrarScene(*game);
 		cerrarScene->Load();
 
-		//SceneManager::changeScene(MAIN_MENU);
+		SceneManager::changeScene(MAIN_GAME);
 		game->run();
 
 		SceneManager::unload();

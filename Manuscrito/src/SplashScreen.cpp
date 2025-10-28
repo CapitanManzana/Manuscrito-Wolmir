@@ -5,6 +5,7 @@
 #include "Text.h"
 #include "Fader.h"
 #include "Hover.h"
+#include "AudioManager.h"
 
 void SplashScreen::Load() {
 	logo = new GameObject("ContinueButton", 5);
@@ -17,4 +18,9 @@ void SplashScreen::Load() {
 
 	game->gameObjects.push_back(logo);
 	sceneObjects.push_back(logo);
+
+}
+
+void SplashScreen::OnLoadScene() {
+	AudioManager::playSong(AudioManager::MENU);
 }

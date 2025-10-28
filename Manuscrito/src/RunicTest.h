@@ -5,12 +5,15 @@
 class GameObject;
 class Selector;
 class Book;
+class MainGame;
 
 typedef unsigned short mask;
 
 class RunicTest : public MonoBehaviour
 {
 private:
+	MainGame* game;
+
 	Book* book = nullptr;
 	GameObject* newPage = nullptr;
 	int pageIndex;
@@ -28,9 +31,12 @@ private:
 
 	bool completed = false;
 
+	int id;
+	static int testsCount;
+
 public:
 	RunicTest() = default;
-	RunicTest(mask solution, int length, Book* book, GameObject* newPage, int pageIndex);
+	RunicTest(mask solution, int length, Book* book, GameObject* newPage, int pageIndex, MainGame* game);
 
 	void addSelector(Selector* sl);
 	void updateState(int index);

@@ -1,6 +1,6 @@
 #include "game.h"
 
-#include <SDL3_image/SDL_image.h>
+#include <SDL3/SDL_image.h>
 #include <fstream>
 
 #include "texture.h"
@@ -8,6 +8,7 @@
 #include "Button.h"
 #include "Hover.h"
 #include "SceneManager.h"
+#include "AudioManager.h"
 
 using namespace std;
 
@@ -24,7 +25,7 @@ constexpr const char* const imgBase = "../assets/images/";
 constexpr const char* const fontBase = "../assets/font/";
 
 constexpr array<TextureSpec, Game::NUM_TEXTURES> textureList{
-	TextureSpec{"fondo.jpg"},
+	TextureSpec{"fondo.JPEG"},
 	{"Logo.png"},
 	{"Fader.jpg"},
 	{"Runas.JPEG"},
@@ -52,12 +53,23 @@ Game::Game() : exit(false)
 #pragma region SDL INIT
 	// Carga SDL y sus bibliotecas auxiliares
 	SDL_Init(SDL_INIT_VIDEO);
-	if (!TTF_Init()) {
-		SDL_LogError(SDL_LOG_CATEGORY_APPLICATION, "Couldn't initialize TTF");
+
+	if (SDL_Init(SDL_INIT_AUDIO) < 0) {
+		SDL_LogError(SDL_LOG_CATEGORY_APPLICATION, "Error al inicializar SDL: %s", SDL_GetError());
+		exit = true;
 	}
 
-	//SDL_WINDOW_FULLSCREEN
-	//SDL_WINDOW_RESIZABLE
+	if (!TTF_Init()) {
+		SDL_LogError(SDL_LOG_CATEGORY_APPLICATION, "Couldn't initialize TTF");
+		exit = true;
+	}
+
+	// Inicializa SDL_mixer (puedes especificar formatos como OGG, MP3)
+	if (!MIX_Init()) {
+		SDL_LogError(SDL_LOG_CATEGORY_APPLICATION, "No se ha cargado SDL_mixer");
+		exit = true;
+	}
+
 	window = SDL_CreateWindow(WINDOW_TITLE, WINDOW_WIDTH, WINDOW_HEIGHT, SDL_WINDOW_FULLSCREEN);
 
 	if (window == nullptr)
@@ -67,26 +79,37 @@ Game::Game() : exit(false)
 
 	if (renderer == nullptr)
 		throw "renderer: "s + SDL_GetError();
+
 #pragma endregion
 
 	// Inicializamos las variables de tiempo
 	perfFrequency = SDL_GetPerformanceFrequency();
 	lastTime = SDL_GetPerformanceCounter();
 
+	std::string basePath = SDL_GetBasePath();
+	if (basePath.empty()) {
+		SDL_LogError(SDL_LOG_CATEGORY_APPLICATION, "¡No se pudo obtener la ruta base! %s", SDL_GetError());
+		exit = true;
+	}
+
+	// 2. Construye la ruta a tus fuentes subiendo dos niveles
+	std::string fontDir = basePath + fontBase;
+	std::string imgDir = basePath + imgBase;
+
 	//Carga la fuente
-	baseFont = TTF_OpenFont(((string)fontBase + "OldNewspaperTypes.ttf").c_str(), FONT_SIZE);
+	baseFont = TTF_OpenFont(((string)fontDir + "OldNewspaperTypes.ttf").c_str(), FONT_SIZE);
 	if (!baseFont) {
 		SDL_LogError(SDL_LOG_CATEGORY_APPLICATION, "Couldn't load font");
 	}
 	TTF_SetFontWrapAlignment(baseFont, TTF_HORIZONTAL_ALIGN_LEFT);
 
-	baseFontCentered = TTF_OpenFont(((string)fontBase + "OldNewspaperTypes.ttf").c_str(), FONT_SIZE);
+	baseFontCentered = TTF_OpenFont(((string)fontDir + "OldNewspaperTypes.ttf").c_str(), FONT_SIZE);
 	if (!baseFontCentered) {
 		SDL_LogError(SDL_LOG_CATEGORY_APPLICATION, "Couldn't load font");
 	}
 	TTF_SetFontWrapAlignment(baseFontCentered, TTF_HORIZONTAL_ALIGN_CENTER);
 
-	manuscritoFont = TTF_OpenFont(((string)fontBase + "ManuscritoWolmir2.ttf").c_str(), MANUS_FONT_SIZE);
+	manuscritoFont = TTF_OpenFont(((string)fontDir + "ManuscritoWolmir2.ttf").c_str(), MANUS_FONT_SIZE);
 	if (!manuscritoFont) {
 		SDL_LogError(SDL_LOG_CATEGORY_APPLICATION, "Couldn't load font");
 	}
@@ -94,17 +117,38 @@ Game::Game() : exit(false)
 	// Carga las texturas al inicio
 	for (size_t i = 0; i < textures.size(); i++) {
 		auto [name, nrows, ncols] = textureList[i];
-		textures[i] = new Texture(renderer, (string(imgBase) + name).c_str(), nrows, ncols);
+		textures[i] = new Texture(renderer, (string(imgDir) + name).c_str(), nrows, ncols);
 	}
 
 	SDL_SetRenderDrawBlendMode(renderer, SDL_BLENDMODE_MUL);
 	SDL_SetRenderLogicalPresentation(renderer, WINDOW_WIDTH, WINDOW_HEIGHT, SDL_LOGICAL_PRESENTATION_STRETCH);
+
+	AudioManager::Init();
+
+	cursorDefault = SDL_CreateSystemCursor(SDL_SYSTEM_CURSOR_DEFAULT);
+	cursorHand = SDL_CreateSystemCursor(SDL_SYSTEM_CURSOR_POINTER);
+
+	SDL_Surface* icon = IMG_Load(((string)imgBase + "icon.png").c_str());
+	if (!icon) {
+		SDL_Log("Error cargando icono: %s", SDL_GetError());
+	}
+	else {
+		SDL_SetWindowIcon(window, icon);
+		SDL_DestroySurface(icon);
+	}
+
 }
 
 Game::~Game()
 {
 	TTF_CloseFont(baseFont);
+	TTF_CloseFont(manuscritoFont);
+	TTF_CloseFont(baseFontCentered);
 	baseFont = nullptr;
+	manuscritoFont = nullptr;
+	baseFontCentered = nullptr;
+
+	AudioManager::Unload();
 
 	// Elimina los objetos del juego
 	for (size_t i = 0; i < gameObjects.size(); i++) {
@@ -146,6 +190,8 @@ Game::update()
 	lastTime = currentTime;
 
 	currentScene->Update(deltaTime);
+
+	AudioManager::Update(deltaTime);
 }
 
 void
@@ -192,6 +238,36 @@ Game::handleEvents()
 
 		if (event.type == SDL_EVENT_QUIT)
 			exit = true;
+		if (event.type == SDL_EVENT_MOUSE_MOTION) {
+			float mouseX = event.motion.x;
+			float mouseY = event.motion.y;
+
+			float logicalX, logicalY;
+			SDL_RenderCoordinatesFromWindow(renderer, mouseX, mouseY, &logicalX, &logicalY);
+			SDL_FPoint mousePoint = { logicalX, logicalY };
+
+			bool cursorOverClickable = false;
+
+			for (GameObject* go : currentScene->sceneObjects) {
+				if (go->getIsActive()) {
+					Button* bt = go->getComponent<Button>();
+
+					if (bt != nullptr && bt->isEnabled) {
+						Transform* t = go->getComponent<Transform>();
+
+						if (SDL_PointInRectFloat(&mousePoint, &t->dstRect)) {
+							cursorOverClickable = true;
+							break;
+						}
+					}
+				}
+			}
+
+			if (cursorOverClickable)
+				SDL_SetCursor(cursorHand);
+			else
+				SDL_SetCursor(cursorDefault);
+		}
 
 		if (event.type == SDL_EVENT_MOUSE_BUTTON_DOWN) {
 			float mouseX = event.button.x;
@@ -202,7 +278,7 @@ Game::handleEvents()
 			SDL_RenderCoordinatesFromWindow(renderer, mouseX, mouseY, &logicalX, &logicalY);
 			SDL_FPoint mousePoint = { logicalX, logicalY };
 
-			for (GameObject* go : gameObjects) {
+			for (GameObject* go : currentScene->sceneObjects) {
 				if (go->getIsActive()) {
 					Button* bt = go->getComponent<Button>();
 
@@ -214,13 +290,6 @@ Game::handleEvents()
 						}
 					}
 				}
-			}
-		}
-
-		if (event.type == SDL_EVENT_KEY_DOWN) {
-			// SALIR DEL JUEGO
-			if (event.key.key == SDLK_ESCAPE) {
-				exit = true;
 			}
 		}
 

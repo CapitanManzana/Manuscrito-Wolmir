@@ -2,7 +2,8 @@
 #define GAME_H
 
 #include <SDL3/SDL.h>
-#include <SDL3_ttf/SDL_ttf.h>
+#include <SDL3/SDL_ttf.h>
+#include <SDL3/SDL_mixer.h>
 
 #include <array>
 #include <istream>
@@ -13,6 +14,7 @@ class Texture;
 class GameObject;
 class Book;
 class Scene;
+class AudioManager;
 
 /**
  * Clase principal del juego.
@@ -34,7 +36,7 @@ public:
 	static constexpr unsigned short ASTROLOGY_TEST_SOLUTION = 0b1000011; // 7
 	static constexpr unsigned short ASTROLOGY_TEST_LENGHT = 8;
 
-	static constexpr const char* const FINAL_CODE_SOLUTION = "1904";
+	static constexpr const char* const FINAL_CODE_SOLUTION = "1518";
 
 	static TTF_Font* baseFont;
 	static TTF_Font* baseFontCentered;
@@ -59,6 +61,7 @@ public:
 	};
 
 	static std::vector<GameObject*> gameObjects;
+	Scene* currentScene;
 
 private:
 	
@@ -76,7 +79,9 @@ private:
 	SDL_Window* window;
 	SDL_Renderer* renderer;
 
-	Scene* currentScene;
+	SDL_Cursor* cursorDefault;
+	SDL_Cursor* cursorHand;
+
 	Scene* prevScene;
 public:
 	Game();

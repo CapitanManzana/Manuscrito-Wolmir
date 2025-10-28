@@ -7,7 +7,8 @@
 #include "Button.h"
 #include "Fader.h"
 #include "Hover.h"
-#include "SDL3_image/SDL_image.h"
+#include "SDL3/SDL_image.h"
+#include "AudioManager.h"
 
 using namespace std;
 
@@ -50,8 +51,16 @@ void MainMenu::Load() {
 	sceneObjects.push_back(hoja3);
 	sceneObjects.push_back(hoja4);
 
+	std::string basePath = SDL_GetBasePath();
+	if (basePath.empty()) {
+		SDL_LogError(SDL_LOG_CATEGORY_APPLICATION, "¡No se pudo obtener la ruta base! %s", SDL_GetError());
+	}
+
+	// 2. Construye la ruta a tus fuentes subiendo dos niveles
+	std::string fileDir = basePath + menuTextsData;
+
 	// Cargamos el archivo de textos
-	LoadTexts* textsLoader = new LoadTexts(menuTextsData);
+	LoadTexts* textsLoader = new LoadTexts(fileDir);
 	// Recorremos las páginas y los textos para crearlos
 	for (int i = 0; i < pagesCount; i++) {
 
@@ -71,7 +80,7 @@ void MainMenu::Load() {
 			texto->addComponent<SpriteRenderer>();
 			Text* t = texto->addComponent<Text>(textData.text, textData.color, game->baseFontCentered, textData.textEnd, textData.size, renderer);
 
-			if (i == 1 && j == 3) {
+			if (i == 1 && j == 4) {
 				Button* b = texto->addComponent<Button>();
 				b->onClick = [this]() { changeScene(INTRO); };
 
@@ -82,9 +91,9 @@ void MainMenu::Load() {
 				h->onEnterHover = [t, hoverColor]() { t->setColor(hoverColor); };
 				h->onExitHover = [t, color]() { t->setColor(color); };
 			}
-			else if (i == 1 && j == 4) {
+			else if (i == 1 && j == 5) {
 				Button* b = texto->addComponent<Button>();
-				b->onClick = [this]() { game->exitGame(); };
+				b->onClick = [this]() { exitGame(); };
 
 				SDL_Color hoverColor = { 100, 0, 0, 255 };
 				SDL_Color color = textData.color;
@@ -139,7 +148,7 @@ void MainMenu::Render() {
 	SDL_RenderClear(renderer);
 	SDL_RenderTexture(renderer, ambientLight_tex, NULL, &rect_ambientLight);
 	SDL_SetRenderTarget(renderer, NULL);
-	SDL_RenderClear(renderer); 
+	SDL_RenderClear(renderer);
 
 	game->getTexture(Game::BACKGROUND)->render();
 	for (GameObject* g : sceneObjects) {
@@ -175,8 +184,22 @@ void MainMenu::HandleEvents(SDL_Event& event) {
 	}
 }
 
+void MainMenu::OnLoadScene() {
+	AudioManager::playSong(AudioManager::MENU);
+}
+
 void MainMenu::changeScene(SceneType scene) {
 	Fader* f = fader->getComponent<Fader>();
-	f->startFadeIn();
-	f->onFadeInEnd = [scene]() { SceneManager::changeScene(scene); };
+	AudioManager::playSound(AudioManager::BUTTON);
+
+	if (f && !f->onAnimation) {
+		f->startFadeIn();
+		f->onFadeInEnd = [scene]() { SceneManager::changeScene(scene); };
+		AudioManager::playSong(AudioManager::INTRO_P1);
+	}
+}
+
+void MainMenu::exitGame() {
+	AudioManager::playSound(AudioManager::BUTTON);
+	game->exitGame();
 }

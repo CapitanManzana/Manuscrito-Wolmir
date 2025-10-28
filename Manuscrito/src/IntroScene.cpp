@@ -5,13 +5,22 @@
 #include "Fader.h"
 #include "Button.h"
 #include "Hover.h"
+#include "AudioManager.h"
 
 #include <fstream>
 
 using namespace std;
 
 void IntroScene::Load() {
-	fstream file(INTRO_TEXT_DIR);
+	std::string basePath = SDL_GetBasePath();
+	if (basePath.empty()) {
+		SDL_LogError(SDL_LOG_CATEGORY_APPLICATION, "¡No se pudo obtener la ruta base! %s", SDL_GetError());
+	}
+
+	// 2. Construye la ruta a tus fuentes subiendo dos niveles
+	std::string fileDir = basePath + INTRO_TEXT_DIR;
+
+	fstream file(fileDir);
 	string btonText;
 
 	if (file.is_open()) {
@@ -126,12 +135,15 @@ void IntroScene::loadTexts(istream& file, string& buttonText) {
 
 void IntroScene::nextText() {
 	if (currentText < textsCount) {
+		if (currentText == 2) AudioManager::playSong(AudioManager::INTRO_P2);
+
 		texts[currentText]->setIsActive(true);
 		prevText = texts[currentText];
 		currentText++;
 	}
 	else {
 		SceneManager::changeScene(MAIN_GAME);
+		AudioManager::stopMusic();
 	}
 }
 
@@ -140,10 +152,13 @@ void IntroScene::fadeOutText() {
 		return;
 	}
 
+	AudioManager::playSound(AudioManager::BUTTON);
+
 	canContinue = false;
 	if (currentText < textsCount) {
 		Fader* f = prevText->getComponent<Fader>();
 		if (f) {
+			if (currentText == 3) AudioManager::playSong(AudioManager::INTRO_P3);
 			f->startFadeOut();
 		}
 	}
@@ -152,6 +167,8 @@ void IntroScene::fadeOutText() {
 		Fader* bf = continueButton->getComponent<Fader>();
 
 		if (f && bf) {
+			AudioManager::playSong(AudioManager::RISER);
+
 			f->startFadeOut();
 			bf->startFadeOut();
 		}

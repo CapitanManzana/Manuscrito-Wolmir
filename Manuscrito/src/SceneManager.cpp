@@ -3,6 +3,7 @@
 Scene* SceneManager::activeScene;
 SceneType SceneManager::nextScene = (SceneType)-1;
 std::vector<Scene*> SceneManager::scenes;
+SceneType SceneManager::scene;
 
 void SceneManager::changeScene(SceneType scene) {
 	SDL_Log("Cambiando a escena %i", scene);
@@ -13,6 +14,8 @@ void SceneManager::applySceneChange() {
 	if (nextScene != (SceneType)-1) {
 		SDL_Log("Aplicando cambio a escena %i", nextScene);
 		activeScene = scenes[nextScene];
+		activeScene->OnLoadScene();
+		scene = nextScene;
 		nextScene = (SceneType)-1; // resetea el marcador
 	}
 }
@@ -35,4 +38,8 @@ void SceneManager::unload() {
 	}
 
 	scenes.clear();
+}
+
+SceneType SceneManager::getActiveScene() {
+	return scene;
 }

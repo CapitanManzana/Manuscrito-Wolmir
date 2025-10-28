@@ -27,6 +27,12 @@ private:
 	//Cuaderno de notas
 	GameObject* notebookParent = nullptr;
 	Notebook* notebook = nullptr;
+	GameObject* notifier = nullptr;
+	float elapsedTime = 0;
+	float secondsOnScreen = 5;
+
+	//Menu de pausa
+	GameObject* pauseMenu = nullptr;
 
 	// TEXTOS
 	GameObject* currentText = nullptr;
@@ -78,6 +84,8 @@ public:
 	void Start() override;
 	void HandleEvents(SDL_Event& event) override;
 	void Render() override;
+
+	bool discoveredBlackLight = true;
 
 private:
 	void showText(GameObject* text);

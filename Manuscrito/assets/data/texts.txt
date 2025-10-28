@@ -258,7 +258,7 @@ Page_3
         uv: 1
         revealNoteIndex: -1
 Page_4
-    TextsCount: 4
+    TextsCount: 5
      T_1
         text: El otro día descubrí un hechizo muy curioso, capaz de lanzar una luz que revela elementos que no se ven a simple vista.
         x: 5
@@ -278,18 +278,27 @@ Page_4
         uv: 0
         revealNoteIndex: -1
     T_3
-        text: 5 de octubre de 1534
-        x: -60
-        y: -50
-        size: 80
+        text: Invocar hechizo: tecla E
+        x: 0
+        y: -60
+        size: 70
         textEnd: 1500
         color: #C41A00
         uv: 0
         revealNoteIndex: -1
     T_4
+        text: 5 de octubre de 1534
+        x: -60
+        y: -30
+        size: 80
+        textEnd: 1500
+        color: #C41A00
+        uv: 0
+        revealNoteIndex: -1
+    T_5
         text: Era todo mentira, todo una farsa, menos mal que hemos conseguido escapar. La Orden no nos quería ayudar, nos quería atrapar. Han intentado llevarse a mi hermana y casi nos matan a madre y a mi. Hemos huido por la noche, a través de las cloacas.
         x: 5        
-        y: -5
+        y: 15
         size: 76
         textEnd: 1500
         color: #6B2604
@@ -574,7 +583,7 @@ Page_7
 Page_8:
 	TextsCount: 6
     T_1:
-        text: 4 esconden la verdad
+        text: Introduce 4 dígitos
 		x: 0
 		y: -120
 		size: 120
@@ -610,7 +619,7 @@ Page_8:
 		uv: 0
 		revealNoteIndex: -1
     T_5:
-        text: Todo comenzó en la fría mañana del 13 de octubre de 1534. Los desgarradores gritos de madre nos despertaron a Helena y a mi. Salimos a fuera, y ahí estaban, la Orden Wincanster y los soldados de la Inquisición. Tenían atada a madre a un palo, encima de una pila de paja. Bruja, Bruja… gritaban todos, y sin mediar palabra, el director de la orden, dejó caer su antorcha sobre la pila de paja. Solo se escuchaban los agonizantes gritos de madre en el inmenso silencio del bosque. Nos obligaron a ver como ardía, jamás olvidare al hombre que asesinó a mi madre, el Señor Wolmir, el director de la Orden Wincanster. 
+        text: Todo comenzó en la fría mañana del 13 de octubre de 1534. Los desgarradores gritos de madre nos despertaron a Helena y a mi. Salimos a fuera, y ahí estaban, la Orden Wincanster y los soldados de la Inquisición. Tenían atada a madre a un palo, encima de una pila de paja. Bruja, Bruja… gritaban todos, y sin mediar palabra, el director de la orden, dejó caer su antorcha sobre la pila de paja. Solo se escuchaban los agonizantes gritos de madre en el inmenso silencio del bosque. Nos obligaron a ver como ardía, jamás olvidaré al hombre que asesinó a mi madre, el Señor Wolmir, el director de la Orden Wincanster. 
 		x: 0
 		y: -30
 		size: 70

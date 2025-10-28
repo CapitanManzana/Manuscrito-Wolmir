@@ -6,8 +6,9 @@
 #include "game.h"
 #include "NoteRevealer.h"
 #include "Button.h"
+#include "Scene.h"
 
-#include<SDL3_ttf/SDL_ttf.h>
+#include<SDL3/SDL_ttf.h>
 
 enum Direction {
 	UP,
@@ -16,7 +17,7 @@ enum Direction {
 	RIGHT
 };
 
-Notebook::Notebook(std::istream& is, GameObject* parent, TTF_Font* font, Texture* tex, SDL_Renderer* rend, Game* game) {
+Notebook::Notebook(std::istream& is, GameObject* parent, TTF_Font* font, Texture* tex, SDL_Renderer* rend, Scene* scene) {
 	notebookObject = parent;
 	totalObjects.push_back(notebookObject);
 
@@ -31,9 +32,12 @@ Notebook::Notebook(std::istream& is, GameObject* parent, TTF_Font* font, Texture
 
 	std::string tag;
 	std::string title;
+	std::string subtitleT;
 	//Leemos el titulo
 	is >> tag;
 	std::getline(is, title);
+	is >> tag;
+	std::getline(is, subtitleT);
 	// Leemos la cantidad de notas
 	is >> tag >> notesCount;
 
@@ -41,10 +45,18 @@ Notebook::Notebook(std::istream& is, GameObject* parent, TTF_Font* font, Texture
 	GameObject* titleObject = new GameObject("NotebookTitle", 3, notebookObject);
 	titleObject->addComponent<Transform>(Vector2D<float>(0, -200), 0.15);
 	titleObject->addComponent<SpriteRenderer>();
-	Text* titleText = titleObject->addComponent<Text>(title, mainNoteColor, font, 10000, TITLE_FONT_SIZE, renderer);
+	Text* titleText = titleObject->addComponent<Text>(title, mainNoteColor, font, 0, TITLE_FONT_SIZE, renderer);
+
+	//Creamos el subtitulo
+	GameObject* subtilte = new GameObject("NotebookSubtitle", 3, notebookObject);
+	subtilte->addComponent<Transform>(Vector2D<float>(0, -170), 0.15);
+	subtilte->addComponent<SpriteRenderer>();
+	subtilte->addComponent<Text>(subtitleT, mainNoteColor, font, 0, TITLE_FONT_SIZE - 100, renderer);
 
 	totalObjects.push_back(titleObject);
+	totalObjects.push_back(subtilte);
 	Game::gameObjects.push_back(titleObject);
+	Game::gameObjects.push_back(subtilte);
 
 	for (int i = 0; i < notesCount; i++) {
 		// Leemos NX:
@@ -118,7 +130,7 @@ Notebook::Notebook(std::istream& is, GameObject* parent, TTF_Font* font, Texture
 			//Creamos la info de la nota
 			GameObject* hoverInfo = new GameObject("NoteHoverInfo_" + std::to_string(i), 2, noteObject);
 			hoverInfo->addComponent<Transform>(Vector2D<float>(0, -h*2), 0.09);
-			hoverInfo->addComponent<SpriteRenderer>(game->getTexture(Game::FOLIO), 0, 0);
+			hoverInfo->addComponent<SpriteRenderer>(scene->game->getTexture(Game::FOLIO), 0, 0);
 
 			hoverInfo->spriteRenderer->isEnabled = false;
 
@@ -147,6 +159,8 @@ Notebook::Notebook(std::istream& is, GameObject* parent, TTF_Font* font, Texture
 			Game::gameObjects.push_back(marco);
 			Game::gameObjects.push_back(hoverInfo);
 			Game::gameObjects.push_back(infoTextObject);
+
+			scene->sceneObjects.push_back(marco);
 		}
 		else {
 			delete noteObject;
@@ -188,6 +202,10 @@ void Notebook::discoverNote(int index) {
 			}
 		}
 	}
+}
+
+void Notebook::update(float deltaTime) {
+	
 }
 
 void Notebook::render() const {

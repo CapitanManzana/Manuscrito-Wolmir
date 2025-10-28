@@ -1,5 +1,6 @@
 #pragma once
 #include "game.h"
+#include "AudioManager.h"
 
 class Scene
 {
@@ -8,13 +9,15 @@ private:
 	static int totalScenes;
 
 protected:
-	std::vector<GameObject*> sceneObjects;
-	Game* game;
 	SDL_Renderer* renderer;
 
 public:
+	Game* game;
+
 	Scene(Game& game);
 	virtual ~Scene() {}
+
+	std::vector<GameObject*> sceneObjects;
 
 	virtual void Load() {}
 	virtual void Reload() {}
@@ -23,5 +26,7 @@ public:
 	virtual void Update(float deltaTime);
 	virtual void Start();
 	virtual void Render();
+
+	virtual void OnLoadScene() {}
 };
 
