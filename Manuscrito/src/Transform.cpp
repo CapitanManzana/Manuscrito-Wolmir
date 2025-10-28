@@ -8,6 +8,7 @@ Transform::Transform() {
 	scale = Vector2D<float>(1.0f, 1.0f);
 
 	dstRect = { position.x, position.y, scale.x, scale.y };
+	parentTransform = nullptr;
 }
 
 Transform::Transform(Vector2D<float> position, Vector2D<float> size) {
@@ -17,6 +18,7 @@ Transform::Transform(Vector2D<float> position, Vector2D<float> size) {
 	dstRect = { position.x, position.y, scale.x, scale.y };
 
 	scaleMode = ScaleMode::DEFAULT;
+	parentTransform = nullptr;
 }
 
 Transform::Transform(Vector2D<float> position, float size) {
@@ -29,18 +31,10 @@ Transform::Transform(Vector2D<float> position, float size) {
 	dstRect = { position.x, position.y, scale.x, scale.y };
 
 	scaleMode = ScaleMode::SCALAR;
+	parentTransform = nullptr;
 }
 
 #pragma endregion
-
-Vector2D<float> Transform::getParentPosition() const {
-	if (parentTransform == nullptr) {
-		return position;
-	}
-	else {
-		return parentTransform->getParentPosition() + position;
-	}
-}
 
 Vector2D<float> Transform::getScale() const {
 	return scale;
@@ -63,10 +57,8 @@ Vector2D<float> Transform::getGlobalPosition() const {
 void Transform::setPosition(Vector2D<float> newPosition) {
 	position = newPosition;
 
-	// Si el objeto es hijo, pues se toman las coordenadas del padre
 	if (parentTransform != nullptr) {
-		Vector2D<float> parentPos = parentTransform->getParentPosition();
-
+		Vector2D<float> parentPos = parentTransform->getGlobalPosition();
 		dstRect.x = parentPos.x + position.x - dstRect.w / 2;
 		dstRect.y = parentPos.y + position.y - dstRect.h / 2;
 	}
@@ -104,7 +96,7 @@ void Transform::updateTextureSize(Vector2D<float> size) {
 
 	// Si el objeto es hijo, pues se toman las coordenadas del padre
 	if (gameObject->parent != nullptr && gameObject->parent->transform != nullptr) {
-		Vector2D<float> parentPos = parentTransform->getParentPosition();
+		Vector2D<float> parentPos = parentTransform->getGlobalPosition();
 
 		dstRect.x = parentPos.x + position.x - dstRect.w / 2;
 		dstRect.y = parentPos.y + position.y - dstRect.h / 2;
@@ -118,12 +110,7 @@ void Transform::updateTextureSize(Vector2D<float> size) {
 void Transform::onComponentAdd() {
 	gameObject->transform = this;
 
-	if (gameObject->parent != nullptr && gameObject->parent->transform != nullptr) {
-		parentTransform = gameObject->parent->transform;
-
-		Vector2D<float> parentPos = getParentPosition();
-
-		dstRect.x = parentPos.x + position.x - dstRect.w / 2;
-		dstRect.y = parentPos.y + position.y - dstRect.h / 2;
-	}
+	if (gameObject->parent != nullptr) parentTransform = gameObject->parent->transform;
+	setPosition(position);
+	updateTextureSize(scale);
 }

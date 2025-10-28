@@ -227,7 +227,7 @@ void MainGame::createGameObjects() {
 	vector<GameObject*> bookPages;
 
 	GameObject* hoja1 = new GameObject("Hoja1", 2);
-	hoja1->addComponent<Transform>(Vector2D<float>(1, 1), 0.1875);
+	hoja1->addComponent<Transform>(Vector2D<float>(10, 10), 0.1875);
 	hoja1->addComponent<SpriteRenderer>(game->getTexture(Game::HOJA1), 0, 0);
 
 	GameObject* hoja2 = new GameObject("Hoja2", 2);
@@ -345,11 +345,6 @@ void MainGame::createGameObjects() {
 	LoadTexts* textsLoader = new LoadTexts(textsData);
 	// Recorremos las páginas y los textos para crearlos
 	for (int i = 0; i < pagesCount; i++) {
-
-		if (i % 2 == 0) {
-			manuscrito->changePage(i);
-		}
-
 		for (int j = 0; j < textsLoader->getTextsCount(i); j++) {
 
 			// La data del texto (pos, tamaño, contenido)

@@ -24,6 +24,15 @@ Book::Book(const std::vector<GameObject*>& pages, float x, float y, float separa
 	this->position = Vector2D<float>(x, y);
 	this->pageSeparation = separation;
 
+	for (int i = 0; i < pages.size(); i++) {
+		GameObject* g = pages[i];
+		if (i % 2 != 0) {
+			g->transform->setPosition(Vector2D<float>(position.x + pageSeparation, position.y));
+		}
+		else {
+			g->transform->setPosition(Vector2D<float>(position.x - pageSeparation, position.y));
+		}
+	}
 	// Muestra la primera página (o las dos primeras).
 	changePage(0);
 }

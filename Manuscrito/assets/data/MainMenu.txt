@@ -11,7 +11,7 @@ Page_0:
         uv: 0
         revealNoteIndex: -1
 Page_1:
-    TextsCount: 6
+    TextsCount: 7
     T_1
         text: Controles
         x: 0
@@ -49,6 +49,15 @@ Page_1:
         uv: 0
         revealNoteIndex: -1
     T_5
+        text: Prueba a pasar de página (D) ->
+        x: 0
+        y: 120
+        size: 70
+        textEnd: 1500
+        color: #000000
+        uv: 0
+        revealNoteIndex: -1
+    T_6
         text: JUGAR
         x: 0
         y: 0
@@ -57,7 +66,7 @@ Page_1:
         color: #C41A00
         uv: 0
         revealNoteIndex: -1
-    T_6
+    T_7
         text: SALIR
         x: 0
         y: 60

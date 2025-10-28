@@ -80,7 +80,7 @@ void MainMenu::Load() {
 			texto->addComponent<SpriteRenderer>();
 			Text* t = texto->addComponent<Text>(textData.text, textData.color, game->baseFontCentered, textData.textEnd, textData.size, renderer);
 
-			if (i == 1 && j == 4) {
+			if (i == 1 && j == 5) {
 				Button* b = texto->addComponent<Button>();
 				b->onClick = [this]() { changeScene(INTRO); };
 
@@ -91,7 +91,7 @@ void MainMenu::Load() {
 				h->onEnterHover = [t, hoverColor]() { t->setColor(hoverColor); };
 				h->onExitHover = [t, color]() { t->setColor(color); };
 			}
-			else if (i == 1 && j == 5) {
+			else if (i == 1 && j == 6) {
 				Button* b = texto->addComponent<Button>();
 				b->onClick = [this]() { exitGame(); };
 

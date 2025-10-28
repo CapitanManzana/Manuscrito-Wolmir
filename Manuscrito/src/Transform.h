@@ -19,9 +19,6 @@ private:
 	Transform* parentTransform = nullptr;
 
 	ScaleMode scaleMode = ScaleMode::DEFAULT;
-
-	Vector2D<float> getParentPosition() const;
-
 public:
 	// Rectángulo destino para renderizar con SDL
 	SDL_FRect dstRect;
