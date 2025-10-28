@@ -27,8 +27,11 @@ private:
 	int textureWidth;
 	int fontSize;
 
+	SDL_Surface* surface;
+	Texture* texture;
 	TTF_Font* font;
 	SDL_Renderer* renderer;
+	SDL_Texture* textureSDL;
 
 
 	void updateSurface();
@@ -36,7 +39,7 @@ private:
 public:
 	Text();
 	Text(std::string text, SDL_Color newColor, TTF_Font* font, int width, int size, SDL_Renderer* renderer);
-	~Text() = default;
+	~Text();
 
 	static bool showingText;
 

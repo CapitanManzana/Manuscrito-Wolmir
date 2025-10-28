@@ -162,7 +162,6 @@ Game::~Game()
 
 	SDL_DestroyRenderer(renderer);
 	SDL_DestroyWindow(window);
-	MIX_Quit();
 	TTF_Quit();
 	SDL_Quit();
 }

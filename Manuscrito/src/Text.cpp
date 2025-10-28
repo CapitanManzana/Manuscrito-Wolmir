@@ -14,12 +14,13 @@ Text::Text() {
 	this->color = { 255, 255, 255, 255 };
 	this->textureWidth = 200;
 
+	texture = nullptr;
+	surface = nullptr;
 	font = nullptr;
 	renderer = nullptr;
+	textureSDL = nullptr;
 	currentText = "";
 	fontSize = 16;
-
-	timePerChar = 0;
 }
 
 Text::Text(std::string text, SDL_Color newColor, TTF_Font* font, int width, int size, SDL_Renderer* renderer) {
@@ -30,10 +31,30 @@ Text::Text(std::string text, SDL_Color newColor, TTF_Font* font, int width, int 
 	this->renderer = renderer;
 	this->textureWidth = width;
 
-	timePerChar = 0;
+	surface = nullptr;
+	texture = nullptr;
+	textureSDL = nullptr;
 
 	TTF_SetFontSize(font, size);
 	fontSize = size;
+}
+
+Text::~Text() {
+	if (surface) {
+		SDL_DestroySurface(surface);
+		surface = nullptr;
+	}
+
+	delete texture;
+
+	if (textureSDL) {
+		SDL_DestroyTexture(textureSDL);
+		textureSDL = nullptr;
+	}
+
+	font = nullptr;
+	texture = nullptr;
+	renderer = nullptr;
 }
 
 #pragma endregion
@@ -100,41 +121,44 @@ void Text::onComponentAdd() {
 }
 
 void Text::updateSurface() {
-	SDL_Surface* localSurface = nullptr;
-	SDL_Texture* localTextureSDL = nullptr;
-	Texture* newTexture = nullptr;
+	if (surface) {
+		SDL_DestroySurface(surface);
+		surface = nullptr;
+	}
 
-	localSurface = TTF_RenderText_Blended_Wrapped(font, currentText.c_str(), 0, color, textureWidth);
-	if (!localSurface) {
+	if (texture) {
+		delete texture;
+	}
+
+	surface = TTF_RenderText_Blended_Wrapped(font, currentText.c_str(), 0, color, textureWidth);
+	if (!surface) {
 		SDL_LogError(SDL_LOG_CATEGORY_APPLICATION, "No se pudo crear la superficie: %s", SDL_GetError());
 	}
 
-	if (localSurface) {
-		localTextureSDL = SDL_CreateTextureFromSurface(renderer, localSurface);
-		if (!localTextureSDL) {
+	//2. Crear la textura a partir de la superficie
+	//3. Asignar la textura al SpriteRenderer del GameObject
+	if (surface) {
+		textureSDL = SDL_CreateTextureFromSurface(renderer, surface);
+		if (!textureSDL) {
 			SDL_LogError(SDL_LOG_CATEGORY_APPLICATION, "No se pudo crear la textura: %s", SDL_GetError());
 		}
 		else {
-			newTexture = new Texture(renderer, localTextureSDL);
+			texture = new Texture(renderer, textureSDL, 1, 1);
 			if (gameObject->spriteRenderer) {
-				// Le damos la textura al SpriteRenderer.
-				// Asumimos que setTexture() borra la textura anterior
-				// si ya tenía una.
-				gameObject->spriteRenderer->setTexture(newTexture);
+				gameObject->spriteRenderer->setTexture(texture);
 			}
 			else {
 				SDL_LogError(SDL_LOG_CATEGORY_APPLICATION, "No hay SpriteRenderer component en GameObject %s", gameObject->getName());
-				delete newTexture; // Si no hay renderer, hay que borrarla
 			}
 		}
 
-		if (newTexture && gameObject->transform) {
-			gameObject->transform->updateTextureSize(Vector2D<float>(localSurface->w, localSurface->h));
+		if (texture && gameObject->transform) {
+			gameObject->transform->updateTextureSize(Vector2D<float>(surface->w, surface->h));
 		}
 
-		// Liberamos la superficie local
-		SDL_DestroySurface(localSurface);
-		localSurface = nullptr;
+		// Liberamos la superficie ya que no la necesitamos más
+		SDL_DestroySurface(surface);
+		surface = nullptr;
 	}
 }
 

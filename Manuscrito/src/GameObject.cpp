@@ -89,7 +89,6 @@ bool GameObject::getIsActive() const {
 	return isActive;
 }
 void GameObject::setIsActive(bool active) {
-	SDL_Log("[%s]: estoy %i", name, active);
 	if (childs.size() > 0) {
 		for (GameObject* child : childs) {
 			child->setIsActive(active);

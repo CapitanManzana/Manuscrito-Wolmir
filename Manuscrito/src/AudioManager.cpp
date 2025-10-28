@@ -109,6 +109,7 @@ void AudioManager::Unload() {
 
 	MIX_DestroyTrack(musicTrackA);
 	MIX_DestroyMixer(mixer);
+	MIX_Quit();
 }
 
 void AudioManager::Update(float deltaTime) {
