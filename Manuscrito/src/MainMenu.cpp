@@ -51,8 +51,16 @@ void MainMenu::Load() {
 	sceneObjects.push_back(hoja3);
 	sceneObjects.push_back(hoja4);
 
+	std::string basePath = SDL_GetBasePath();
+	if (basePath.empty()) {
+		SDL_LogError(SDL_LOG_CATEGORY_APPLICATION, "¡No se pudo obtener la ruta base! %s", SDL_GetError());
+	}
+
+	// 2. Construye la ruta a tus fuentes subiendo dos niveles
+	std::string fileDir = basePath + menuTextsData;
+
 	// Cargamos el archivo de textos
-	LoadTexts* textsLoader = new LoadTexts(menuTextsData);
+	LoadTexts* textsLoader = new LoadTexts(fileDir);
 	// Recorremos las páginas y los textos para crearlos
 	for (int i = 0; i < pagesCount; i++) {
 

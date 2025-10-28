@@ -316,7 +316,15 @@ void MainGame::createGameObjects() {
 	notebookParent->addComponent<Transform>(Vector2D<float>(Game::WINDOW_WIDTH / 2, Game::WINDOW_HEIGHT / 2), 0.37);
 	notebookParent->addComponent<SpriteRenderer>(game->getTexture(Game::FOLIO), 0, 0);
 
-	ifstream notesFile(notesData);
+	std::string basePath = SDL_GetBasePath();
+	if (basePath.empty()) {
+		SDL_LogError(SDL_LOG_CATEGORY_APPLICATION, "¡No se pudo obtener la ruta base! %s", SDL_GetError());
+	}
+
+	// 2. Construye la ruta a tus fuentes subiendo dos niveles
+	std::string fileDir = basePath + notesData;
+
+	fstream notesFile(fileDir);
 
 	if (notesFile.is_open()) {
 		notebook = new Notebook(notesFile, notebookParent, game->baseFontCentered, game->getTexture(Game::MARCO), renderer, this);

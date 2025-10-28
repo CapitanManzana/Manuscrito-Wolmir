@@ -86,20 +86,30 @@ Game::Game() : exit(false)
 	perfFrequency = SDL_GetPerformanceFrequency();
 	lastTime = SDL_GetPerformanceCounter();
 
+	std::string basePath = SDL_GetBasePath();
+	if (basePath.empty()) {
+		SDL_LogError(SDL_LOG_CATEGORY_APPLICATION, "¡No se pudo obtener la ruta base! %s", SDL_GetError());
+		exit = true;
+	}
+
+	// 2. Construye la ruta a tus fuentes subiendo dos niveles
+	std::string fontDir = basePath + fontBase;
+	std::string imgDir = basePath + imgBase;
+
 	//Carga la fuente
-	baseFont = TTF_OpenFont(((string)fontBase + "OldNewspaperTypes.ttf").c_str(), FONT_SIZE);
+	baseFont = TTF_OpenFont(((string)fontDir + "OldNewspaperTypes.ttf").c_str(), FONT_SIZE);
 	if (!baseFont) {
 		SDL_LogError(SDL_LOG_CATEGORY_APPLICATION, "Couldn't load font");
 	}
 	TTF_SetFontWrapAlignment(baseFont, TTF_HORIZONTAL_ALIGN_LEFT);
 
-	baseFontCentered = TTF_OpenFont(((string)fontBase + "OldNewspaperTypes.ttf").c_str(), FONT_SIZE);
+	baseFontCentered = TTF_OpenFont(((string)fontDir + "OldNewspaperTypes.ttf").c_str(), FONT_SIZE);
 	if (!baseFontCentered) {
 		SDL_LogError(SDL_LOG_CATEGORY_APPLICATION, "Couldn't load font");
 	}
 	TTF_SetFontWrapAlignment(baseFontCentered, TTF_HORIZONTAL_ALIGN_CENTER);
 
-	manuscritoFont = TTF_OpenFont(((string)fontBase + "ManuscritoWolmir2.ttf").c_str(), MANUS_FONT_SIZE);
+	manuscritoFont = TTF_OpenFont(((string)fontDir + "ManuscritoWolmir2.ttf").c_str(), MANUS_FONT_SIZE);
 	if (!manuscritoFont) {
 		SDL_LogError(SDL_LOG_CATEGORY_APPLICATION, "Couldn't load font");
 	}
@@ -107,7 +117,7 @@ Game::Game() : exit(false)
 	// Carga las texturas al inicio
 	for (size_t i = 0; i < textures.size(); i++) {
 		auto [name, nrows, ncols] = textureList[i];
-		textures[i] = new Texture(renderer, (string(imgBase) + name).c_str(), nrows, ncols);
+		textures[i] = new Texture(renderer, (string(imgDir) + name).c_str(), nrows, ncols);
 	}
 
 	SDL_SetRenderDrawBlendMode(renderer, SDL_BLENDMODE_MUL);
@@ -161,7 +171,7 @@ Game::render() const
 {
 	SDL_RenderClear(renderer);
 
- 	currentScene->Render();
+	currentScene->Render();
 
 	SDL_RenderPresent(renderer);
 }

@@ -33,6 +33,8 @@ public:
 		UV_ON,
 		UV_OFF,
 		PENCIL_DRAW,
+		VOZ1_LIBERAR,
+		VOZ2_CERRAR,
 		NUM_SOUNDS
 	};
 

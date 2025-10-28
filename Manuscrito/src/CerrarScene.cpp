@@ -12,7 +12,16 @@
 using namespace std;
 
 void CerrarScene::Load() {
-	fstream file(INTRO_TEXT_DIR);
+
+	std::string basePath = SDL_GetBasePath();
+	if (basePath.empty()) {
+		SDL_LogError(SDL_LOG_CATEGORY_APPLICATION, "¡No se pudo obtener la ruta base! %s", SDL_GetError());
+	}
+
+	// 2. Construye la ruta a tus fuentes subiendo dos niveles
+	std::string fileDir = basePath + INTRO_TEXT_DIR;
+
+	fstream file(fileDir);
 	string btonText;
 
 	if (file.is_open()) {
@@ -127,7 +136,10 @@ void CerrarScene::loadTexts(istream& file, string& buttonText) {
 
 void CerrarScene::nextText() {
 	if (currentText < textsCount) {
-		if (currentText == 3) AudioManager::playSong(AudioManager::END_FINAL_CERRAR);
+		if (currentText == 3) {
+			AudioManager::playSong(AudioManager::END_FINAL_CERRAR);
+			AudioManager::playSound(AudioManager::VOZ2_CERRAR);
+		}
 
 		texts[currentText]->setIsActive(true);
 		prevText = texts[currentText];

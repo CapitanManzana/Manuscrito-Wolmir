@@ -51,7 +51,9 @@ constexpr array<const char*, AudioManager::NUM_SOUNDS> soundsList{
 	"Button.wav",
 	"uvLight.mp3",
 	"uvLightOff.mp3",
-	"PencilDraw.mp3"
+	"PencilDraw.mp3",
+	"voz1.mp3",
+	"voz2.mp3"
 };
 
 void AudioManager::Init() {
