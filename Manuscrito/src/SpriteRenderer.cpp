@@ -9,6 +9,7 @@ SpriteRenderer::SpriteRenderer() {
 
 	isEnabled = true;
 	texture = nullptr;
+	transform = nullptr;
 }
 
 SpriteRenderer::SpriteRenderer(Texture* texture, int row, int col) {
@@ -45,11 +46,11 @@ Texture* SpriteRenderer::getTexture() const
 	return texture;
 }
 
-void SpriteRenderer::setTexture(Texture* texture)
+void SpriteRenderer::setTexture(Texture* newTexture)
 {
-	if (texture == nullptr) return;
+	if (newTexture == nullptr) return;
 
-	this->texture = texture;
+	texture = newTexture;
 	if (transform != nullptr) {
 		transform->updateTextureSize(Vector2D<float>(texture->getWidth(), texture->getHeight()));
 	}
